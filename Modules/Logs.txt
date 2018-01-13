@@ -1,0 +1,26 @@
+** OPENCART
+- Theme Option (Quick View + Layered Navigation)
+- Ajax Login
+- Bestseller Page
+- Blog
+- Feature Category
+- Feature Category Tabs
+- Instagram
+- Layout Builder
+- Mega Menu
+- New Products Page
+- Search Category
+- Twitter
+- CMS Block
+- Newsletter
+- Slideshow 
+- Testimonial
+- Product Tabs
+- Categories Tabs
+- Featured Products
+- Most Viewed
+- New Products Slider 
+- Bestseller Slider
+- Price Countdown
+- Random Slider
+- Special Slider
