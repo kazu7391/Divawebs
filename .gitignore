@@ -4,6 +4,7 @@ admin/config.php
 
 !index.html
 
+.idea/
 download/
 image/data/
 image/cache/
