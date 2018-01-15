@@ -3,7 +3,7 @@
     <div class="page-header">
         <div class="container-fluid">
             <div class="pull-right">
-                <button type="submit" form="form-occategorythumbnail" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+                <button type="submit" form="form-featuredcate" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
                 <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
             <h1>{{ heading_title }}</h1>
             <ul class="breadcrumb">
@@ -24,7 +24,7 @@
                 <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_form }}</h3>
             </div>
             <div class="panel-body">
-                <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-occategorythumbnail" class="form-horizontal">
+                <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-featuredcate" class="form-horizontal">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">{{ entry_name }}</label>
                         <div class="col-sm-10">
@@ -33,30 +33,30 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">{{ entry_thumbnail_image }}</label>
-                        <div class="col-sm-10"><a href="javascript:void(0);" id="thumb-image" data-toggle="image" class="img-thumbnail"><img src="{{ thumb }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
-                            <input type="hidden" name="thumbnail_image" value="{{ thumbnail_image }}" id="input-thumbnail-image" />
+                        <div class="col-sm-10"><a href="javascript:void(0);" id="secondary-image" data-toggle="image" class="img-thumbnail"><img src="{{ secondary_img }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+                            <input type="hidden" name="secondary_image" value="{{ secondary_image }}" id="input-secondary-image" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">{{ entry_homethumb_image }}</label>
-                        <div class="col-sm-10"><a href="javascript:void(0);" id="home-image" data-toggle="image" class="img-thumbnail"><img src="{{ home_thumb }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
-                            <input type="hidden" name="homethumb_image" value="{{ homethumb_image }}" id="input-homethumb-image" />
+                        <div class="col-sm-10"><a href="javascript:void(0);" id="alternative-image" data-toggle="image" class="img-thumbnail"><img src="{{ alternative_img }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+                            <input type="hidden" name="alternative_image" value="{{ alternative_image }}" id="input-alternative-image" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-featured">{{ entry_featured }}</label>
                         <div class="col-sm-10">
-                            <select name="featured" id="input-featured" class="form-control">
-                            {% if featured %}
-                            <option value="1" selected="selected">{{ text_yes }}</option>
-                            <option value="0">{{ text_no }}</option>
-                            {% else %}
-                            <option value="1">{{ text_yes }}</option>
-                            <option value="0" selected="selected">{{ text_no }}</option>
-                            {% endif %}
+                            <select name="is_featured" id="input-featured" class="form-control">
+                                {% if is_featured %}
+                                    <option value="1" selected="selected">{{ text_yes }}</option>
+                                    <option value="0">{{ text_no }}</option>
+                                {% else %}
+                                    <option value="1">{{ text_yes }}</option>
+                                    <option value="0" selected="selected">{{ text_no }}</option>
+                                {% endif %}
                             </select>
                         </div>
-                      </div>
+                    </div>
                 </form>
             </div>
         </div>

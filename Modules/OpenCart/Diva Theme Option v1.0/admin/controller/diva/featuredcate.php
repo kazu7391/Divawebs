@@ -1,18 +1,18 @@
 <?php
-class ControllerCatalogOccategorythumbnail extends Controller
+class ControllerDivaFeaturedcate extends Controller
 {
     private $error = array();
 
     public function index() {
-        $this->load->language('catalog/occategorythumbnail');
+        $this->load->language('diva/featuredcate');
 
         $this->document->setTitle($this->language->get('heading_title'));
 
         $this->load->model('catalog/category');
 
-        $this->load->model('catalog/occategorythumbnail');
+        $this->load->model('diva/featuredcate');
 
-        $this->model_catalog_occategorythumbnail->installCategoryThumbnail();
+        $this->model_diva_featuredcate->createFeaturedCate();
 
         $this->getList();
     }
@@ -60,7 +60,7 @@ class ControllerCatalogOccategorythumbnail extends Controller
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('catalog/occategorythumbnail', 'user_token=' . $this->session->data['user_token'] . $url, true)
+            'href' => $this->url->link('diva/featuredcate', 'user_token=' . $this->session->data['user_token'] . $url, true)
         );
         /* End */
 
@@ -78,29 +78,29 @@ class ControllerCatalogOccategorythumbnail extends Controller
 
         $category_total = $this->model_catalog_category->getTotalCategories();
 
-        $results = $this->model_catalog_occategorythumbnail->getCategories($filter_data);
+        $results = $this->model_diva_featuredcate->getCategories($filter_data);
 
         foreach ($results as $result) {
-            if (is_file(DIR_IMAGE . $result['thumbnail_image'])) {
-                $thumbnail_image = $this->model_tool_image->resize($result['thumbnail_image'], 40, 40);
+            if (is_file(DIR_IMAGE . $result['secondary_image'])) {
+                $secondary_image = $this->model_tool_image->resize($result['secondary_image'], 40, 40);
             } else {
-                $thumbnail_image = $this->model_tool_image->resize('no_image.png', 40, 40);
+                $secondary_image = $this->model_tool_image->resize('no_image.png', 40, 40);
             }
 
-            if (is_file(DIR_IMAGE . $result['homethumb_image'])) {
-                $homethumb_image = $this->model_tool_image->resize($result['homethumb_image'], 40, 40);
+            if (is_file(DIR_IMAGE . $result['alternative_image'])) {
+                $alternative_image = $this->model_tool_image->resize($result['alternative_image'], 40, 40);
             } else {
-                $homethumb_image = $this->model_tool_image->resize('no_image.png', 40, 40);
+                $alternative_image = $this->model_tool_image->resize('no_image.png', 40, 40);
             }
 
             $data['categories'][] = array(
                 'category_id'           => $result['category_id'],
-                'homethumb_image'       => $homethumb_image,
-                'thumbnail_image'       => $thumbnail_image,
                 'name'                  => $result['name'],
                 'sort_order'            => $result['sort_order'],
-                'featured'              => $result['featured'],
-                'edit'                  => $this->url->link('catalog/occategorythumbnail/edit', 'user_token=' . $this->session->data['user_token'] . '&category_id=' . $result['category_id'] . $url, true),
+                'secondary_image'       => $secondary_image,
+                'alternative_image'     => $alternative_image,
+                'is_featured'           => $result['is_featured'],
+                'edit'                  => $this->url->link('diva/featuredcate/edit', 'user_token=' . $this->session->data['user_token'] . '&category_id=' . $result['category_id'] . $url, true),
             );
         }
         /* End */
@@ -139,8 +139,8 @@ class ControllerCatalogOccategorythumbnail extends Controller
             $url .= '&page=' . $this->request->get['page'];
         }
 
-        $data['sort_name'] = $this->url->link('catalog/occategorythumbnail', 'user_token=' . $this->session->data['user_token'] . '&sort=name' . $url, true);
-        $data['sort_sort_order'] = $this->url->link('catalog/occategorythumbnail', 'user_token=' . $this->session->data['user_token'] . '&sort=sort_order' . $url, true);
+        $data['sort_name'] = $this->url->link('diva/featuredcate', 'user_token=' . $this->session->data['user_token'] . '&sort=name' . $url, true);
+        $data['sort_sort_order'] = $this->url->link('diva/featuredcate', 'user_token=' . $this->session->data['user_token'] . '&sort=sort_order' . $url, true);
 
         $url = '';
 
@@ -156,7 +156,7 @@ class ControllerCatalogOccategorythumbnail extends Controller
         $pagination->total = $category_total;
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('catalog/occategorythumbnail', 'user_token=' . $this->session->data['user_token'] . $url . '&page={page}', true);
+        $pagination->url = $this->url->link('diva/featuredcate', 'user_token=' . $this->session->data['user_token'] . $url . '&page={page}', true);
 
         $data['pagination'] = $pagination->render();
 
@@ -169,20 +169,20 @@ class ControllerCatalogOccategorythumbnail extends Controller
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->load->view('catalog/occategorythumbnail_list', $data));
+        $this->response->setOutput($this->load->view('diva/featuredcate/list', $data));
     }
 
     public function edit() {
-        $this->load->language('catalog/occategorythumbnail');
+        $this->load->language('diva/featuredcate');
 
         $this->document->setTitle($this->language->get('heading_title'));
 
-        $this->load->model('catalog/occategorythumbnail');
+        $this->load->model('diva/featuredcate');
 
         $category_id = $this->request->get['category_id'];
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-            $this->model_catalog_occategorythumbnail->editCategoryThumbnail($category_id, $this->request->post);
+            $this->model_diva_featuredcate->editFeaturedCate($category_id, $this->request->post);
 
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -200,14 +200,13 @@ class ControllerCatalogOccategorythumbnail extends Controller
                 $url .= '&page=' . $this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('catalog/occategorythumbnail', 'user_token=' . $this->session->data['user_token'] . $url, true));
+            $this->response->redirect($this->url->link('diva/featuredcate', 'user_token=' . $this->session->data['user_token'] . $url, true));
         }
 
         $this->getForm();
     }
 
     protected function getForm() {
-
         if (isset($this->error['warning'])) {
             $data['error_warning'] = $this->error['warning'];
         } else {
@@ -237,59 +236,58 @@ class ControllerCatalogOccategorythumbnail extends Controller
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('catalog/occategorythumbnail', 'user_token=' . $this->session->data['user_token'] . $url, true)
+            'href' => $this->url->link('diva/featuredcate', 'user_token=' . $this->session->data['user_token'] . $url, true)
         );
 
-        $data['action'] = $this->url->link('catalog/occategorythumbnail/edit', 'user_token=' . $this->session->data['user_token'] . '&category_id=' . $this->request->get['category_id'] . $url, true);
+        $data['action'] = $this->url->link('diva/featuredcate/edit', 'user_token=' . $this->session->data['user_token'] . '&category_id=' . $this->request->get['category_id'] . $url, true);
+        $data['cancel'] = $this->url->link('diva/featuredcate', 'user_token=' . $this->session->data['user_token'] . $url, true);
 
-        $data['cancel'] = $this->url->link('catalog/occategorythumbnail', 'user_token=' . $this->session->data['user_token'] . $url, true);
-
-        $category_info = $this->model_catalog_occategorythumbnail->getCategory($this->request->get['category_id']);
+        $category_info = $this->model_diva_featuredcate->getCategory($this->request->get['category_id']);
 
         $data['user_token'] = $this->session->data['user_token'];
 
         $data['category_name'] = $category_info['name'];
 
-        if (isset($this->request->post['featured'])) {
-            $data['featured'] = $this->request->post['featured'];
+        if (isset($this->request->post['secondary_image'])) {
+            $data['secondary_image'] = $this->request->post['secondary_image'];
         } elseif (!empty($category_info)) {
-            $data['featured'] = $category_info['featured'];
+            $data['secondary_image'] = $category_info['secondary_image'];
         } else {
-            $data['featured'] = 0;
+            $data['secondary_image'] = '';
         }
 
-        if (isset($this->request->post['thumbnail_image'])) {
-            $data['thumbnail_image'] = $this->request->post['thumbnail_image'];
+        if (isset($this->request->post['alternative_image'])) {
+            $data['alternative_image'] = $this->request->post['alternative_image'];
         } elseif (!empty($category_info)) {
-            $data['thumbnail_image'] = $category_info['thumbnail_image'];
+            $data['alternative_image'] = $category_info['alternative_image'];
         } else {
-            $data['thumbnail_image'] = '';
+            $data['alternative_image'] = '';
         }
 
-        if (isset($this->request->post['homethumb_image'])) {
-            $data['homethumb_image'] = $this->request->post['homethumb_image'];
+        if (isset($this->request->post['is_featured'])) {
+            $data['is_featured'] = $this->request->post['is_featured'];
         } elseif (!empty($category_info)) {
-            $data['homethumb_image'] = $category_info['homethumb_image'];
+            $data['is_featured'] = $category_info['is_featured'];
         } else {
-            $data['homethumb_image'] = '';
+            $data['is_featured'] = 0;
         }
 
         $this->load->model('tool/image');
 
-        if (isset($this->request->post['thumbnail_image']) && is_file(DIR_IMAGE . $this->request->post['thumbnail_image'])) {
-            $data['thumb'] = $this->model_tool_image->resize($this->request->post['thumbnail_image'], 100, 100);
-        } elseif (!empty($category_info) && is_file(DIR_IMAGE . $category_info['thumbnail_image'])) {
-            $data['thumb'] = $this->model_tool_image->resize($category_info['thumbnail_image'], 100, 100);
+        if (isset($this->request->post['secondary_image']) && is_file(DIR_IMAGE . $this->request->post['secondary_image'])) {
+            $data['secondary_img'] = $this->model_tool_image->resize($this->request->post['secondary_image'], 100, 100);
+        } elseif (!empty($category_info) && is_file(DIR_IMAGE . $category_info['secondary_image'])) {
+            $data['secondary_img'] = $this->model_tool_image->resize($category_info['secondary_image'], 100, 100);
         } else {
-            $data['thumb'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+            $data['secondary_img'] = $this->model_tool_image->resize('no_image.png', 100, 100);
         }
 
-        if (isset($this->request->post['homethumb_image']) && is_file(DIR_IMAGE . $this->request->post['homethumb_image'])) {
-            $data['home_thumb'] = $this->model_tool_image->resize($this->request->post['homethumb_image'], 100, 100);
-        } elseif (!empty($category_info) && is_file(DIR_IMAGE . $category_info['homethumb_image'])) {
-            $data['home_thumb'] = $this->model_tool_image->resize($category_info['homethumb_image'], 100, 100);
+        if (isset($this->request->post['alternative_image']) && is_file(DIR_IMAGE . $this->request->post['alternative_image'])) {
+            $data['alternative_img'] = $this->model_tool_image->resize($this->request->post['alternative_image'], 100, 100);
+        } elseif (!empty($category_info) && is_file(DIR_IMAGE . $category_info['alternative_image'])) {
+            $data['alternative_img'] = $this->model_tool_image->resize($category_info['alternative_image'], 100, 100);
         } else {
-            $data['home_thumb'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+            $data['alternative_img'] = $this->model_tool_image->resize('no_image.png', 100, 100);
         }
 
         $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
@@ -298,12 +296,12 @@ class ControllerCatalogOccategorythumbnail extends Controller
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->load->view('catalog/occategorythumbnail_form', $data));
+        $this->response->setOutput($this->load->view('diva/featuredcate/form', $data));
 
     }
 
     protected function validateForm() {
-        if (!$this->user->hasPermission('modify', 'catalog/occategorythumbnail')) {
+        if (!$this->user->hasPermission('modify', 'diva/featuredcate')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
 

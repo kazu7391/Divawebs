@@ -11,28 +11,28 @@
             <search ><![CDATA[$sale = array();]]></search>
             <add position="before"><![CDATA[
             // OC Menu Items
-            $this->load->language('ocadminmenu/ocadminmenu');
+            $this->load->language('diva/adminmenu');
 
-            $ocadmin_menu = array();
+            $adminmenu = array();
 
-            if($this->user->hasPermission('access', 'extension/module/octhemeoption')) {
-                $ocadmin_menu[] = array(
+            if($this->user->hasPermission('access', 'extension/module/dvcontrolpanel')) {
+                $adminmenu[] = array(
                     'name'     => $this->language->get('text_theme_config'),
-                    'href'     => $this->url->link('extension/module/octhemeoption', 'user_token=' . $this->session->data['user_token'], true),
+                    'href'     => $this->url->link('extension/module/dvcontrolpanel', 'user_token=' . $this->session->data['user_token'], true),
                     'children' => array()
                 );
             }
 
-            if($this->user->hasPermission('access', 'catalog/occategorythumbnail')) {
-                $ocadmin_menu[] = array(
+            if($this->user->hasPermission('access', 'diva/featuredcate')) {
+                $adminmenu[] = array(
                     'name'     => $this->language->get('text_category_thumbnail'),
-                    'href'     => $this->url->link('catalog/occategorythumbnail', 'user_token=' . $this->session->data['user_token'], true),
+                    'href'     => $this->url->link('diva/featuredcate', 'user_token=' . $this->session->data['user_token'], true),
                     'children' => array()
                 );
             }
 
             if($this->user->hasPermission('access', 'extension/module/ocmegamenu')) {
-                $ocadmin_menu[] = array(
+                $adminmenu[] = array(
                     'name'     => $this->language->get('text_advance_menu'),
                     'href'     => $this->url->link('extension/module/ocmegamenu/menuList', 'user_token=' . $this->session->data['user_token'], true),
                     'children' => array()
@@ -67,7 +67,7 @@
             }
 
             if($blog) {
-                $ocadmin_menu[] = array(
+                $adminmenu[] = array(
                     'name'      => $this->language->get('text_blog'),
                     'href'      => '',
                     'children'  => $blog
@@ -75,7 +75,7 @@
             }
 
             if($this->user->hasPermission('access', 'extension/module/occmsblock')) {
-                $ocadmin_menu[] = array(
+                $adminmenu[] = array(
                     'name'     => $this->language->get('text_cms_block'),
                     'href'     => $this->url->link('extension/module/occmsblock/cmslist', 'user_token=' . $this->session->data['user_token'], true),
                     'children' => array()
@@ -83,7 +83,7 @@
             }
 
             if($this->user->hasPermission('access', 'extension/module/ocslideshow')) {
-                $ocadmin_menu[] = array(
+                $adminmenu[] = array(
                     'name'     => $this->language->get('text_slideshow'),
                     'href'     => $this->url->link('extension/module/ocslideshow/form', 'user_token=' . $this->session->data['user_token'], true),
                     'children' => array()
@@ -91,7 +91,7 @@
             }
 
             if($this->user->hasPermission('access', 'catalog/octestimonial')) {
-                $ocadmin_menu[] = array(
+                $adminmenu[] = array(
                     'name'     => $this->language->get('text_testimonial'),
                     'href'     => $this->url->link('catalog/octestimonial', 'user_token=' . $this->session->data['user_token'], true),
                     'children' => array()
@@ -103,7 +103,7 @@
                 'icon'     => 'fa-empire',
                 'name'     => $this->language->get('text_theme_menu'),
                 'href'     => '',
-                'children' => $ocadmin_menu
+                'children' => $adminmenu
             );
             ]]></add>
         </operation>
@@ -791,7 +791,7 @@
         <operation>
             <search><![CDATA[$this->response->setOutput($this->load->view('design/layout_form', $data));]]></search>
             <add position="replace"><![CDATA[
-                $this->response->setOutput($this->load->view('design/layout_plaza_form', $data));
+                $this->response->setOutput($this->load->view('design/diva_layout', $data));
             ]]></add>
         </operation>
     </file>

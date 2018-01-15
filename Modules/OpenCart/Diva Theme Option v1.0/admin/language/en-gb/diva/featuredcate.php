@@ -10,6 +10,7 @@ $_['text_form']              = 'Edit Category Thumbnail';
 $_['text_edit']              = 'Edit Category Thumbnail';
 $_['text_yes']               = 'Yes';
 $_['text_no']                = 'No';
+$_['text_info']              = 'These columns are added successfully';
 
 // Column
 $_['column_name']            = 'Category Name';
@@ -24,3 +25,4 @@ $_['entry_name']             = 'Category Name';
 $_['entry_thumbnail_image']  = 'Thumbnail Image';
 $_['entry_homethumb_image']  = 'Home Thumbnail Image';
 $_['entry_featured']  		 = 'Is Featured?';
+
