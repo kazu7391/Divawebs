@@ -10,7 +10,7 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller {
         $this->load->model('setting/module');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-            var_dump($this->request->post);die;
+//            var_dump($this->request->post);die;
             if (!isset($this->request->get['module_id'])) {
                 $this->model_setting_module->addModule('dvfeaturedcate', $this->request->post);
             } else {
@@ -95,7 +95,7 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller {
         } elseif (!empty($module_info)) {
             $data['status'] = $module_info['status'];
         } else {
-            $data['status'] = '1';
+            $data['status'] = '';
         }
 
         if (isset($this->request->post['type'])) {
@@ -160,7 +160,7 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller {
         } elseif (!empty($module_info)) {
             $data['autoplay'] = $module_info['autoplay'];
         } else {
-            $data['autoplay'] = 1;
+            $data['autoplay'] = '';
         }
 
         if (isset($this->request->post['shownextback'])) {
@@ -168,7 +168,7 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller {
         } elseif (!empty($module_info)) {
             $data['shownextback'] = $module_info['shownextback'];
         } else {
-            $data['shownextback'] = 1;
+            $data['shownextback'] = '';
         }
 
         if (isset($this->request->post['shownav'])) {
@@ -176,7 +176,7 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller {
         } elseif (!empty($module_info)) {
             $data['shownav'] = $module_info['shownav'];
         } else {
-            $data['shownav'] = 0;
+            $data['shownav'] = '';
         }
 
         /* Category Settings */
@@ -185,7 +185,7 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller {
         } elseif (!empty($module_info)) {
             $data['slider'] = $module_info['slider'];
         } else {
-            $data['slider'] = 1;
+            $data['slider'] = '';
         }
 
         if (isset($this->request->post['showcatedes'])) {
@@ -193,7 +193,7 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller {
         } elseif (!empty($module_info)) {
             $data['showcatedes'] = $module_info['showcatedes'];
         } else {
-            $data['showcatedes'] = 1;
+            $data['showcatedes'] = '';
         }
 
         if (isset($this->request->post['showsub'])) {
@@ -201,7 +201,7 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller {
         } elseif (!empty($module_info)) {
             $data['showsub'] = $module_info['showsub'];
         } else {
-            $data['showsub'] = 1;
+            $data['showsub'] = '';
         }
 
         if (isset($this->request->post['showsubnumber'])) {
@@ -218,7 +218,7 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller {
         } elseif (!empty($module_info)) {
             $data['use_cate_second_image'] = $module_info['use_cate_second_image'];
         } else {
-            $data['use_cate_second_image'] = 1;
+            $data['use_cate_second_image'] = '';
         }
 
         if (isset($this->request->post['showlabel'])) {
@@ -226,7 +226,7 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller {
         } elseif (!empty($module_info)) {
             $data['showlabel'] = $module_info['showlabel'];
         } else {
-            $data['showlabel'] = 1;
+            $data['showlabel'] = '';
         }
 
         if (isset($this->request->post['showprodes'])) {
@@ -234,7 +234,7 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller {
         } elseif (!empty($module_info)) {
             $data['showprodes'] = $module_info['showprodes'];
         } else {
-            $data['showprodes'] = 1;
+            $data['showprodes'] = '';
         }
 
         $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');

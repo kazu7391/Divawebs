@@ -38,6 +38,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="input-status">{{ entry_status }}</label>
                             <div class="col-sm-6">
+                                <input type="hidden" name="status" value="0" />
                                 <input type="checkbox" class="ckb-switch" name="status" id="input-status"
                                         data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
                                         {% if status %} value="1" checked {% else %} value="0" {% endif %}>
@@ -99,6 +100,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="input-autoplay">{{ entry_autoplay }}</label>
                                     <div class="col-sm-6">
+                                        <input type="hidden" name="autoplay" value="0" />
                                         <input type="checkbox" class="ckb-switch" name="autoplay" id="input-autoplay"
                                                 data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
                                                 {% if autoplay %} value="1" checked {% else %} value="0" {% endif %}>
@@ -113,6 +115,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="input-shownextback">{{ entry_shownextback }}</label>
                                     <div class="col-sm-6">
+                                        <input type="hidden" name="shownextback" value="0" />
                                         <input type="checkbox" class="ckb-switch" name="shownextback" id="input-shownextback"
                                                 data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
                                                 {% if shownextback %} value="1" checked {% else %} value="0" {% endif %}>
@@ -121,6 +124,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="input-shownav">{{ entry_shownav }}</label>
                                     <div class="col-sm-6">
+                                        <input type="hidden" name="shownav" value="0" />
                                         <input type="checkbox" class="ckb-switch" name="shownav" id="input-shownav"
                                                 data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
                                                 {% if shownav %} value="1" checked {% else %} value="0" {% endif %}>
@@ -132,6 +136,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="input-slider">{{ entry_slider }}</label>
                                     <div class="col-sm-6">
+                                        <input type="hidden" name="slider" value="0" />
                                         <input type="checkbox" class="ckb-switch" name="slider" id="input-slider"
                                                 data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
                                                 {% if slider %} value="1" checked {% else %} value="0" {% endif %}>
@@ -140,6 +145,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="input-showdes">{{ entry_showdes }}</label>
                                     <div class="col-sm-6">
+                                        <input type="hidden" name="showcatedes" value="0" />
                                         <input type="checkbox" class="ckb-switch" name="showcatedes" id="input-showdes"
                                                 data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
                                                 {% if showcatedes %} value="1" checked {% else %} value="0" {% endif %}>
@@ -148,6 +154,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="input-showsub">{{ entry_showsub }}</label>
                                     <div class="col-sm-6">
+                                        <input type="hidden" name="showsub" value="0" />
                                         <input type="checkbox" class="ckb-switch" name="showsub" id="input-showsub"
                                                 data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
                                                 {% if showsub %} value="1" checked {% else %} value="0" {% endif %}>
@@ -165,6 +172,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="input-image">{{ entry_use_cate_image }}</label>
                                     <div class="col-sm-6">
+                                        <input type="hidden" name="use_cate_second_image" value="0" />
                                         <input type="checkbox" class="ckb-switch" name="use_cate_second_image" id="input-image"
                                                 data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
                                                 {% if use_cate_second_image %} value="1" checked {% else %} value="0" {% endif %}>
@@ -173,6 +181,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="input-showlabel">{{ entry_showlabel }}</label>
                                     <div class="col-sm-6">
+                                        <input type="hidden" name="showlabel" value="0" />
                                         <input type="checkbox" class="ckb-switch" name="showlabel" id="input-showlabel"
                                                 data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
                                                 {% if showlabel %} value="1" checked {% else %} value="0" {% endif %}>
@@ -181,6 +190,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="input-showprodes">{{ entry_showdes }}</label>
                                     <div class="col-sm-6">
+                                        <input type="hidden" name="showprodes" value="0" />
                                         <input type="checkbox" class="ckb-switch" name="showprodes" id="input-showprodes"
                                                 data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
                                                 {% if showprodes %} value="1" checked {% else %} value="0" {% endif %}>

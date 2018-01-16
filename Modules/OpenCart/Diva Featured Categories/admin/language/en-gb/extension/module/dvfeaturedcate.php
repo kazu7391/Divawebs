@@ -11,7 +11,7 @@ $_['tab_slider_settings']   = "Slider Settings";
 // Text
 $_['text_extension']        = 'Extensions';
 $_['text_success']          = 'Success: You have modified module!';
-$_['text_edit']             = 'DIVA Featured Categories Module';
+$_['text_edit']             = 'Edit Featured Categories Module';
 $_['text_show_cate']        = 'Only show Featured Categories';
 $_['text_show_pro']         = 'Show products by tabs';
 
@@ -23,7 +23,7 @@ $_['entry_width']           = 'Item Width';
 $_['entry_height']          = 'Item Height';
 $_['entry_item']            = 'Active Items';
 $_['entry_limit']           = 'Limited Items';
-$_['entry_speed']           = 'Speed';
+$_['entry_speed']           = 'Animation Speed';
 $_['entry_autoplay']        = 'Auto Play';
 $_['entry_rows']            = 'Rows of Items';
 $_['entry_shownextback']    = 'Next/Back';
