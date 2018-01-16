@@ -10,7 +10,7 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller {
         $this->load->model('setting/module');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-
+            var_dump($this->request->post);die;
             if (!isset($this->request->get['module_id'])) {
                 $this->model_setting_module->addModule('dvfeaturedcate', $this->request->post);
             } else {
@@ -90,6 +90,23 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller {
             $data['name'] = '';
         }
 
+        if (isset($this->request->post['status'])) {
+            $data['status'] = $this->request->post['status'];
+        } elseif (!empty($module_info)) {
+            $data['status'] = $module_info['status'];
+        } else {
+            $data['status'] = '1';
+        }
+
+        if (isset($this->request->post['type'])) {
+            $data['type'] = $this->request->post['type'];
+        } elseif (!empty($module_info)) {
+            $data['type'] = $module_info['type'];
+        } else {
+            $data['type'] = 'category';
+        }
+
+        /* Slider Settings */
         if (isset($this->request->post['width'])) {
             $data['width'] = $this->request->post['width'];
         } elseif (!empty($module_info)) {
@@ -122,6 +139,14 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller {
             $data['limit'] = 10;
         }
 
+        if (isset($this->request->post['speed'])) {
+            $data['speed'] = $this->request->post['speed'];
+        } elseif (!empty($module_info)) {
+            $data['speed'] = $module_info['speed'];
+        } else {
+            $data['speed'] = 3000;
+        }
+
         if (isset($this->request->post['rows'])) {
             $data['rows'] = $this->request->post['rows'];
         } elseif (!empty($module_info) && isset($module_info['rows'])) {
@@ -135,31 +160,7 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller {
         } elseif (!empty($module_info)) {
             $data['autoplay'] = $module_info['autoplay'];
         } else {
-            $data['autoplay'] = '';
-        }
-
-        if (isset($this->request->post['slider'])) {
-            $data['slider'] = $this->request->post['slider'];
-        } elseif (!empty($module_info)) {
-            $data['slider'] = $module_info['slider'];
-        } else {
-            $data['slider'] = 1;
-        }
-
-        if (isset($this->request->post['autoplay'])) {
-            $data['autoplay'] = $this->request->post['autoplay'];
-        } elseif (!empty($module_info)) {
-            $data['autoplay'] = $module_info['autoplay'];
-        } else {
             $data['autoplay'] = 1;
-        }
-
-        if (isset($this->request->post['speed'])) {
-            $data['speed'] = $this->request->post['speed'];
-        } elseif (!empty($module_info)) {
-            $data['speed'] = $module_info['speed'];
-        } else {
-            $data['speed'] = 3000;
         }
 
         if (isset($this->request->post['shownextback'])) {
@@ -178,12 +179,21 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller {
             $data['shownav'] = 0;
         }
 
-        if (isset($this->request->post['showdes'])) {
-            $data['showdes'] = $this->request->post['showdes'];
+        /* Category Settings */
+        if (isset($this->request->post['slider'])) {
+            $data['slider'] = $this->request->post['slider'];
         } elseif (!empty($module_info)) {
-            $data['showdes'] = $module_info['showdes'];
+            $data['slider'] = $module_info['slider'];
         } else {
-            $data['showdes'] = 1;
+            $data['slider'] = 1;
+        }
+
+        if (isset($this->request->post['showcatedes'])) {
+            $data['showcatedes'] = $this->request->post['showcatedes'];
+        } elseif (!empty($module_info)) {
+            $data['showcatedes'] = $module_info['showcatedes'];
+        } else {
+            $data['showcatedes'] = 1;
         }
 
         if (isset($this->request->post['showsub'])) {
@@ -202,12 +212,29 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller {
             $data['showsubnumber'] = 4;
         }
 
-        if (isset($this->request->post['status'])) {
-            $data['status'] = $this->request->post['status'];
+        /* Product Settings */
+        if (isset($this->request->post['use_cate_second_image'])) {
+            $data['use_cate_second_image'] = $this->request->post['use_cate_second_image'];
         } elseif (!empty($module_info)) {
-            $data['status'] = $module_info['status'];
+            $data['use_cate_second_image'] = $module_info['use_cate_second_image'];
         } else {
-            $data['status'] = 1;
+            $data['use_cate_second_image'] = 1;
+        }
+
+        if (isset($this->request->post['showlabel'])) {
+            $data['showlabel'] = $this->request->post['showlabel'];
+        } elseif (!empty($module_info)) {
+            $data['showlabel'] = $module_info['showlabel'];
+        } else {
+            $data['showlabel'] = 1;
+        }
+
+        if (isset($this->request->post['showprodes'])) {
+            $data['showprodes'] = $this->request->post['showprodes'];
+        } elseif (!empty($module_info)) {
+            $data['showprodes'] = $module_info['showprodes'];
+        } else {
+            $data['showprodes'] = 1;
         }
 
         $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
