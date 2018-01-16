@@ -34,10 +34,10 @@
 }
 .theme-option-container .hoz-ul-sections li.active a, .theme-option-container .hoz-ul-sections li.active a:hover, .theme-option-container .hoz-ul-sections li.active a:focus,
 .theme-option-container .hoz-ul-sections li a:hover, .theme-option-container .hoz-ul-sections li a:focus {
-    background-color: #fff;
-    color: #000;
+    background-color: #9e2d33;
+    color: #fff;
     border: none;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #d21f29;
     border-radius: 0;
 }
 .theme-option-container .col-left {padding-right: 0;}
