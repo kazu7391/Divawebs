@@ -76,22 +76,32 @@
     background-color: #d21f27;
     color: #fff;
 }
+.theme-option-pagination .pagination > li > a, .theme-option-pagination .pagination > li > span {
+    color: #d21f27;
+}
+.theme-option-pagination .pagination > .active > a, .theme-option-pagination .pagination > .active > span,
+.theme-option-pagination .pagination > .active > a:hover, .theme-option-pagination .pagination > .active > span:hover,
+.theme-option-pagination .pagination > .active > a:focus, .theme-option-pagination .pagination > .active > span:focus {
+    color: #fff;
+    background-color: #d21f27;
+    border-color:  #d21f27;
+}
 /*.theme-option-container .hoz-ul-sections {*/
-    /*background-color: #e8e8e8;*/
-    /*margin-right: -15px;*/
+/*background-color: #e8e8e8;*/
+/*margin-right: -15px;*/
 /*}*/
 /*.theme-option-container .hoz-ul-sections li a {*/
-    /*margin: 0;*/
-    /*border: none;*/
-    /*color: #5a5a5a;*/
-    /*background-color: #e8e8e8;*/
+/*margin: 0;*/
+/*border: none;*/
+/*color: #5a5a5a;*/
+/*background-color: #e8e8e8;*/
 /*}*/
 /*.theme-option-container .hoz-ul-sections li.active a, .theme-option-container .hoz-ul-sections li.active a:hover, .theme-option-container .hoz-ul-sections li.active a:focus,*/
 /*.theme-option-container .hoz-ul-sections li a:hover, .theme-option-container .hoz-ul-sections li a:focus {*/
-    /*background-color: #fff;*/
-    /*color: #000;*/
-    /*border: none;*/
-    /*border-bottom: 1px solid #fff;*/
-    /*border-radius: 0;*/
-    /*font-weight: inherit;*/
+/*background-color: #fff;*/
+/*color: #000;*/
+/*border: none;*/
+/*border-bottom: 1px solid #fff;*/
+/*border-radius: 0;*/
+/*font-weight: inherit;*/
 /*}*/

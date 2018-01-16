@@ -1,11 +1,11 @@
 <?php
 // Heading
-$_['heading_title']        = '<b><i>Theme Configuration</i></b>';
-$_['page_title']           = 'Theme Configuration';
+$_['heading_title']        = '<b><i>DIVA Control Panel</i></b>';
+$_['page_title']           = 'DIVA Control Panel';
 
 // Text
 $_['text_extension']       = 'Extensions';
-$_['text_edit']            = 'Theme Control Panel';
+$_['text_edit']            = 'DIVA Control Panel';
 $_['text_success']         = 'Success: You have modified module OC Theme Configuration!';
 $_['text_import_success']  = 'Success: You have imported Theme Database!';
 $_['text_list']            = 'List View';

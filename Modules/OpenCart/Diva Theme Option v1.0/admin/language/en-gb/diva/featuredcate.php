@@ -1,28 +1,22 @@
 <?php
 // Heading
-$_['heading_title']          = 'Categories Thumbnail';
+$_['heading_title']          = 'DIVA Featured Categories';
 
 // Text
-$_['text_success']           = 'Success: You have modified categories thumbnail!';
-$_['text_thumbnail']         = 'Categories Thumbnail';
-$_['text_list']              = 'Category Thumbnail List';
-$_['text_form']              = 'Edit Category Thumbnail';
-$_['text_edit']              = 'Edit Category Thumbnail';
-$_['text_yes']               = 'Yes';
-$_['text_no']                = 'No';
+$_['text_success']           = 'Success: You have modified Featured Categories!';
+$_['text_thumbnail']         = 'Featured Categories';
+$_['text_list']              = 'Category List';
 $_['text_info']              = 'These columns are added successfully';
 
 // Column
 $_['column_name']            = 'Category Name';
-$_['column_sort_order']      = 'Sort Order';
+$_['column_featured']        = 'Featured';
+$_['column_secondary']       = 'Secondary Image';
+$_['column_alternative']     = 'Alternative Image';
 $_['column_action']          = 'Action';
-$_['column_thumbnail']       = 'Thumbnail Image';
-$_['column_homethumb']       = 'Home Thumbnail Image';
-$_['column_featured']        = 'Is Featured';
 
 // Entry
-$_['entry_name']             = 'Category Name';
-$_['entry_thumbnail_image']  = 'Thumbnail Image';
-$_['entry_homethumb_image']  = 'Home Thumbnail Image';
-$_['entry_featured']  		 = 'Is Featured?';
+$_['entry_featured']  		  = 'Featured';
+$_['entry_secondary_image']   = 'Secondary Image';
+$_['entry_alternative_image'] = 'Alternative Image';
 

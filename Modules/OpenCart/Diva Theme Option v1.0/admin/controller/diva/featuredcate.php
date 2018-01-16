@@ -165,6 +165,8 @@ class ControllerDivaFeaturedcate extends Controller
         $data['sort'] = $sort;
         $data['order'] = $order;
 
+        $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
+
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
@@ -291,6 +293,10 @@ class ControllerDivaFeaturedcate extends Controller
         }
 
         $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+
+        $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
+        $this->document->addScript('view/javascript/divawebs/switch-toggle/js/bootstrap-toggle.min.js');
+        $this->document->addStyle('view/javascript/divawebs/switch-toggle/css/bootstrap-toggle.min.css');
 
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');

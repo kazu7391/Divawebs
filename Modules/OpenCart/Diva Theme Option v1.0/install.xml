@@ -114,24 +114,22 @@
         <operation>
             <search ><![CDATA[public function index() {]]></search>
             <add position="after"><![CDATA[
-        $this->load->model('catalog/ocproductrotator');
-        $this->model_catalog_ocproductrotator->installProductRotator();
-
-        $this->load->model('catalog/occolorswatches');
-        $this->model_catalog_occolorswatches->installSwatchesAttribute();
+        $this->load->model('diva/controlpanel');
+        $this->model_diva_controlpanel->setupRotateImage();
+        $this->model_diva_controlpanel->setupColorSwatches();
             ]]></add>
         </operation>
         <operation>
             <search ><![CDATA[$this->load->language('catalog/product');]]></search>
             <add position="before"><![CDATA[
-                $this->load->language('extension/module/ocproductrotator');
-                $this->load->language('extension/module/octhemeoption');
+                $this->load->language('diva/rotateimage');
+                $this->load->language('extension/module/dvcontrolpanel');
             ]]></add>
         </operation>
         <operation>
             <search ><![CDATA['sort_order' => $product_image['sort_order']]]></search>
             <add position="before"><![CDATA[
-                'is_rotator' => $product_image['is_rotator'],
+                'is_rotate' => $product_image['is_rotate'],
                 'product_option_value_id' => $product_image['product_option_value_id'],
             ]]></add>
         </operation>
@@ -142,8 +140,7 @@
             <search><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "product_image SET product_id = '" . (int)$product_id . "', image = '" . $this->db->escape($product_image['image']) . "', sort_order = '" . (int)$product_image['sort_order'] . "'");]]></search>
             <add position="replace">
                 <![CDATA[
-                    /* Product Rotator */
-                    $this->db->query("INSERT INTO " . DB_PREFIX . "product_image SET product_id = '" . (int)$product_id . "', image = '" . $this->db->escape($product_image['image']) . "', sort_order = '" . (int)$product_image['sort_order'] . "', is_rotator = '" . (int)$product_image['is_rotator'] . "', product_option_value_id = '" . (int)$product_image['product_option_value_id'] . "'");
+                    $this->db->query("INSERT INTO " . DB_PREFIX . "product_image SET product_id = '" . (int)$product_id . "', image = '" . $this->db->escape($product_image['image']) . "', sort_order = '" . (int)$product_image['sort_order'] . "', is_rotate = '" . (int)$product_image['is_rotate'] . "', product_option_value_id = '" . (int)$product_image['product_option_value_id'] . "'");
                 ]]>
             </add>
         </operation>
@@ -155,7 +152,7 @@
             <add position="after">
                 <![CDATA[
                     <td class="text-center">{{ entry_option }}</td>
-                    <td class="text-center">{{ entry_is_rotator }}</td>
+                    <td class="text-center">{{ entry_rotate }}</td>
                 ]]>
             </add>
         </operation>
@@ -191,10 +188,10 @@
                       {% endfor %}
                     </td>
 
-                    <!-- Rotator Image -->
+                    <!-- Rotate Image -->
                     <td class="text-center">
-                      <select name="product_image[{{ image_row }}][is_rotator]" class="form-control rotator-select">
-                        {% if product_image.is_rotator and (product_image.is_rotator == 1) %}
+                      <select name="product_image[{{ image_row }}][is_rotate]" class="form-control rotate-select">
+                        {% if product_image.is_rotate and (product_image.is_rotate == 1) %}
                         <option value="1" selected="selected">Yes</option>
                         <option value="0">No</option>
                         {% else %}
@@ -234,11 +231,10 @@
                       $('#' + id_select + "-" + product_option_id).attr('name', 'product_image[' + row + '][product_option_value_id]').show();
                     });
 
-                    // Product Rotator
-                    $('.rotator-select').change(function() {
+                    $('.rotate-select').change(function() {
                       var value = $(this).val();
                       if(value == 1) {
-                        $('.rotator-select').val(0);
+                        $('.rotate-select').val(0);
                         $(this).val(1);
                       }
                     });
@@ -258,11 +254,10 @@
                       $('#' + id_select + "-" + product_option_id).attr('name', 'product_image[' + row + '][product_option_value_id]').show();
                     });
 
-                    //Product Rotator
-                    $('.rotator-select').change(function() {
+                    $('.rotate-select').change(function() {
                       var value = $(this).val();
                       if(value == 1) {
-                        $('.rotator-select').val(0);
+                        $('.rotate-select').val(0);
                         $(this).val(1);
                       }
                     });
@@ -302,9 +297,8 @@
                     {% endfor %}
                     html += '  </td>';
 
-                    //Product Rotator
                     html += ' <td class="text-center">';
-                    html += '   <select name="product_image[' + image_row + '][is_rotator]" class="form-control rotator-select">';
+                    html += '   <select name="product_image[' + image_row + '][is_rotate]" class="form-control rotate-select">';
                     html += '     <option value="1">{{ text_yes }}</option>';
                     html += '     <option value="0" selected="selected">{{ text_no }}</option>';
                     html += '   </select>';
