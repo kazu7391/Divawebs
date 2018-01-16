@@ -1,26 +1,25 @@
 ** OPENCART
-- Theme Option (Quick View + Layered Navigation)
-- Ajax Login
-- Bestseller Page
-- Blog
-- Feature Category
-- Feature Category Tabs
-- Instagram
-- Layout Builder
-- Mega Menu
-- New Products Page
-- Search Category
-- Twitter
-- CMS Block
-- Newsletter
-- Slideshow 
-- Testimonial
-- Product Tabs
-- Categories Tabs
-- Featured Products
-- Most Viewed
-- New Products Slider 
-- Bestseller Slider
-- Price Countdown
-- Random Slider
+- Theme Option (Quick View + Layered Navigation) (logo)
+- Ajax Login   (	fa-user)
+- Bestseller Page   (fa-bar-chart)
+- Blog		(fa-ticket)
+- Feature Category (fa-tag)
+- Instagram	(fa-instagram)
+- Layout Builder  (fa-magic)
+- Mega Menu	(fa-bars)
+- New Products Page (fa-sort-amount-desc)
+- Search Category  (fa-search)
+- Twitter	(fa-twitter)
+- CMS Block	(fa-object-group)
+- Newsletter		(fa-envelope)
+- Slideshow 		(fa-window-maximize)
+- Testimonial		(fa-comments)
+- Product Tabs		(fa-shopping-bag)
+- Categories Tabs	(fa-tags)
+- Featured Products	(fa-bookmark)
+- Most Viewed  		(fa-eye)
+- New Products Slider 	(fa-sort-amount-desc)
+- Bestseller Slider  (fa-bar-chart)
+- Price Countdown	(fa-percent)
+- Random Slider		(fa-barcode)
 - Special Slider
