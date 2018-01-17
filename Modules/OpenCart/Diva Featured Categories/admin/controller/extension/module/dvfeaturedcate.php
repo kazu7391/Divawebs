@@ -10,7 +10,6 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller {
         $this->load->model('setting/module');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-//            var_dump($this->request->post);die;
             if (!isset($this->request->get['module_id'])) {
                 $this->model_setting_module->addModule('dvfeaturedcate', $this->request->post);
             } else {
