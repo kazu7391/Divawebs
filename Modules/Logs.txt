@@ -1,5 +1,10 @@
 ** OPENCART
 - Theme Option (Quick View + Layered Navigation) (logo)
+  + Lazy Load
+  + Catalog mode (price & cart)
+  + Rotate 
+  + Quickview
+  + 
 - Ajax Login   (	fa-user)
 - Bestseller Page   (fa-bar-chart)
 - Blog		(fa-ticket)
