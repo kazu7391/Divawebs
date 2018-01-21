@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']        = '<b><i>DIVA Control Panel</i></b>';
+$_['heading_title']        = '<b style="color: #d21f27;"><i><i class="fa fa-magic"></i> DIVA Control Panel</i></b>';
 $_['page_title']           = 'DIVA Control Panel';
 
 // Text
@@ -26,15 +26,21 @@ $_['text_data_caution']    = 'Caution: If you choose Home Page by using data bac
 // Tab
 $_['tab_stylesheet']       = 'Stylesheet CSS';
 $_['tab_configuration']    = 'Module Configuration';
-$_['tab_a']                = '&lt; a &gt; Tag';
-$_['tab_header']           = 'Header Tag (h1,h2,..,h6)';
+$_['tab_link']             = 'Link';
+$_['tab_header']           = 'Header Tag';
 $_['tab_body']             = 'Body';
+$_['tab_button']           = 'Button';
 $_['tab_backup']           = 'Data Storage';
-$_['tab_product']          = 'Product Page';
+$_['tab_product']          = 'Product Detail';
 $_['tab_category']         = 'Category Page';
+$_['tab_font']             = 'Font & CSS';
+$_['tab_catalog']          = 'Catalog Mode';
 
 // Entry
 $_['entry_status']         = 'Stylesheet Configuration';
+$_['entry_lazy_load']      = 'Lazy Load';
+$_['entry_sticky_header']  = 'Sticky Header';
+$_['entry_scroll_top']     = 'Scroll Top Button';
 $_['entry_store']          = 'Choose Store';
 $_['entry_rotator']        = 'Rotate Image';
 $_['entry_quickview']      = 'Quick View';
@@ -49,7 +55,7 @@ $_['entry_font_size']      = 'Font Size';
 $_['entry_line_height']    = 'Line Height';
 $_['entry_bg_color']       = 'Background Color';
 $_['entry_bg_hover_color'] = 'Background Color when Hover';
-$_['entry_loader_image']   = 'Ajax Loader Image';
+$_['entry_loader_image']   = 'Loader Image';
 $_['entry_theme_database'] = 'Choose Theme Data';
 $_['entry_use_swatches']   = 'Use Color Swatches';
 $_['entry_color_option']   = 'Use Option for Swatches';

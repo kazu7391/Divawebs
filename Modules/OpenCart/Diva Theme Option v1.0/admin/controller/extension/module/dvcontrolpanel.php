@@ -101,6 +101,38 @@ class ControllerExtensionModuleDvcontrolpanel extends Controller
 
         $data['cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true);
 
+        if (isset($this->request->post['module_dvcontrolpanel_lazy_load'])) {
+            $data['module_dvcontrolpanel_lazy_load'] = $this->request->post['module_dvcontrolpanel_lazy_load'];
+        } else {
+            $data['module_dvcontrolpanel_lazy_load'] = $this->config->get('module_dvcontrolpanel_lazy_load');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_sticky_header'])) {
+            $data['module_dvcontrolpanel_sticky_header'] = $this->request->post['module_dvcontrolpanel_sticky_header'];
+        } else {
+            $data['module_dvcontrolpanel_sticky_header'] = $this->config->get('module_dvcontrolpanel_sticky_header');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_scroll_top'])) {
+            $data['module_dvcontrolpanel_scroll_top'] = $this->request->post['module_dvcontrolpanel_scroll_top'];
+        } else {
+            $data['module_dvcontrolpanel_scroll_top'] = $this->config->get('module_dvcontrolpanel_scroll_top');
+        }
+
+        $this->load->model('tool/image');
+
+        foreach ($data['stores'] as $store) {
+            if (isset($this->request->post['module_dvcontrolpanel_loader_img'][$store['store_id']]) && is_file(DIR_IMAGE . $this->request->post['module_dvcontrolpanel_loader_img'][$store['store_id']])) {
+                $data['thumb'][$store['store_id']] = $this->model_tool_image->resize($this->request->post['module_dvcontrolpanel_loader_img'][$store['store_id']], 50, 50);
+            } elseif (is_file(DIR_IMAGE . $this->config->get('module_dvcontrolpanel_loader_img')[$store['store_id']])) {
+                $data['thumb'][$store['store_id']] = $this->model_tool_image->resize($this->config->get('module_dvcontrolpanel_loader_img')[$store['store_id']], 50, 50);
+            } else {
+                $data['thumb'][$store['store_id']] = $this->model_tool_image->resize('no_image.png', 50, 50);
+            }
+        }
+
+        $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 50, 50);
+
         if (isset($this->request->post['module_dvcontrolpanel_status'])) {
             $data['module_dvcontrolpanel_status'] = $this->request->post['module_dvcontrolpanel_status'];
         } else {
@@ -269,17 +301,7 @@ class ControllerExtensionModuleDvcontrolpanel extends Controller
             $data['module_dvcontrolpanel_cate_swatches_height'] = $this->config->get('module_dvcontrolpanel_cate_swatches_height');
         }
 
-        $this->load->model('tool/image');
 
-        if (isset($this->request->post['module_dvcontrolpanel_loader_img']) && is_file(DIR_IMAGE . $this->request->post['module_dvcontrolpanel_loader_img'])) {
-            $data['thumb'] = $this->model_tool_image->resize($this->request->post['module_dvcontrolpanel_loader_img'], 50, 50);
-        } elseif (is_file(DIR_IMAGE . $this->config->get('module_dvcontrolpanel_loader_img'))) {
-            $data['thumb'] = $this->model_tool_image->resize($this->config->get('module_dvcontrolpanel_loader_img'), 50, 50);
-        } else {
-            $data['thumb'] = $this->model_tool_image->resize('no_image.png', 50, 50);
-        }
-
-        $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 50, 50);
 
         $this->document->addScript('view/javascript/divawebs/jscolor.js');
         $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');

@@ -11,6 +11,11 @@
     background: #000;
     border-width: 2px;
     border-radius: 0;
+    padding: 20px;
+}
+.theme-option-container .panel-default .panel-select {
+    float: right;
+    margin: -10px;
 }
 .theme-option-container .panel-body {
     background: #fff;
@@ -25,6 +30,12 @@
 .theme-option-container .hoz-ul-sections {
     background-color: #e8e8e8;
     margin: 15px -15px 15px -15px;
+}
+.theme-option-container .tab-content .hoz-ul-sections {
+    margin: -15px;
+}
+.theme-option-container .tab-content .child-content {
+    margin: 15px;
 }
 .theme-option-container .hoz-ul-sections li a {
     margin: 0;
@@ -59,13 +70,13 @@
     border-radius: 0;
     font-weight: inherit;
 }
-.theme-option-container .tab-general {
-    margin-left: -15px;
-    margin-top: -15px;
-}
-.theme-option-container .tab-general .tab-content {
-    padding-left: 15px;
-}
+/*.theme-option-container .tab-general {*/
+    /*margin-left: -15px;*/
+    /*margin-top: -15px;*/
+/*}*/
+/*.theme-option-container .tab-general .tab-content {*/
+    /*padding-left: 15px;*/
+/*}*/
 
 .stylesheet-settings .nav-pills > li > a {
     color: #000;

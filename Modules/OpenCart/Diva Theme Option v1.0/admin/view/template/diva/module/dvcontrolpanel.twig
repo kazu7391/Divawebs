@@ -3,7 +3,7 @@
     <div class="page-header">
         <div class="container-fluid">
             <div class="pull-right">
-                <button type="submit" form="form-octhemeoption" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+                <button type="submit" form="form-dvcontrolpanel" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
                 <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
             <h1>{{ heading_title }}</h1>
             <ul class="breadcrumb theme-option-breadcrumb">
@@ -32,14 +32,23 @@
         <div class="theme-option-container">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-empire fw"></i>{{ text_edit }}</h3>
+                    <h3 class="panel-title"><i class="fa fa-magic"></i> {{ text_edit }}</h3>
+                    <div class="panel-select">
+                        <select id="input-store" class="form-control">
+                            {% for store in stores %}
+                                <option value="{{ store.store_id }}" {% if(store.store_id == 0) %}selected="selected"{% endif %}>{{ store.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-2 col-left">
                         <ul class="nav nav-tabs menu-sections">
                             <li class="active"><a href="#tab-general" data-toggle="tab"><i class="fa fa-puzzle-piece" aria-hidden="true"></i>{{ tab_general }}</a></li>
-                            <li><a href="#tab-product" data-toggle="tab"><i class="fa fa-shopping-bag" aria-hidden="true"></i>{{ tab_product }}</a></li>
+                            <li><a href="#tab-font" data-toggle="tab"><i class="fa fa-font" aria-hidden="true"></i>{{ tab_font }}</a></li>
+                            <li><a href="#tab-product" data-toggle="tab"><i class="fa fa-cube" aria-hidden="true"></i>{{ tab_product }}</a></li>
                             <li><a href="#tab-category" data-toggle="tab"><i class="fa fa-tags" aria-hidden="true"></i>{{ tab_category }}</a></li>
+                            <li><a href="#tab-catalog" data-toggle="tab"><i class="fa fa-shopping-bag" aria-hidden="true"></i>{{ tab_catalog }}</a></li>
                             <li><a href="#tab-database" data-toggle="tab"><i class="fa fa-database" aria-hidden="true"></i>{{ tab_backup }}</a></li>
                         </ul>
                     </div>
@@ -48,23 +57,75 @@
                             <form action="{{ action_import }}" method="post" enctype="multipart/form-data" id="form-data" class="form-horizontal">
                                 <input type="hidden" name="file" />
                             </form>
-
-                            <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-octhemeoption" class="form-horizontal">
+                            <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-dvcontrolpanel" class="form-horizontal">
                                 <div class="tab-content">
-                                    <div class="tab-pane active tab-general" id="tab-general">
-                                        <ul class="nav nav-tabs general-sections">
-                                            <li class="active"><a href="#tab-configuration" data-toggle="tab">{{ tab_configuration }}</a></li>
-                                            <li><a href="#tab-stylesheet" data-toggle="tab">{{ tab_stylesheet }}</a></li>
-                                        </ul>
-                                        <div class="tab-content">
-                                            <div class="tab-pane active" id="tab-configuration">
+                                    <div class="tab-pane active" id="tab-general">
+                                        {% for store in stores %}
+                                            <div class="frm-field frm-field-{{ store.store_id }}">
                                                 <div class="form-group">
-                                                    <label class="col-sm-3 control-label" for="input-image">{{ entry_loader_image }}</label>
-                                                    <div class="col-sm-9">
-                                                        <a href="" id="thumb-image" data-toggle="image" class="img-thumbnail"><img src="{{ thumb }}" alt="" title=""  /></a>
-                                                        <input type="hidden" name="module_octhemeoption_loader_img" value="{{ module_octhemeoption_loader_img }}" id="input-image" />
+                                                    <label class="col-sm-3 control-label">{{ entry_lazy_load }}</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="hidden" name="module_dvcontrolpanel_lazy_load[{{ store.store_id }}]" value="0" />
+                                                        <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_lazy_load[{{ store.store_id }}]"
+                                                               data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
+                                                                {% if module_dvcontrolpanel_lazy_load[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
                                                     </div>
                                                 </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">{{ entry_sticky_header }}</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="hidden" name="module_dvcontrolpanel_sticky_header[{{ store.store_id }}]" value="0" />
+                                                        <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_sticky_header[{{ store.store_id }}]"
+                                                               data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
+                                                                {% if module_dvcontrolpanel_sticky_header[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">{{ entry_scroll_top }}</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="hidden" name="module_dvcontrolpanel_scroll_top[{{ store.store_id }}]" value="0" />
+                                                        <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_scroll_top[{{ store.store_id }}]"
+                                                               data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
+                                                                {% if module_dvcontrolpanel_scroll_top[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">{{ entry_loader_image }}</label>
+                                                    <div class="col-sm-9">
+                                                        <a href="" id="input-image{{ store.store_id }}" data-toggle="image" class="img-thumbnail"><img src="{{ thumb[store.store_id] }}" alt="" title=""  /></a>
+                                                        <input type="hidden" name="module_dvcontrolpanel_loader_img[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_loader_img[store.store_id] }}" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+
+                                    <div class="tab-pane" id="tab-font">
+                                        {% for store in stores %}
+                                            <div class="frm-field frm-field-{{ store.store_id }}">
+                                                <ul class="nav nav-tabs hoz-ul-sections">
+                                                    <li class="active"><a href="#tab-body-{{ store.store_id }}" data-toggle="tab">{{ tab_body }}</a></li>
+                                                    <li><a href="#tab-header-{{ store.store_id }}" data-toggle="tab">{{ tab_header }}</a></li>
+                                                    <li><a href="#tab-link-{{ store.store_id }}" data-toggle="tab">{{ tab_link }}</a></li>
+                                                    <li><a href="#tab-button-{{ store.store_id }}" data-toggle="tab">{{ tab_button }}</a></li>
+                                                </ul>
+
+                                                <div class="tab-content child-content">
+                                                    <div class="tab-pane active" id="tab-body-{{ store.store_id }}">Body</div>
+                                                    <div class="tab-pane" id="tab-header-{{ store.store_id }}">Header</div>
+                                                    <div class="tab-pane" id="tab-link-{{ store.store_id }}">Link</div>
+                                                    <div class="tab-pane" id="tab-button-{{ store.store_id }}">Button</div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+
+                                    <div>
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tab-configuration">
 
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label" for="input-configuration-store">{{ entry_store }}</label>
@@ -495,98 +556,22 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        $('.frm-field').hide();
+        $('.frm-field-0').show();
+
+        $('#input-store').change(function () {
+            $('.frm-field').hide();
+            var store = $(this).val();
+            $('.frm-field-' + store).show();
+        })
+
+
         $('.toggle.btn').on('click', function () {
             var ckb_status = parseInt($(this).find('.ckb-switch').val());
             if(ckb_status == 1) {
                 $(this).find('.ckb-switch').val('0');
             } else {
                 $(this).find('.ckb-switch').val('1');
-            }
-        });
-
-        // Module Configuration of Stores
-        $('.frm-configuration').hide();
-        $('#frm-configuration-0').show();
-        $('#input-configuration-store').change(function () {
-            var store_id = $(this).val();
-            $('.frm-configuration').hide();
-            $('#frm-configuration-' + store_id).show();
-        });
-
-        // Stylesheet of Stores
-        $('.frm-stylesheet').hide();
-        $('#frm-stylesheet-0').show();
-        $('#input-stylesheet-store').change(function () {
-            var store_id = $(this).val();
-            $('.frm-stylesheet').hide();
-            $('#frm-stylesheet-' + store_id).show();
-        });
-
-        // Enable / Disable Stylesheet Settings
-        $('.stylesheet-settings').hide();
-        var style_selection = $('.style-status');
-        style_selection.each(function () {
-            var store_id = $(this).data('store-id');
-            var status = parseInt($('#input-status-' + store_id).val());
-
-            if(status === 1) {
-                $('#stylesheet-settings-' + store_id).show();
-            } else {
-                $('#stylesheet-settings-' + store_id).hide();
-            }
-        });
-
-        style_selection.on('change', function () {
-            var store_id = $(this).data('store-id');
-            var status = parseInt($('#input-status-' + store_id).val());
-
-            if(status === 1) {
-                $('#stylesheet-settings-' + store_id).show();
-            } else {
-                $('#stylesheet-settings-' + store_id).hide();
-            }
-        });
-
-        // Product Configuration of Stores
-        $('.frm-product').hide();
-        $('#frm-product-0').show();
-        $('#input-product-store').change(function () {
-            var store_id = $(this).val();
-            $('.frm-product').hide();
-            $('#frm-product-' + store_id).show();
-        });
-
-        // Category Configuration of Stores
-        $('.frm-category').hide();
-        $('#frm-category-0').show();
-        $('#input-category-store').change(function () {
-            var store_id = $(this).val();
-            $('.frm-category').hide();
-            $('#frm-category-' + store_id).show();
-        });
-
-        // Enable / Disable Zoom Settings
-        $('.zoom-settings').hide();
-        var zoom_status = $('.zoom-status');
-        zoom_status.each(function () {
-            var store_id = $(this).data('store-id');
-            var status = parseInt($('#input-zoom-' + store_id).val());
-
-            if(status === 1) {
-                $('.zoom-settings-' + store_id).show();
-            } else {
-                $('.zoom-settings-' + store_id).hide();
-            }
-        });
-
-        zoom_status.change(function () {
-            var store_id = $(this).data('store-id');
-            var status = parseInt($('#input-zoom-' + store_id).val());
-
-            if(status === 1) {
-                $('.zoom-settings-' + store_id).show();
-            } else {
-                $('.zoom-settings-' + store_id).hide();
             }
         });
     });
