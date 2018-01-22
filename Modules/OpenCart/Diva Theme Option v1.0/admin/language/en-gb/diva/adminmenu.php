@@ -1,6 +1,6 @@
 <?php
-$_['text_theme_menu'] = "OC Theme Menu";
-$_['text_theme_config'] = "Theme Configuration";
+$_['text_theme_menu'] = "DIVA Configuration";
+$_['text_theme_config'] = "Control Panel";
 $_['text_category_thumbnail'] = "Featured Categories";
 $_['text_advance_menu'] = 'Advanced Menu';
 $_['text_blog'] = "Blog";

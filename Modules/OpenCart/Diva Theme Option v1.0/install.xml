@@ -8,7 +8,7 @@
     <!-- Menu Left in Admin -->
     <file path="admin/controller/common/column_left.php">
         <operation>
-            <search ><![CDATA[$sale = array();]]></search>
+            <search ><![CDATA[$catalog = array();]]></search>
             <add position="before"><![CDATA[
             // OC Menu Items
             $this->load->language('diva/adminmenu');
@@ -100,7 +100,7 @@
             
             $data['menus'][] = array(
                 'id'       => 'menu-panel',
-                'icon'     => 'fa-empire',
+                'icon'     => 'fa-diva',
                 'name'     => $this->language->get('text_theme_menu'),
                 'href'     => '',
                 'children' => $adminmenu
