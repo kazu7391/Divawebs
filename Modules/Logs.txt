@@ -13,7 +13,7 @@
   * Catalog mode (price, cart, wishlist/compare)
   	+ Header (cart, currency)
   	+ Module (rotate, quick view, label)
-  	+ Category (product des)
+  	+ Category (product des, label)
   	+ Product Detail (Options)
   * Product Detail
   	+ Social
