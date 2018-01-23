@@ -115,6 +115,7 @@
 
                                                 <div class="tab-content child-content">
                                                     <div class="tab-pane active" id="tab-body-{{ store.store_id }}">
+                                                        <label class="col-sm-3 control-label" for="input-body-color-{{ store.store_id }}">{{ entry_color }}</label>
 
                                                     </div>
                                                     <div class="tab-pane" id="tab-header-{{ store.store_id }}">Header</div>
@@ -395,9 +396,190 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="tab-pane" id="tab-module-{{ store.store_id }}">Module</div>
-                                                    <div class="tab-pane" id="tab-product-{{ store.store_id }}">product</div>
-                                                    <div class="tab-pane" id="tab-category-{{ store.store_id }}">category</div>
+
+                                                    <div class="tab-pane" id="tab-module-{{ store.store_id }}">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="input-module-price-{{ store.store_id }}">{{ entry_show_price }}</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="hidden" name="module_dvcontrolpanel_module_price[{{ store.store_id }}]" value="0" />
+                                                                <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_module_price[{{ store.store_id }}]" id="input-module-price-{{ store.store_id }}"
+                                                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36" data-store-id="{{ store.store_id }}"
+                                                                        {% if module_dvcontrolpanel_module_price[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="input-module-cart-{{ store.store_id }}">{{ entry_show_cart }}</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="hidden" name="module_dvcontrolpanel_module_cart[{{ store.store_id }}]" value="0" />
+                                                                <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_module_cart[{{ store.store_id }}]" id="input-module-cart-{{ store.store_id }}"
+                                                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36" data-store-id="{{ store.store_id }}"
+                                                                        {% if module_dvcontrolpanel_module_cart[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="input-module-wishlist-{{ store.store_id }}">{{ entry_show_wishlist }}</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="hidden" name="module_dvcontrolpanel_module_wishlist[{{ store.store_id }}]" value="0" />
+                                                                <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_module_wishlist[{{ store.store_id }}]" id="input-module-wishlist-{{ store.store_id }}"
+                                                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36" data-store-id="{{ store.store_id }}"
+                                                                        {% if module_dvcontrolpanel_module_wishlist[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="input-module-compare-{{ store.store_id }}">{{ entry_show_compare }}</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="hidden" name="module_dvcontrolpanel_module_compare[{{ store.store_id }}]" value="0" />
+                                                                <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_module_compare[{{ store.store_id }}]" id="input-module-compare-{{ store.store_id }}"
+                                                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36" data-store-id="{{ store.store_id }}"
+                                                                        {% if module_dvcontrolpanel_module_compare[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="input-module-hover-{{ store.store_id }}">{{ entry_hover }}</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="hidden" name="module_dvcontrolpanel_module_hover[{{ store.store_id }}]" value="0" />
+                                                                <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_module_hover[{{ store.store_id }}]" id="input-module-hover-{{ store.store_id }}"
+                                                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36" data-store-id="{{ store.store_id }}"
+                                                                        {% if module_dvcontrolpanel_module_hover[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="input-module-quickview-{{ store.store_id }}">{{ entry_quickview }}</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="hidden" name="module_dvcontrolpanel_module_quickview[{{ store.store_id }}]" value="0" />
+                                                                <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_module_quickview[{{ store.store_id }}]" id="input-module-quickview-{{ store.store_id }}"
+                                                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36" data-store-id="{{ store.store_id }}"
+                                                                        {% if module_dvcontrolpanel_module_quickview[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="input-module-label-{{ store.store_id }}">{{ entry_label }}</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="hidden" name="module_dvcontrolpanel_module_label[{{ store.store_id }}]" value="0" />
+                                                                <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_module_label[{{ store.store_id }}]" id="input-module-label-{{ store.store_id }}"
+                                                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36" data-store-id="{{ store.store_id }}"
+                                                                        {% if module_dvcontrolpanel_module_label[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane" id="tab-product-{{ store.store_id }}">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="input-product-price-{{ store.store_id }}">{{ entry_show_price }}</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="hidden" name="module_dvcontrolpanel_product_price[{{ store.store_id }}]" value="0" />
+                                                                <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_product_price[{{ store.store_id }}]" id="input-product-price-{{ store.store_id }}"
+                                                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36" data-store-id="{{ store.store_id }}"
+                                                                        {% if module_dvcontrolpanel_product_price[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="input-product-cart-{{ store.store_id }}">{{ entry_show_cart }}</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="hidden" name="module_dvcontrolpanel_product_cart[{{ store.store_id }}]" value="0" />
+                                                                <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_product_cart[{{ store.store_id }}]" id="input-product-cart-{{ store.store_id }}"
+                                                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36" data-store-id="{{ store.store_id }}"
+                                                                        {% if module_dvcontrolpanel_product_cart[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="input-product-wishlist-{{ store.store_id }}">{{ entry_show_wishlist }}</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="hidden" name="module_dvcontrolpanel_product_wishlist[{{ store.store_id }}]" value="0" />
+                                                                <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_product_wishlist[{{ store.store_id }}]" id="input-product-wishlist-{{ store.store_id }}"
+                                                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36" data-store-id="{{ store.store_id }}"
+                                                                        {% if module_dvcontrolpanel_product_wishlist[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="input-product-compare-{{ store.store_id }}">{{ entry_show_compare }}</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="hidden" name="module_dvcontrolpanel_product_compare[{{ store.store_id }}]" value="0" />
+                                                                <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_product_compare[{{ store.store_id }}]" id="input-product-compare-{{ store.store_id }}"
+                                                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36" data-store-id="{{ store.store_id }}"
+                                                                        {% if module_dvcontrolpanel_product_compare[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="input-product-options-{{ store.store_id }}">{{ entry_show_options }}</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="hidden" name="module_dvcontrolpanel_product_options[{{ store.store_id }}]" value="0" />
+                                                                <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_product_options[{{ store.store_id }}]" id="input-product-options-{{ store.store_id }}"
+                                                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36" data-store-id="{{ store.store_id }}"
+                                                                        {% if module_dvcontrolpanel_product_options[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane" id="tab-category-{{ store.store_id }}">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="input-category-price-{{ store.store_id }}">{{ entry_show_price }}</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="hidden" name="module_dvcontrolpanel_category_price[{{ store.store_id }}]" value="0" />
+                                                                <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_category_price[{{ store.store_id }}]" id="input-category-price-{{ store.store_id }}"
+                                                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36" data-store-id="{{ store.store_id }}"
+                                                                        {% if module_dvcontrolpanel_category_price[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="input-category-cart-{{ store.store_id }}">{{ entry_show_cart }}</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="hidden" name="module_dvcontrolpanel_category_cart[{{ store.store_id }}]" value="0" />
+                                                                <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_category_cart[{{ store.store_id }}]" id="input-category-cart-{{ store.store_id }}"
+                                                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36" data-store-id="{{ store.store_id }}"
+                                                                        {% if module_dvcontrolpanel_category_cart[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="input-category-wishlist-{{ store.store_id }}">{{ entry_show_wishlist }}</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="hidden" name="module_dvcontrolpanel_category_wishlist[{{ store.store_id }}]" value="0" />
+                                                                <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_category_wishlist[{{ store.store_id }}]" id="input-category-wishlist-{{ store.store_id }}"
+                                                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36" data-store-id="{{ store.store_id }}"
+                                                                        {% if module_dvcontrolpanel_category_wishlist[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="input-category-compare-{{ store.store_id }}">{{ entry_show_compare }}</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="hidden" name="module_dvcontrolpanel_category_compare[{{ store.store_id }}]" value="0" />
+                                                                <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_category_compare[{{ store.store_id }}]" id="input-category-compare-{{ store.store_id }}"
+                                                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36" data-store-id="{{ store.store_id }}"
+                                                                        {% if module_dvcontrolpanel_category_compare[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="input-category-prodes-{{ store.store_id }}">{{ entry_product_des }}</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="hidden" name="module_dvcontrolpanel_category_prodes[{{ store.store_id }}]" value="0" />
+                                                                <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_category_prodes[{{ store.store_id }}]" id="input-category-prodes-{{ store.store_id }}"
+                                                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36" data-store-id="{{ store.store_id }}"
+                                                                        {% if module_dvcontrolpanel_category_prodes[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="input-category-label-{{ store.store_id }}">{{ entry_label }}</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="hidden" name="module_dvcontrolpanel_category_label[{{ store.store_id }}]" value="0" />
+                                                                <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_category_label[{{ store.store_id }}]" id="input-category-label-{{ store.store_id }}"
+                                                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36" data-store-id="{{ store.store_id }}"
+                                                                        {% if module_dvcontrolpanel_category_label[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         {% endfor %}

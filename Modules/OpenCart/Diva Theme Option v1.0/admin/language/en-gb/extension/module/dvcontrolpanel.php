@@ -40,8 +40,7 @@ $_['entry_lazy_load']      = 'Lazy Load';
 $_['entry_sticky_header']  = 'Sticky Header';
 $_['entry_scroll_top']     = 'Scroll Top Button';
 $_['entry_store']          = 'Choose Store';
-$_['entry_rotator']        = 'Rotate Image';
-$_['entry_quickview']      = 'Quick View';
+$_['entry_hover']          = 'Hover Image';
 $_['entry_catalog']        = 'Catalog Mode';
 $_['entry_color']          = 'Color';
 $_['entry_width']          = 'Width';
@@ -79,6 +78,12 @@ $_['entry_quickview']      = 'Quick View';
 $_['entry_img_effect']     = 'Image Effect';
 $_['entry_cart']           = 'Cart';
 $_['entry_currency']       = 'Currency';
+$_['entry_show_price']     = 'Show Price';
+$_['entry_show_cart']      = 'Show Cart Button';
+$_['entry_show_wishlist']  = 'Show Wish list Button';
+$_['entry_show_compare']   = 'Show Compare Button';
+$_['entry_show_options']   = 'Show Options';
+$_['entry_product_des']    = 'Product Description';
 
 //Error
 $_['error_permission']     = 'Warning: You do not have permission to modify Diva Theme!';
