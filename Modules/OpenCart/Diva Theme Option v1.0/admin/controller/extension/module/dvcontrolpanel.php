@@ -101,6 +101,7 @@ class ControllerExtensionModuleDvcontrolpanel extends Controller
 
         $data['cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true);
 
+        /* General */
         if (isset($this->request->post['module_dvcontrolpanel_lazy_load'])) {
             $data['module_dvcontrolpanel_lazy_load'] = $this->request->post['module_dvcontrolpanel_lazy_load'];
         } else {
@@ -133,11 +134,282 @@ class ControllerExtensionModuleDvcontrolpanel extends Controller
 
         $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 50, 50);
 
-        
+        /* Font */
 
-        $this->document->addScript('view/javascript/divawebs/jscolor.min.js');
+        /* Catalog */
+        /* Header */
+        if (isset($this->request->post['module_dvcontrolpanel_header_cart'])) {
+            $data['module_dvcontrolpanel_header_cart'] = $this->request->post['module_dvcontrolpanel_header_cart'];
+        } else {
+            $data['module_dvcontrolpanel_header_cart'] = $this->config->get('module_dvcontrolpanel_header_cart');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_header_currency'])) {
+            $data['module_dvcontrolpanel_header_currency'] = $this->request->post['module_dvcontrolpanel_header_currency'];
+        } else {
+            $data['module_dvcontrolpanel_header_currency'] = $this->config->get('module_dvcontrolpanel_header_currency');
+        }
+
+        /* Module */
+        if (isset($this->request->post['module_dvcontrolpanel_module_price'])) {
+            $data['module_dvcontrolpanel_module_price'] = $this->request->post['module_dvcontrolpanel_module_price'];
+        } else {
+            $data['module_dvcontrolpanel_module_price'] = $this->config->get('module_dvcontrolpanel_module_price');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_module_cart'])) {
+            $data['module_dvcontrolpanel_module_cart'] = $this->request->post['module_dvcontrolpanel_module_cart'];
+        } else {
+            $data['module_dvcontrolpanel_module_cart'] = $this->config->get('module_dvcontrolpanel_module_cart');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_module_wishlist'])) {
+            $data['module_dvcontrolpanel_module_wishlist'] = $this->request->post['module_dvcontrolpanel_module_wishlist'];
+        } else {
+            $data['module_dvcontrolpanel_module_wishlist'] = $this->config->get('module_dvcontrolpanel_module_wishlist');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_module_compare'])) {
+            $data['module_dvcontrolpanel_module_compare'] = $this->request->post['module_dvcontrolpanel_module_compare'];
+        } else {
+            $data['module_dvcontrolpanel_module_compare'] = $this->config->get('module_dvcontrolpanel_module_compare');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_module_hover'])) {
+            $data['module_dvcontrolpanel_module_hover'] = $this->request->post['module_dvcontrolpanel_module_hover'];
+        } else {
+            $data['module_dvcontrolpanel_module_hover'] = $this->config->get('module_dvcontrolpanel_module_hover');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_module_quickview'])) {
+            $data['module_dvcontrolpanel_module_quickview'] = $this->request->post['module_dvcontrolpanel_module_quickview'];
+        } else {
+            $data['module_dvcontrolpanel_module_quickview'] = $this->config->get('module_dvcontrolpanel_module_quickview');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_module_label'])) {
+            $data['module_dvcontrolpanel_module_label'] = $this->request->post['module_dvcontrolpanel_module_label'];
+        } else {
+            $data['module_dvcontrolpanel_module_label'] = $this->config->get('module_dvcontrolpanel_module_label');
+        }
+
+        /* Product catalog */
+        if (isset($this->request->post['module_dvcontrolpanel_product_price'])) {
+            $data['module_dvcontrolpanel_product_price'] = $this->request->post['module_dvcontrolpanel_product_price'];
+        } else {
+            $data['module_dvcontrolpanel_product_price'] = $this->config->get('module_dvcontrolpanel_product_price');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_product_cart'])) {
+            $data['module_dvcontrolpanel_product_cart'] = $this->request->post['module_dvcontrolpanel_product_cart'];
+        } else {
+            $data['module_dvcontrolpanel_product_cart'] = $this->config->get('module_dvcontrolpanel_product_cart');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_product_wishlist'])) {
+            $data['module_dvcontrolpanel_product_wishlist'] = $this->request->post['module_dvcontrolpanel_product_wishlist'];
+        } else {
+            $data['module_dvcontrolpanel_product_wishlist'] = $this->config->get('module_dvcontrolpanel_product_wishlist');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_product_compare'])) {
+            $data['module_dvcontrolpanel_product_compare'] = $this->request->post['module_dvcontrolpanel_product_compare'];
+        } else {
+            $data['module_dvcontrolpanel_product_compare'] = $this->config->get('module_dvcontrolpanel_product_compare');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_product_options'])) {
+            $data['module_dvcontrolpanel_product_options'] = $this->request->post['module_dvcontrolpanel_product_options'];
+        } else {
+            $data['module_dvcontrolpanel_product_options'] = $this->config->get('module_dvcontrolpanel_product_options');
+        }
+
+        /* Category Catalog */
+        if (isset($this->request->post['module_dvcontrolpanel_category_price'])) {
+            $data['module_dvcontrolpanel_category_price'] = $this->request->post['module_dvcontrolpanel_category_price'];
+        } else {
+            $data['module_dvcontrolpanel_category_price'] = $this->config->get('module_dvcontrolpanel_category_price');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_category_cart'])) {
+            $data['module_dvcontrolpanel_category_cart'] = $this->request->post['module_dvcontrolpanel_category_cart'];
+        } else {
+            $data['module_dvcontrolpanel_category_cart'] = $this->config->get('module_dvcontrolpanel_category_cart');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_category_wishlist'])) {
+            $data['module_dvcontrolpanel_category_wishlist'] = $this->request->post['module_dvcontrolpanel_category_wishlist'];
+        } else {
+            $data['module_dvcontrolpanel_category_wishlist'] = $this->config->get('module_dvcontrolpanel_category_wishlist');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_category_compare'])) {
+            $data['module_dvcontrolpanel_category_compare'] = $this->request->post['module_dvcontrolpanel_category_compare'];
+        } else {
+            $data['module_dvcontrolpanel_category_compare'] = $this->config->get('module_dvcontrolpanel_category_compare');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_category_prodes'])) {
+            $data['module_dvcontrolpanel_category_prodes'] = $this->request->post['module_dvcontrolpanel_category_prodes'];
+        } else {
+            $data['module_dvcontrolpanel_category_prodes'] = $this->config->get('module_dvcontrolpanel_category_prodes');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_category_label'])) {
+            $data['module_dvcontrolpanel_category_label'] = $this->request->post['module_dvcontrolpanel_category_label'];
+        } else {
+            $data['module_dvcontrolpanel_category_label'] = $this->config->get('module_dvcontrolpanel_category_label');
+        }
+
+        /* Product */
+        if (isset($this->request->post['module_dvcontrolpanel_related'])) {
+            $data['module_dvcontrolpanel_related'] = $this->request->post['module_dvcontrolpanel_related'];
+        } else {
+            $data['module_dvcontrolpanel_related'] = $this->config->get('module_dvcontrolpanel_related');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_social'])) {
+            $data['module_dvcontrolpanel_social'] = $this->request->post['module_dvcontrolpanel_social'];
+        } else {
+            $data['module_dvcontrolpanel_social'] = $this->config->get('module_dvcontrolpanel_social');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_tax'])) {
+            $data['module_dvcontrolpanel_tax'] = $this->request->post['module_dvcontrolpanel_tax'];
+        } else {
+            $data['module_dvcontrolpanel_tax'] = $this->config->get('module_dvcontrolpanel_tax');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_tags'])) {
+            $data['module_dvcontrolpanel_tags'] = $this->request->post['module_dvcontrolpanel_tags'];
+        } else {
+            $data['module_dvcontrolpanel_tags'] = $this->config->get('module_dvcontrolpanel_tags');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_use_zoom'])) {
+            $data['module_dvcontrolpanel_use_zoom'] = $this->request->post['module_dvcontrolpanel_use_zoom'];
+        } else {
+            $data['module_dvcontrolpanel_use_zoom'] = $this->config->get('module_dvcontrolpanel_use_zoom');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_zoom_type'])) {
+            $data['module_dvcontrolpanel_zoom_type'] = $this->request->post['module_dvcontrolpanel_zoom_type'];
+        } else {
+            $data['module_dvcontrolpanel_zoom_type'] = $this->config->get('module_dvcontrolpanel_zoom_type');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_zoom_space'])) {
+            $data['module_dvcontrolpanel_zoom_space'] = $this->request->post['module_dvcontrolpanel_zoom_space'];
+        } else {
+            $data['module_dvcontrolpanel_zoom_space'] = $this->config->get('module_dvcontrolpanel_zoom_space');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_zoom_title'])) {
+            $data['module_dvcontrolpanel_zoom_title'] = $this->request->post['module_dvcontrolpanel_zoom_title'];
+        } else {
+            $data['module_dvcontrolpanel_zoom_title'] = $this->config->get('module_dvcontrolpanel_zoom_title');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_use_swatches'])) {
+            $data['module_dvcontrolpanel_use_swatches'] = $this->request->post['module_dvcontrolpanel_use_swatches'];
+        } else {
+            $data['module_dvcontrolpanel_use_swatches'] = $this->config->get('module_dvcontrolpanel_use_swatches');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_swatches_width'])) {
+            $data['module_dvcontrolpanel_swatches_width'] = $this->request->post['module_dvcontrolpanel_swatches_width'];
+        } else {
+            $data['module_dvcontrolpanel_swatches_width'] = $this->config->get('module_dvcontrolpanel_swatches_width');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_swatches_height'])) {
+            $data['module_dvcontrolpanel_swatches_height'] = $this->request->post['module_dvcontrolpanel_swatches_height'];
+        } else {
+            $data['module_dvcontrolpanel_swatches_height'] = $this->config->get('module_dvcontrolpanel_swatches_height');
+        }
+        
+        if (isset($this->request->post['module_dvcontrolpanel_swatches_option'])) {
+            $data['module_dvcontrolpanel_swatches_option'] = $this->request->post['module_dvcontrolpanel_swatches_option'];
+        } else {
+            $data['module_dvcontrolpanel_swatches_option'] = $this->config->get('module_dvcontrolpanel_swatches_option');
+        }
+        
+        /* Category */
+        if (isset($this->request->post['module_dvcontrolpanel_category_image'])) {
+            $data['module_dvcontrolpanel_category_image'] = $this->request->post['module_dvcontrolpanel_category_image'];
+        } else {
+            $data['module_dvcontrolpanel_category_image'] = $this->config->get('module_dvcontrolpanel_category_image');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_category_description'])) {
+            $data['module_dvcontrolpanel_category_description'] = $this->request->post['module_dvcontrolpanel_category_description'];
+        } else {
+            $data['module_dvcontrolpanel_category_description'] = $this->config->get('module_dvcontrolpanel_category_description');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_sub_category'])) {
+            $data['module_dvcontrolpanel_sub_category'] = $this->request->post['module_dvcontrolpanel_sub_category'];
+        } else {
+            $data['module_dvcontrolpanel_sub_category'] = $this->config->get('module_dvcontrolpanel_sub_category');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_use_filter'])) {
+            $data['module_dvcontrolpanel_use_filter'] = $this->request->post['module_dvcontrolpanel_use_filter'];
+        } else {
+            $data['module_dvcontrolpanel_use_filter'] = $this->config->get('module_dvcontrolpanel_use_filter');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_filter_position'])) {
+            $data['module_dvcontrolpanel_filter_position'] = $this->request->post['module_dvcontrolpanel_filter_position'];
+        } else {
+            $data['module_dvcontrolpanel_filter_position'] = $this->config->get('module_dvcontrolpanel_filter_position');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_cate_quickview'])) {
+            $data['module_dvcontrolpanel_cate_quickview'] = $this->request->post['module_dvcontrolpanel_cate_quickview'];
+        } else {
+            $data['module_dvcontrolpanel_cate_quickview'] = $this->config->get('module_dvcontrolpanel_cate_quickview');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_img_effect'])) {
+            $data['module_dvcontrolpanel_img_effect'] = $this->request->post['module_dvcontrolpanel_img_effect'];
+        } else {
+            $data['module_dvcontrolpanel_img_effect'] = $this->config->get('module_dvcontrolpanel_img_effect');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_cate_swatches_width'])) {
+            $data['module_dvcontrolpanel_cate_swatches_width'] = $this->request->post['module_dvcontrolpanel_cate_swatches_width'];
+        } else {
+            $data['module_dvcontrolpanel_cate_swatches_width'] = $this->config->get('module_dvcontrolpanel_cate_swatches_width');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_cate_swatches_height'])) {
+            $data['module_dvcontrolpanel_cate_swatches_height'] = $this->request->post['module_dvcontrolpanel_cate_swatches_height'];
+        } else {
+            $data['module_dvcontrolpanel_cate_swatches_height'] = $this->config->get('module_dvcontrolpanel_cate_swatches_height');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_advance_view'])) {
+            $data['module_dvcontrolpanel_advance_view'] = $this->request->post['module_dvcontrolpanel_advance_view'];
+        } else {
+            $data['module_dvcontrolpanel_advance_view'] = $this->config->get('module_dvcontrolpanel_advance_view');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_default_view'])) {
+            $data['module_dvcontrolpanel_default_view'] = $this->request->post['module_dvcontrolpanel_default_view'];
+        } else {
+            $data['module_dvcontrolpanel_default_view'] = $this->config->get('module_dvcontrolpanel_default_view');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_product_row'])) {
+            $data['module_dvcontrolpanel_product_row'] = $this->request->post['module_dvcontrolpanel_product_row'];
+        } else {
+            $data['module_dvcontrolpanel_product_row'] = $this->config->get('module_dvcontrolpanel_product_row');
+        }
+
         $this->document->addScript('view/javascript/divawebs/googlefont.js');
         $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
+        $this->document->addScript('view/javascript/divawebs/jscolor.min.js');
         $this->document->addScript('view/javascript/divawebs/switch-toggle/js/bootstrap-toggle.min.js');
         $this->document->addStyle('view/javascript/divawebs/switch-toggle/css/bootstrap-toggle.min.css');
 

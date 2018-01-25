@@ -116,7 +116,6 @@
                                                 <div class="tab-content child-content">
                                                     <div class="tab-pane active" id="tab-body-{{ store.store_id }}">
                                                         <label class="col-sm-3 control-label" for="input-body-color-{{ store.store_id }}">{{ entry_color }}</label>
-
                                                     </div>
                                                     <div class="tab-pane" id="tab-header-{{ store.store_id }}">Header</div>
                                                     <div class="tab-pane" id="tab-link-{{ store.store_id }}">Link</div>
@@ -183,8 +182,8 @@
                                                     <label class="col-sm-3 control-label" for="input-zoom-type-{{ store.store_id }}">{{ entry_zoom_type }}</label>
                                                     <div class="col-sm-6">
                                                         <select name="module_dvcontrolpanel_zoom_type[{{ store.store_id }}]" id="input-zoom-type-{{ store.store_id }}" class="form-control">
-                                                            <option value="outside" {% if module_dvcontrolpanel_zoom_type[store.store_id] == 'outside' %}selected="selected"{% endif %}>{{ text_outside }}</option>
-                                                            <option value="inside" {% if module_dvcontrolpanel_zoom_type[store.store_id] == 'inside' %}selected="selected"{% endif %}>{{ text_inside }}</option>
+                                                            <option value="outer" {% if module_dvcontrolpanel_zoom_type[store.store_id] == 'outer' %}selected="selected"{% endif %}>{{ text_outside }}</option>
+                                                            <option value="inner" {% if module_dvcontrolpanel_zoom_type[store.store_id] == 'inner' %}selected="selected"{% endif %}>{{ text_inside }}</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -271,16 +270,6 @@
                                                         <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_sub_category[{{ store.store_id }}]" id="input-category-sub-{{ store.store_id }}"
                                                                data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36" data-store-id="{{ store.store_id }}"
                                                                 {% if module_dvcontrolpanel_sub_category[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label class="col-sm-3 control-label" for="input-category-label-{{ store.store_id }}">{{ entry_label }}</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="hidden" name="module_dvcontrolpanel_category_label[{{ store.store_id }}]" value="0" />
-                                                        <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_category_label[{{ store.store_id }}]" id="input-category-label-{{ store.store_id }}"
-                                                               data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36" data-store-id="{{ store.store_id }}"
-                                                                {% if module_dvcontrolpanel_category_label[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
                                                     </div>
                                                 </div>
 
