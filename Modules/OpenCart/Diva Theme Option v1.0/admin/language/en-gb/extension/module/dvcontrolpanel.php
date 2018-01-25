@@ -46,6 +46,7 @@ $_['entry_color']          = 'Color';
 $_['entry_width']          = 'Width';
 $_['entry_height']         = 'Height';
 $_['entry_hover_color']    = 'Color when Hover';
+$_['entry_global_font']    = 'Global Font';
 $_['entry_font_family']    = 'Font Family';
 $_['entry_font_weight']    = 'Font Weight';
 $_['entry_font_size']      = 'Font Size';
