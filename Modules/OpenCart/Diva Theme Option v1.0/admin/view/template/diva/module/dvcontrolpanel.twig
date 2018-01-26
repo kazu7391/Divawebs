@@ -115,18 +115,18 @@
 
                                                 <div class="tab-content child-content">
                                                     <div class="tab-pane active" id="tab-body-{{ store.store_id }}">
-                                                        <div class="form-group">
-                                                            <label class="col-sm-3 control-label" for="input-body-color-{{ store.store_id }}">{{ entry_global_font }}</label>
-                                                            <div class="col-sm-3">
-                                                                <select class="font-box form-control"></select>
+                                                        <div class="form-group font-control">
+                                                            <div>
+                                                                <label class="col-sm-3 control-label" for="input-body-color-{{ store.store_id }}">{{ entry_global_font }}</label>
+                                                                <div class="col-sm-3">
+                                                                    <select class="font-box form-control" onchange="gfont.chooseFont(this.value, $(this))">
+                                                                        <option>{{ text_choose_font }}</option>
+                                                                    </select>
+                                                                    <span class="font-demo">ABC abc 123 ~!@#$%^&*()_+</span>
+                                                                </div>
+                                                                <div class="col-sm-3 font-variant-ckb"></div>
+                                                                <div class="col-sm-3 font-subset-ckb"></div>
                                                             </div>
-                                                            <div class="col-sm-6">
-                                                                <span class="font-demo">aaaaaa</span>
-                                                            </div>
-                                                            <div class="col-sm-3"></div>
-                                                            <div class="col-sm-9 font-variant-ckb"></div>
-                                                            <div class="col-sm-3"></div>
-                                                            <div class="col-sm-9 font-subset-ckb"></div>
                                                         </div>
                                                     </div>
                                                     <div class="tab-pane" id="tab-header-{{ store.store_id }}">Header</div>
@@ -135,6 +135,8 @@
                                                 </div>
                                             </div>
                                         {% endfor %}
+                                        <input type="hidden" value="{{ entry_font_weight }}" id="text-font-weight" />
+                                        <input type="hidden" value="{{ entry_font_subset }}" id="text-font-subset" />
                                     </div>
 
                                     <div class="tab-pane" id="tab-product">

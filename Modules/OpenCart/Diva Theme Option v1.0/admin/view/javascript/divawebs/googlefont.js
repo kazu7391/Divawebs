@@ -1,22 +1,62 @@
+var fonts = [];
+
 $(document).ready(function () {
     $.getJSON('https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyCKhdPP0mANQLtEY8Br0H71OqpQHxfu8wo', function (response) {
-        var fonts = [];
         for (i = 0; i < response.items.length; i++) {
+            font_family_val = response.items[i]['family'].replace(' ', '+');
             fonts[i] = {
-               'family' : response.items[i]['family'],
-               'variants' : response.items[i]['variants'],
-               'subsets': response.items[i]['subsets']
+                'id'     : i,
+                'family' : response.items[i]['family'],
+                'variants' : response.items[i]['variants'],
+                'subsets': response.items[i]['subsets']
             };
         }
 
         var options_html = '';
-        var variants_html = '';
-        var subsets_html = '';
         for (i = 0; i < fonts.length; i++) {
-            var font_val = fonts[i]['family'].replace(' ', '+');
-            options_html += "<option value='" + font_val + "'>" + fonts[i]['family'] +"</option>";
+            options_html += "<option value='" + fonts[i]['id'] + "'>" + fonts[i]['family'] +"</option>";
         }
 
-        $('.font-box').html(options_html);
+        $('.font-box').append(options_html);
    })
 });
+
+var gfont = {
+    'chooseFont' : function (font_id, selection) {
+        var variants_html = '';
+        var subsets_html = '';
+        var text_font_weight = $('#text-font-weight').val();
+        var text_font_subset = $('#text-font-subset').val();
+
+        var variants = fonts[font_id]['variants'];
+        var subsets = fonts[font_id]['subsets'];
+
+        if (variants.length) {
+            variants_html += "<label class='control-label'>" + text_font_weight + "</label>";
+            variants_html += "<div class='lbl-checkbox'>";
+            for (i = 0; i < variants.length; i++) {
+                variants_html += "<label class='cbk-container'>" + variants[i];
+                variants_html += "<input type='checkbox' value='" + variants[i] + "'>";
+                variants_html += "<span class='checkmark'></span>";
+                variants_html += "</label>";
+            }
+            variants_html += "</div>";
+        }
+
+        selection.closest('.font-control').find('.font-variant-ckb').html(variants_html);
+
+        if (subsets.length) {
+            subsets_html += "<label class='control-label'>" + text_font_subset + "</label>";
+            subsets_html += "<div class='lbl-checkbox'>";
+            for (i = 0; i < subsets.length; i++) {
+                subsets_html += "<label class='cbk-container'>" + subsets[i];
+                subsets_html += "<input type='checkbox' value='" + subsets[i] + "'>";
+                subsets_html += "<span class='checkmark'></span>";
+                subsets_html += "</label>";
+            }
+            subsets_html += "</div>";
+        }
+
+        selection.closest('.font-control').find('.font-subset-ckb').html(subsets_html);
+    }
+}
