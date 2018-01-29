@@ -7,8 +7,10 @@ $(document).ready(function () {
             fonts[i] = {
                 'id'     : i,
                 'family' : response.items[i]['family'],
+                'family_val' : font_family_val,
                 'variants' : response.items[i]['variants'],
-                'subsets': response.items[i]['subsets']
+                'subsets': response.items[i]['subsets'],
+                'category' : response.items[i]['category']
             };
         }
 
@@ -18,98 +20,55 @@ $(document).ready(function () {
         }
 
         $('.font-box').append(options_html);
-   })
+    });
 });
 
 var gfont = {
-    'chooseFont' : function (font_id, selection) {
-        var variants_html = '';
-        var subsets_html = '';
-        var text_font_weight = $('#text-font-weight').val();
-        var text_font_subset = $('#text-font-subset').val();
-
+    'chooseBodyFont' : function (font_id) {
         var variants = fonts[font_id]['variants'];
         var subsets = fonts[font_id]['subsets'];
+        var variants_attr = '';
+        var subsets_attr = '';
+
+        $('#body-font-family-name').val(fonts[font_id]['family']);
+        $('#body-font-family-cate').val(fonts[font_id]['category']);
+
+        var family_val = fonts[font_id]['family_val'];
 
         if (variants.length) {
-            var length = variants.length;
-            var divide_count = 7;
-
-            variants_html += "<label class='control-label'>" + text_font_weight + "</label>";
-            variants_html += "<div class='lbl-checkbox row'>";
-            if (length <= divide_count) {
-                variants_html += "<div class='col-sm-6'>";
-                for (i = 0; i < variants.length; i++) {
-                    variants_html += "<label class='cbk-container'>" + variants[i];
-                    variants_html += "<input type='checkbox' value='" + variants[i] + "'>";
-                    variants_html += "<span class='checkmark'></span>";
-                    variants_html += "</label>";
-                }
-                variants_html += "</div>";
-            }
-
-            if (length > divide_count) {
-                variants_html += "<div class='col-sm-6'>";
-                for (i = 0; i < divide_count; i++) {
-                    variants_html += "<label class='cbk-container'>" + variants[i];
-                    variants_html += "<input type='checkbox' value='" + variants[i] + "'>";
-                    variants_html += "<span class='checkmark'></span>";
-                    variants_html += "</label>";
-                }
-                variants_html += "</div>";
-                variants_html += "<div class='col-sm-6'>";
-                for (i = 7; i < length; i++) {
-                    variants_html += "<label class='cbk-container'>" + variants[i];
-                    variants_html += "<input type='checkbox' value='" + variants[i] + "'>";
-                    variants_html += "<span class='checkmark'></span>";
-                    variants_html += "</label>";
-                }
-                variants_html += "</div>";
-            }
-
-            variants_html += "</div>";
+            variants_attr = variants.join(',');
         }
-
-        selection.closest('.font-control').find('.font-variant-ckb').html(variants_html);
 
         if (subsets.length) {
-            var length = subsets.length;
-            var divide_count = 7;
-
-            subsets_html += "<label class='control-label'>" + text_font_subset + "</label>";
-            subsets_html += "<div class='lbl-checkbox row'>";
-            if (length <= divide_count) {
-                subsets_html += "<div class='col-sm-6'>";
-                for (i = 0; i < subsets.length; i++) {
-                    subsets_html += "<label class='cbk-container'>" + subsets[i];
-                    subsets_html += "<input type='checkbox' value='" + subsets[i] + "'>";
-                    subsets_html += "<span class='checkmark'></span>";
-                    subsets_html += "</label>";
-                }
-                subsets_html += "</div>";
-            }
-
-            if (length > divide_count) {
-                subsets_html += "<div class='col-sm-6'>";
-                for (i = 0; i < divide_count; i++) {
-                    subsets_html += "<label class='cbk-container'>" + subsets[i];
-                    subsets_html += "<input type='checkbox' value='" + subsets[i] + "'>";
-                    subsets_html += "<span class='checkmark'></span>";
-                    subsets_html += "</label>";
-                }
-                subsets_html += "</div>";
-                subsets_html += "<div class='col-sm-6'>";
-                for (i = 7; i < length; i++) {
-                    subsets_html += "<label class='cbk-container'>" + subsets[i];
-                    subsets_html += "<input type='checkbox' value='" + subsets[i] + "'>";
-                    subsets_html += "<span class='checkmark'></span>";
-                    subsets_html += "</label>";
-                }
-                subsets_html += "</div>";
-            }
-            subsets_html += "</div>";
+            subsets_attr = subsets.join(',');
         }
 
-        selection.closest('.font-control').find('.font-subset-ckb').html(subsets_html);
+        var font_css_link = 'https://fonts.googleapis.com/css?family=' + family_val + ":" + variants_attr + '&subset=' + subsets_attr;
+
+        $('#body-font-family-link').val(font_css_link);
+    },
+
+    'chooseHeadingFont' : function (font_id) {
+        var variants = fonts[font_id]['variants'];
+        var subsets = fonts[font_id]['subsets'];
+        var variants_attr = '';
+        var subsets_attr = '';
+
+        $('#heading-font-family-name').val(fonts[font_id]['family']);
+        $('#heading-font-family-cate').val(fonts[font_id]['category']);
+
+        var family_val = fonts[font_id]['family_val'];
+
+        if (variants.length) {
+            variants_attr = variants.join(',');
+        }
+
+        if (subsets.length) {
+            subsets_attr = subsets.join(',');
+        }
+
+        var font_css_link = 'https://fonts.googleapis.com/css?family=' + family_val + ":" + variants_attr + '&subset=' + subsets_attr;
+
+        $('#heading-font-family-link').val(font_css_link);
     }
 }

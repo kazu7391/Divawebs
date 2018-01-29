@@ -108,7 +108,7 @@
                                             <div class="frm-field frm-field-{{ store.store_id }}">
                                                 <ul class="nav nav-tabs hoz-ul-sections">
                                                     <li class="active"><a href="#tab-body-{{ store.store_id }}" data-toggle="tab">{{ tab_body }}</a></li>
-                                                    <li><a href="#tab-header-{{ store.store_id }}" data-toggle="tab">{{ tab_header }}</a></li>
+                                                    <li><a href="#tab-header-{{ store.store_id }}" data-toggle="tab">{{ tab_heading }}</a></li>
                                                     <li><a href="#tab-link-{{ store.store_id }}" data-toggle="tab">{{ tab_link }}</a></li>
                                                     <li><a href="#tab-button-{{ store.store_id }}" data-toggle="tab">{{ tab_button }}</a></li>
                                                 </ul>
@@ -116,21 +116,100 @@
                                                 <div class="tab-content child-content">
                                                     <div class="tab-pane active" id="tab-body-{{ store.store_id }}">
                                                         <div class="form-group font-control">
-                                                            <div>
-                                                                <label class="col-sm-3 control-label" for="input-body-color-{{ store.store_id }}">{{ entry_global_font }}</label>
-                                                                <div class="col-sm-3">
-                                                                    <select class="font-box form-control" onchange="gfont.chooseFont(this.value, $(this))">
-                                                                        <option>{{ text_choose_font }}</option>
-                                                                    </select>
-                                                                    <span class="font-demo">ABC abc 123 ~!@#$%^&*()_+</span>
-                                                                </div>
-                                                                <div class="col-sm-3 font-variant-ckb"></div>
-                                                                <div class="col-sm-3 font-subset-ckb"></div>
+                                                            <label class="col-sm-3 control-label">{{ entry_global_font }}</label>
+                                                            <div class="col-sm-3">
+                                                                <select class="font-box form-control" onchange="gfont.chooseBodyFont(this.value)">
+                                                                    <option>{{ text_choose_font }}</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <p class="font-demo">ABCDEF ghijklmn 0123456789 !@#$%^&*()_{}[]</p>
+                                                            </div>
+                                                            <input type="hidden" id="body-font-family-id"   name="module_dvcontrolpanel_body_font_family_id[{{ store.store_id }}]" value="" />
+                                                            <input type="hidden" id="body-font-family-name" name="module_dvcontrolpanel_body_font_family_name[{{ store.store_id }}]" value="" />
+                                                            <input type="hidden" id="body-font-family-cate" name="module_dvcontrolpanel_body_font_family_cate[{{ store.store_id }}]" value="" />
+                                                            <input type="hidden" id="body-font-family-link" name="module_dvcontrolpanel_body_font_family_link[{{ store.store_id }}]" value="" />
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">{{ entry_font_size }}</label>
+                                                            <div class="col-sm-3">
+                                                                <input class="form-control" type="text" name="module_dvcontrolpanel_body_font_size[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_body_font_size[store.store_id] }}" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">{{ entry_font_weight }}</label>
+                                                            <div class="col-sm-3">
+                                                                <select class="form-control" name="module_dvcontrolpanel_body_font_weight[{{ store.store_id }}]">
+                                                                    <option value="300" {% if module_dvcontrolpanel_body_font_weight[store.store_id] == '300' %}selected="selected"{% endif %}>300</option>
+                                                                    <option value="400" {% if module_dvcontrolpanel_body_font_weight[store.store_id] == '400' %}selected="selected"{% endif %}>400</option>
+                                                                    <option value="500" {% if module_dvcontrolpanel_body_font_weight[store.store_id] == '500' %}selected="selected"{% endif %}>500</option>
+                                                                    <option value="600" {% if module_dvcontrolpanel_body_font_weight[store.store_id] == '600' %}selected="selected"{% endif %}>600</option>
+                                                                    <option value="700" {% if module_dvcontrolpanel_body_font_weight[store.store_id] == '700' %}selected="selected"{% endif %}>700</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">{{ entry_color }}</label>
+                                                            <div class="col-sm-3">
+                                                                <input class="form-control jscolor" type="text" name="module_dvcontrolpanel_body_color[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_body_color[store.store_id] }}" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">{{ entry_text_transform }}</label>
+                                                            <div class="col-sm-3">
+                                                                <select class="form-control" name="module_dvcontrolpanel_body_text_transform[{{ store.store_id }}]">
+                                                                    <option value="lowercase"  {% if module_dvcontrolpanel_body_text_transform[store.store_id] == 'lowercase' %} selected="selected"{% endif %}>{{ text_lowercase }}</option>
+                                                                    <option value="uppercase"  {% if module_dvcontrolpanel_body_text_transform[store.store_id] == 'uppercase' %} selected="selected"{% endif %}>{{ text_uppercase }}</option>
+                                                                    <option value="capitalize" {% if module_dvcontrolpanel_body_text_transform[store.store_id] == 'capitalize' %}selected="selected"{% endif %}>{{ text_capitalize }}</option>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="tab-pane" id="tab-header-{{ store.store_id }}">Header</div>
+
+                                                    <div class="tab-pane" id="tab-header-{{ store.store_id }}">
+                                                        <div class="form-group font-control">
+                                                            <label class="col-sm-3 control-label">{{ entry_heading_font }}</label>
+                                                            <div class="col-sm-3">
+                                                                <select class="font-box form-control" onchange="gfont.chooseHeadingFont(this.value)">
+                                                                    <option>{{ text_choose_font }}</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <p class="font-demo">ABCDEF ghijklmn 0123456789 !@#$%^&*()_{}[]</p>
+                                                            </div>
+                                                            <input type="hidden" id="heading-font-family-id"   name="module_dvcontrolpanel_heading_font_family_id[{{ store.store_id }}]" value="" />
+                                                            <input type="hidden" id="heading-font-family-name" name="module_dvcontrolpanel_heading_font_family_name[{{ store.store_id }}]" value="" />
+                                                            <input type="hidden" id="heading-font-family-cate" name="module_dvcontrolpanel_heading_font_family_cate[{{ store.store_id }}]" value="" />
+                                                            <input type="hidden" id="heading-font-family-link" name="module_dvcontrolpanel_heading_font_family_link[{{ store.store_id }}]" value="" />
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">{{ entry_font_weight }}</label>
+                                                            <div class="col-sm-3">
+                                                                <select class="form-control" name="module_dvcontrolpanel_heading_font_weight[{{ store.store_id }}]">
+                                                                    <option value="300" {% if module_dvcontrolpanel_heading_font_weight[store.store_id] == '300' %}selected="selected"{% endif %}>300</option>
+                                                                    <option value="400" {% if module_dvcontrolpanel_heading_font_weight[store.store_id] == '400' %}selected="selected"{% endif %}>400</option>
+                                                                    <option value="500" {% if module_dvcontrolpanel_heading_font_weight[store.store_id] == '500' %}selected="selected"{% endif %}>500</option>
+                                                                    <option value="600" {% if module_dvcontrolpanel_heading_font_weight[store.store_id] == '600' %}selected="selected"{% endif %}>600</option>
+                                                                    <option value="700" {% if module_dvcontrolpanel_heading_font_weight[store.store_id] == '700' %}selected="selected"{% endif %}>700</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">{{ entry_color }}</label>
+                                                            <div class="col-sm-3">
+                                                                <input class="form-control jscolor" type="text" name="module_dvcontrolpanel_heading_color[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_heading_color[store.store_id] }}" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                     <div class="tab-pane" id="tab-link-{{ store.store_id }}">Link</div>
+
                                                     <div class="tab-pane" id="tab-button-{{ store.store_id }}">Button</div>
                                                 </div>
                                             </div>
