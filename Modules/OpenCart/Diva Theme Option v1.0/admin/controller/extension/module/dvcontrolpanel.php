@@ -134,7 +134,130 @@ class ControllerExtensionModuleDvcontrolpanel extends Controller
 
         $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 50, 50);
 
-        /* Font */
+        /* Font & CSS */
+        /* Body */
+        if (isset($this->request->post['module_dvcontrolpanel_body_font_family_id'])) {
+            $data['module_dvcontrolpanel_body_font_family_id'] = $this->request->post['module_dvcontrolpanel_body_font_family_id'];
+        } else {
+            $data['module_dvcontrolpanel_body_font_family_id'] = $this->config->get('module_dvcontrolpanel_body_font_family_id');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_body_font_family_name'])) {
+            $data['module_dvcontrolpanel_body_font_family_name'] = $this->request->post['module_dvcontrolpanel_body_font_family_name'];
+        } else {
+            $data['module_dvcontrolpanel_body_font_family_name'] = $this->config->get('module_dvcontrolpanel_body_font_family_name');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_body_font_family_cate'])) {
+            $data['module_dvcontrolpanel_body_font_family_cate'] = $this->request->post['module_dvcontrolpanel_body_font_family_cate'];
+        } else {
+            $data['module_dvcontrolpanel_body_font_family_cate'] = $this->config->get('module_dvcontrolpanel_body_font_family_cate');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_body_font_family_link'])) {
+            $data['module_dvcontrolpanel_body_font_family_link'] = $this->request->post['module_dvcontrolpanel_body_font_family_link'];
+        } else {
+            $data['module_dvcontrolpanel_body_font_family_link'] = $this->config->get('module_dvcontrolpanel_body_font_family_link');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_body_font_size'])) {
+            $data['module_dvcontrolpanel_body_font_size'] = $this->request->post['module_dvcontrolpanel_body_font_size'];
+        } else {
+            $data['module_dvcontrolpanel_body_font_size'] = $this->config->get('module_dvcontrolpanel_body_font_size');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_body_font_weight'])) {
+            $data['module_dvcontrolpanel_body_font_weight'] = $this->request->post['module_dvcontrolpanel_body_font_weight'];
+        } else {
+            $data['module_dvcontrolpanel_body_font_weight'] = $this->config->get('module_dvcontrolpanel_body_font_weight');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_body_color'])) {
+            $data['module_dvcontrolpanel_body_color'] = $this->request->post['module_dvcontrolpanel_body_color'];
+        } else {
+            $data['module_dvcontrolpanel_body_color'] = $this->config->get('module_dvcontrolpanel_body_color');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_body_text_transform'])) {
+            $data['module_dvcontrolpanel_body_text_transform'] = $this->request->post['module_dvcontrolpanel_body_text_transform'];
+        } else {
+            $data['module_dvcontrolpanel_body_text_transform'] = $this->config->get('module_dvcontrolpanel_body_text_transform');
+        }
+
+        /* Heading */
+        if (isset($this->request->post['module_dvcontrolpanel_heading_font_family_id'])) {
+            $data['module_dvcontrolpanel_heading_font_family_id'] = $this->request->post['module_dvcontrolpanel_heading_font_family_id'];
+        } else {
+            $data['module_dvcontrolpanel_heading_font_family_id'] = $this->config->get('module_dvcontrolpanel_heading_font_family_id');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_heading_font_family_name'])) {
+            $data['module_dvcontrolpanel_heading_font_family_name'] = $this->request->post['module_dvcontrolpanel_heading_font_family_name'];
+        } else {
+            $data['module_dvcontrolpanel_heading_font_family_name'] = $this->config->get('module_dvcontrolpanel_heading_font_family_name');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_heading_font_family_cate'])) {
+            $data['module_dvcontrolpanel_heading_font_family_cate'] = $this->request->post['module_dvcontrolpanel_heading_font_family_cate'];
+        } else {
+            $data['module_dvcontrolpanel_heading_font_family_cate'] = $this->config->get('module_dvcontrolpanel_heading_font_family_cate');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_heading_font_family_link'])) {
+            $data['module_dvcontrolpanel_heading_font_family_link'] = $this->request->post['module_dvcontrolpanel_heading_font_family_link'];
+        } else {
+            $data['module_dvcontrolpanel_heading_font_family_link'] = $this->config->get('module_dvcontrolpanel_heading_font_family_link');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_heading_font_weight'])) {
+            $data['module_dvcontrolpanel_heading_font_weight'] = $this->request->post['module_dvcontrolpanel_heading_font_weight'];
+        } else {
+            $data['module_dvcontrolpanel_heading_font_weight'] = $this->config->get('module_dvcontrolpanel_heading_font_weight');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_heading_color'])) {
+            $data['module_dvcontrolpanel_heading_color'] = $this->request->post['module_dvcontrolpanel_heading_color'];
+        } else {
+            $data['module_dvcontrolpanel_heading_color'] = $this->config->get('module_dvcontrolpanel_heading_color');
+        }
+
+        /* Link */
+        if (isset($this->request->post['module_dvcontrolpanel_link_color'])) {
+            $data['module_dvcontrolpanel_link_color'] = $this->request->post['module_dvcontrolpanel_link_color'];
+        } else {
+            $data['module_dvcontrolpanel_link_color'] = $this->config->get('module_dvcontrolpanel_link_color');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_link_hover_color'])) {
+            $data['module_dvcontrolpanel_link_hover_color'] = $this->request->post['module_dvcontrolpanel_link_hover_color'];
+        } else {
+            $data['module_dvcontrolpanel_link_hover_color'] = $this->config->get('module_dvcontrolpanel_link_hover_color');
+        }
+
+        /* Button */
+        if (isset($this->request->post['module_dvcontrolpanel_button_color'])) {
+            $data['module_dvcontrolpanel_button_color'] = $this->request->post['module_dvcontrolpanel_button_color'];
+        } else {
+            $data['module_dvcontrolpanel_button_color'] = $this->config->get('module_dvcontrolpanel_button_color');
+        }
+        
+        if (isset($this->request->post['module_dvcontrolpanel_button_hover_color'])) {
+            $data['module_dvcontrolpanel_button_hover_color'] = $this->request->post['module_dvcontrolpanel_button_hover_color'];
+        } else {
+            $data['module_dvcontrolpanel_button_hover_color'] = $this->config->get('module_dvcontrolpanel_button_hover_color');
+        }
+        
+        if (isset($this->request->post['module_dvcontrolpanel_button_bg_color'])) {
+            $data['module_dvcontrolpanel_button_bg_color'] = $this->request->post['module_dvcontrolpanel_button_bg_color'];
+        } else {
+            $data['module_dvcontrolpanel_button_bg_color'] = $this->config->get('module_dvcontrolpanel_button_bg_color');
+        }
+        
+        if (isset($this->request->post['module_dvcontrolpanel_button_bg_hover_color'])) {
+            $data['module_dvcontrolpanel_button_bg_hover_color'] = $this->request->post['module_dvcontrolpanel_button_bg_hover_color'];
+        } else {
+            $data['module_dvcontrolpanel_button_bg_hover_color'] = $this->config->get('module_dvcontrolpanel_button_bg_hover_color');
+        }
 
         /* Catalog */
         /* Header */

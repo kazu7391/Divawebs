@@ -37,6 +37,7 @@ $_['tab_product']          = 'Product Detail';
 $_['tab_category']         = 'Category Page';
 $_['tab_font']             = 'Font & CSS';
 $_['tab_catalog']          = 'Catalog Mode';
+$_['tab_header']           = 'Header';
 $_['tab_module']           = 'Module';
 
 // Entry
@@ -49,14 +50,14 @@ $_['entry_catalog']        = 'Catalog Mode';
 $_['entry_color']          = 'Color';
 $_['entry_width']          = 'Width';
 $_['entry_height']         = 'Height';
-$_['entry_hover_color']    = 'Color when Hover';
+$_['entry_hover_color']    = 'Hover Color';
 $_['entry_global_font']    = 'Global Font';
 $_['entry_font_weight']    = 'Font Weight';
 $_['entry_font_size']      = 'Font Size';
 $_['entry_text_transform'] = 'Text Transform';
 $_['entry_heading_font']   = 'Heading Font';
 $_['entry_bg_color']       = 'Background Color';
-$_['entry_bg_hover_color'] = 'Background Color when Hover';
+$_['entry_bg_hover_color'] = 'Hover Background Color';
 $_['entry_loader_image']   = 'Loader Image';
 $_['entry_theme_database'] = 'Choose Theme Data';
 $_['entry_social_icons']   = 'Social Icons';

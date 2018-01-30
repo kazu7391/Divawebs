@@ -30,6 +30,7 @@ var gfont = {
         var variants_attr = '';
         var subsets_attr = '';
 
+        $('#body-font-family-id').val(font_id);
         $('#body-font-family-name').val(fonts[font_id]['family']);
         $('#body-font-family-cate').val(fonts[font_id]['category']);
 
@@ -54,6 +55,7 @@ var gfont = {
         var variants_attr = '';
         var subsets_attr = '';
 
+        $('#heading-font-family-id').val(font_id);
         $('#heading-font-family-name').val(fonts[font_id]['family']);
         $('#heading-font-family-cate').val(fonts[font_id]['category']);
 
