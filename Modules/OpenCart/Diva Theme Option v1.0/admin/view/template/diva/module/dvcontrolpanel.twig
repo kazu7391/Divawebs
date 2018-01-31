@@ -44,12 +44,12 @@
                 <div class="row">
                     <div class="col-md-2 col-left">
                         <ul class="nav nav-tabs menu-sections">
-                            <li class="active"><a href="#tab-general" data-toggle="tab"><i class="fa fa-puzzle-piece" aria-hidden="true"></i>{{ tab_general }}</a></li>
+                            <li class="active"><a href="#tab-general" data-toggle="tab"><i class="fa fa-tachometer" aria-hidden="true"></i>{{ tab_general }}</a></li>
                             <li><a href="#tab-font" data-toggle="tab"><i class="fa fa-font" aria-hidden="true"></i>{{ tab_font }}</a></li>
                             <li><a href="#tab-catalog" data-toggle="tab"><i class="fa fa-shopping-bag" aria-hidden="true"></i>{{ tab_catalog }}</a></li>
                             <li><a href="#tab-product" data-toggle="tab"><i class="fa fa-cube" aria-hidden="true"></i>{{ tab_product }}</a></li>
                             <li><a href="#tab-category" data-toggle="tab"><i class="fa fa-tags" aria-hidden="true"></i>{{ tab_category }}</a></li>
-                            <li><a href="#tab-database" data-toggle="tab"><i class="fa fa-database" aria-hidden="true"></i>{{ tab_backup }}</a></li>
+                            <li><a href="#tab-advance" data-toggle="tab"><i class="fa fa-fire" aria-hidden="true"></i>{{ tab_advance }}</a></li>
                         </ul>
                     </div>
                     <div class="col-md-10 col-right">
@@ -95,8 +95,8 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label">{{ entry_loader_image }}</label>
                                                     <div class="col-sm-9">
-                                                        <a href="" id="input-image{{ store.store_id }}" data-toggle="image" class="img-thumbnail"><img src="{{ thumb[store.store_id] }}" alt="" title=""  /></a>
-                                                        <input type="hidden" name="module_dvcontrolpanel_loader_img[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_loader_img[store.store_id] }}" />
+                                                        <a href="" id="thumb-image{{ store.store_id }}" data-toggle="image" class="img-thumbnail"><img src="{{ thumb[store.store_id] }}" alt="" title=""  /></a>
+                                                        <input type="hidden" id="input-image{{ store.store_id }}" name="module_dvcontrolpanel_loader_img[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_loader_img[store.store_id] }}" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -155,17 +155,6 @@
                                                             <label class="col-sm-3 control-label">{{ entry_color }}</label>
                                                             <div class="col-sm-3">
                                                                 <input class="form-control jscolor" type="text" name="module_dvcontrolpanel_body_color[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_body_color[store.store_id] }}" />
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label class="col-sm-3 control-label">{{ entry_text_transform }}</label>
-                                                            <div class="col-sm-3">
-                                                                <select class="form-control" name="module_dvcontrolpanel_body_text_transform[{{ store.store_id }}]">
-                                                                    <option value="lowercase"  {% if module_dvcontrolpanel_body_text_transform[store.store_id] == 'lowercase' %} selected="selected"{% endif %}>{{ text_lowercase }}</option>
-                                                                    <option value="uppercase"  {% if module_dvcontrolpanel_body_text_transform[store.store_id] == 'uppercase' %} selected="selected"{% endif %}>{{ text_uppercase }}</option>
-                                                                    <option value="capitalize" {% if module_dvcontrolpanel_body_text_transform[store.store_id] == 'capitalize' %}selected="selected"{% endif %}>{{ text_capitalize }}</option>
-                                                                </select>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -709,27 +698,47 @@
                                         {% endfor %}
                                     </div>
 
-                                    <div class="tab-pane" id="tab-database">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label" for="input-theme">{{ entry_theme_database }}</label>
-                                            <div class="col-sm-9">
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <select id="input-theme" class="form-control" name="file">
-                                                            {% for key, value in database %}
-                                                                <option value="{{ key }}">{{ value }}</option>
-                                                            {% endfor %}
-                                                        </select>
+                                    <div class="tab-pane" id="tab-advance">
+                                        {% for store in stores %}
+                                            <div class="frm-field frm-field-{{ store.store_id }}">
+                                                <ul class="nav nav-tabs hoz-ul-sections">
+                                                    <li class="active"><a href="#tab-css-{{ store.store_id }}" data-toggle="tab">{{ tab_custom_css }}</a></li>
+                                                    <li><a href="#tab-js-{{ store.store_id }}" data-toggle="tab">{{ tab_custom_js }}</a></li>
+                                                    <li><a href="#tab-data-{{ store.store_id }}" data-toggle="tab">{{ tab_data }}</a></li>
+                                                </ul>
+
+                                                <div class="tab-content child-content">
+                                                    <div class="tab-pane active" id="tab-css-{{ store.store_id }}">
+
                                                     </div>
-                                                    <div class="col-sm-6">
-                                                        <button type="button" id="button-import" class="btn btn-primary btn-theme-option"><i class="fa fa-upload"></i> {{ button_import }}</button>
+                                                    <div class="tab-pane" id="tab-js-{{ store.store_id }}">
+
+                                                    </div>
+                                                    <div class="tab-pane" id="tab-data-{{ store.store_id }}">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="input-theme">{{ entry_theme_database }}</label>
+                                                            <div class="col-sm-9">
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+                                                                        <select id="input-theme" class="form-control" name="file">
+                                                                            {% for key, value in database %}
+                                                                                <option value="{{ key }}">{{ value }}</option>
+                                                                            {% endfor %}
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <button type="button" id="button-import" class="btn btn-primary btn-theme-option"><i class="fa fa-upload"></i> {{ button_import }}</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="notification">
+                                                            <i class="fa-warning fa fa-exclamation-triangle" aria-hidden="true"></i> {{ text_data_caution }}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="notification">
-                                            <i class="fa-warning fa fa-exclamation-triangle" aria-hidden="true"></i> {{ text_data_caution }}
-                                        </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </form>

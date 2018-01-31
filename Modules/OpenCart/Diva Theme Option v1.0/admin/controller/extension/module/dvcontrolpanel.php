@@ -178,12 +178,6 @@ class ControllerExtensionModuleDvcontrolpanel extends Controller
             $data['module_dvcontrolpanel_body_color'] = $this->config->get('module_dvcontrolpanel_body_color');
         }
 
-        if (isset($this->request->post['module_dvcontrolpanel_body_text_transform'])) {
-            $data['module_dvcontrolpanel_body_text_transform'] = $this->request->post['module_dvcontrolpanel_body_text_transform'];
-        } else {
-            $data['module_dvcontrolpanel_body_text_transform'] = $this->config->get('module_dvcontrolpanel_body_text_transform');
-        }
-
         /* Heading */
         if (isset($this->request->post['module_dvcontrolpanel_heading_font_family_id'])) {
             $data['module_dvcontrolpanel_heading_font_family_id'] = $this->request->post['module_dvcontrolpanel_heading_font_family_id'];

@@ -32,13 +32,16 @@ $_['tab_link']             = 'Link';
 $_['tab_heading']          = 'Heading';
 $_['tab_body']             = 'Body';
 $_['tab_button']           = 'Button';
-$_['tab_backup']           = 'Data Storage';
+$_['tab_advance']          = 'Advance';
 $_['tab_product']          = 'Product Detail';
 $_['tab_category']         = 'Category Page';
 $_['tab_font']             = 'Font & CSS';
 $_['tab_catalog']          = 'Catalog Mode';
 $_['tab_header']           = 'Header';
 $_['tab_module']           = 'Module';
+$_['tab_custom_css']       = 'Custom CSS';
+$_['tab_custom_js']        = 'Custom Javascript';
+$_['tab_data']             = 'Data Storage';
 
 // Entry
 $_['entry_lazy_load']      = 'Lazy Load';
