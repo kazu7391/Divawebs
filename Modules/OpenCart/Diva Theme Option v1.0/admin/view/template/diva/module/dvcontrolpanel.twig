@@ -115,17 +115,30 @@
 
                                                 <div class="tab-content child-content">
                                                     <div class="tab-pane active" id="tab-body-{{ store.store_id }}">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-3"></div>
+                                                            <div class="col-sm-9">
+                                                                <p class="font-body-demo font-demo">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z <br />
+                                                                    a b c d e f g h i j k l m n o p q r s t u v w x y z <br />
+                                                                    0 1 2 3 4 5 6 7 8 9</p>
+                                                            </div>
+                                                        </div>
                                                         <div class="form-group font-control">
                                                             <label class="col-sm-3 control-label">{{ entry_global_font }}</label>
                                                             <div class="col-sm-3">
-                                                                <select class="font-box form-control" onchange="gfont.chooseBodyFont(this.value)">
+                                                                <select class="font-box form-control" name="module_dvcontrolpanel_body_font_family_id[{{ store.store_id }}]" onchange="chooseBodyFont(this.value)">
                                                                     <option>{{ text_choose_font }}</option>
+                                                                    {% for font in fonts %}
+                                                                        <option value="{{ font.id }}" {% if module_dvcontrolpanel_body_font_family_id[store.store_id] == font.id %} selected="selected" {% endif %}
+                                                                                id="body-font-{{ font.id }}" data-family="{{ font.family }}" data-family-val="{{ font.family_val }}"
+                                                                                data-variants="{{ font.variants }}" data-subsets="{{ font.subsets }}" data-category="{{ font.category }}">
+                                                                            {{ font.family }}
+                                                                        </option>
+                                                                    {% endfor %}
                                                                 </select>
+
                                                             </div>
-                                                            <div class="col-sm-6">
-                                                                <p class="font-demo">ABCDEF ghijklmn 0123456789 !@#$%^&*()_{}[]</p>
-                                                            </div>
-                                                            <input type="hidden" id="body-font-family-id"   name="module_dvcontrolpanel_body_font_family_id[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_body_font_family_id[store.store_id] }}" />
+
                                                             <input type="hidden" id="body-font-family-name" name="module_dvcontrolpanel_body_font_family_name[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_body_font_family_name[store.store_id] }}" />
                                                             <input type="hidden" id="body-font-family-cate" name="module_dvcontrolpanel_body_font_family_cate[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_body_font_family_cate[store.store_id] }}" />
                                                             <input type="hidden" id="body-font-family-link" name="module_dvcontrolpanel_body_font_family_link[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_body_font_family_link[store.store_id] }}" />
@@ -749,7 +762,7 @@
         </div>
     </div>
 </div>
-
+<div class="body-stylesheet-link"></div>
 <script type="text/javascript">
     $(document).ready(function () {
         $('.frm-field').hide();
@@ -770,7 +783,38 @@
                 $(this).find('.ckb-switch').val('1');
             }
         });
+
+        var body_font_css_link = $('#body-font-family-link').val();
+        var body_font_stylesheet_link = '<link href="' + body_font_css_link + '" rel="stylesheet">';
+        var body_family =  $('#body-font-family-name').val();
+        var body_category =  $('#body-font-family-cate').val();
+
+        $('.body-stylesheet-link').html(body_font_stylesheet_link);
+        $('.font-body-demo').css("font-family", "'" + body_family + "', " + body_category);
     });
+
+    function chooseBodyFont(id) {
+        var family = $("#body-font-" + id).data('family');
+        var family_val = $("#body-font-" + id).data('family-val');
+        var variants = $("#body-font-" + id).data('variants');
+        var subsets = $("#body-font-" + id).data('subsets');
+        var category = $("#body-font-" + id).data('category');
+
+        var font_css_link = 'https://fonts.googleapis.com/css?family=' + family_val + ":" + variants + '&subset=' + subsets;
+        var font_stylesheet_link = '<link href="' + font_css_link + '" rel="stylesheet">';
+
+        $('.body-stylesheet-link').html(font_stylesheet_link);
+
+        $('#body-font-family-name').val(family);
+        $('#body-font-family-cate').val(category);
+        $('#body-font-family-link').val(font_css_link);
+
+        $('.font-body-demo').css("font-family", "'" + family + "', " + category);
+    }
+
+    function chooseHeadingFont(id) {
+
+    }
 </script>
 
 <script type="text/javascript"><!--

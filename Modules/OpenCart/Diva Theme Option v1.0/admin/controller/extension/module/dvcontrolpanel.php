@@ -94,6 +94,26 @@ class ControllerExtensionModuleDvcontrolpanel extends Controller
             DIR_APPLICATION . '../divadata/diva_db2.sql' => 'Layout 2'
         );
 
+        $fonts_file = file_get_contents('https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyCKhdPP0mANQLtEY8Br0H71OqpQHxfu8wo');
+
+        $google_fonts = json_decode($fonts_file, true);
+
+        $fonts = $google_fonts['items'];
+
+        foreach ($fonts as $key => $font) {
+            $font_family_val = str_replace(' ', '+', $font['family']);
+            $variants = implode(',', $font['variants']);
+            $subsets = implode(',', $font['subsets']);
+            $data['fonts'][] = array(
+                'id'    => $key,
+                'family' => $font['family'],
+                'family_val' => $font_family_val,
+                'variants' => $variants,
+                'subsets' => $subsets,
+                'category' => $font['category']
+            );
+        }
+
         $data['user_token'] = $this->session->data['user_token'];
 
         $data['action'] = $this->url->link('extension/module/dvcontrolpanel', 'user_token=' . $this->session->data['user_token'], true);
@@ -523,9 +543,8 @@ class ControllerExtensionModuleDvcontrolpanel extends Controller
         } else {
             $data['module_dvcontrolpanel_product_row'] = $this->config->get('module_dvcontrolpanel_product_row');
         }
-
-        $this->document->addScript('view/javascript/divawebs/googlefont.js');
-        $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
+        
+        //$this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
         $this->document->addScript('view/javascript/divawebs/jscolor.min.js');
         $this->document->addScript('view/javascript/divawebs/switch-toggle/js/bootstrap-toggle.min.js');
         $this->document->addStyle('view/javascript/divawebs/switch-toggle/css/bootstrap-toggle.min.css');

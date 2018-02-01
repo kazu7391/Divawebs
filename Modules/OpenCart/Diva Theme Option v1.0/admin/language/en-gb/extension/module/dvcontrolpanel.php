@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']        = '<b style="color: #d21f27;"><i><i class="fa fa-magic"></i> DIVA Control Panel</i></b>';
+//$_['heading_title']        = '<b style="color: #d21f27;"><i><i class="fa fa-magic"></i> DIVA Control Panel</i></b>';
 $_['page_title']           = 'DIVA Control Panel';
 
 // Text
@@ -55,6 +55,7 @@ $_['entry_width']          = 'Width';
 $_['entry_height']         = 'Height';
 $_['entry_hover_color']    = 'Hover Color';
 $_['entry_global_font']    = 'Global Font';
+$_['entry_demo_text']      = 'Demo Text';
 $_['entry_font_weight']    = 'Font Weight';
 $_['entry_font_size']      = 'Font Size';
 $_['entry_text_transform'] = 'Text Transform';
