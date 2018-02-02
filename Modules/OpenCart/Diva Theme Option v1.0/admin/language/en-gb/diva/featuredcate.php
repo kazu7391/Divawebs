@@ -1,6 +1,7 @@
 <?php
 // Heading
-$_['heading_title']          = 'DIVA Featured Categories';
+$_['heading_title']          = '<b style="color: #d21f27;"><i><i class="fa fa-tag"></i> DIVA Featured Categories</i></b>';
+$_['page_title']             = 'DIVA Featured Categories';
 
 // Text
 $_['text_success']           = 'Success: You have modified Featured Categories!';

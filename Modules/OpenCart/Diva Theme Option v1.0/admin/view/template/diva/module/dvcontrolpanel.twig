@@ -44,8 +44,8 @@
                 <div class="row">
                     <div class="col-md-2 col-left">
                         <ul class="nav nav-tabs menu-sections">
-                            <li class="active"><a href="#tab-general" data-toggle="tab"><i class="fa fa-tachometer" aria-hidden="true"></i>{{ tab_general }}</a></li>
-                            <li><a href="#tab-font" data-toggle="tab"><i class="fa fa-font" aria-hidden="true"></i>{{ tab_font }}</a></li>
+                            <li><a href="#tab-general" data-toggle="tab"><i class="fa fa-tachometer" aria-hidden="true"></i>{{ tab_general }}</a></li>
+                            <li class="active"><a href="#tab-font" data-toggle="tab"><i class="fa fa-font" aria-hidden="true"></i>{{ tab_font }}</a></li>
                             <li><a href="#tab-catalog" data-toggle="tab"><i class="fa fa-shopping-bag" aria-hidden="true"></i>{{ tab_catalog }}</a></li>
                             <li><a href="#tab-product" data-toggle="tab"><i class="fa fa-cube" aria-hidden="true"></i>{{ tab_product }}</a></li>
                             <li><a href="#tab-category" data-toggle="tab"><i class="fa fa-tags" aria-hidden="true"></i>{{ tab_category }}</a></li>
@@ -59,7 +59,7 @@
                             </form>
                             <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-dvcontrolpanel" class="form-horizontal">
                                 <div class="tab-content">
-                                    <div class="tab-pane active" id="tab-general">
+                                    <div class="tab-pane" id="tab-general">
                                         {% for store in stores %}
                                             <div class="frm-field frm-field-{{ store.store_id }}">
                                                 <div class="form-group">
@@ -103,7 +103,7 @@
                                         {% endfor %}
                                     </div>
 
-                                    <div class="tab-pane" id="tab-font">
+                                    <div class="tab-pane  active" id="tab-font">
                                         {% for store in stores %}
                                             <div class="frm-field frm-field-{{ store.store_id }}">
                                                 <ul class="nav nav-tabs hoz-ul-sections">
@@ -117,16 +117,17 @@
                                                     <div class="tab-pane active" id="tab-body-{{ store.store_id }}">
                                                         <div class="form-group">
                                                             <div class="col-sm-3"></div>
-                                                            <div class="col-sm-9">
-                                                                <p class="font-body-demo font-demo">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z <br />
+                                                            <div class="col-sm-6">
+                                                                <p class="font-body-demo-{{ store.store_id }} font-demo">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z <br />
                                                                     a b c d e f g h i j k l m n o p q r s t u v w x y z <br />
                                                                     0 1 2 3 4 5 6 7 8 9</p>
                                                             </div>
                                                         </div>
+
                                                         <div class="form-group font-control">
                                                             <label class="col-sm-3 control-label">{{ entry_global_font }}</label>
                                                             <div class="col-sm-3">
-                                                                <select class="font-box form-control" name="module_dvcontrolpanel_body_font_family_id[{{ store.store_id }}]" onchange="chooseBodyFont(this.value)">
+                                                                <select class="form-control" name="module_dvcontrolpanel_body_font_family_id[{{ store.store_id }}]" onchange="chooseBodyFont(this.value, {{ store.store_id }})">
                                                                     <option>{{ text_choose_font }}</option>
                                                                     {% for font in fonts %}
                                                                         <option value="{{ font.id }}" {% if module_dvcontrolpanel_body_font_family_id[store.store_id] == font.id %} selected="selected" {% endif %}
@@ -136,12 +137,11 @@
                                                                         </option>
                                                                     {% endfor %}
                                                                 </select>
-
                                                             </div>
 
-                                                            <input type="hidden" id="body-font-family-name" name="module_dvcontrolpanel_body_font_family_name[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_body_font_family_name[store.store_id] }}" />
-                                                            <input type="hidden" id="body-font-family-cate" name="module_dvcontrolpanel_body_font_family_cate[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_body_font_family_cate[store.store_id] }}" />
-                                                            <input type="hidden" id="body-font-family-link" name="module_dvcontrolpanel_body_font_family_link[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_body_font_family_link[store.store_id] }}" />
+                                                            <input type="hidden" id="body-font-family-name-{{ store.store_id }}" name="module_dvcontrolpanel_body_font_family_name[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_body_font_family_name[store.store_id] }}" />
+                                                            <input type="hidden" id="body-font-family-cate-{{ store.store_id }}" name="module_dvcontrolpanel_body_font_family_cate[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_body_font_family_cate[store.store_id] }}" />
+                                                            <input type="hidden" id="body-font-family-link-{{ store.store_id }}" name="module_dvcontrolpanel_body_font_family_link[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_body_font_family_link[store.store_id] }}" />
                                                         </div>
 
                                                         <div class="form-group">
@@ -154,7 +154,7 @@
                                                         <div class="form-group">
                                                             <label class="col-sm-3 control-label">{{ entry_font_weight }}</label>
                                                             <div class="col-sm-3">
-                                                                <select class="form-control" name="module_dvcontrolpanel_body_font_weight[{{ store.store_id }}]">
+                                                                <select class="form-control" id="body-font-weight-{{ store.store_id }}" name="module_dvcontrolpanel_body_font_weight[{{ store.store_id }}]" onclick="chooseBodyWeight(this.value, {{ store.store_id }})">
                                                                     <option value="300" {% if module_dvcontrolpanel_body_font_weight[store.store_id] == '300' %}selected="selected"{% endif %}>300</option>
                                                                     <option value="400" {% if module_dvcontrolpanel_body_font_weight[store.store_id] == '400' %}selected="selected"{% endif %}>400</option>
                                                                     <option value="500" {% if module_dvcontrolpanel_body_font_weight[store.store_id] == '500' %}selected="selected"{% endif %}>500</option>
@@ -173,26 +173,39 @@
                                                     </div>
 
                                                     <div class="tab-pane" id="tab-header-{{ store.store_id }}">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-3"></div>
+                                                            <div class="col-sm-6">
+                                                                <p class="font-heading-demo-{{ store.store_id }} font-demo">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z <br />
+                                                                    a b c d e f g h i j k l m n o p q r s t u v w x y z <br />
+                                                                    0 1 2 3 4 5 6 7 8 9</p>
+                                                            </div>
+                                                        </div>
+
                                                         <div class="form-group font-control">
                                                             <label class="col-sm-3 control-label">{{ entry_heading_font }}</label>
                                                             <div class="col-sm-3">
-                                                                <select class="font-box form-control" onchange="gfont.chooseHeadingFont(this.value)">
+                                                                <select class="form-control" name="module_dvcontrolpanel_heading_font_family_id[{{ store.store_id }}]" onchange="chooseHeadingFont(this.value, {{ store.store_id }})">
                                                                     <option>{{ text_choose_font }}</option>
+                                                                    {% for font in fonts %}
+                                                                        <option value="{{ font.id }}" {% if module_dvcontrolpanel_heading_font_family_id[store.store_id] == font.id %} selected="selected" {% endif %}
+                                                                                id="heading-font-{{ font.id }}" data-family="{{ font.family }}" data-family-val="{{ font.family_val }}"
+                                                                                data-variants="{{ font.variants }}" data-subsets="{{ font.subsets }}" data-category="{{ font.category }}">
+                                                                            {{ font.family }}
+                                                                        </option>
+                                                                    {% endfor %}
                                                                 </select>
                                                             </div>
-                                                            <div class="col-sm-6">
-                                                                <p class="font-demo">ABCDEF ghijklmn 0123456789 !@#$%^&*()_{}[]</p>
-                                                            </div>
-                                                            <input type="hidden" id="heading-font-family-id"   name="module_dvcontrolpanel_heading_font_family_id[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_heading_font_family_id[store.store_id] }}" />
-                                                            <input type="hidden" id="heading-font-family-name" name="module_dvcontrolpanel_heading_font_family_name[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_heading_font_family_name[store.store_id] }}" />
-                                                            <input type="hidden" id="heading-font-family-cate" name="module_dvcontrolpanel_heading_font_family_cate[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_heading_font_family_cate[store.store_id] }}" />
-                                                            <input type="hidden" id="heading-font-family-link" name="module_dvcontrolpanel_heading_font_family_link[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_heading_font_family_link[store.store_id] }}" />
+
+                                                            <input type="hidden" id="heading-font-family-name-{{ store.store_id }}" name="module_dvcontrolpanel_heading_font_family_name[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_heading_font_family_name[store.store_id] }}" />
+                                                            <input type="hidden" id="heading-font-family-cate-{{ store.store_id }}" name="module_dvcontrolpanel_heading_font_family_cate[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_heading_font_family_cate[store.store_id] }}" />
+                                                            <input type="hidden" id="heading-font-family-link-{{ store.store_id }}" name="module_dvcontrolpanel_heading_font_family_link[{{ store.store_id }}]" value="{{ module_dvcontrolpanel_heading_font_family_link[store.store_id] }}" />
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label class="col-sm-3 control-label">{{ entry_font_weight }}</label>
                                                             <div class="col-sm-3">
-                                                                <select class="form-control" name="module_dvcontrolpanel_heading_font_weight[{{ store.store_id }}]">
+                                                                <select class="form-control" id="heading-font-weight-{{ store.store_id }}" name="module_dvcontrolpanel_heading_font_weight[{{ store.store_id }}]" onchange="chooseHeadingWeight(this.value, {{ store.store_id }})">
                                                                     <option value="300" {% if module_dvcontrolpanel_heading_font_weight[store.store_id] == '300' %}selected="selected"{% endif %}>300</option>
                                                                     <option value="400" {% if module_dvcontrolpanel_heading_font_weight[store.store_id] == '400' %}selected="selected"{% endif %}>400</option>
                                                                     <option value="500" {% if module_dvcontrolpanel_heading_font_weight[store.store_id] == '500' %}selected="selected"{% endif %}>500</option>
@@ -763,6 +776,7 @@
     </div>
 </div>
 <div class="body-stylesheet-link"></div>
+<div class="heading-stylesheet-link"></div>
 <script type="text/javascript">
     $(document).ready(function () {
         $('.frm-field').hide();
@@ -784,16 +798,32 @@
             }
         });
 
-        var body_font_css_link = $('#body-font-family-link').val();
-        var body_font_stylesheet_link = '<link href="' + body_font_css_link + '" rel="stylesheet">';
-        var body_family =  $('#body-font-family-name').val();
-        var body_category =  $('#body-font-family-cate').val();
+        {% for store in stores %}
+            /* Body */
+            var body_font_css_link_{{ store.store_id }} = $('#body-font-family-link-{{ store.store_id }}').val();
+            var body_font_stylesheet_link_{{ store.store_id }} = '<link href="' + body_font_css_link_{{ store.store_id }} + '" rel="stylesheet">';
+            var body_family_{{ store.store_id }} =  $('#body-font-family-name-{{ store.store_id }}').val();
+            var body_category_{{ store.store_id }} =  $('#body-font-family-cate-{{ store.store_id }}').val();
+            var body_font_weight{{ store.store_id }} = $('#body-font-weight-{{ store.store_id }}').val();
 
-        $('.body-stylesheet-link').html(body_font_stylesheet_link);
-        $('.font-body-demo').css("font-family", "'" + body_family + "', " + body_category);
+            $('.body-stylesheet-link').append(body_font_stylesheet_link_{{ store.store_id }});
+            $('.font-body-demo-{{ store.store_id }}').css("font-family", "'" + body_family_{{ store.store_id }} + "', " + body_category_{{ store.store_id }});
+            $('.font-body-demo-{{ store.store_id }}').css("font-weight", body_font_weight{{ store.store_id }});
+
+            /* Heading */
+            var heading_font_css_link_{{ store.store_id }} = $('#heading-font-family-link-{{ store.store_id }}').val();
+            var heading_font_stylesheet_link_{{ store.store_id }} = '<link href="' + heading_font_css_link_{{ store.store_id }} + '" rel="stylesheet">';
+            var heading_family_{{ store.store_id }} =  $('#heading-font-family-name-{{ store.store_id }}').val();
+            var heading_category_{{ store.store_id }} =  $('#heading-font-family-cate-{{ store.store_id }}').val();
+            var heading_font_weight{{ store.store_id }} = $('#heading-font-weight-{{ store.store_id }}').val();
+
+            $('.heading-stylesheet-link').append(heading_font_stylesheet_link_{{ store.store_id }});
+            $('.font-heading-demo-{{ store.store_id }}').css("font-family", "'" + heading_family_{{ store.store_id }} + "', " + heading_category_{{ store.store_id }});
+            $('.font-heading-demo-{{ store.store_id }}').css("font-weight", heading_font_weight{{ store.store_id }});
+        {% endfor %}
     });
 
-    function chooseBodyFont(id) {
+    function chooseBodyFont(id, store_id) {
         var family = $("#body-font-" + id).data('family');
         var family_val = $("#body-font-" + id).data('family-val');
         var variants = $("#body-font-" + id).data('variants');
@@ -803,17 +833,40 @@
         var font_css_link = 'https://fonts.googleapis.com/css?family=' + family_val + ":" + variants + '&subset=' + subsets;
         var font_stylesheet_link = '<link href="' + font_css_link + '" rel="stylesheet">';
 
-        $('.body-stylesheet-link').html(font_stylesheet_link);
+        $('.body-stylesheet-link').append(font_stylesheet_link);
 
-        $('#body-font-family-name').val(family);
-        $('#body-font-family-cate').val(category);
-        $('#body-font-family-link').val(font_css_link);
+        $('#body-font-family-name-' + store_id).val(family);
+        $('#body-font-family-cate-' + store_id).val(category);
+        $('#body-font-family-link-' + store_id).val(font_css_link);
 
-        $('.font-body-demo').css("font-family", "'" + family + "', " + category);
+        $('.font-body-demo-' + store_id).css("font-family", "'" + family + "', " + category);
     }
 
-    function chooseHeadingFont(id) {
+    function chooseBodyWeight(value, store_id) {
+        $('.font-body-demo-' + store_id).css("font-weight", value);
+    }
 
+    function chooseHeadingFont(id, store_id) {
+        var family = $("#heading-font-" + id).data('family');
+        var family_val = $("#heading-font-" + id).data('family-val');
+        var variants = $("#heading-font-" + id).data('variants');
+        var subsets = $("#heading-font-" + id).data('subsets');
+        var category = $("#heading-font-" + id).data('category');
+
+        var font_css_link = 'https://fonts.googleapis.com/css?family=' + family_val + ":" + variants + '&subset=' + subsets;
+        var font_stylesheet_link = '<link href="' + font_css_link + '" rel="stylesheet">';
+
+        $('.heading-stylesheet-link').append(font_stylesheet_link);
+
+        $('#heading-font-family-name-' + store_id).val(family);
+        $('#heading-font-family-cate-' + store_id).val(category);
+        $('#heading-font-family-link-' + store_id).val(font_css_link);
+
+        $('.font-heading-demo-' + store_id).css("font-family", "'" + family + "', " + category);
+    }
+
+    function chooseHeadingWeight(value, store_id) {
+        $('.font-heading-demo-' + store_id).css("font-weight", value);
     }
 </script>
 

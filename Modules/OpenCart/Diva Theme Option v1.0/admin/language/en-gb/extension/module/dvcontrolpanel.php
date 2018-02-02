@@ -1,6 +1,6 @@
 <?php
 // Heading
-//$_['heading_title']        = '<b style="color: #d21f27;"><i><i class="fa fa-magic"></i> DIVA Control Panel</i></b>';
+$_['heading_title']        = '<b style="color: #d21f27;"><i><i class="fa fa-magic"></i> DIVA Control Panel</i></b>';
 $_['page_title']           = 'DIVA Control Panel';
 
 // Text
@@ -24,7 +24,6 @@ $_['text_right']           = 'Right';
 $_['text_lowercase']       = 'lowercase';
 $_['text_uppercase']       = 'UPPERCASE';
 $_['text_capitalize']      = 'Capitalize';
-$_['text_data_caution']    = 'Caution: If you choose Home Page by using data backup, all modules will be reset and active modules of chosen Home Page.';
 
 // Tab
 $_['tab_general']          = 'General';

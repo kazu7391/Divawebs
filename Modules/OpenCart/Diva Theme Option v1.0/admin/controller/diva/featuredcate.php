@@ -6,7 +6,7 @@ class ControllerDivaFeaturedcate extends Controller
     public function index() {
         $this->load->language('diva/featuredcate');
 
-        $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->setTitle($this->language->get('page_title'));
 
         $this->load->model('catalog/category');
 
@@ -177,7 +177,7 @@ class ControllerDivaFeaturedcate extends Controller
     public function edit() {
         $this->load->language('diva/featuredcate');
 
-        $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->setTitle($this->language->get('page_title'));
 
         $this->load->model('diva/featuredcate');
 

@@ -145,8 +145,10 @@ class ControllerExtensionModuleDvcontrolpanel extends Controller
         foreach ($data['stores'] as $store) {
             if (isset($this->request->post['module_dvcontrolpanel_loader_img'][$store['store_id']]) && is_file(DIR_IMAGE . $this->request->post['module_dvcontrolpanel_loader_img'][$store['store_id']])) {
                 $data['thumb'][$store['store_id']] = $this->model_tool_image->resize($this->request->post['module_dvcontrolpanel_loader_img'][$store['store_id']], 50, 50);
+                $data['module_dvcontrolpanel_loader_img'] = $this->request->post['module_dvcontrolpanel_loader_img'];
             } elseif (is_file(DIR_IMAGE . $this->config->get('module_dvcontrolpanel_loader_img')[$store['store_id']])) {
                 $data['thumb'][$store['store_id']] = $this->model_tool_image->resize($this->config->get('module_dvcontrolpanel_loader_img')[$store['store_id']], 50, 50);
+                $data['module_dvcontrolpanel_loader_img'] = $this->config->get('module_dvcontrolpanel_loader_img');
             } else {
                 $data['thumb'][$store['store_id']] = $this->model_tool_image->resize('no_image.png', 50, 50);
             }
@@ -544,7 +546,7 @@ class ControllerExtensionModuleDvcontrolpanel extends Controller
             $data['module_dvcontrolpanel_product_row'] = $this->config->get('module_dvcontrolpanel_product_row');
         }
         
-        //$this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
+        $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
         $this->document->addScript('view/javascript/divawebs/jscolor.min.js');
         $this->document->addScript('view/javascript/divawebs/switch-toggle/js/bootstrap-toggle.min.js');
         $this->document->addStyle('view/javascript/divawebs/switch-toggle/css/bootstrap-toggle.min.css');

@@ -22,10 +22,9 @@
     min-height: 270px;
 }
 .theme-option-container .font-demo {
-    width: 100%;
-    height: 36px;
-    padding: 8px 13px;
+    padding: 10px 15px;
     font-size: 16px;
+    border: 1px solid #f5c1bb;
 }
 .theme-option-container .btn-theme-option { background-color: #d21f27; border-color: #d21f27; }
 .theme-option-container .btn-theme-option:hover { background-color: #b01927; border-color: #a11d4e; }
