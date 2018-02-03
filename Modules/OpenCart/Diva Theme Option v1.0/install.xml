@@ -821,6 +821,90 @@
             $data['body_font_color'] = false;
         }
 
+        /* Heading */
+        if(isset($this->config->get('module_dvcontrolpanel_heading_font_family_name')[$data['store_id']])) {
+            $data['heading_font_family'] = $this->config->get('module_dvcontrolpanel_heading_font_family_name')[$data['store_id']];
+        } else {
+            $data['heading_font_family'] = false;
+        }
+
+        if(isset($this->config->get('module_dvcontrolpanel_heading_font_family_cate')[$data['store_id']])) {
+            $data['heading_font_cate'] = $this->config->get('module_dvcontrolpanel_heading_font_family_cate')[$data['store_id']];
+        } else {
+            $data['heading_font_cate'] = false;
+        }
+
+        if(isset($this->config->get('module_dvcontrolpanel_heading_font_family_link')[$data['store_id']])) {
+            $data['heading_font_link'] = $this->config->get('module_dvcontrolpanel_heading_font_family_link')[$data['store_id']];
+        } else {
+            $data['heading_font_link'] = false;
+        }
+
+        if(isset($this->config->get('module_dvcontrolpanel_heading_font_weight')[$data['store_id']])) {
+            $data['heading_font_weight'] = $this->config->get('module_dvcontrolpanel_heading_font_weight')[$data['store_id']];
+        } else {
+            $data['heading_font_weight'] = false;
+        }
+
+        if(isset($this->config->get('module_dvcontrolpanel_heading_color')[$data['store_id']])) {
+            $data['heading_font_color'] = $this->config->get('module_dvcontrolpanel_heading_color')[$data['store_id']];
+        } else {
+            $data['heading_font_color'] = false;
+        }
+
+        /* Link */
+        if(isset($this->config->get('module_dvcontrolpanel_link_color')[$data['store_id']])) {
+            $data['link_color'] = $this->config->get('module_dvcontrolpanel_link_color')[$data['store_id']];
+        } else {
+            $data['link_color'] = false;
+        }
+
+        if(isset($this->config->get('module_dvcontrolpanel_link_hover_color')[$data['store_id']])) {
+            $data['link_hover_color'] = $this->config->get('module_dvcontrolpanel_link_hover_color')[$data['store_id']];
+        } else {
+            $data['link_hover_color'] = false;
+        }
+
+        /* Button */
+        if(isset($this->config->get('module_dvcontrolpanel_button_color')[$data['store_id']])) {
+            $data['button_color'] = $this->config->get('module_dvcontrolpanel_button_color')[$data['store_id']];
+        } else {
+            $data['button_color'] = false;
+        }
+
+        if(isset($this->config->get('module_dvcontrolpanel_button_hover_color')[$data['store_id']])) {
+            $data['button_hover_color'] = $this->config->get('module_dvcontrolpanel_button_hover_color')[$data['store_id']];
+        } else {
+            $data['button_hover_color'] = false;
+        }
+
+        if(isset($this->config->get('module_dvcontrolpanel_button_bg_color')[$data['store_id']])) {
+            $data['button_bg_color'] = $this->config->get('module_dvcontrolpanel_button_bg_color')[$data['store_id']];
+        } else {
+            $data['button_bg_color'] = false;
+        }
+
+        if(isset($this->config->get('module_dvcontrolpanel_button_bg_hover_color')[$data['store_id']])) {
+            $data['button_bg_hover_color'] = $this->config->get('module_dvcontrolpanel_button_bg_hover_color')[$data['store_id']];
+        } else {
+            $data['button_bg_hover_color'] = false;
+        }
+
+        /* Catalog Mode */
+        /* Header */
+        if(isset($this->config->get('module_dvcontrolpanel_header_cart')[$data['store_id']])) {
+            $data['header_cart'] = (int) $this->config->get('module_dvcontrolpanel_header_cart')[$data['store_id']];
+        } else {
+            $data['header_cart'] = 0;
+        }
+
+        if(isset($this->config->get('module_dvcontrolpanel_header_currency')[$data['store_id']])) {
+            $data['header_currency'] = (int) $this->config->get('module_dvcontrolpanel_header_currency')[$data['store_id']];
+        } else {
+            $data['header_currency'] = 0;
+        }
+
+
 
 
 
