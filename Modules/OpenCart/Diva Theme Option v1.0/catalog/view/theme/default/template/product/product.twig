@@ -219,10 +219,16 @@
                     {% set class = 'col-sm-4' %}
                 {% endif %}
                 <div class="{{ class }}">
+                    {% if show_product_button_wishlist or show_product_button_compare %}
                     <div class="btn-group">
-                        <button type="button" data-toggle="tooltip" class="btn btn-default" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product_id }}');"><i class="fa fa-heart"></i></button>
-                        <button type="button" data-toggle="tooltip" class="btn btn-default" title="{{ button_compare }}" onclick="compare.add('{{ product_id }}');"><i class="fa fa-exchange"></i></button>
+                        {% if show_product_button_wishlist %}
+                            <button type="button" data-toggle="tooltip" class="btn btn-default" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product_id }}');"><i class="fa fa-heart"></i></button>
+                        {% endif %}
+                        {% if show_product_button_compare %}
+                            <button type="button" data-toggle="tooltip" class="btn btn-default" title="{{ button_compare }}" onclick="compare.add('{{ product_id }}');"><i class="fa fa-exchange"></i></button>
+                        {% endif %}
                     </div>
+                    {% endif %}
                     <h1>{{ heading_title }}</h1>
                     <ul class="list-unstyled">
                         {% if manufacturer %}
@@ -234,7 +240,7 @@
                         {% endif %}
                         <li>{{ text_stock }} {{ stock }}</li>
                     </ul>
-                    {% if price %}
+                    {% if show_product_price and price %}
                         <ul class="list-unstyled">
                             {% if not special %}
                                 <li>
@@ -262,7 +268,7 @@
                             {% endif %}
                         </ul>
                     {% endif %}
-                    <div id="product"> {% if options %}
+                    <div id="product"> {% if (show_product_button_cart or show_product_options) and options %}
                             <hr>
                             <h3>{{ text_option }}</h3>
                             {% for option in options %}
@@ -463,16 +469,19 @@
                                 <div class="help-block" id="recurring-description"></div>
                             </div>
                         {% endif %}
-                        <div class="form-group">
-                            <label class="control-label" for="input-quantity">{{ entry_qty }}</label>
-                            <input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" class="form-control" />
-                            <input type="hidden" name="product_id" value="{{ product_id }}" />
-                            <br />
-                            <button type="button" id="button-cart" data-loading-text="{{ text_loading }}" class="btn btn-primary btn-lg btn-block">{{ button_cart }}</button>
-                        </div>
-                        {% if minimum > 1 %}
-                            <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ text_minimum }}</div>
-                        {% endif %}</div>
+                        {% if show_product_button_cart %}
+                            <div class="form-group">
+                                <label class="control-label" for="input-quantity">{{ entry_qty }}</label>
+                                <input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" class="form-control" />
+                                <input type="hidden" name="product_id" value="{{ product_id }}" />
+                                <br />
+                                <button type="button" id="button-cart" data-loading-text="{{ text_loading }}" class="btn btn-primary btn-lg btn-block">{{ button_cart }}</button>
+                            </div>
+                            {% if minimum > 1 %}
+                                <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ text_minimum }}</div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
                     {% if review_status %}
                         <div class="rating">
                             <p>{% for i in 1..5 %}

@@ -311,8 +311,42 @@
         <operation>
             <search><![CDATA[$data['heading_title'] = $product_info['name'];]]></search>
             <add position="before"><![CDATA[
-            /* Zoom & Swatches */
+            /* DIVA Product Configuration */
             $store_id = $this->config->get('config_store_id');
+
+            /* Catalog Mode */
+            if(isset($this->config->get('module_dvcontrolpanel_product_price')[$store_id])) {
+                $data['show_product_price'] = (int) $this->config->get('module_dvcontrolpanel_product_price')[$store_id];
+            } else {
+                $data['show_product_price'] = 0;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_product_cart')[$store_id])) {
+                $data['show_product_button_cart'] = (int) $this->config->get('module_dvcontrolpanel_product_cart')[$store_id];
+            } else {
+                $data['show_product_button_cart'] = 0;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_product_wishlist')[$store_id])) {
+                $data['show_product_button_wishlist'] = (int) $this->config->get('module_dvcontrolpanel_product_wishlist')[$store_id];
+            } else {
+                $data['show_product_button_wishlist'] = 0;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_product_compare')[$store_id])) {
+                $data['show_product_button_compare'] = (int) $this->config->get('module_dvcontrolpanel_product_compare')[$store_id];
+            } else {
+                $data['show_product_button_compare'] = 0;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_product_options')[$store_id])) {
+                $data['show_product_options'] = (int) $this->config->get('module_dvcontrolpanel_product_options')[$store_id];
+            } else {
+                $data['show_product_options'] = 0;
+            }
+
+
+
             $use_swatches = (int) $this->config->get('module_octhemeoption_use_swatches')[$store_id];
             $use_zoom = (int) $this->config->get('module_octhemeoption_use_zoom')[$store_id];
             ]]></add>
@@ -414,12 +448,55 @@
             <search><![CDATA[$data['heading_title'] = $category_info['name'];]]></search>
             <add position="before"><![CDATA[
             if (file_exists('catalog/view/theme/' . $this->config->get('theme_' . $this->config->get('config_theme') . '_directory') . '/stylesheet/octhemecategory/category.css')) {
-                $this->document->addStyle('catalog/view/theme/' . $this->config->get('theme_' . $this->config->get('config_theme') . '_directory') . '/stylesheet/octhemecategory/category.css');
+                $this->document->addStyle('catalog/view/theme/' . $this->config->get('theme_' . $this->config->get('config_theme') . '_directory') . '/stylesheet/diva/category/category.css');
             } else {
-                $this->document->addStyle('catalog/view/theme/default/stylesheet/octhemecategory/category.css');
+                $this->document->addStyle('catalog/view/theme/default/stylesheet/diva/category/category.css');
             }
 
+            /* DIVA Category Configuration */
             $store_id = $this->config->get('config_store_id');
+
+            /* Catalog Mode */
+            if(isset($this->config->get('module_dvcontrolpanel_category_price')[$store_id])) {
+                $data['show_cate_price'] = (int) $this->config->get('module_dvcontrolpanel_category_price')[$store_id];
+            } else {
+                $data['show_cate_price'] = 0;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_category_cart')[$store_id])) {
+                $data['show_cate_cart'] = (int) $this->config->get('module_dvcontrolpanel_category_cart')[$store_id];
+            } else {
+                $data['show_cate_cart'] = 0;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_category_wishlist')[$store_id])) {
+                $data['show_cate_wishlist'] = (int) $this->config->get('module_dvcontrolpanel_category_wishlist')[$store_id];
+            } else {
+                $data['show_cate_wishlist'] = 0;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_category_compare')[$store_id])) {
+                $data['show_cate_compare'] = (int) $this->config->get('module_dvcontrolpanel_category_compare')[$store_id];
+            } else {
+                $data['show_cate_compare'] = 0;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_category_prodes')[$store_id])) {
+                $data['show_cate_prodes'] = (int) $this->config->get('module_dvcontrolpanel_category_prodes')[$store_id];
+            } else {
+                $data['show_cate_prodes'] = 0;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_category_label')[$store_id])) {
+                $data['show_cate_label'] = (int) $this->config->get('module_dvcontrolpanel_category_label')[$store_id];
+            } else {
+                $data['show_cate_label'] = 0;
+            }
+
+
+
+
+
             if(isset($this->config->get('module_octhemeoption_custom_view')[$store_id])) {
                 $data['use_custom_view'] = (int) $this->config->get('module_octhemeoption_custom_view')[$store_id];
             } else {

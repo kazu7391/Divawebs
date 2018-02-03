@@ -171,6 +171,10 @@
                                         </div>
                                     {% else %}
                                         <div class="image rotate-image-container">
+                                            {% if show_cate_label %}
+                                                <!-- Example Text -->
+                                                <span class="pro-label">New</span>
+                                            {% endif %}
                                             <a href="{{ product.href }}">
                                                 <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive img-default-image" />
                                                 {% if product.rotate_image %}
@@ -185,8 +189,10 @@
                                     <div>
                                         <div class="caption">
                                             <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
-                                            <p>{{ product.description }}</p>
-                                            {% if product.price %}
+                                            {% if show_cate_prodes %}
+                                                <p>{{ product.description }}</p>
+                                            {% endif %}
+                                            {% if show_cate_price and product.price %}
                                                 <p class="price"> {% if not product.special %}
                                                         {{ product.price }}
                                                     {% else %} <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span> {% endif %}
@@ -197,11 +203,19 @@
                                                         {% if product.rating < i %} <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> {% else %} <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>{% endif %}
                                                     {% endfor %} </div>
                                             {% endif %} </div>
+                                        {% if show_cate_cart or show_cate_wishlist or show_cate_compare %}
                                         <div class="button-group">
-                                            <button type="button" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span></button>
-                                            <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
-                                            <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>
+                                            {% if show_cate_cart %}
+                                                <button type="button" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span></button>
+                                            {% endif %}
+                                            {% if show_cate_wishlist %}
+                                                <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
+                                            {% endif %}
+                                            {% if show_cate_compare %}
+                                                <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>
+                                            {% endif %}
                                         </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
