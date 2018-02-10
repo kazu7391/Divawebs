@@ -1,5 +1,5 @@
 <?php
-class ControllerProductOcfilter extends Controller
+class ControllerDivaFilter extends Controller
 {
     public function index() {
         if (isset($this->request->get['path'])) {
@@ -18,13 +18,13 @@ class ControllerProductOcfilter extends Controller
 
         if (!empty($_SERVER['HTTPS'])) {
             // SSL connection
-            $base_url = str_replace('http', 'https', $this->config->get('config_url'));
+            $common_url = str_replace('http', 'https', $this->config->get('config_url'));
         } else {
-            $base_url = $this->config->get('config_url');
+            $common_url = $this->config->get('config_url');
         }
 
         if ($category_info) {
-            $this->load->language('product/ocfilter');
+            $this->load->language('diva/filter');
 
             $url = '';
 
@@ -40,8 +40,8 @@ class ControllerProductOcfilter extends Controller
                 $url .= '&limit=' . $this->request->get['limit'];
             }
 
-            $data['action'] = str_replace('&amp;', '&', $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . $url);
-            $data['clear_action'] = str_replace('&amp;', '&', $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id);
+            $data['action'] = str_replace('&amp;', '&', $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . $url);
+            $data['clear_action'] = str_replace('&amp;', '&', $common_url . 'index.php?route=diva/filter/category&path=' . $category_id);
 
             if (isset($this->request->get['filter'])) {
                 $data['filter_category'] = explode(',', $this->request->get['filter']);
@@ -119,7 +119,7 @@ class ControllerProductOcfilter extends Controller
             }
         }
 
-        return $this->load->view('product/ocfilter/filter', $data);
+        return $this->load->view('diva/filter/filter', $data);
     }
 
     /**
@@ -128,9 +128,9 @@ class ControllerProductOcfilter extends Controller
     public function layer() {
         if (!empty($_SERVER['HTTPS'])) {
             // SSL connection
-            $base_url = str_replace('http', 'https', $this->config->get('config_url'));
+            $common_url = str_replace('http', 'https', $this->config->get('config_url'));
         } else {
-            $base_url = $this->config->get('config_url');
+            $common_url = $this->config->get('config_url');
         }
 
         if (isset($this->request->get['path'])) {
@@ -146,9 +146,9 @@ class ControllerProductOcfilter extends Controller
         $category_info = $this->model_catalog_category->getCategory($category_id);
 
         if ($category_info) {
-            $this->load->language('product/ocfilter');
+            $this->load->language('diva/filter');
 
-            $data['clear_action'] = str_replace('&amp;', '&', $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id);
+            $data['clear_action'] = str_replace('&amp;', '&', $common_url . 'index.php?route=diva/filter/category&path=' . $category_id);
 
             if (isset($this->request->get['filter'])) {
                 $data['filter_category'] = explode(',', $this->request->get['filter']);
@@ -241,13 +241,13 @@ class ControllerProductOcfilter extends Controller
             }
         }
 
-        return $this->load->view('product/ocfilter/filter_ajax', $data);
+        return $this->load->view('diva/filter/filter_ajax', $data);
     }
 
     /**
      * Load category view
      */
-    public function category() {
+    public function category() { // STILL
 
         $this->load->language('product/category');
 
@@ -259,9 +259,9 @@ class ControllerProductOcfilter extends Controller
 
         if (!empty($_SERVER['HTTPS'])) {
             // SSL connection
-            $base_url = str_replace('http', 'https', $this->config->get('config_url'));
+            $common_url = str_replace('http', 'https', $this->config->get('config_url'));
         } else {
-            $base_url = $this->config->get('config_url');
+            $common_url = $this->config->get('config_url');
         }
 
         $json = array();
@@ -393,57 +393,57 @@ class ControllerProductOcfilter extends Controller
                 $data['ajax_sorts'][] = array(
                     'text'  => $this->language->get('text_default'),
                     'value' => 'p.sort_order-ASC',
-                    'href'  => $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . '&sort=p.sort_order&order=ASC' . $url
+                    'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=p.sort_order&order=ASC' . $url
                 );
 
                 $data['ajax_sorts'][] = array(
                     'text'  => $this->language->get('text_name_asc'),
                     'value' => 'pd.name-ASC',
-                    'href'  => $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . '&sort=pd.name&order=ASC' . $url
+                    'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=pd.name&order=ASC' . $url
                 );
 
                 $data['ajax_sorts'][] = array(
                     'text'  => $this->language->get('text_name_desc'),
                     'value' => 'pd.name-DESC',
-                    'href'  => $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . '&sort=pd.name&order=DESC' . $url
+                    'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=pd.name&order=DESC' . $url
                 );
 
                 $data['ajax_sorts'][] = array(
                     'text'  => $this->language->get('text_price_asc'),
                     'value' => 'p.price-ASC',
-                    'href'  => $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . '&sort=p.price&order=ASC' . $url
+                    'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=p.price&order=ASC' . $url
                 );
 
                 $data['ajax_sorts'][] = array(
                     'text'  => $this->language->get('text_price_desc'),
                     'value' => 'p.price-DESC',
-                    'href'  => $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . '&sort=p.price&order=DESC' . $url
+                    'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=p.price&order=DESC' . $url
                 );
 
                 if ($this->config->get('config_review_status')) {
                     $data['ajax_sorts'][] = array(
                         'text'  => $this->language->get('text_rating_desc'),
                         'value' => 'rating-DESC',
-                        'href'  => $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . '&sort=rating&order=DESC' . $url
+                        'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=rating&order=DESC' . $url
                     );
 
                     $data['ajax_sorts'][] = array(
                         'text'  => $this->language->get('text_rating_asc'),
                         'value' => 'rating-ASC',
-                        'href'  => $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . '&sort=rating&order=ASC' . $url
+                        'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=rating&order=ASC' . $url
                     );
                 }
 
                 $data['ajax_sorts'][] = array(
                     'text'  => $this->language->get('text_model_asc'),
                     'value' => 'p.model-ASC',
-                    'href'  => $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . '&sort=p.model&order=ASC' . $url
+                    'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=p.model&order=ASC' . $url
                 );
 
                 $data['ajax_sorts'][] = array(
                     'text'  => $this->language->get('text_model_desc'),
                     'value' => 'p.model-DESC',
-                    'href'  => $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . '&sort=p.model&order=DESC' . $url
+                    'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=p.model&order=DESC' . $url
                 );
 
                 $url = '';
@@ -474,7 +474,7 @@ class ControllerProductOcfilter extends Controller
                     $data['ajax_limits'][] = array(
                         'text'  => $value,
                         'value' => $value,
-                        'href'  => $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . $url . '&limit=' . $value
+                        'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . $url . '&limit=' . $value
                     );
                 }
             }
@@ -702,7 +702,7 @@ class ControllerProductOcfilter extends Controller
             $ajax_pagination->total = $product_total;
             $ajax_pagination->page = $page;
             $ajax_pagination->limit = $limit;
-            $ajax_pagination->url = $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . $url . '&page={page}';
+            $ajax_pagination->url = $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . $url . '&page={page}';
 
             $data['ajax_pagination'] = $ajax_pagination->render();
 
@@ -710,7 +710,7 @@ class ControllerProductOcfilter extends Controller
             $pagination->total = $product_total;
             $pagination->page = $page;
             $pagination->limit = $limit;
-            $pagination->url = $base_url . 'index.php?route=product/category&path=' . $category_id . $url . '&amp;page={page}';
+            $pagination->url = $common_url . 'index.php?route=product/category&path=' . $category_id . $url . '&amp;page={page}';
 
             $data['pagination'] = $pagination->render();
 
@@ -724,7 +724,7 @@ class ControllerProductOcfilter extends Controller
             $data['order'] = $order;
             $data['limit'] = $limit;
 
-            $json['result_html'] = $this->load->view('product/ocfilter/category', $data);
+            $json['result_html'] = $this->load->view('diva/filter/category', $data);
 
             $url = '';
 
@@ -744,7 +744,7 @@ class ControllerProductOcfilter extends Controller
                 $url .= '&limit=' . $this->request->get['limit'];
             }
 
-            $json['filter_action'] =  str_replace('&amp;', '&', $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . $url);
+            $json['filter_action'] =  str_replace('&amp;', '&', $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . $url);
 
             $url = '';
 
@@ -764,7 +764,7 @@ class ControllerProductOcfilter extends Controller
                 $url .= '&limit=' . $this->request->get['limit'];
             }
 
-            $json['price_action'] =  str_replace('&amp;', '&', $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . $url);
+            $json['price_action'] =  str_replace('&amp;', '&', $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . $url);
 
             $json['layered_html'] = $this->layer();
 

@@ -307,7 +307,7 @@
         </operation>
     </file>
 
-    <file path="catalog/controller/product/product.php">
+    <file path="catalog/controller/product/product.php"> <!-- Done -->
         <operation>
             <search><![CDATA[$data['heading_title'] = $product_info['name'];]]></search>
             <add position="before"><![CDATA[
@@ -452,7 +452,6 @@
             } else {
                 $data['use_swatches'] = false;
             }
-
             ]]></add>
         </operation>
         <operation>
@@ -515,6 +514,131 @@
                 $data['show_cate_label'] = 0;
             }
 
+            /* Category Settings */
+            if(isset($this->config->get('module_dvcontrolpanel_category_image')[$store_id])) {
+                $data['show_cate_img'] = (int) $this->config->get('module_dvcontrolpanel_category_image')[$store_id];
+            } else {
+                $data['show_cate_img'] = 0;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_category_description')[$store_id])) {
+                $data['show_cate_des'] = (int) $this->config->get('module_dvcontrolpanel_category_description')[$store_id];
+            } else {
+                $data['show_cate_des'] = 0;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_sub_category')[$store_id])) {
+                $data['show_cate_sub'] = (int) $this->config->get('module_dvcontrolpanel_sub_category')[$store_id];
+            } else {
+                $data['show_cate_sub'] = 0;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_use_filter')[$store_id])) {
+                $data['use_filter'] = (int) $this->config->get('module_dvcontrolpanel_use_filter')[$store_id];
+            } else {
+                $data['use_filter'] = 0;
+            }
+
+            if (!empty($_SERVER['HTTPS'])) {
+                // SSL connection
+                $common_url = str_replace('http', 'https', $this->config->get('config_url'));
+            } else {
+                $common_url = $this->config->get('config_url');
+            }
+
+            $data['dv_sorts'] = array();
+
+            $data['dv_limits'] = array();
+
+            if($data['use_filter']) {
+                if (file_exists('catalog/view/theme/' . $this->config->get('theme_' . $this->config->get('config_theme') . '_directory') . '/stylesheet/octhemecategory/filter.css')) {
+                    $this->document->addStyle('catalog/view/theme/' . $this->config->get('theme_' . $this->config->get('config_theme') . '_directory') . '/stylesheet/diva/category/filter.css');
+                } else {
+                    $this->document->addStyle('catalog/view/theme/default/stylesheet/diva/category/filter.css');
+                }
+
+                $this->document->addScript('catalog/view/javascript/diva/category/filter.js');
+
+                $data['dv_sorts'][] = array(
+                    'text'  => $this->language->get('text_default'),
+                    'value' => 'p.sort_order-ASC',
+                    'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=p.sort_order&order=ASC' . $url
+                );
+
+                $data['dv_sorts'][] = array(
+                    'text'  => $this->language->get('text_name_asc'),
+                    'value' => 'pd.name-ASC',
+                    'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=pd.name&order=ASC' . $url
+                );
+
+                $data['dv_sorts'][] = array(
+                    'text'  => $this->language->get('text_name_desc'),
+                    'value' => 'pd.name-DESC',
+                    'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=pd.name&order=DESC' . $url
+                );
+
+                $data['dv_sorts'][] = array(
+                    'text'  => $this->language->get('text_price_asc'),
+                    'value' => 'p.price-ASC',
+                    'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=p.price&order=ASC' . $url
+                );
+
+                $data['dv_sorts'][] = array(
+                    'text'  => $this->language->get('text_price_desc'),
+                    'value' => 'p.price-DESC',
+                    'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=p.price&order=DESC' . $url
+                );
+
+                if ($this->config->get('config_review_status')) {
+                    $data['dv_sorts'][] = array(
+                        'text'  => $this->language->get('text_rating_desc'),
+                        'value' => 'rating-DESC',
+                        'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=rating&order=DESC' . $url
+                    );
+
+                    $data['dv_sorts'][] = array(
+                        'text'  => $this->language->get('text_rating_asc'),
+                        'value' => 'rating-ASC',
+                        'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=rating&order=ASC' . $url
+                    );
+                }
+
+                $data['dv_sorts'][] = array(
+                    'text'  => $this->language->get('text_model_asc'),
+                    'value' => 'p.model-ASC',
+                    'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=p.model&order=ASC' . $url
+                );
+
+                $data['dv_sorts'][] = array(
+                    'text'  => $this->language->get('text_model_desc'),
+                    'value' => 'p.model-DESC',
+                    'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=p.model&order=DESC' . $url
+                );
+
+                $data['dv_limits'] = array();
+
+                $limits = array_unique(array($this->config->get('theme_' . $this->config->get('config_theme') . '_product_limit'), 25, 50, 75, 100));
+
+                sort($limits);
+
+                foreach($limits as $value) {
+                    $data['dv_limits'][] = array(
+                        'text'  => $value,
+                        'value' => $value,
+                        'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . $url . '&limit=' . $value
+                    );
+                }
+
+                if(isset($this->config->get('module_dvcontrolpanel_loader_img')[$data['store_id']])) {
+                    $data['loader_img'] = $common_url . 'image/' . $this->config->get('module_dvcontrolpanel_loader_img')[$data['store_id']];
+                } else {
+                    $data['loader_img'] = $common_url . 'image/diva/ajax-loader.gif';;
+                }
+            }
+
+*** STILL ****
+
+
 
 
 
@@ -574,87 +698,7 @@
 
             $data['ajax_limits'] = array();
 
-            if($data['use_layered']) {
-                if (file_exists('catalog/view/theme/' . $this->config->get('theme_' . $this->config->get('config_theme') . '_directory') . '/stylesheet/octhemecategory/filter.css')) {
-                    $this->document->addStyle('catalog/view/theme/' . $this->config->get('theme_' . $this->config->get('config_theme') . '_directory') . '/stylesheet/octhemecategory/filter.css');
-                } else {
-                    $this->document->addStyle('catalog/view/theme/default/stylesheet/octhemecategory/filter.css');
-                }
 
-                $this->document->addScript('catalog/view/javascript/occategorygrid/filter.js');
-
-                $data['ajax_sorts'][] = array(
-                    'text'  => $this->language->get('text_default'),
-                    'value' => 'p.sort_order-ASC',
-                    'href'  => $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . '&sort=p.sort_order&order=ASC' . $url
-                );
-
-                $data['ajax_sorts'][] = array(
-                    'text'  => $this->language->get('text_name_asc'),
-                    'value' => 'pd.name-ASC',
-                    'href'  => $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . '&sort=pd.name&order=ASC' . $url
-                );
-
-                $data['ajax_sorts'][] = array(
-                    'text'  => $this->language->get('text_name_desc'),
-                    'value' => 'pd.name-DESC',
-                    'href'  => $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . '&sort=pd.name&order=DESC' . $url
-                );
-
-                $data['ajax_sorts'][] = array(
-                    'text'  => $this->language->get('text_price_asc'),
-                    'value' => 'p.price-ASC',
-                    'href'  => $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . '&sort=p.price&order=ASC' . $url
-                );
-
-                $data['ajax_sorts'][] = array(
-                    'text'  => $this->language->get('text_price_desc'),
-                    'value' => 'p.price-DESC',
-                    'href'  => $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . '&sort=p.price&order=DESC' . $url
-                );
-
-                if ($this->config->get('config_review_status')) {
-                    $data['ajax_sorts'][] = array(
-                        'text'  => $this->language->get('text_rating_desc'),
-                        'value' => 'rating-DESC',
-                        'href'  => $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . '&sort=rating&order=DESC' . $url
-                    );
-
-                    $data['ajax_sorts'][] = array(
-                        'text'  => $this->language->get('text_rating_asc'),
-                        'value' => 'rating-ASC',
-                        'href'  => $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . '&sort=rating&order=ASC' . $url
-                    );
-                }
-
-                $data['ajax_sorts'][] = array(
-                    'text'  => $this->language->get('text_model_asc'),
-                    'value' => 'p.model-ASC',
-                    'href'  => $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . '&sort=p.model&order=ASC' . $url
-                );
-
-                $data['ajax_sorts'][] = array(
-                    'text'  => $this->language->get('text_model_desc'),
-                    'value' => 'p.model-DESC',
-                    'href'  => $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . '&sort=p.model&order=DESC' . $url
-                );
-
-                $data['ajax_limits'] = array();
-
-                $limits = array_unique(array($this->config->get('theme_' . $this->config->get('config_theme') . '_product_limit'), 25, 50, 75, 100));
-
-                sort($limits);
-
-                foreach($limits as $value) {
-                    $data['ajax_limits'][] = array(
-                        'text'  => $value,
-                        'value' => $value,
-                        'href'  => $base_url . 'index.php?route=product/ocfilter/category&path=' . $category_id . $url . '&limit=' . $value
-                    );
-                }
-
-                $data['ajax_loader'] = $base_url . 'image/' . $this->config->get('module_octhemeoption_loader_img');
-            }
             ]]></add>
         </operation>
         <operation>
