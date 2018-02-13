@@ -51,10 +51,8 @@ class ControllerDivaFilter extends Controller
 
             $this->load->model('catalog/product');
 
-            // Min price and Max price of product collection
-            /* Begin */
-            $min_price = 1000000000;  // Set the large number
-            $max_price = 0;         // Set the small number
+            $min_price = 1000000000;
+            $max_price = 0;
 
             $data['products'] = array();
 
@@ -87,7 +85,6 @@ class ControllerDivaFilter extends Controller
 
             $data['currency_symbol_left'] = $this->currency->getSymbolLeft($this->session->data['currency']);
             $data['currency_symbol_right'] = $this->currency->getSymbolRight($this->session->data['currency']);
-            /* End */
 
             $data['filter_groups'] = array();
 
@@ -158,10 +155,8 @@ class ControllerDivaFilter extends Controller
 
             $this->load->model('catalog/product');
 
-            // Min price and Max price of product collection
-            /* Begin */
-            $min_price = 1000000000;  // Set the large number
-            $max_price = 0;         // Set the small number
+            $min_price = 1000000000;
+            $max_price = 0;
 
             $data['products'] = array();
 
@@ -209,7 +204,6 @@ class ControllerDivaFilter extends Controller
 
             $data['currency_symbol_left'] = $this->currency->getSymbolLeft($this->session->data['currency']);
             $data['currency_symbol_right'] = $this->currency->getSymbolRight($this->session->data['currency']);
-            /* End */
 
             $data['filter_groups'] = array();
 
@@ -247,7 +241,7 @@ class ControllerDivaFilter extends Controller
     /**
      * Load category view
      */
-    public function category() { // STILL
+    public function category() {
 
         $this->load->language('product/category');
 
@@ -335,47 +329,55 @@ class ControllerDivaFilter extends Controller
 
         if ($category_info) {
             $store_id = $this->config->get('config_store_id');
-            if(isset($this->config->get('module_octhemeoption_custom_view')[$store_id])) {
-                $data['use_custom_view'] = (int) $this->config->get('module_octhemeoption_custom_view')[$store_id];
+            /* Catalog Mode */
+            if(isset($this->config->get('module_dvcontrolpanel_category_price')[$store_id])) {
+                $data['show_cate_price'] = (int) $this->config->get('module_dvcontrolpanel_category_price')[$store_id];
             } else {
-                $data['use_custom_view'] = 0;
+                $data['show_cate_price'] = 0;
             }
 
-            if(isset($this->config->get('module_octhemeoption_category_view')[$store_id])) {
-                $data['category_view'] = $this->config->get('module_octhemeoption_category_view')[$store_id];
+            if(isset($this->config->get('module_dvcontrolpanel_category_cart')[$store_id])) {
+                $data['show_cate_cart'] = (int) $this->config->get('module_dvcontrolpanel_category_cart')[$store_id];
             } else {
-                $data['category_view'] = false;
+                $data['show_cate_cart'] = 0;
             }
 
-            if(isset($this->config->get('module_octhemeoption_category_view')[$store_id])) {
-                $data['grid_columns'] = $this->config->get('module_octhemeoption_grid_columns')[$store_id];
+            if(isset($this->config->get('module_dvcontrolpanel_category_wishlist')[$store_id])) {
+                $data['show_cate_wishlist'] = (int) $this->config->get('module_dvcontrolpanel_category_wishlist')[$store_id];
             } else {
-                $data['grid_columns'] = false;
+                $data['show_cate_wishlist'] = 0;
             }
 
-            if(isset($this->config->get('module_octhemeoption_use_layered')[$store_id])) {
-                $data['use_layered'] = (int) $this->config->get('module_octhemeoption_use_layered')[$store_id];
+            if(isset($this->config->get('module_dvcontrolpanel_category_compare')[$store_id])) {
+                $data['show_cate_compare'] = (int) $this->config->get('module_dvcontrolpanel_category_compare')[$store_id];
             } else {
-                $data['use_layered'] = 0;
+                $data['show_cate_compare'] = 0;
             }
 
-            if(isset($this->config->get('module_octhemeoption_use_cate_quickview')[$store_id])) {
-                $data['use_quickview'] = (int) $this->config->get('module_octhemeoption_use_cate_quickview')[$store_id];
+            if(isset($this->config->get('module_dvcontrolpanel_category_prodes')[$store_id])) {
+                $data['show_cate_prodes'] = (int) $this->config->get('module_dvcontrolpanel_category_prodes')[$store_id];
             } else {
-                $data['use_quickview'] = 0;
+                $data['show_cate_prodes'] = 0;
             }
 
-            if(isset($this->config->get('module_octhemeoption_image_effect')[$store_id])) {
-                $data['image_effect'] = $this->config->get('module_octhemeoption_image_effect')[$store_id];
+            if(isset($this->config->get('module_dvcontrolpanel_category_label')[$store_id])) {
+                $data['show_cate_label'] = (int) $this->config->get('module_dvcontrolpanel_category_label')[$store_id];
             } else {
-                $data['image_effect'] = false;
+                $data['show_cate_label'] = 0;
             }
 
-            $data['ajax_sorts'] = array();
+            /* Category Settings */
+            if(isset($this->config->get('module_dvcontrolpanel_use_filter')[$store_id])) {
+                $data['use_filter'] = (int) $this->config->get('module_dvcontrolpanel_use_filter')[$store_id];
+            } else {
+                $data['use_filter'] = 0;
+            }
 
-            $data['ajax_limits'] = array();
+            $data['dv_sorts'] = array();
 
-            if($data['use_layered']) {
+            $data['dv_limits'] = array();
+
+            if($data['use_filter']) {
                 $url = '';
 
                 if (isset($this->request->get['filter'])) {
@@ -390,57 +392,57 @@ class ControllerDivaFilter extends Controller
                     $url .= '&price=' . $this->request->get['price'];
                 }
 
-                $data['ajax_sorts'][] = array(
+                $data['dv_sorts'][] = array(
                     'text'  => $this->language->get('text_default'),
                     'value' => 'p.sort_order-ASC',
                     'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=p.sort_order&order=ASC' . $url
                 );
 
-                $data['ajax_sorts'][] = array(
+                $data['dv_sorts'][] = array(
                     'text'  => $this->language->get('text_name_asc'),
                     'value' => 'pd.name-ASC',
                     'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=pd.name&order=ASC' . $url
                 );
 
-                $data['ajax_sorts'][] = array(
+                $data['dv_sorts'][] = array(
                     'text'  => $this->language->get('text_name_desc'),
                     'value' => 'pd.name-DESC',
                     'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=pd.name&order=DESC' . $url
                 );
 
-                $data['ajax_sorts'][] = array(
+                $data['dv_sorts'][] = array(
                     'text'  => $this->language->get('text_price_asc'),
                     'value' => 'p.price-ASC',
                     'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=p.price&order=ASC' . $url
                 );
 
-                $data['ajax_sorts'][] = array(
+                $data['dv_sorts'][] = array(
                     'text'  => $this->language->get('text_price_desc'),
                     'value' => 'p.price-DESC',
                     'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=p.price&order=DESC' . $url
                 );
 
                 if ($this->config->get('config_review_status')) {
-                    $data['ajax_sorts'][] = array(
+                    $data['dv_sorts'][] = array(
                         'text'  => $this->language->get('text_rating_desc'),
                         'value' => 'rating-DESC',
                         'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=rating&order=DESC' . $url
                     );
 
-                    $data['ajax_sorts'][] = array(
+                    $data['dv_sorts'][] = array(
                         'text'  => $this->language->get('text_rating_asc'),
                         'value' => 'rating-ASC',
                         'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=rating&order=ASC' . $url
                     );
                 }
 
-                $data['ajax_sorts'][] = array(
+                $data['dv_sorts'][] = array(
                     'text'  => $this->language->get('text_model_asc'),
                     'value' => 'p.model-ASC',
                     'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=p.model&order=ASC' . $url
                 );
 
-                $data['ajax_sorts'][] = array(
+                $data['dv_sorts'][] = array(
                     'text'  => $this->language->get('text_model_desc'),
                     'value' => 'p.model-DESC',
                     'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . '&sort=p.model&order=DESC' . $url
@@ -464,19 +466,49 @@ class ControllerDivaFilter extends Controller
                     $url .= '&price=' . $this->request->get['price'];
                 }
 
-                $data['ajax_limits'] = array();
+                $data['dv_limits'] = array();
 
                 $limits = array_unique(array($this->config->get('theme_' . $this->config->get('config_theme') . '_product_limit'), 25, 50, 75, 100));
 
                 sort($limits);
 
                 foreach($limits as $value) {
-                    $data['ajax_limits'][] = array(
+                    $data['dv_limits'][] = array(
                         'text'  => $value,
                         'value' => $value,
                         'href'  => $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . $url . '&limit=' . $value
                     );
                 }
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_cate_quickview')[$store_id])) {
+                $data['use_quick_view'] = (int) $this->config->get('module_dvcontrolpanel_cate_quickview')[$store_id];
+            } else {
+                $data['use_quick_view'] = 0;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_img_effect')[$store_id])) {
+                $data['image_effect'] = $this->config->get('module_dvcontrolpanel_img_effect')[$store_id];
+            } else {
+                $data['image_effect'] = false;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_advance_view')[$store_id])) {
+                $data['use_advance_view'] = (int) $this->config->get('module_dvcontrolpanel_advance_view')[$store_id];
+            } else {
+                $data['use_advance_view'] = 0;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_default_view')[$store_id])) {
+                $data['advance_default_view'] = $this->config->get('module_dvcontrolpanel_default_view')[$store_id];
+            } else {
+                $data['advance_default_view'] = false;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_product_row')[$store_id])) {
+                $data['product_p_row'] = $this->config->get('module_dvcontrolpanel_product_row')[$store_id];
+            } else {
+                $data['product_p_row'] = false;
             }
             
             $data['text_compare'] = sprintf($this->language->get('text_compare'), (isset($this->session->data['compare']) ? count($this->session->data['compare']) : 0));
@@ -532,7 +564,6 @@ class ControllerDivaFilter extends Controller
 
             $rate = (float) $this->currency->getValue($this->session->data['currency']);
 
-            // Min and Max Price
             $filter_price = array();
             if (isset($this->request->get['price'])) {
                 $price_data = explode(',', $price_data);
@@ -540,7 +571,6 @@ class ControllerDivaFilter extends Controller
                 $filter_price['max_price'] = round($price_data[1] / $rate);
             }
 
-            // var_dump($filter_price);die;
             $filter_data = array(
                 'filter_category_id' => $category_id,
                 'filter_filter'      => $filter,
@@ -586,13 +616,13 @@ class ControllerDivaFilter extends Controller
                     $rating = false;
                 }
 
-                if($data['image_effect'] == 'rotator') {
-                    $this->load->model('catalog/ocproductrotator');
+                if($data['image_effect'] == 'hover') {
+                    $this->load->model('diva/rotateimage');
 
-                    $product_rotator_image = $this->model_catalog_ocproductrotator->getProductRotatorImage($result['product_id']);
+                    $product_rotate_image = $this->model_diva_rotateimage->getProductRotateImage($result['product_id']);
 
-                    if($product_rotator_image) {
-                        $rotate_image = $this->model_tool_image->resize($product_rotator_image, $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_height'));
+                    if($product_rotate_image) {
+                        $rotate_image = $this->model_tool_image->resize($product_rotate_image, $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_height'));
                     } else {
                         $rotate_image = false;
                     }
@@ -605,21 +635,21 @@ class ControllerDivaFilter extends Controller
                 $options = array();
 
                 if($data['image_effect'] == 'swatches') {
-                    $data['icon_swatches_width'] = $this->config->get('module_octhemeoption_cate_swatches_width')[$store_id];
-                    $data['icon_swatches_height'] = $this->config->get('module_octhemeoption_cate_swatches_height')[$store_id];
+                    $data['icon_swatches_width'] = $this->config->get('module_dvcontrolpanel_cate_swatches_width')[$store_id];
+                    $data['icon_swatches_height'] = $this->config->get('module_dvcontrolpanel_cate_swatches_height')[$store_id];
 
-                    $this->load->model('catalog/occolorswatches');
+                    $this->load->model('diva/swatches');
 
                     $images = $this->model_catalog_product->getProductImages($result['product_id']);
 
-                    $is_swatches_option = false;
+                    $is_swatches = false;
 
                     foreach ($images as $img) {
                         if ($img['product_option_value_id']) {
-                            $image_option_id = $this->model_catalog_occolorswatches->getOptionIdByProductOptionValueId($img['product_option_value_id']);
+                            $image_option_id = $this->model_diva_swatches->getOptionIdByProductOptionValueId($img['product_option_value_id']);
 
-                            if($image_option_id == $this->config->get('module_octhemeoption_swatches_option')[$store_id]) {
-                                $is_swatches_option = true;
+                            if($image_option_id == $this->config->get('module_dvcontrolpanel_swatches_option')[$store_id]) {
+                                $is_swatches = true;
 
                                 $swatches_images[] = array(
                                     'product_option_value_id' => $img['product_option_value_id'],
@@ -629,9 +659,9 @@ class ControllerDivaFilter extends Controller
                         }
                     }
 
-                    if($is_swatches_option) {
+                    if($is_swatches) {
                         foreach ($this->model_catalog_product->getProductOptions($result['product_id']) as $option) {
-                            if($option['option_id'] == $this->config->get('module_octhemeoption_swatches_option')[$store_id]) {
+                            if($option['option_id'] == $this->config->get('module_dvcontrolpanel_swatches_option')[$store_id]) {
                                 $product_option_value_data = array();
 
                                 foreach ($option['product_option_value'] as $option_value) {
@@ -697,14 +727,13 @@ class ControllerDivaFilter extends Controller
                 $url .= '&price=' . $this->request->get['price'];
             }
 
-            /* Ajax Pagination */
-            $ajax_pagination = new Pagination();
-            $ajax_pagination->total = $product_total;
-            $ajax_pagination->page = $page;
-            $ajax_pagination->limit = $limit;
-            $ajax_pagination->url = $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . $url . '&page={page}';
+            $dv_pagination = new Pagination();
+            $dv_pagination->total = $product_total;
+            $dv_pagination->page = $page;
+            $dv_pagination->limit = $limit;
+            $dv_pagination->url = $common_url . 'index.php?route=diva/filter/category&path=' . $category_id . $url . '&page={page}';
 
-            $data['ajax_pagination'] = $ajax_pagination->render();
+            $data['dv_pagination'] = $dv_pagination->render();
 
             $pagination = new Pagination();
             $pagination->total = $product_total;

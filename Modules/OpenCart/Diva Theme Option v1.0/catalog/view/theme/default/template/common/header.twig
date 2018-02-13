@@ -28,12 +28,6 @@
 <script src="catalog/view/javascript/jquery/owl-carousel/js/owl.carousel.min.js" type="text/javascript"></script>
 <link href="catalog/view/javascript/jquery/owl-carousel/css/owl.carousel.min.css" rel="stylesheet" />
 <link href="catalog/view/javascript/jquery/owl-carousel/css/owl.theme.green.min.css" rel="stylesheet" />
-{% if use_quick_view %}
-<script src="catalog/view/javascript/diva/cloudzoom/cloud-zoom.1.0.2.min.js" type="text/javascript"></script>
-<script src="catalog/view/javascript/diva/cloudzoom/zoom.js" type="text/javascript"></script>
-<script src="catalog/view/javascript/ocquickview/ocquickview.js" type="text/javascript"></script>
-<link href="catalog/view/theme/default/stylesheet/ocquickview/ocquickview.css" rel="stylesheet" type="text/css" />
-{% endif %}
 {% for style in styles %}
 <link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
 {% endfor %}
@@ -47,6 +41,14 @@
 {% for analytic in analytics %}
 {{ analytic }}
 {% endfor %}
+  <!-- Quick view -->
+  {% if use_quick_view %}
+    <script src="catalog/view/javascript/diva/cloudzoom/cloud-zoom.1.0.2.min.js" type="text/javascript"></script>
+    <script src="catalog/view/javascript/diva/cloudzoom/zoom.js" type="text/javascript"></script>
+    <script src="catalog/view/javascript//diva/quickview/quickview.js" type="text/javascript"></script>
+    <link href="catalog/view/theme/default/stylesheet/diva/quickview/quickview.css" rel="stylesheet" type="text/css" />
+  {% endif %}
+
   <!-- Font & CSS -->
   <!-- Body -->
   {% if body_font_link and body_font_family and body_font_cate %}

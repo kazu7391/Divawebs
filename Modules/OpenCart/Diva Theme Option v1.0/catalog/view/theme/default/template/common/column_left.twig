@@ -1,7 +1,7 @@
-{% if modules or use_layered %}
+{% if modules or use_filter %}
 <aside id="column-left" class="col-sm-3 hidden-xs">
-  {% if use_layered %}
-    {{ layered_section }}
+  {% if use_filter %}
+    {{ filter_section }}
   {% endif %}
   {% for module in modules %}
   {{ module }}
