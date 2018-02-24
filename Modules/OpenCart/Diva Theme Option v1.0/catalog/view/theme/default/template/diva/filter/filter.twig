@@ -18,7 +18,7 @@
                 {% endfor %}
                 {% if is_filter %}
                     <div class="list-group-item filter-clear-all">
-                        <a class="clear-filter" href="javascript:void(0);" onclick="ocfilter.filter('{{ clear_action }}')">Clear all</a>
+                        <a class="clear-filter" href="javascript:void(0);" onclick="dvfilter.filter('{{ clear_action }}')">Clear all</a>
                     </div>
                 {% endif %}
             </div>
@@ -83,7 +83,7 @@
         stop    : function (event, ui) {
             filter_url = $('.price-url').val();
             filter_url += '&price=' + current_min_price + ',' + current_max_price;
-            ocfilter.filter(filter_url);
+            dvfilter.filter(filter_url);
         }
     });
 
@@ -100,7 +100,7 @@
         }
         filter_ids = ids.join(',');
         filter_url += '&filter=' + filter_ids;
-        ocfilter.filter(filter_url);
+        dvfilter.filter(filter_url);
     });
 
     $('.clear-filter').click(function () {
@@ -125,7 +125,7 @@
             stop    : function (event, ui) {
                 filter_url = $('.price-url').val();
                 filter_url += '&price=' + current_min_price + ',' + current_max_price;
-                ocfilter.filter(filter_url);
+                dvfilter.filter(filter_url);
             }
         });
 
@@ -143,7 +143,7 @@
             }
             filter_ids = ids.join(',');
             filter_url += '&filter=' + filter_ids;
-            ocfilter.filter(filter_url);
+            dvfilter.filter(filter_url);
         });
 
         $('.clear-filter').click(function () {

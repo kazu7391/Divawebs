@@ -1,16 +1,16 @@
 //<![CDATA[
 $(window).load(function () {
-	ocquickview.initQuickViewContainer();
+	dvquickview.initQuickViewContainer();
 });
 
-var ocquickview = {
+var dvquickview = {
 	'initQuickViewContainer' : function () {
 		$('body').append('<div class="quickview-container"></div>');
-		$('div.quickview-container').load('index.php?route=product/ocquickview/appendcontainer');
+		$('div.quickview-container').load('index.php?route=diva/quickview/appendcontainer');
 	},
 
 	'appendCloseFrameLink' : function () {
-		$('div#quickview-content').prepend("<a href='javascript:void(0);' class='a-qv-close' onclick='ocquickview.closeQVFrame()'>" + $('#qv-text-close').val() + "</a>");
+		$('div#quickview-content').prepend("<a href='javascript:void(0);' class='a-qv-close' onclick='dvquickview.closeQVFrame()'>" + $('#qv-text-close').val() + "</a>");
 	},
 
 	'closeQVFrame' : function () {
@@ -21,9 +21,9 @@ var ocquickview = {
 
 	'ajaxView'	: function (url) {
 		if(url.search('route=product/product') != -1) {
-			url = url.replace('route=product/product', 'route=product/ocquickview');
+			url = url.replace('route=product/product', 'route=diva/quickview');
 		} else {
-			url = 'index.php?route=product/ocquickview/seoview&ourl=' + url;
+			url = 'index.php?route=diva/quickview/seoview&ourl=' + url;
 		}
 
 		$.ajax({
@@ -37,7 +37,7 @@ var ocquickview = {
 				if(json['success'] == true) {
 					$('.quickview-load-img').hide();
 					$('#quickview-content').html(json['html']);
-					ocquickview.appendCloseFrameLink();
+					dvquickview.appendCloseFrameLink();
 					$('#quickview-content').show(600);
 				}
 			}

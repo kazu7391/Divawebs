@@ -1,14 +1,14 @@
-{% if ocquickview_status %}
+{% if use_quick_view %}
 <div id="quickview-content">
-    <!-- Load quickview content into here -->
+    <!-- Load product content -->
 </div>
 
 <div id="quickview-bg-block">
-    <!-- Quick View deep background -->
+    <!-- Background -->
 </div>
 
 <div class="quickview-load-img">
-    <img src="{{ ocquickview_loader_img }}" alt="" />
+    <img src="{{ loader_img }}" alt="" />
 </div>
 
 <div class="lightbox-container lbo-quickview"></div>
@@ -17,7 +17,7 @@
 
 <script type="text/javascript">
     $('#quickview-bg-block').click(function () {
-        ocquickview.closeQVFrame();
+        dvquickview.closeQVFrame();
     })
 
     if($('#product-product').length) {

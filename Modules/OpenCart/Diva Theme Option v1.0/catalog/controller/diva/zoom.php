@@ -1,5 +1,5 @@
 <?php
-class ControllerProductOczoom extends Controller
+class ControllerDivaZoom extends Controller
 {
     public function lightbox($product_id) {
         $this->load->model('catalog/product');
@@ -36,7 +36,7 @@ class ControllerProductOczoom extends Controller
             }
         }
 
-        return $this->load->view('product/oczoom/lightbox', $data);
+        return $this->load->view('diva/product/lightbox', $data);
     }
     
     public function openLightbox() {

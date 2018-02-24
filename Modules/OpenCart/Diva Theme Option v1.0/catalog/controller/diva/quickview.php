@@ -1,5 +1,5 @@
 <?php
-class ControllerProductOcquickview extends Controller
+class ControllerDivaQuickview extends Controller
 {
     public function index() {
         $json = array();
@@ -14,7 +14,7 @@ class ControllerProductOcquickview extends Controller
 
         if(!$json) {
             if($data) {
-                $json['html'] = $this->load->view('product/ocquickview/product', $data);
+                $json['html'] = $this->load->view('diva/quickview/product', $data);
                 $json['success'] = true;
             } else {
                 $json['success'] = false;
@@ -29,18 +29,18 @@ class ControllerProductOcquickview extends Controller
     public function seoview() {
         $json = array();
 
-        $this->load->model('catalog/ocquickview');
+        $this->load->model('diva/quickview');
 
         if(!$json) {
             if (isset($this->request->get['ourl'])) {
                 $seo_url = $this->request->get['ourl'];
 
-                $product_id = $this->model_catalog_ocquickview->getProductBySeoUrl($seo_url);
+                $product_id = $this->model_diva_quickview->getProductBySeoUrl($seo_url);
 
                 $data = $this->loadProduct($product_id);
 
                 if($data) {
-                    $json['html'] = $this->load->view('product/ocquickview/product', $data);
+                    $json['html'] = $this->load->view('diva/quickview/product', $data);
                     $json['success'] = true;
                 } else {
                     $json['success'] = false;
@@ -65,12 +65,131 @@ class ControllerProductOcquickview extends Controller
         if($product_info) {
             $data['product_name'] = $product_info['name'];
 
-            $data['heading_title'] = $product_info['name'];
-
-            /* Zoom & Swatches */
+            /* DIVA Product Configuration */
+            $this->load->model('tool/image');
             $store_id = $this->config->get('config_store_id');
-            $use_swatches = (int) $this->config->get('module_octhemeoption_use_swatches')[$store_id];
-            $use_zoom = (int) $this->config->get('module_octhemeoption_use_zoom')[$store_id];
+
+            /* Catalog Mode */
+            if(isset($this->config->get('module_dvcontrolpanel_product_price')[$store_id])) {
+                $data['show_product_price'] = (int) $this->config->get('module_dvcontrolpanel_product_price')[$store_id];
+            } else {
+                $data['show_product_price'] = 0;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_product_cart')[$store_id])) {
+                $data['show_product_button_cart'] = (int) $this->config->get('module_dvcontrolpanel_product_cart')[$store_id];
+            } else {
+                $data['show_product_button_cart'] = 0;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_product_wishlist')[$store_id])) {
+                $data['show_product_button_wishlist'] = (int) $this->config->get('module_dvcontrolpanel_product_wishlist')[$store_id];
+            } else {
+                $data['show_product_button_wishlist'] = 0;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_product_compare')[$store_id])) {
+                $data['show_product_button_compare'] = (int) $this->config->get('module_dvcontrolpanel_product_compare')[$store_id];
+            } else {
+                $data['show_product_button_compare'] = 0;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_product_options')[$store_id])) {
+                $data['show_product_options'] = (int) $this->config->get('module_dvcontrolpanel_product_options')[$store_id];
+            } else {
+                $data['show_product_options'] = 0;
+            }
+
+            /* Product Details */
+            if(isset($this->config->get('module_dvcontrolpanel_related')[$store_id])) {
+                $data['show_product_related'] = (int) $this->config->get('module_dvcontrolpanel_related')[$store_id];
+            } else {
+                $data['show_product_related'] = 0;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_social')[$store_id])) {
+                $data['show_product_social'] = (int) $this->config->get('module_dvcontrolpanel_social')[$store_id];
+            } else {
+                $data['show_product_social'] = 0;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_tax')[$store_id])) {
+                $data['show_product_tax'] = (int) $this->config->get('module_dvcontrolpanel_tax')[$store_id];
+            } else {
+                $data['show_product_tax'] = 0;
+            }
+
+            if(isset($this->config->get('module_dvcontrolpanel_tags')[$store_id])) {
+                $data['show_product_tags'] = (int) $this->config->get('module_dvcontrolpanel_tags')[$store_id];
+            } else {
+                $data['show_product_tags'] = 0;
+            }
+
+            $use_zoom = (int) $this->config->get('module_dvcontrolpanel_use_zoom')[$store_id];
+
+            if($use_zoom) {
+                $data['use_zoom'] = true;
+
+                if ($product_info['image']) {
+                    $data['small_image'] = $this->model_tool_image->resize($product_info['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_additional_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_additional_height'));
+                } else {
+                    $data['small_image'] = '';
+                }
+
+                $data['popup_dimension'] = array(
+                    'width' => $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'),
+                    'height' => $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height')
+                );
+
+                $data['thumb_dimension'] = array(
+                    'width' => $this->config->get('theme_' . $this->config->get('config_theme') . '_image_thumb_width'),
+                    'height' => $this->config->get('theme_' . $this->config->get('config_theme') . '_image_thumb_height')
+                );
+
+                $data['small_dimension'] = array(
+                    'width' => $this->config->get('theme_' . $this->config->get('config_theme') . '_image_additional_width'),
+                    'height' => $this->config->get('theme_' . $this->config->get('config_theme') . '_image_additional_height')
+                );
+
+                if(isset($this->config->get('module_dvcontrolpanel_zoom_type')[$store_id])) {
+                    $zoom_type = $this->config->get('module_dvcontrolpanel_zoom_type')[$store_id];
+                } else {
+                    $zoom_type = 'outer';
+                }
+
+                if(isset($this->config->get('module_dvcontrolpanel_zoom_space')[$store_id])) {
+                    $zoom_space = $this->config->get('module_dvcontrolpanel_zoom_space')[$store_id];
+                } else {
+                    $zoom_space = '0';
+                }
+
+                if(isset($this->config->get('module_dvcontrolpanel_zoom_title')[$store_id])) {
+                    $zoom_title = (int) $this->config->get('module_dvcontrolpanel_zoom_title')[$store_id];
+                } else {
+                    $zoom_title = 0;
+                }
+
+                $data['product_zoom_settings'] = array(
+                    'type' => $zoom_type,
+                    'space' => $zoom_space,
+                    'title' => $zoom_title
+                );
+            } else {
+                $data['use_zoom'] = false;
+            }
+
+            $use_swatches = (int) $this->config->get('module_dvcontrolpanel_use_swatches')[$store_id];
+
+            if($use_swatches) {
+                $data['use_swatches'] = true;
+                $data['icon_swatches_width'] = $this->config->get('module_dvcontrolpanel_swatches_width')[$store_id];
+                $data['icon_swatches_height'] = $this->config->get('module_dvcontrolpanel_swatches_height')[$store_id];
+                $data['swatches_option'] = $this->config->get('module_dvcontrolpanel_swatches_option')[$store_id];
+            } else {
+                $data['use_swatches'] = false;
+            }
+
+            $data['heading_title'] = $product_info['name'];
 
             $data['text_minimum'] = sprintf($this->language->get('text_minimum'), $product_info['minimum']);
             $data['text_login'] = sprintf($this->language->get('text_login'), $this->url->link('account/login', '', true), $this->url->link('account/register', '', true));
@@ -107,71 +226,6 @@ class ControllerProductOcquickview extends Controller
                 $data['thumb'] = $this->model_tool_image->resize($product_info['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_thumb_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_thumb_height'));
             } else {
                 $data['thumb'] = '';
-            }
-
-            if($use_swatches) {
-                $data['use_swatches'] = true;
-                $data['icon_swatches_width'] = $this->config->get('module_octhemeoption_swatches_width')[$store_id];
-                $data['icon_swatches_height'] = $this->config->get('module_octhemeoption_swatches_height')[$store_id];
-                $data['swatches_option'] = $this->config->get('module_octhemeoption_swatches_option')[$store_id];
-            } else {
-                $data['use_swatches'] = false;
-            }
-
-            if($use_zoom) {
-                $data['use_zoom'] = true;
-
-                if ($product_info['image']) {
-                    $data['small_image'] = $this->model_tool_image->resize($product_info['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_additional_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_additional_height'));
-                } else {
-                    $data['small_image'] = '';
-                }
-
-                if (file_exists('catalog/view/theme/' . $this->config->get('config_template') . '/stylesheet/oczoom/zoom.css')) {
-                    $this->document->addStyle('catalog/view/theme/' . $this->config->get('config_template') . '/stylesheet/oczoom/zoom.css');
-                } else {
-                    $this->document->addStyle('catalog/view/theme/default/stylesheet/oczoom/zoom.css');
-                }
-
-                $data['popup_dimension'] = array(
-                    'width' => $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'),
-                    'height' => $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height')
-                );
-
-                $data['thumb_dimension'] = array(
-                    'width' => $this->config->get('theme_' . $this->config->get('config_theme') . '_image_thumb_width'),
-                    'height' => $this->config->get('theme_' . $this->config->get('config_theme') . '_image_thumb_height')
-                );
-
-                $data['small_dimension'] = array(
-                    'width' => $this->config->get('theme_' . $this->config->get('config_theme') . '_image_additional_width'),
-                    'height' => $this->config->get('theme_' . $this->config->get('config_theme') . '_image_additional_height')
-                );
-
-                $bg_status = (int) $this->config->get('module_octhemeoption_zoom_background_status')[$store_id];
-                if($bg_status) {
-                    $zoom_bg_status = true;
-                } else {
-                    $zoom_bg_status = false;
-                }
-
-                $title_status = (int) $this->config->get('module_octhemeoption_zoom_title')[$store_id];
-                if($title_status) {
-                    $zoom_title_status = true;
-                } else {
-                    $zoom_title_status = false;
-                }
-
-                $data['zoom_config'] = array(
-                    'position' => $this->config->get('module_octhemeoption_zoom_position')[$store_id],
-                    'space' => $this->config->get('module_octhemeoption_zoom_space')[$store_id],
-                    'bg_status' => $zoom_bg_status,
-                    'bg_color' => '#' . $this->config->get('module_octhemeoption_zoom_background_color')[$store_id],
-                    'bg_opacity' => $this->config->get('module_octhemeoption_zoom_background_opacity')[$store_id],
-                    'title_status' => $zoom_title_status
-                );
-            } else {
-                $data['use_zoom'] = false;
             }
 
             $data['images'] = array();
@@ -218,7 +272,7 @@ class ControllerProductOcquickview extends Controller
 
             $data['options'] = array();
 
-            foreach ($this->model_catalog_product->getProductOptions($product_id) as $option) {
+            foreach ($this->model_catalog_product->getProductOptions($this->request->get['product_id']) as $option) {
                 $product_option_value_data = array();
 
                 foreach ($option['product_option_value'] as $option_value) {
@@ -309,11 +363,49 @@ class ControllerProductOcquickview extends Controller
     }
 
     public function container() {
-        $this->load->language('product/ocquickview');
-        $data['ocquickview_loader_img'] = $this->config->get('config_url') . 'image/' . $this->config->get('module_octhemeoption_loader_img');
-        $data['ocquickview_status'] = (int) $this->config->get('module_octhemeoption_quickview');
+        $this->load->language('diva/quickview');
+        
+        if (!empty($_SERVER['HTTPS'])) {
+            // SSL connection
+            $common_url = str_replace('http', 'https', $this->config->get('config_url'));
+        } else {
+            $common_url = $this->config->get('config_url');
+        }
 
-        return $this->load->view('product/ocquickview/qvcontainer', $data);
+        $store_id = $this->config->get('config_store_id');
+
+        /* Loader Image */
+        if(isset($this->config->get('module_dvcontrolpanel_loader_img')[$store_id])) {
+            $loader_img = $this->config->get('module_dvcontrolpanel_loader_img')[$store_id];
+        } else {
+            $loader_img = false;
+        }
+
+        if($loader_img) {
+            $data['loader_img'] = $common_url . 'image/' . $loader_img;
+        } else {
+            $data['loader_img'] = $common_url . 'image/diva/ajax-loader.gif';
+        }
+
+        if(isset($this->config->get('module_dvcontrolpanel_module_quickview')[$store_id])) {
+            $module_quick_view = (int) $this->config->get('module_dvcontrolpanel_module_quickview')[$store_id];
+        } else {
+            $module_quick_view = 0;
+        }
+
+        if(isset($this->config->get('module_dvcontrolpanel_cate_quickview')[$store_id])) {
+            $category_quick_view = (int) $this->config->get('module_dvcontrolpanel_cate_quickview')[$store_id];
+        } else {
+            $category_quick_view = 0;
+        }
+
+        if($module_quick_view || $category_quick_view) {
+            $data['use_quick_view'] = true;
+        } else {
+            $data['use_quick_view'] = false;
+        }
+
+        return $this->load->view('diva/quickview/qvcontainer', $data);
     }
 
     public function appendcontainer() {

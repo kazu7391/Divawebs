@@ -1,5 +1,5 @@
 {% if has_images %}
-    <span class="close cursor" onclick="oczoom.closeLightBox()">&times;</span>
+    <span class="close cursor" onclick="dvzoom.closeLightBox()">&times;</span>
     <div class="lightbox-content">
         {% set i = 1 %}
         {% for image in images %}
@@ -11,8 +11,8 @@
         {% endfor %}
     </div>
 
-    <a class="prev" onclick="oczoom.plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="oczoom.plusSlides(1)">&#10095;</a>
+    <a class="prev" onclick="dvzoom.plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="dvzoom.plusSlides(1)">&#10095;</a>
 {% else %}
     <div class="lightbox-content">No Image Data</div>
 {% endif %}

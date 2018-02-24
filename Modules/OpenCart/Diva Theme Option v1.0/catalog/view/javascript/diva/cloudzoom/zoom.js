@@ -2,7 +2,7 @@ $(document).ready(function () {
     $('.product-zoom-image').on('click', function () {
         var pos = $('#light-box-position').val();
 
-        oczoom.openLightBox(pos);
+        dvzoom.openLightBox(pos);
     });
 
     $('.sub-image').on('click', function () {
@@ -10,10 +10,10 @@ $(document).ready(function () {
         $('#light-box-position').val(pos);
     });
 
-    oczoom.initAdditionalImagesOwl();
+    dvzoom.initAdditionalImagesOwl();
 });
 
-var oczoom = {
+var dvzoom = {
     'initAdditionalImagesOwl'  : function () {
         $('.additional-images').owlCarousel({
             loop: false,
@@ -45,16 +45,16 @@ var oczoom = {
         var flag = false;
 
         $.ajax({
-            url : 'index.php?route=product/oczoom/openLightbox&product_id=' + product_id,
+            url : 'index.php?route=diva/zoom/openLightbox&product_id=' + product_id,
             type: 'get',
             success : function (json) {
                 $('.lightbox-container').html(json['html']).show(500);
-                oczoom.showSlides(position);
+                dvzoom.showSlides(position);
                 flag = true;
             },
             complete: function () {
                 if(!flag) {
-                    oczoom.closeLightBox();
+                    dvzoom.closeLightBox();
                 }
             }
         });
@@ -79,7 +79,7 @@ var oczoom = {
     'plusSlides' : function (n) {
         var position = parseInt($('#light-box-position').val());
 
-        oczoom.showSlides(position += n);
+        dvzoom.showSlides(position += n);
     },
 
     'closeLightBox': function () {
