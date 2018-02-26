@@ -1,0 +1,2 @@
+<?php
+$_['fdemo'] = "FDemo";
