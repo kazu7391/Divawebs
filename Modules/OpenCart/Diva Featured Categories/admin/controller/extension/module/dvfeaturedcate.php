@@ -211,7 +211,6 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller {
             $data['showsubnumber'] = 4;
         }
 
-        /* Product Settings */
         if (isset($this->request->post['use_cate_second_image'])) {
             $data['use_cate_second_image'] = $this->request->post['use_cate_second_image'];
         } elseif (!empty($module_info)) {
@@ -220,12 +219,31 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller {
             $data['use_cate_second_image'] = '';
         }
 
-        if (isset($this->request->post['showlabel'])) {
-            $data['showlabel'] = $this->request->post['showlabel'];
+        /* Product Settings */
+        /* Featured Categories */
+        $data['user_token'] = $this->session->data['user_token'];
+
+        $this->load->model('catalog/category');
+
+        if (isset($this->request->post['pro_fcategory'])) {
+            $fcategories = $this->request->post['pro_fcategory'];
         } elseif (!empty($module_info)) {
-            $data['showlabel'] = $module_info['showlabel'];
+            $fcategories = $module_info['pro_fcategory'];
         } else {
-            $data['showlabel'] = '';
+            $fcategories = array();
+        }
+
+        $data['pro_fcategories'] = array();
+
+        foreach ($fcategories as $category_id) {
+            $category_info = $this->model_catalog_category->getCategory($category_id);
+
+            if ($category_info) {
+                $data['pro_fcategories'][] = array(
+                    'category_id' => $category_info['category_id'],
+                    'name'        => ($category_info['path']) ? $category_info['path'] . ' &gt; ' . $category_info['name'] : $category_info['name']
+                );
+            }
         }
 
         if (isset($this->request->post['showprodes'])) {

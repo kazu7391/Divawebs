@@ -14,6 +14,7 @@ $_['text_success']          = 'Success: You have modified module!';
 $_['text_edit']             = 'Edit Featured Categories Module';
 $_['text_show_cate']        = 'Only show Featured Categories';
 $_['text_show_pro']         = 'Show products by tabs';
+$_['text_choose_fcate']     = 'Choose Featured categories to show its products';
 
 // Entry
 $_['entry_name']            = 'Module Name';
@@ -33,7 +34,7 @@ $_['entry_showdes']         = 'Description';
 $_['entry_showsub']         = 'Child Categories';
 $_['entry_showsubnumber']   = 'Number of Child Categories';
 $_['entry_use_cate_image']  = 'Category Secondary Image';
-$_['entry_showlabel']       = 'Product Label';
+$_['entry_choose_fcates']   = 'Choose Featured categories';
 
 // Error
 $_['error_permission'] = 'Warning: You do not have permission to modify this module!';
