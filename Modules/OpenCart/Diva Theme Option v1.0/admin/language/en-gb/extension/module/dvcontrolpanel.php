@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']        = '<b style="color: #d21f27;"><i><i class="fa fa-magic"></i> DIVA Control Panel</i></b>';
+//$_['heading_title']        = '<b style="color: #d21f27;"><i><i class="fa fa-magic"></i> DIVA Control Panel</i></b>';
 $_['page_title']           = 'DIVA Control Panel';
 
 // Text
@@ -93,6 +93,8 @@ $_['entry_show_wishlist']  = 'Show Wish list Button';
 $_['entry_show_compare']   = 'Show Compare Button';
 $_['entry_show_options']   = 'Show Options';
 $_['entry_product_des']    = 'Product Description';
+$_['entry_custom_css']     = 'Customize Stylesheet';
+$_['entry_custom_js']      = 'Customize Javascript';
 
 //Error
 $_['error_permission']     = 'Warning: You do not have permission to modify Diva Theme!';
