@@ -1,2 +1,2 @@
 <?php
-$_['fdemo'] = "FDemo";
+$_['title'] = "Featured Categories";
