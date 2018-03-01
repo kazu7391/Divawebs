@@ -9,9 +9,11 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller
         $this->load->model('diva/rotateimage');
         $this->load->language('diva/module/dvfeaturedcate');
 
+        $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/swiper.min.css');
+        $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+        $this->document->addScript('catalog/view/javascript/jquery/swiper/js/swiper.jquery.js');
+        
         $data = array();
-
-        $data['demo'] = "demo";
 
         /* Catalog Settings */
         $store_id = $this->config->get('config_store_id');
@@ -114,42 +116,51 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller
             $pagination = false;
         }
 
+        $data['slide_settings'] = array(
+            'items' => $item,
+            'autoplay' => $autoplay,
+            'shownextback' => $nextback,
+            'shownav' => $pagination,
+            'speed' => $speed,
+            'rows' => $rows
+        );
+
         /* Category Settings */
         if(isset($setting['slider']) && $setting['slider']) {
-            $slider = true;
+            $data['use_slider'] = true;
         } else {
-            $slider = false;
+            $data['use_slider'] = false;
         }
 
         if(isset($setting['showcatedes']) && $setting['showcatedes']) {
-            $show_cate_des = true;
+            $data['show_cate_des'] = true;
         } else {
-            $show_cate_des = false;
+            $data['show_cate_des'] = false;
         }
 
         if(isset($setting['showsub']) && $setting['showsub']) {
-            $show_sub = true;
+            $data['show_child'] = true;
         } else {
-            $show_sub = false;
+            $data['show_child'] = false;
         }
 
         if(isset($setting['showsubnumber']) && $setting['showsubnumber']) {
-            $show_child = (int) $setting['showsubnumber'];
+            $data['child_number'] = (int) $setting['showsubnumber'];
         } else {
-            $show_child = 4;
+            $data['child_number'] = 4;
         }
 
         if(isset($setting['use_cate_second_image']) && $setting['use_cate_second_image']) {
-            $use_second_image = true;
+            $data['use_second_img'] = true;
         } else {
-            $use_second_image = false;
+            $data['use_second_img'] = false;
         }
 
         /* Product Settings */
         if(isset($setting['showprodes']) && $setting['showprodes']) {
-            $show_pro_des = true;
+            $data['show_pro_des'] = true;
         } else {
-            $show_pro_des = false;
+            $data['show_pro_des'] = false;
         }
 
         $data['categories'] = array();
@@ -169,7 +180,7 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller
                         $sub_categories[] = array(
                             'category_id' => $sub_category['category_id'],
                             'name' => $sub_category['name'],
-                            'href' => $this->url->link('product/category', 'path='. $sub_category['category_id'])
+                            'href' => $this->url->link('product/category', 'path=' . $_category['category_id'] . '_' . $sub_category['category_id'])
                         );
                     }
 
@@ -178,13 +189,19 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller
                     } else {
                         $secondary_image = $this->model_tool_image->resize('placeholder.png', $setting['width'], $setting['height']);
                     }
+                    
+                    if ($_category['description']) {
+                        $description = utf8_substr(strip_tags(html_entity_decode($_category['description'], ENT_QUOTES, 'UTF-8')), 0, 80) . '..';
+                    } else {
+                        $description = false;
+                    }
 
                     $data['categories'][] = array(
                         'children'			=> $sub_categories,
                         'category_id'  		=> $_category['category_id'],
                         'secondary_image'   => $secondary_image,
                         'name'        		=> $_category['name'],
-                        'description' 		=> utf8_substr(strip_tags(html_entity_decode($_category['description'], ENT_QUOTES, 'UTF-8')), 0, 80) . '..',
+                        'description' 		=> $description,
                         'href'        		=> $this->url->link('product/category', 'path=' . $_category['category_id']),
                     );
                 }
