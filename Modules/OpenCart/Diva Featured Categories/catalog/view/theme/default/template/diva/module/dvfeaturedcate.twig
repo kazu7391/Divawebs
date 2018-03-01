@@ -1,39 +1,38 @@
 <div class="featured-categories-container dv-container">
     <div class="dvmodule-title"><h2>{{ title }}</h2></div>
-    <div class="dv-content swiper-viewport">
+    <div class="dv-content">
         {% if type == "category" %}
-            {% set count, rows = 0, slide_settings.rows %}
-            {% if not rows %}
-                {% set rows = 1 %}
-            {% endif %}
-            <div class="featured-categories-content swiper-container">
-                <div class="swiper-wrapper">
-                    {% for category in categories %}
-                        <div class="swiper-slide category-content">
-                            {% if use_second_img %}
-                                <img src="{{ category.secondary_image }}" alt="" />
-                            {% endif %}
-                            <h4 class="name"><a href="{{ category.href }}">{{ category.name }}</a></h4>
-                            {% if show_cate_des and category.description %}
-                                <p class="category-description">{{ category.description }}</p>
-                            {% endif %}
-                            {% if show_child %}
-                                {% if category.children %}
-                                    {% set child_count = 0 %}
-                                    <ul class="child-featured-categories">
-                                        {% for childcate in category.children %}
-                                            {% if child_count < child_number %}
-                                                <li><a href="{{ childcate.href }}">{{ childcate.name }}</a></li>
-                                            {% endif %}
-                                            {% set child_count = child_count + 1 %}
-                                        {% endfor %}
-                                    </ul>
+            <div class="swiper-viewport">
+                <div class="featured-categories-content swiper-container">
+                    <div class="swiper-wrapper">
+                        {% for category in categories %}
+                            <div class="swiper-slide category-content">
+                                {% if use_second_img %}
+                                    <img src="{{ category.secondary_image }}" alt="{{ category.name }}" />
                                 {% endif %}
-                            {% endif %}
-                        </div>
-                    {% endfor %}
+                                <h4 class="name"><a href="{{ category.href }}">{{ category.name }}</a></h4>
+                                {% if show_cate_des and category.description %}
+                                    <p class="category-description">{{ category.description }}</p>
+                                {% endif %}
+                                {% if show_child %}
+                                    {% if category.children %}
+                                        {% set child_count = 0 %}
+                                        <ul class="child-featured-categories">
+                                            {% for childcate in category.children %}
+                                                {% if child_count < child_number %}
+                                                    <li><a href="{{ childcate.href }}">{{ childcate.name }}</a></li>
+                                                {% endif %}
+                                                {% set child_count = child_count + 1 %}
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
+
             {% if use_slider %}
                 {% if slide_settings.shownav %}
                     <div class="swiper-pagination fcategory-pagination"></div>
@@ -70,7 +69,133 @@
         {% endif %}
 
         {% if type == "product" %}
-            product
+            <div class="featured-category-section">
+                <ul class="nav nav-tabs">
+                    {% for category in categories %}
+                        <li>
+                            <a href="#tab-category-{{ category.category_id }}" data-toggle="tab">
+                                {% if use_second_img %}
+                                    <img src="{{ category.secondary_image }}" alt="{{ category.name }}" />
+                                {% endif %}
+                                {{ category.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="tab-content featured-category-content">
+                    {% for category in categories %}
+                        <div class="tab-pane" id="tab-category-{{ category.category_id }}">
+                            <div class="swiper-viewport">
+                                <div id="products-container-{{ category.category_id }}" class="products-container swiper-container">
+                                    <div class="swiper-wrapper">
+                                        {% for product in category.products %}
+                                            <div class="product-thumb transition swiper-slide">
+                                                <div class="image">
+                                                    <a href="{{ product.href }}">
+                                                        {% if product.rotate_image %}
+                                                            <img src="{{ product.rotate_image }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive rotate-image" />
+                                                        {% endif %}
+                                                        <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" />
+                                                    </a>
+                                                </div>
+                                                <div class="caption">
+                                                    <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
+                                                    <p>{{ product.description }}</p>
+
+                                                    {% if product.rating %}
+                                                        <div class="rating">
+                                                            {% for i in 5 %}
+                                                                {% if product.rating < i %}
+                                                                    <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                                                {% else %}
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </div>
+                                                    {% endif %}
+
+                                                    {% if product.price %}
+                                                        <p class="price">
+                                                            {% if not product.special %}
+                                                                {{ product.price }}
+                                                            {% else %}
+                                                                <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+                                                            {% endif %}
+                                                            {% if product.tax %}
+                                                                <span class="price-tax">{{ text_tax }} {{ product.tax }}</span>
+                                                            {% endif %}
+                                                        </p>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="button-group">
+                                                    <button type="button" onclick="cart.add('{{ product.product_id }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span></button>
+                                                    <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
+                                                    <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% if slide_settings.shownav %}
+                                    <div class="swiper-pagination fcategory-product-pagination-{{ category.category_id }}"></div>
+                                {% endif %}
+
+                                {% if slide_settings.shownextback %}
+                                    <div class="swiper-pager">
+                                        <div class="swiper-button-next swiper-button-next-{{ category.category_id }}"></div>
+                                        <div class="swiper-button-prev swiper-button-prev-{{ category.category_id }}"></div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $('.nav-tabs > li').first().addClass('active');
+                    $('.tab-content > .tab-pane').first().addClass('active');
+
+                    $('.swiper-container').each(function () {
+                         $(this).swiper({
+                             spaceBetween: 20,
+                             {#{% if slide_settings.shownav %}#}
+                             {#pagination: '.fcategory-pagination',#}
+                             {#paginationClickable: true,#}
+                             {#{% endif %}#}
+                             {#{% if slide_settings.shownextback %}#}
+                             {#nextButton: '.swiper-button-next',#}
+                             {#prevButton: '.swiper-button-prev',#}
+                             {#{% endif %}#}
+                             speed: {% if slide_settings.speed %} {{ slide_settings.speed }} {% else %} 3000 {% endif %},
+                             slidesPerView: {{ slide_settings.items }},
+                             slidesPerColumn: {{ slide_settings.rows }},
+                             autoplay: {% if slide_settings.autoplay %} true {% else %} false {% endif %},
+                             loop: false
+                         });
+                    });
+
+                    {#{% for category in categories %}#}
+                    {#$('#products-container-{{ category.category_id }}').swiper({#}
+                        {#spaceBetween: 20,#}
+                        {#{% if slide_settings.shownav %}#}
+                        {#pagination: '.fcategory-product-pagination-{{ category.category_id }}',#}
+                        {#paginationClickable: true,#}
+                        {#{% endif %}#}
+                        {#{% if slide_settings.shownextback %}#}
+                        {#nextButton: '.swiper-button-next-{{ category.category_id }}',#}
+                        {#prevButton: '.swiper-button-prev-{{ category.category_id }}',#}
+                        {#{% endif %}#}
+                        {#speed: {% if slide_settings.speed %} {{ slide_settings.speed }} {% else %} 3000 {% endif %},#}
+                        {#slidesPerView: {{ slide_settings.items }},#}
+                        {#slidesPerColumn: {{ slide_settings.rows }},#}
+                        {#autoplay: {% if slide_settings.autoplay %} true {% else %} false {% endif %},#}
+                        {#loop: false#}
+                    {#});#}
+                    {#{% endfor %}#}
+                });
+            </script>
         {% endif %}
     </div>
 </div>
