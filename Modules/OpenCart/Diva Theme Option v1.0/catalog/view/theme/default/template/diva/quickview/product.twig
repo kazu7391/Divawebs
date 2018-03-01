@@ -33,29 +33,36 @@
                                     </a>
                                 {% endif %}
                             </div>
-                            <div class="additional-images owl-carousel owl-theme">
-                                {% if thumb %}
-                                    <div class="item">
-                                        <a class="cloud-zoom-gallery sub-image" id="product-image-default" href="{{ popup }}" title="{{ heading_title }}"
-                                           rel="useZoom: 'product-cloud-zoom', smallImage: '{{ thumb }}'" data-pos="1">
-                                            <img src="{{ small_image }}" title="{{ heading_title }}" alt="{{ heading_title }}" />
-                                        </a>
+                            <div class="swiper-viewport">
+                                <div class="additional-images swiper-container">
+                                    <div class="swiper-wrapper">
+                                        {% if thumb %}
+                                            <div class="item swiper-slide">
+                                                <a class="cloud-zoom-gallery sub-image" id="product-image-default" href="{{ popup }}" title="{{ heading_title }}"
+                                                   rel="useZoom: 'product-cloud-zoom', smallImage: '{{ thumb }}'" data-pos="1">
+                                                    <img src="{{ small_image }}" title="{{ heading_title }}" alt="{{ heading_title }}" />
+                                                </a>
+                                            </div>
+                                        {% endif %}
+                                        {% if images %}
+                                            {% set img_count = 2 %}
+                                            {% for image in images %}
+                                                <div class="item swiper-slide">
+                                                    <a class="cloud-zoom-gallery sub-image" id="product-image-options-{{ image.product_option_value_id }}" href="{{ image.popup }}" title="{{ heading_title }}"
+                                                       rel="useZoom: 'product-cloud-zoom', smallImage: '{{ image.product_image_option }}'" data-pos="{{ img_count }}">
+                                                        <img src="{{ image.thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" />
+                                                    </a>
+                                                </div>
+                                                {% set img_count = img_count + 1 %}
+                                            {% endfor %}
+                                        {% endif %}
                                     </div>
-                                {% endif %}
-                                {% if images %}
-                                    {% set img_count = 2 %}
-                                    {% for image in images %}
-                                        <div class="item">
-                                            <a class="cloud-zoom-gallery sub-image" id="product-image-options-{{ image.product_option_value_id }}" href="{{ image.popup }}" title="{{ heading_title }}"
-                                               rel="useZoom: 'product-cloud-zoom', smallImage: '{{ image.product_image_option }}'" data-pos="{{ img_count }}">
-                                                <img src="{{ image.thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" />
-                                            </a>
-                                        </div>
-                                        {% set img_count = img_count + 1 %}
-                                    {% endfor %}
-                                {% endif %}
+                                </div>
+                                <div class="swiper-pager">
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-button-prev"></div>
+                                </div>
                             </div>
-
                         {% else %}
                             <div class="product-zoom-image">
                                 {% if thumb %}
@@ -68,27 +75,35 @@
                                     </a>
                                 {% endif %}
                             </div>
-                            <div class="additional-images owl-carousel owl-theme">
-                                {% if thumb %}
-                                    <div class="item">
-                                        <a class="cloud-zoom-gallery sub-image" href="{{ popup }}" title="{{ heading_title }}"
-                                           rel="useZoom: 'product-cloud-zoom', smallImage: '{{ thumb }}'" data-pos="1">
-                                            <img src="{{ small_image }}" title="{{ heading_title }}" alt="{{ heading_title }}" />
-                                        </a>
+                            <div class="swiper-viewport">
+                                <div class="additional-images swiper-container">
+                                    <div class="swiper-wrapper">
+                                        {% if thumb %}
+                                            <div class="item swiper-slide">
+                                                <a class="cloud-zoom-gallery sub-image" href="{{ popup }}" title="{{ heading_title }}"
+                                                   rel="useZoom: 'product-cloud-zoom', smallImage: '{{ thumb }}'" data-pos="1">
+                                                    <img src="{{ small_image }}" title="{{ heading_title }}" alt="{{ heading_title }}" />
+                                                </a>
+                                            </div>
+                                        {% endif %}
+                                        {% if images %}
+                                            {% set img_count = 2 %}
+                                            {% for image in images %}
+                                                <div class="item swiper-slide">
+                                                    <a class="cloud-zoom-gallery sub-image" href="{{ image.popup }}" title="{{ heading_title }}"
+                                                       rel="useZoom: 'product-cloud-zoom', smallImage: '{{ image.product_image_option }}'" data-pos="{{ img_count }}">
+                                                        <img src="{{ image.thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" />
+                                                    </a>
+                                                </div>
+                                                {% set img_count = img_count + 1 %}
+                                            {% endfor %}
+                                        {% endif %}
                                     </div>
-                                {% endif %}
-                                {% if images %}
-                                    {% set img_count = 2 %}
-                                    {% for image in images %}
-                                        <div class="item">
-                                            <a class="cloud-zoom-gallery sub-image" href="{{ image.popup }}" title="{{ heading_title }}"
-                                               rel="useZoom: 'product-cloud-zoom', smallImage: '{{ image.product_image_option }}'" data-pos="{{ img_count }}">
-                                                <img src="{{ image.thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" />
-                                            </a>
-                                        </div>
-                                        {% set img_count = img_count + 1 %}
-                                    {% endfor %}
-                                {% endif %}
+                                </div>
+                                <div class="swiper-pager">
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-button-prev"></div>
+                                </div>
                             </div>
                         {% endif %}
                     {% else %}
@@ -501,7 +516,7 @@
 <script type="text/javascript"><!--
     $('.cloud-zoom, .cloud-zoom-gallery').CloudZoom();
 
-    dvzoom.initAdditionalImagesOwl();
+    dvzoom.initAdditionalImagesSlider();
 
     $('.product-zoom-image').on('click', function () {
         var pos = $('#light-box-position').val();

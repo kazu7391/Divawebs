@@ -427,6 +427,9 @@
                     $this->document->addStyle('catalog/view/theme/default/stylesheet/diva/product/zoom.css');
                 }
 
+                $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/swiper.min.css');
+                $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+                $this->document->addScript('catalog/view/javascript/jquery/swiper/js/swiper.jquery.js');
                 $this->document->addStyle('catalog/view/javascript/diva/cloudzoom/css/cloud-zoom.css');
                 $this->document->addScript('catalog/view/javascript/diva/cloudzoom/cloud-zoom.1.0.2.min.js');
                 $this->document->addScript('catalog/view/javascript/diva/cloudzoom/zoom.js');

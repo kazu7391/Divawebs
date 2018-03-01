@@ -10,34 +10,22 @@ $(document).ready(function () {
         $('#light-box-position').val(pos);
     });
 
-    dvzoom.initAdditionalImagesOwl();
+    dvzoom.initAdditionalImagesSlider();
 });
 
 var dvzoom = {
-    'initAdditionalImagesOwl'  : function () {
-        $('.additional-images').owlCarousel({
-            loop: false,
-            margin: 30,
-            nav: false,
-            dots: false,
-            responsive:{
-                0: {
-                    items: 1
-                },
-                480: {
-                    items: 2
-                },
-                768: {
-                    items: 3
-                },
-                992: {
-                    items: 3
-                },
-                1200: {
-                    items: 4
-                }
-            }
-        });
+    'initAdditionalImagesSlider'  : function () {
+        if($('.additional-images').length) {
+            $('.additional-images').swiper({
+                loop: false,
+                spaceBetween: 30,
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev',
+                speed: 300,
+                slidesPerView: 4,
+                autoPlay: false
+            });
+        }
     },
 
     'openLightBox' : function (position) {
