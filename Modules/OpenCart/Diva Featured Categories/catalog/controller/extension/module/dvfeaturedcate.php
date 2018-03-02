@@ -245,11 +245,6 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller
                     );
                 }
             }
-
-            $alias = str_replace(' ', '_', $setting['name']);
-            $data['category_alias'] = $alias;
-
-            $data['tab_effect'] = 'wiggle';
         }
 
         if ($data['categories']) {
