@@ -12,7 +12,12 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller
         $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/swiper.min.css');
         $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
         $this->document->addScript('catalog/view/javascript/jquery/swiper/js/swiper.jquery.js');
-        
+        if (file_exists('catalog/view/theme/' . $this->config->get('theme_' . $this->config->get('config_theme') . '_directory') . '/stylesheet/oczoom/zoom.css')) {
+            $this->document->addStyle('catalog/view/theme/' . $this->config->get('theme_' . $this->config->get('config_theme') . '_directory') . '/stylesheet/diva/module.css');
+        } else {
+            $this->document->addStyle('catalog/view/theme/default/stylesheet/diva/module.css');
+        }
+
         $data = array();
 
         /* Catalog Settings */
@@ -157,12 +162,6 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller
         }
 
         /* Product Settings */
-        if(isset($setting['showprodes']) && $setting['showprodes']) {
-            $data['show_pro_des'] = true;
-        } else {
-            $data['show_pro_des'] = false;
-        }
-
         $data['categories'] = array();
 
         if($data['type'] == 'category') {
@@ -239,7 +238,7 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller
                         'category_id'  		=> $_category['category_id'],
                         'secondary_image'   => $secondary_image,
                         'name'        		=> $_category['name'],
-                        'description' 		=> utf8_substr(strip_tags(html_entity_decode($_category['description'], ENT_QUOTES, 'UTF-8')), 0, 80) . '..',
+                        'description' 		=> utf8_substr(trim(strip_tags(html_entity_decode($_category['description'], ENT_QUOTES, 'UTF-8'))), 0, 80) . '..',
                         'href'        		=> $this->url->link('product/category', 'path=' . $_category['category_id']),
                         'products'          => $this->getProductFromData($filter_data, $setting)
                     );
@@ -295,6 +294,12 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller
                 $rating = false;
             }
 
+            if(isset($setting['showprodes']) && $setting['showprodes']) {
+                $description = utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..';
+            } else {
+                $description = false;
+            }
+
             $is_new = false;
             if ($new_results) {
                 foreach($new_results as $new_r) {
@@ -326,7 +331,7 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller
                 'special' 	 => $special,
                 'is_new'      => $is_new,
                 'rating'     => $rating,
-                'description' => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
+                'description' => $description,
                 'reviews'    => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
                 'href'    	 => $this->url->link('product/product', 'product_id=' . $result['product_id']),
             );

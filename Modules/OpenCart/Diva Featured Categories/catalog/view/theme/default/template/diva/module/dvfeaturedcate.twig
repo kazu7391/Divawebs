@@ -2,48 +2,47 @@
     <div class="dvmodule-title"><h2>{{ title }}</h2></div>
     <div class="dv-content">
         {% if type == "category" %}
-            <div class="swiper-viewport">
-                <div class="featured-categories-content swiper-container">
-                    <div class="swiper-wrapper">
-                        {% for category in categories %}
-                            <div class="swiper-slide category-content">
-                                {% if use_second_img %}
-                                    <img src="{{ category.secondary_image }}" alt="{{ category.name }}" />
-                                {% endif %}
-                                <h4 class="name"><a href="{{ category.href }}">{{ category.name }}</a></h4>
-                                {% if show_cate_des and category.description %}
-                                    <p class="category-description">{{ category.description }}</p>
-                                {% endif %}
-                                {% if show_child %}
-                                    {% if category.children %}
-                                        {% set child_count = 0 %}
-                                        <ul class="child-featured-categories">
-                                            {% for childcate in category.children %}
-                                                {% if child_count < child_number %}
-                                                    <li><a href="{{ childcate.href }}">{{ childcate.name }}</a></li>
-                                                {% endif %}
-                                                {% set child_count = child_count + 1 %}
-                                            {% endfor %}
-                                        </ul>
-                                    {% endif %}
-                                {% endif %}
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-
             {% if use_slider %}
-                {% if slide_settings.shownav %}
-                    <div class="swiper-pagination fcategory-pagination"></div>
-                {% endif %}
+                <div class="swiper-viewport">
+                    <div class="featured-categories-content swiper-container">
+                        <div class="swiper-wrapper">
+                            {% for category in categories %}
+                                <div class="swiper-slide category-content">
+                                    {% if use_second_img %}
+                                        <img src="{{ category.secondary_image }}" alt="{{ category.name }}" />
+                                    {% endif %}
+                                    <h4 class="name"><a href="{{ category.href }}">{{ category.name }}</a></h4>
+                                    {% if show_cate_des and category.description %}
+                                        <p class="category-description">{{ category.description }}</p>
+                                    {% endif %}
+                                    {% if show_child %}
+                                        {% if category.children %}
+                                            {% set child_count = 0 %}
+                                            <ul class="child-featured-categories">
+                                                {% for childcate in category.children %}
+                                                    {% if child_count < child_number %}
+                                                        <li><a href="{{ childcate.href }}">{{ childcate.name }}</a></li>
+                                                    {% endif %}
+                                                    {% set child_count = child_count + 1 %}
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% if slide_settings.shownav %}
+                        <div class="swiper-pagination fcategory-pagination"></div>
+                    {% endif %}
 
-                {% if slide_settings.shownextback %}
-                <div class="swiper-pager">
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
+                    {% if slide_settings.shownextback %}
+                        <div class="swiper-pager">
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    {% endif %}
                 </div>
-                {% endif %}
 
                 <script>
                     $(document).ready(function() {
@@ -57,14 +56,41 @@
                             nextButton: '.swiper-button-next',
                             prevButton: '.swiper-button-prev',
                             {% endif %}
-                            speed: {% if slide_settings.speed %} {{ slide_settings.speed }} {% else %} 3000 {% endif %},
+                            speed: {% if slide_settings.speed %} {{ slide_settings.speed }} {% else %} 300 {% endif %},
                             slidesPerView: {{ slide_settings.items }},
                             slidesPerColumn: {{ slide_settings.rows }},
-                            autoplay: {% if slide_settings.autoplay %} true {% else %} false {% endif %},
+                            autoplay: {% if slide_settings.autoplay %} 3000 {% else %} false {% endif %},
                             loop: false
                         });
                     });
                 </script>
+            {% else %}
+                <div class="featured-categories-content">
+                    {% for category in categories %}
+                        <div class="category-content">
+                            {% if use_second_img %}
+                                <img src="{{ category.secondary_image }}" alt="{{ category.name }}" />
+                            {% endif %}
+                            <h4 class="name"><a href="{{ category.href }}">{{ category.name }}</a></h4>
+                            {% if show_cate_des and category.description %}
+                                <p class="category-description">{{ category.description }}</p>
+                            {% endif %}
+                            {% if show_child %}
+                                {% if category.children %}
+                                    {% set child_count = 0 %}
+                                    <ul class="child-featured-categories">
+                                        {% for childcate in category.children %}
+                                            {% if child_count < child_number %}
+                                                <li><a href="{{ childcate.href }}">{{ childcate.name }}</a></li>
+                                            {% endif %}
+                                            {% set child_count = child_count + 1 %}
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
             {% endif %}
         {% endif %}
 
@@ -91,17 +117,31 @@
                                         <div class="swiper-wrapper">
                                             {% for product in category.products %}
                                                 <div class="product-thumb transition swiper-slide">
-                                                    <div class="image">
+                                                    <div class="image {% if product.rotate_image %}rotate-image-container{% endif %}">
                                                         <a href="{{ product.href }}">
+                                                            {% if show_module_label %}
+                                                                {% if product.special %}
+                                                                    <span class="pro-label">{{ text_sale }}</span>
+                                                                {% else %}
+                                                                    {% if product.is_new %}
+                                                                        <span class="pro-label">{{ text_new }}</span>
+                                                                    {% endif %}
+                                                                {% endif %}
+                                                            {% endif %}
                                                             {% if product.rotate_image %}
-                                                                <img src="{{ product.rotate_image }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive rotate-image" />
+                                                                <img src="{{ product.rotate_image }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive img-rotate-image" />
                                                             {% endif %}
                                                             <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" />
                                                         </a>
+                                                        {% if show_module_quickview %}
+                                                            <button type="button" title="{{ product.name }}" onclick="dvquickview.ajaxView('{{ product.href }}')"><i class="fa fa-search-plus"></i></button>
+                                                        {% endif %}
                                                     </div>
                                                     <div class="caption">
                                                         <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
-                                                        <p>{{ product.description }}</p>
+                                                        {% if product.description %}
+                                                            <p>{{ product.description }}</p>
+                                                        {% endif %}
 
                                                         {% if product.rating %}
                                                             <div class="rating">
@@ -115,7 +155,7 @@
                                                             </div>
                                                         {% endif %}
 
-                                                        {% if product.price %}
+                                                        {% if show_module_price and product.price %}
                                                             <p class="price">
                                                                 {% if not product.special %}
                                                                     {{ product.price }}
@@ -129,9 +169,17 @@
                                                         {% endif %}
                                                     </div>
                                                     <div class="button-group">
-                                                        <button type="button" onclick="cart.add('{{ product.product_id }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span></button>
-                                                        <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
-                                                        <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>
+                                                        {% if show_module_cart %}
+                                                            <button type="button" onclick="cart.add('{{ product.product_id }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span></button>
+                                                        {% endif %}
+
+                                                        {% if show_module_wishlist %}
+                                                            <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
+                                                        {% endif %}
+
+                                                        {% if show_module_compare %}
+                                                            <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
                                             {% endfor %}
@@ -169,10 +217,10 @@
                         nextButton: '.swiper-button-next-{{ category.category_id }}',
                         prevButton: '.swiper-button-prev-{{ category.category_id }}',
                         {% endif %}
-                        speed: {% if slide_settings.speed %} {{ slide_settings.speed }} {% else %} 3000 {% endif %},
+                        speed: {% if slide_settings.speed %} {{ slide_settings.speed }} {% else %} 300 {% endif %},
                         slidesPerView: {{ slide_settings.items }},
                         slidesPerColumn: {{ slide_settings.rows }},
-                        autoplay: {% if slide_settings.autoplay %} true {% else %} false {% endif %},
+                        autoplay: {% if slide_settings.autoplay %} 3000 {% else %} false {% endif %},
                         loop: false
                     });
                     {% endfor %}
