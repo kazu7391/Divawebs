@@ -1,5 +1,5 @@
 .theme-option-breadcrumb > li:last-child a {
-    color: #d21f27;
+    color: #eb5202;
 }
 .theme-option-container .panel-default {
     border: none;
@@ -24,10 +24,10 @@
 .theme-option-container .font-demo {
     padding: 10px 15px;
     font-size: 16px;
-    border: 1px solid #f5c1bb;
+    border: 1px solid #f7b998;
 }
-.theme-option-container .btn-theme-option { background-color: #d21f27; border-color: #d21f27; }
-.theme-option-container .btn-theme-option:hover { background-color: #b01927; border-color: #a11d4e; }
+.theme-option-container .btn-theme-option {background-color: #eb5202;border-color: #eb5202;}
+.theme-option-container .btn-theme-option:hover {background-color: #d85a01;border-color: #ca5909;}
 .theme-option-container .notification {text-align: center;margin-top: 15px;font-size: 14px;}
 .theme-option-container .notification .fa-warning {color: #f27636;margin-right: 5px;}
 .theme-option-container .btn.toggle-on {background-color: #eb5202;border-color: #eb5202;}
@@ -50,10 +50,10 @@
 }
 .theme-option-container .hoz-ul-sections li.active a, .theme-option-container .hoz-ul-sections li.active a:hover, .theme-option-container .hoz-ul-sections li.active a:focus,
 .theme-option-container .hoz-ul-sections li a:hover, .theme-option-container .hoz-ul-sections li a:focus {
-    background-color: #eb5202;
+    background-color: #cc4804;
     color: #fff;
     border: none;
-    border-bottom: 1px solid #eb5202;
+    border-bottom: 1px solid #cc4804;
     border-radius: 0;
 }
 .theme-option-container .col-left {padding-right: 0;}
@@ -84,14 +84,14 @@
 /*}*/
 
 .theme-option-pagination .pagination > li > a, .theme-option-pagination .pagination > li > span {
-    color: #d21f27;
+    color: #eb5202;
 }
 .theme-option-pagination .pagination > .active > a, .theme-option-pagination .pagination > .active > span,
 .theme-option-pagination .pagination > .active > a:hover, .theme-option-pagination .pagination > .active > span:hover,
 .theme-option-pagination .pagination > .active > a:focus, .theme-option-pagination .pagination > .active > span:focus {
     color: #fff;
-    background-color: #d21f27;
-    border-color:  #d21f27;
+    background-color: #eb5202;
+    border-color: #eb5202;
 }
 /*.theme-option-container .hoz-ul-sections {*/
 /*background-color: #e8e8e8;*/
