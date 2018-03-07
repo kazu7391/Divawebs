@@ -1,11 +1,11 @@
 <?php
 // Heading
-$_['heading_title']         = '<b style="color: #ff7a05;"><i><i class="fa fa-cubes"></i> DIVA Layout Builder</i></b>';
-$_['heading_primary_title'] = '<b style="color: #ff7a05;"><i><i class="fa fa-cubes"></i> DIVA Layout Builder</i></b>';
+$_['heading_title']         = '<b style="color: #eb5202;"><i><i class="fa fa-cubes"></i> DIVA Layout Builder</i></b>';
+$_['heading_primary_title'] = '<b style="color: #eb5202;"><i><i class="fa fa-cubes"></i> DIVA Layout Builder</i></b>';
 $_['page_title']            = "DIVA Layout Builder";
 
 // Text
-$_['text_success']          = "Success: You have modified DIVA Layout Builder module!";
+$_['text_success']          = "Success: You have modified module!";
 $_['text_extension']        = 'Extensions';
 $_['text_primary_edit']     = "Edit DIVA Layout Builder";
 $_['text_columns']          = "Columns";
@@ -20,9 +20,9 @@ $_['text_number_max_over']  = "The number of columns must be less than 12";
 $_['text_number_min_over']  = "The number of columns must be more than 0";
 
 // Entry
-$_['entry_name']        = "Content Name";
+$_['entry_name']        = "Module Name";
 $_['entry_status']      = "Status";
 
 // Error
-$_['error_permission']  = 'Warning: You do not have permission to modify DIVA Layout Builder module!';
-$_['error_name']        = 'Content Name must be between 3 and 64 characters!';
+$_['error_permission']  = 'Warning: You do not have permission to modify this module!';
+$_['error_name']        = 'Module Name must be between 3 and 64 characters!';
