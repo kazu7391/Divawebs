@@ -7,7 +7,7 @@
 }
 .theme-option-container .panel-default .panel-heading {
     color: #fff;
-    border-color: #d21f27;
+    border-color: #eb5202;
     background: #000;
     border-width: 2px;
     border-radius: 0;
@@ -30,8 +30,8 @@
 .theme-option-container .btn-theme-option:hover { background-color: #b01927; border-color: #a11d4e; }
 .theme-option-container .notification {text-align: center;margin-top: 15px;font-size: 14px;}
 .theme-option-container .notification .fa-warning {color: #f27636;margin-right: 5px;}
-.theme-option-container .btn.toggle-on { background-color: #d21f27; border-color: #d21f27; }
-.theme-option-container .btn-primary { background-color: #d21f27; border-color: #d21f27; }
+.theme-option-container .btn.toggle-on {background-color: #eb5202;border-color: #eb5202;}
+.theme-option-container .btn-primary {background-color: #eb5202;border-color: #eb5202;}
 .theme-option-container .hoz-ul-sections {
     background-color: #e8e8e8;
     margin: 15px -15px 15px -15px;
@@ -50,10 +50,10 @@
 }
 .theme-option-container .hoz-ul-sections li.active a, .theme-option-container .hoz-ul-sections li.active a:hover, .theme-option-container .hoz-ul-sections li.active a:focus,
 .theme-option-container .hoz-ul-sections li a:hover, .theme-option-container .hoz-ul-sections li a:focus {
-    background-color: #9e2d33;
+    background-color: #eb5202;
     color: #fff;
     border: none;
-    border-bottom: 1px solid #d21f27;
+    border-bottom: 1px solid #eb5202;
     border-radius: 0;
 }
 .theme-option-container .col-left {padding-right: 0;}
