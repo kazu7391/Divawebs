@@ -32,7 +32,7 @@
 - Blog		(fa-ticket)
 - Feature Category (fa-tag) (Done)
 - Instagram	(fa-instagram)
-- Layout Builder  (fa-cubes) (edit CSS)
+- Layout Builder  (fa-cubes) (editing CSS)
 - Mega Menu	(fa-bars) 
 - New Products Page (fa-sort-amount-desc)
 - Search Category  (fa-search)
