@@ -131,7 +131,7 @@
     vertical-align: top;
     padding: 0 30px;
 }
-.row-content .column-area { height: auto; padding-left: 10px; padding-right: 10px; }
+.row-content .column-area {height: auto;padding-left: 10px;padding-right: 10px;/* border: 1px dashed; */border-radius: 10px;}
 .row-content .droparea {
     float: left;
     height: 100%;
@@ -143,6 +143,7 @@
     padding: 5px 10px;
     width: 100%;
     min-height: 45px;
+    border: 1px dashed;
 }
 .row-content .droparea .ui-state-highlight {
     float: left;
