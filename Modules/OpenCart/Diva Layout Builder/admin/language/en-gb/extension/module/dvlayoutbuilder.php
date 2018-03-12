@@ -1,7 +1,7 @@
 <?php
 // Heading
-$_['heading_title']         = '<b style="color: #eb5202;"><i><i class="fa fa-cubes"></i> DIVA Layout Builder</i></b>';
-$_['heading_primary_title'] = '<b style="color: #eb5202;"><i><i class="fa fa-cubes"></i> DIVA Layout Builder</i></b>';
+$_['heading_title']         = '<b style="color: #eb5202;"><i><i class="fa fa-puzzle-piece"></i> DIVA Layout Builder</i></b>';
+$_['heading_primary_title'] = '<b style="color: #eb5202;"><i><i class="fa fa-puzzle-piece"></i> DIVA Layout Builder</i></b>';
 $_['page_title']            = "DIVA Layout Builder";
 
 // Text
