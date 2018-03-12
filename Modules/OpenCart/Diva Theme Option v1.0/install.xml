@@ -30,10 +30,10 @@
                 );
             }
 
-            if($this->user->hasPermission('access', 'extension/module/ocmegamenu')) {
+            if($this->user->hasPermission('access', 'diva/ultimatemenu')) {
                 $adminmenu[] = array(
                     'name'     => $this->language->get('text_advance_menu'),
-                    'href'     => $this->url->link('extension/module/ocmegamenu/menuList', 'user_token=' . $this->session->data['user_token'], true),
+                    'href'     => $this->url->link('diva/ultimatemenu/menuList', 'user_token=' . $this->session->data['user_token'], true),
                     'children' => array()
                 );
             }

@@ -194,6 +194,9 @@ class ModelDivaControlpanel extends Model
 	            `title` VARCHAR(255) NOT NULL,
 	            PRIMARY KEY (`sub_menu_item_id`,`language_id`)
 		) DEFAULT COLLATE=utf8_general_ci;");
+
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'diva/ultimatemenu');
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'diva/ultimatemenu');
     }
 
     public function setupFeaturedCategories() {
