@@ -3,7 +3,7 @@ class ModelDivaUltimatemenu extends Model
 {
     public function createMenuTable() {
         $this->db->query("
-			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "megamenu` (
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvmegamenu` (
 			    `menu_id` INT(11) NOT NULL AUTO_INCREMENT,
 	            `status` TINYINT(1) NOT NULL DEFAULT '0',
 	            `name` VARCHAR(255) NOT NULL,
@@ -12,7 +12,7 @@ class ModelDivaUltimatemenu extends Model
 		) DEFAULT COLLATE=utf8_general_ci;");
 
         $this->db->query("
-			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "megamenu_top_item` (
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvmegamenu_top_item` (
 			    `menu_item_id` INT(11) NOT NULL AUTO_INCREMENT,
 			    `menu_id` INT(11) NOT NULL,
 	            `status` TINYINT(1) NOT NULL DEFAULT '0',
@@ -33,7 +33,7 @@ class ModelDivaUltimatemenu extends Model
 		) DEFAULT COLLATE=utf8_general_ci;");
 
         $this->db->query("
-			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "megamenu_top_item_description` (
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvmegamenu_top_item_description` (
 			    `menu_item_id` INT(11) NOT NULL,
 			    `language_id` int(11) NOT NULL,
 	            `title` VARCHAR(255) NOT NULL,
@@ -41,7 +41,7 @@ class ModelDivaUltimatemenu extends Model
 		) DEFAULT COLLATE=utf8_general_ci;");
 
         $this->db->query("
-			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "megamenu_sub_item` (
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvmegamenu_sub_item` (
 			    `sub_menu_item_id` INT(11) NOT NULL AUTO_INCREMENT,
 			    `parent_menu_item_id` INT(11) NOT NULL,
 			    `level` INT(11) NOT NULL,
@@ -53,16 +53,19 @@ class ModelDivaUltimatemenu extends Model
 		) DEFAULT COLLATE=utf8_general_ci;");
 
         $this->db->query("
-			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "megamenu_sub_item_description` (
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvmegamenu_sub_item_description` (
 			    `sub_menu_item_id` INT(11) NOT NULL,
 			    `language_id` int(11) NOT NULL,
 	            `title` VARCHAR(255) NOT NULL,
 	            PRIMARY KEY (`sub_menu_item_id`,`language_id`)
 		) DEFAULT COLLATE=utf8_general_ci;");
+
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'diva/ultimatemenu');
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'diva/ultimatemenu');
     }
 
     public function addMenu($data) {
-        $sql = "INSERT INTO " . DB_PREFIX . "megamenu SET status = '" . (int)$data['status'] . "', name = '" . $this->db->escape($data['name']) . "', menu_type = '" . $this->db->escape($data['menu_type']) . "'";
+        $sql = "INSERT INTO " . DB_PREFIX . "dvmegamenu SET status = '" . (int)$data['status'] . "', name = '" . $this->db->escape($data['name']) . "', menu_type = '" . $this->db->escape($data['menu_type']) . "'";
 
         $this->db->query($sql);
 
@@ -71,32 +74,32 @@ class ModelDivaUltimatemenu extends Model
         $top_items = $this->getTopItems(0);
 
         foreach($top_items as $top_item) {
-            $sql_update = "UPDATE " . DB_PREFIX . "megamenu_top_item SET menu_id = '" . (int) $menu_id . "' WHERE menu_item_id = '" . (int) $top_item['menu_item_id'] . "'";
+            $sql_update = "UPDATE " . DB_PREFIX . "dvmegamenu_top_item SET menu_id = '" . (int) $menu_id . "' WHERE menu_item_id = '" . (int) $top_item['menu_item_id'] . "'";
 
             $this->db->query($sql_update);
         }
     }
 
     public function editMenu($menu_id, $data) {
-        $sql_update = "UPDATE " . DB_PREFIX . "megamenu SET status = '" . (int)$data['status'] . "', name = '". $this->db->escape($data['name']) ."', menu_type = '" . $this->db->escape($data['menu_type']) . "' WHERE menu_id = '" . (int) $menu_id . "'";
+        $sql_update = "UPDATE " . DB_PREFIX . "dvmegamenu SET status = '" . (int)$data['status'] . "', name = '". $this->db->escape($data['name']) ."', menu_type = '" . $this->db->escape($data['menu_type']) . "' WHERE menu_id = '" . (int) $menu_id . "'";
 
         $this->db->query($sql_update);
     }
 
     public function deleteMenu($menu_id) {
-        $this->db->query("DELETE FROM " . DB_PREFIX . "megamenu_top_item WHERE menu_id = '" . (int)$menu_id . "'");
-        $this->db->query("DELETE FROM " . DB_PREFIX . "megamenu WHERE menu_id = '" . (int)$menu_id . "'");
+        $this->db->query("DELETE FROM " . DB_PREFIX . "dvmegamenu_top_item WHERE menu_id = '" . (int)$menu_id . "'");
+        $this->db->query("DELETE FROM " . DB_PREFIX . "dvmegamenu WHERE menu_id = '" . (int)$menu_id . "'");
     }
 
     public function addTopItem($data) {
-        $sql = "INSERT INTO ". DB_PREFIX . "megamenu_top_item SET status = '" . (int)$data['status'] . "', menu_id = '" . (int)$data['menu_id'] . "', has_title = '" . (int)$data['has_title'] . "', has_link = '" . (int)$data['has_link'] . "', has_child = '" . (int)$data['has_child'] . "', category_id = '" . (int)$data['category_id'] . "', position = '" . (int)$data['position'] . "', name = '" . $this->db->escape($data['name']) . "', link = '" . $this->db->escape($data['link']) . "', icon = '" . $this->db->escape($data['icon']) . "', item_align = '" . $this->db->escape($data['item_align']) . "', sub_menu_type = '" . $this->db->escape($data['sub_menu_type']) . "', sub_menu_content_type = '" . $this->db->escape($data['sub_menu_content_type']) . "', sub_menu_content_columns = '" . (int)$data['sub_menu_content_columns'] . "', sub_menu_content = '" . $this->db->escape(json_encode($data['sub_menu_content'])) . "'";
+        $sql = "INSERT INTO ". DB_PREFIX . "dvmegamenu_top_item SET status = '" . (int)$data['status'] . "', menu_id = '" . (int)$data['menu_id'] . "', has_title = '" . (int)$data['has_title'] . "', has_link = '" . (int)$data['has_link'] . "', has_child = '" . (int)$data['has_child'] . "', category_id = '" . (int)$data['category_id'] . "', position = '" . (int)$data['position'] . "', name = '" . $this->db->escape($data['name']) . "', link = '" . $this->db->escape($data['link']) . "', icon = '" . $this->db->escape($data['icon']) . "', item_align = '" . $this->db->escape($data['item_align']) . "', sub_menu_type = '" . $this->db->escape($data['sub_menu_type']) . "', sub_menu_content_type = '" . $this->db->escape($data['sub_menu_content_type']) . "', sub_menu_content_columns = '" . (int)$data['sub_menu_content_columns'] . "', sub_menu_content = '" . $this->db->escape(json_encode($data['sub_menu_content'])) . "'";
 
         $this->db->query($sql);
 
         $menu_item_id = $this->db->getLastId();
 
         foreach ($data['title'] as $language_id => $title) {
-            $sql_title = "INSERT INTO " . DB_PREFIX . "megamenu_top_item_description SET language_id = '" . (int) $language_id . "', menu_item_id = '" . (int) $menu_item_id . "', title = '" . $this->db->escape($title) . "'";
+            $sql_title = "INSERT INTO " . DB_PREFIX . "dvmegamenu_top_item_description SET language_id = '" . (int) $language_id . "', menu_item_id = '" . (int) $menu_item_id . "', title = '" . $this->db->escape($title) . "'";
 
             $this->db->query($sql_title);
         }
@@ -105,29 +108,29 @@ class ModelDivaUltimatemenu extends Model
     }
 
     public function editTopItem($data, $menu_item_id) {
-        $sql = "UPDATE ". DB_PREFIX . "megamenu_top_item SET status = '" . (int)$data['status'] . "', menu_id = '" . (int)$data['menu_id'] . "', has_title = '" . (int)$data['has_title'] . "', has_link = '" . (int)$data['has_link'] . "', has_child = '" . (int)$data['has_child'] . "', category_id = '" . (int)$data['category_id'] . "', position = '" . (int)$data['position'] . "', name = '" . $this->db->escape($data['name']) . "', link = '" . $this->db->escape($data['link']) . "', icon = '" . $this->db->escape($data['icon']) . "', item_align = '" . $this->db->escape($data['item_align']) . "', sub_menu_type = '" . $this->db->escape($data['sub_menu_type']) . "', sub_menu_content_type = '" . $this->db->escape($data['sub_menu_content_type']) . "', sub_menu_content_columns = '" . (int)$data['sub_menu_content_columns'] . "', sub_menu_content = '" . $this->db->escape(json_encode($data['sub_menu_content'])) . "' WHERE menu_item_id = '". (int) $menu_item_id."'";
+        $sql = "UPDATE ". DB_PREFIX . "dvmegamenu_top_item SET status = '" . (int)$data['status'] . "', menu_id = '" . (int)$data['menu_id'] . "', has_title = '" . (int)$data['has_title'] . "', has_link = '" . (int)$data['has_link'] . "', has_child = '" . (int)$data['has_child'] . "', category_id = '" . (int)$data['category_id'] . "', position = '" . (int)$data['position'] . "', name = '" . $this->db->escape($data['name']) . "', link = '" . $this->db->escape($data['link']) . "', icon = '" . $this->db->escape($data['icon']) . "', item_align = '" . $this->db->escape($data['item_align']) . "', sub_menu_type = '" . $this->db->escape($data['sub_menu_type']) . "', sub_menu_content_type = '" . $this->db->escape($data['sub_menu_content_type']) . "', sub_menu_content_columns = '" . (int)$data['sub_menu_content_columns'] . "', sub_menu_content = '" . $this->db->escape(json_encode($data['sub_menu_content'])) . "' WHERE menu_item_id = '". (int) $menu_item_id."'";
 
         $this->db->query($sql);
 
-        $sql_reset = "DELETE FROM " . DB_PREFIX . "megamenu_top_item_description WHERE menu_item_id = '" . (int) $menu_item_id . "'";
+        $sql_reset = "DELETE FROM " . DB_PREFIX . "dvmegamenu_top_item_description WHERE menu_item_id = '" . (int) $menu_item_id . "'";
 
         $this->db->query($sql_reset);
 
         foreach ($data['title'] as $language_id => $title) {
-            $sql_title = "INSERT INTO " . DB_PREFIX . "megamenu_top_item_description SET language_id = '" . (int) $language_id . "', menu_item_id = '" . (int) $menu_item_id . "', title = '" . $this->db->escape($title) . "'";
+            $sql_title = "INSERT INTO " . DB_PREFIX . "dvmegamenu_top_item_description SET language_id = '" . (int) $language_id . "', menu_item_id = '" . (int) $menu_item_id . "', title = '" . $this->db->escape($title) . "'";
 
             $this->db->query($sql_title);
         }
     }
 
     public function editTopItemPosition($position, $menu_item_id) {
-        $sql = "UPDATE ". DB_PREFIX . "megamenu_top_item SET position = '" . (int) $position . "' WHERE menu_item_id = '". (int) $menu_item_id."'";
+        $sql = "UPDATE ". DB_PREFIX . "dvmegamenu_top_item SET position = '" . (int) $position . "' WHERE menu_item_id = '". (int) $menu_item_id."'";
 
         $this->db->query($sql);
     }
 
     public function deleteTopItem($menu_item_id) {
-        $sql = "SELECT * FROM `" . DB_PREFIX . "megamenu_sub_item` WHERE parent_menu_item_id = '" . (int) $menu_item_id . "'";
+        $sql = "SELECT * FROM `" . DB_PREFIX . "dvmegamenu_sub_item` WHERE parent_menu_item_id = '" . (int) $menu_item_id . "'";
 
         $query = $this->db->query($sql);
 
@@ -135,17 +138,17 @@ class ModelDivaUltimatemenu extends Model
             $this->deleteSubItem($item['sub_menu_item_id']);
         }
 
-        $sql = "DELETE FROM `" . DB_PREFIX . "megamenu_top_item_description` WHERE menu_item_id = '" . (int) $menu_item_id . "'";
+        $sql = "DELETE FROM `" . DB_PREFIX . "dvmegamenu_top_item_description` WHERE menu_item_id = '" . (int) $menu_item_id . "'";
 
         $this->db->query($sql);
 
-        $sql = "DELETE FROM `" . DB_PREFIX . "megamenu_top_item` WHERE menu_item_id = '" . (int) $menu_item_id . "'";
+        $sql = "DELETE FROM `" . DB_PREFIX . "dvmegamenu_top_item` WHERE menu_item_id = '" . (int) $menu_item_id . "'";
 
         $this->db->query($sql);
     }
 
     public function deleteTopItemByMenu($menu_id) {
-        $sql = "SELECT * FROM `" . DB_PREFIX . "megamenu_top_item` WHERE menu_id = '" . (int) $menu_id . "'";
+        $sql = "SELECT * FROM `" . DB_PREFIX . "dvmegamenu_top_item` WHERE menu_id = '" . (int) $menu_id . "'";
 
         $query = $this->db->query($sql);
 
@@ -159,14 +162,14 @@ class ModelDivaUltimatemenu extends Model
     }
 
     public function addSubItem($data) {
-        $sql = "INSERT INTO ". DB_PREFIX . "megamenu_sub_item SET status = '" . (int) $data['status'] . "', parent_menu_item_id = '" . (int) $data['parent_menu_item_id'] . "', level = '" . (int)$data['level'] . "', position = '" . (int)$data['position'] . "', name = '" . $this->db->escape($data['name']) . "', link = '" . $this->db->escape($data['link']) . "'";
+        $sql = "INSERT INTO ". DB_PREFIX . "dvmegamenu_sub_item SET status = '" . (int) $data['status'] . "', parent_menu_item_id = '" . (int) $data['parent_menu_item_id'] . "', level = '" . (int)$data['level'] . "', position = '" . (int)$data['position'] . "', name = '" . $this->db->escape($data['name']) . "', link = '" . $this->db->escape($data['link']) . "'";
 
         $this->db->query($sql);
 
         $sub_item_id = $this->db->getLastId();
 
         foreach ($data['title'] as $language_id => $title) {
-            $sql_title = "INSERT INTO " . DB_PREFIX . "megamenu_sub_item_description SET language_id = '" . (int) $language_id . "', sub_menu_item_id = '" . (int) $sub_item_id . "', title = '" . $this->db->escape($title) . "'";
+            $sql_title = "INSERT INTO " . DB_PREFIX . "dvmegamenu_sub_item_description SET language_id = '" . (int) $language_id . "', sub_menu_item_id = '" . (int) $sub_item_id . "', title = '" . $this->db->escape($title) . "'";
 
             $this->db->query($sql_title);
         }
@@ -174,7 +177,7 @@ class ModelDivaUltimatemenu extends Model
         $level = (int) $data['level'];
 
         if($level == 2) {
-            $sqlTopChild = "UPDATE ". DB_PREFIX . "megamenu_top_item SET has_child = '1' WHERE menu_item_id = '" . (int) $data['parent_menu_item_id'] . "'";
+            $sqlTopChild = "UPDATE ". DB_PREFIX . "dvmegamenu_top_item SET has_child = '1' WHERE menu_item_id = '" . (int) $data['parent_menu_item_id'] . "'";
 
             $this->db->query($sqlTopChild);
         }
@@ -183,53 +186,53 @@ class ModelDivaUltimatemenu extends Model
     }
 
     public function editSubItem($data, $sub_item_id) {
-        $sql = "UPDATE ". DB_PREFIX . "megamenu_sub_item SET status = '" . (int)$data['status'] . "', parent_menu_item_id = '" . (int)$data['parent_menu_item_id'] . "', level = '" . (int)$data['level'] . "', position = '" . (int)$data['position'] . "', name = '" . $this->db->escape($data['name']) . "', link = '" . $this->db->escape($data['link']) . "' WHERE sub_menu_item_id = '". (int) $sub_item_id."'";
+        $sql = "UPDATE ". DB_PREFIX . "dvmegamenu_sub_item SET status = '" . (int)$data['status'] . "', parent_menu_item_id = '" . (int)$data['parent_menu_item_id'] . "', level = '" . (int)$data['level'] . "', position = '" . (int)$data['position'] . "', name = '" . $this->db->escape($data['name']) . "', link = '" . $this->db->escape($data['link']) . "' WHERE sub_menu_item_id = '". (int) $sub_item_id."'";
 
         $this->db->query($sql);
 
-        $sql = "DELETE FROM `" . DB_PREFIX . "megamenu_sub_item_description` WHERE sub_menu_item_id = '" . (int) $sub_item_id. "'";
+        $sql = "DELETE FROM `" . DB_PREFIX . "dvmegamenu_sub_item_description` WHERE sub_menu_item_id = '" . (int) $sub_item_id. "'";
 
         $this->db->query($sql);
 
         foreach ($data['title'] as $language_id => $title) {
-            $sql_title = "INSERT INTO " . DB_PREFIX . "megamenu_sub_item_description SET language_id = '" . (int) $language_id . "', sub_menu_item_id = '" . (int) $sub_item_id . "', title = '" . $this->db->escape($title) . "'";
+            $sql_title = "INSERT INTO " . DB_PREFIX . "dvmegamenu_sub_item_description SET language_id = '" . (int) $language_id . "', sub_menu_item_id = '" . (int) $sub_item_id . "', title = '" . $this->db->escape($title) . "'";
 
             $this->db->query($sql_title);
         }
     }
 
     public function editSubItemPosition($position, $sub_menu_id) {
-        $sql = "UPDATE ". DB_PREFIX . "megamenu_sub_item SET position = '" . (int) $position . "' WHERE sub_menu_item_id = '". (int) $sub_menu_id."'";
+        $sql = "UPDATE ". DB_PREFIX . "dvmegamenu_sub_item SET position = '" . (int) $position . "' WHERE sub_menu_item_id = '". (int) $sub_menu_id."'";
 
         $this->db->query($sql);
     }
 
     public function deleteSubItem($sub_item_id) {
-        $sql = "SELECT * FROM `" . DB_PREFIX . "megamenu_sub_item` WHERE parent_menu_item_id = '" . (int) $sub_item_id . "'";
+        $sql = "SELECT * FROM `" . DB_PREFIX . "dvmegamenu_sub_item` WHERE parent_menu_item_id = '" . (int) $sub_item_id . "'";
 
         $query = $this->db->query($sql);
 
         foreach($query->rows as $item) {
-            $sql = "DELETE FROM `" . DB_PREFIX . "megamenu_sub_item_description` WHERE sub_menu_item_id = '" . (int) $item['sub_menu_item_id']. "'";
+            $sql = "DELETE FROM `" . DB_PREFIX . "dvmegamenu_sub_item_description` WHERE sub_menu_item_id = '" . (int) $item['sub_menu_item_id']. "'";
 
             $this->db->query($sql);
 
-            $sql = "DELETE FROM `" . DB_PREFIX . "megamenu_sub_item` WHERE sub_menu_item_id = '" . (int) $item['sub_menu_item_id'] . "'";
+            $sql = "DELETE FROM `" . DB_PREFIX . "dvmegamenu_sub_item` WHERE sub_menu_item_id = '" . (int) $item['sub_menu_item_id'] . "'";
 
             $this->db->query($sql);
         }
 
-        $sql = "DELETE FROM `" . DB_PREFIX . "megamenu_sub_item_description` WHERE sub_menu_item_id = '" . (int) $sub_item_id . "'";
+        $sql = "DELETE FROM `" . DB_PREFIX . "dvmegamenu_sub_item_description` WHERE sub_menu_item_id = '" . (int) $sub_item_id . "'";
 
         $this->db->query($sql);
 
-        $sql = "DELETE FROM `" . DB_PREFIX . "megamenu_sub_item` WHERE sub_menu_item_id = '" . (int) $sub_item_id . "'";
+        $sql = "DELETE FROM `" . DB_PREFIX . "dvmegamenu_sub_item` WHERE sub_menu_item_id = '" . (int) $sub_item_id . "'";
 
         $this->db->query($sql);
     }
 
     public function getTopItems($menu_id) {
-        $sql = "SELECT DISTINCT * FROM `" . DB_PREFIX . "megamenu_top_item` m WHERE m.menu_id = '". (int) $menu_id ."' ORDER BY m.position ASC";
+        $sql = "SELECT DISTINCT * FROM `" . DB_PREFIX . "dvmegamenu_top_item` m WHERE m.menu_id = '". (int) $menu_id ."' ORDER BY m.position ASC";
 
         $query = $this->db->query($sql);
 
@@ -237,7 +240,7 @@ class ModelDivaUltimatemenu extends Model
     }
 
     public function getTopItemById($menu_item_id) {
-        $sql = "SELECT DISTINCT * FROM `" . DB_PREFIX . "megamenu_top_item` m LEFT JOIN `" . DB_PREFIX . "megamenu_top_item_description` md ON (m.menu_item_id = md.menu_item_id) WHERE m.menu_item_id = '". (int) $menu_item_id ."' AND md.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+        $sql = "SELECT DISTINCT * FROM `" . DB_PREFIX . "dvmegamenu_top_item` m LEFT JOIN `" . DB_PREFIX . "dvmegamenu_top_item_description` md ON (m.menu_item_id = md.menu_item_id) WHERE m.menu_item_id = '". (int) $menu_item_id ."' AND md.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
         $query = $this->db->query($sql);
 
@@ -247,7 +250,7 @@ class ModelDivaUltimatemenu extends Model
     public function getTopItemDescriptionById($menu_item_id) {
         $menu_description_data = array();
 
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "megamenu_top_item_description WHERE menu_item_id = '" . (int)$menu_item_id . "'");
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "dvmegamenu_top_item_description WHERE menu_item_id = '" . (int)$menu_item_id . "'");
 
         foreach ($query->rows as $result) {
             $menu_description_data[$result['language_id']] = $result['title'];
@@ -257,7 +260,7 @@ class ModelDivaUltimatemenu extends Model
     }
 
     public function getSubItems($parent_item_id, $level) {
-        $sql = "SELECT DISTINCT * FROM `" . DB_PREFIX . "megamenu_sub_item` m WHERE m.parent_menu_item_id = '". (int) $parent_item_id ."' AND m.level = '" . (int) $level . "' ORDER BY m.position ASC";
+        $sql = "SELECT DISTINCT * FROM `" . DB_PREFIX . "dvmegamenu_sub_item` m WHERE m.parent_menu_item_id = '". (int) $parent_item_id ."' AND m.level = '" . (int) $level . "' ORDER BY m.position ASC";
 
         $query = $this->db->query($sql);
 
@@ -265,7 +268,7 @@ class ModelDivaUltimatemenu extends Model
     }
 
     public function getSubItemById($sub_item_id) {
-        $sql = "SELECT DISTINCT * FROM `" . DB_PREFIX . "megamenu_sub_item` m LEFT JOIN `" . DB_PREFIX . "megamenu_sub_item_description` md ON (m.sub_menu_item_id = md.sub_menu_item_id) WHERE m.sub_menu_item_id = '". (int) $sub_item_id ."' AND md.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+        $sql = "SELECT DISTINCT * FROM `" . DB_PREFIX . "dvmegamenu_sub_item` m LEFT JOIN `" . DB_PREFIX . "dvmegamenu_sub_item_description` md ON (m.sub_menu_item_id = md.sub_menu_item_id) WHERE m.sub_menu_item_id = '". (int) $sub_item_id ."' AND md.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
         $query = $this->db->query($sql);
 
@@ -275,7 +278,7 @@ class ModelDivaUltimatemenu extends Model
     public function getSubItemDescriptionById($sub_item_id) {
         $menu_description_data = array();
 
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "megamenu_sub_item_description WHERE sub_menu_item_id = '" . (int) $sub_item_id . "'");
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "dvmegamenu_sub_item_description WHERE sub_menu_item_id = '" . (int) $sub_item_id . "'");
 
         foreach ($query->rows as $result) {
             $menu_description_data[$result['language_id']] = $result['title'];
@@ -285,7 +288,7 @@ class ModelDivaUltimatemenu extends Model
     }
 
     public function getMenu($menu_id) {
-        $sql = "SELECT * FROM `" . DB_PREFIX . "megamenu` WHERE menu_id = '" . (int)$menu_id . "'";
+        $sql = "SELECT * FROM `" . DB_PREFIX . "dvmegamenu` WHERE menu_id = '" . (int)$menu_id . "'";
 
         $query = $this->db->query($sql);
 
@@ -293,7 +296,7 @@ class ModelDivaUltimatemenu extends Model
     }
 
     public function getMenuList($data = array()) {
-        $sql = "SELECT * FROM `" . DB_PREFIX . "megamenu`";
+        $sql = "SELECT * FROM `" . DB_PREFIX . "dvmegamenu`";
 
         if (isset($data['start']) || isset($data['limit'])) {
             if ($data['start'] < 0) {
@@ -313,7 +316,7 @@ class ModelDivaUltimatemenu extends Model
     }
 
     public function getMenuCount() {
-        $sql = "SELECT COUNT(menu_id) AS total FROM `" . DB_PREFIX . "megamenu`";
+        $sql = "SELECT COUNT(menu_id) AS total FROM `" . DB_PREFIX . "dvmegamenu`";
 
         $query = $this->db->query($sql);
 
@@ -382,11 +385,11 @@ class ModelDivaUltimatemenu extends Model
     }
 
     public function deleteMenuData() {
-        $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "megamenu_sub_item_description`;");
-        $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "megamenu_sub_item`;");
-        $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "megamenu_top_item_description`;");
-        $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "megamenu_top_item`;");
-        $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "megamenu`;");
+        $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "dvmegamenu_sub_item_description`;");
+        $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "dvmegamenu_sub_item`;");
+        $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "dvmegamenu_top_item_description`;");
+        $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "dvmegamenu_top_item`;");
+        $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "dvmegamenu`;");
     }
 
     public function getLanguageByCode($language_code) {
