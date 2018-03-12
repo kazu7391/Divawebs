@@ -127,10 +127,10 @@ class ControllerExtensionModuleDvlayoutbuilder extends Controller
             }
         }
 
-        $this->document->addStyle('view/javascript/jquery/css/jquery-ui.css');
+        $this->document->addStyle('view/javascript/jquery/jquery-ui/jquery-ui.min.css');
         $this->document->addStyle('view/stylesheet/divawebs/layoutbuilder.css');
         $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
-        $this->document->addScript('view/javascript/jquery/jquery-ui.js');
+        $this->document->addScript('view/javascript/jquery/jquery-ui/jquery-ui.min.js');
         $this->document->addScript('view/javascript/divawebs/layoutbuilder.js');
 
         $data['header'] = $this->load->controller('common/header');
