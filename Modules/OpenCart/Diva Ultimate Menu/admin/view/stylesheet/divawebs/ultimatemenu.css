@@ -59,15 +59,14 @@
 .ui-state-highlight { min-height: 40px; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; background: #dcdcdc; border: 1px dashed #000;}
 .ui-top-highlight { margin: 0 5px; }
 .btn-widget {
-    border-radius: 18px;
-    background-color: #dcdcdc;
-    color: #000;
-    border: none;
-}
-.btn-widget:hover, .btn-widget:active,
-.btn-widget:focus, .btn-widget:visited {
-    background-color: #000;
+    background-color: #eb5202;
     color: #fff;
+    border: 1px solid #eb5202;
+}
+.btn-widget:hover {
+    background-color: #fff;
+    color: #eb5202;
+    border: 1px solid#eb5202;
 }
 #form-container-bg { display: none; background-color : rgba(0,0,0,0.35); top: 0; left: 0; right: 0; bottom: 0; margin: auto; position: fixed; z-index: 2000; }
 #form-ajax-loader { display: none; position: fixed; top: 50%; left: 50%; z-index: 2010; }
