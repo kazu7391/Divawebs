@@ -94,7 +94,16 @@ class ControllerExtensionModuleDvcontrolpanel extends Controller
             DIR_APPLICATION . '../divadata/diva_db2.sql' => 'Layout 2'
         );
 
-        $fonts_file = file_get_contents('https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyCKhdPP0mANQLtEY8Br0H71OqpQHxfu8wo');
+        $arrContextOptions = array(
+            "ssl" => array(
+                "verify_peer" => false,
+                "verify_peer_name" => false,
+            ),
+        );
+
+        $url = 'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyAov68H0SNcVzNpBfx40cOrObR8ZvV_cps';
+
+        $fonts_file = file_get_contents($url, false, stream_context_create($arrContextOptions));
 
         $google_fonts = json_decode($fonts_file, true);
 
