@@ -44,8 +44,8 @@
                 <div class="row">
                     <div class="col-md-2 col-left">
                         <ul class="nav nav-tabs menu-sections">
-                            <li><a href="#tab-general" data-toggle="tab"><i class="fa fa-tachometer" aria-hidden="true"></i>{{ tab_general }}</a></li>
-                            <li class="active"><a href="#tab-font" data-toggle="tab"><i class="fa fa-font" aria-hidden="true"></i>{{ tab_font }}</a></li>
+                            <li class="active"><a href="#tab-general" data-toggle="tab"><i class="fa fa-tachometer" aria-hidden="true"></i>{{ tab_general }}</a></li>
+                            <li><a href="#tab-font" data-toggle="tab"><i class="fa fa-font" aria-hidden="true"></i>{{ tab_font }}</a></li>
                             <li><a href="#tab-catalog" data-toggle="tab"><i class="fa fa-shopping-bag" aria-hidden="true"></i>{{ tab_catalog }}</a></li>
                             <li><a href="#tab-product" data-toggle="tab"><i class="fa fa-cube" aria-hidden="true"></i>{{ tab_product }}</a></li>
                             <li><a href="#tab-category" data-toggle="tab"><i class="fa fa-tags" aria-hidden="true"></i>{{ tab_category }}</a></li>
@@ -59,19 +59,9 @@
                             </form>
                             <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-dvcontrolpanel" class="form-horizontal">
                                 <div class="tab-content">
-                                    <div class="tab-pane" id="tab-general">
+                                    <div class="tab-pane active" id="tab-general">
                                         {% for store in stores %}
                                             <div class="frm-field frm-field-{{ store.store_id }}">
-                                                <div class="form-group">
-                                                    <label class="col-sm-3 control-label">{{ entry_lazy_load }}</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="hidden" name="module_dvcontrolpanel_lazy_load[{{ store.store_id }}]" value="0" />
-                                                        <input type="checkbox" class="ckb-switch" name="module_dvcontrolpanel_lazy_load[{{ store.store_id }}]"
-                                                               data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
-                                                                {% if module_dvcontrolpanel_lazy_load[store.store_id] %} value="1" checked {% else %} value="0" {% endif %}>
-                                                    </div>
-                                                </div>
-
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label">{{ entry_sticky_header }}</label>
                                                     <div class="col-sm-6">
@@ -103,7 +93,7 @@
                                         {% endfor %}
                                     </div>
 
-                                    <div class="tab-pane  active" id="tab-font">
+                                    <div class="tab-pane" id="tab-font">
                                         {% for store in stores %}
                                             <div class="frm-field frm-field-{{ store.store_id }}">
                                                 <ul class="nav nav-tabs hoz-ul-sections">
@@ -727,57 +717,35 @@
                                     <div class="tab-pane" id="tab-advance">
                                         {% for store in stores %}
                                             <div class="frm-field frm-field-{{ store.store_id }}">
-                                                <ul class="nav nav-tabs hoz-ul-sections">
-                                                    <li class="active"><a href="#tab-css-{{ store.store_id }}" data-toggle="tab">{{ tab_custom_css }}</a></li>
-                                                    <li><a href="#tab-js-{{ store.store_id }}" data-toggle="tab">{{ tab_custom_js }}</a></li>
-                                                    <li><a href="#tab-data-{{ store.store_id }}" data-toggle="tab">{{ tab_data }}</a></li>
-                                                </ul>
-
-                                                <div class="tab-content child-content">
-                                                    <div class="tab-pane active" id="tab-css-{{ store.store_id }}">
-                                                        <div class="form-group">
-                                                            <label class="col-sm-3 control-label" for="input-theme">{{ entry_custom_css }}</label>
-                                                            <div class="col-sm-9">
-                                                                <textarea class="form-control" rows="15">aaa</textarea>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label" for="input-theme">{{ entry_theme_database }}</label>
+                                                    <div class="col-sm-9">
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <select id="input-theme" class="form-control" name="file">
+                                                                    {% for key, value in database %}
+                                                                        <option value="{{ key }}">{{ value }}</option>
+                                                                    {% endfor %}
+                                                                </select>
                                                             </div>
-                                                            <div class="col-sm-3"></div>
-                                                            <div class="col-sm-9">
-                                                                <button class="btn-theme-save btn btn-primary">Save CSS</button>
+                                                            <div class="col-sm-6">
+                                                                <button type="button" id="button-import" class="btn btn-primary btn-theme-option"><i class="fa fa-upload"></i> {{ button_import }}</button>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
 
-                                                    <div class="tab-pane" id="tab-js-{{ store.store_id }}">
-                                                        <div class="form-group">
-                                                            <label class="col-sm-3 control-label" for="input-theme">{{ entry_custom_js }}</label>
-                                                            <div class="col-sm-9">
-                                                                <textarea class="form-control" rows="15">aaa</textarea>
-                                                            </div>
-                                                            <div class="col-sm-3"></div>
-                                                            <div class="col-sm-9">
-                                                                <button class="btn-theme-save btn btn-primary">Save Javascript</button>
-                                                            </div>
-                                                        </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label" for="input-theme">{{ entry_custom_css }}</label>
+                                                    <div class="col-sm-9">
+                                                        <textarea class="form-control code-area" rows="15" name="module_dvcontrolpanel_custom_css[{{ store.store_id }}]">{{ module_dvcontrolpanel_custom_css[store.store_id] }}</textarea>
                                                     </div>
+                                                </div>
 
-                                                    <div class="tab-pane" id="tab-data-{{ store.store_id }}">
-                                                        <div class="form-group">
-                                                            <label class="col-sm-3 control-label" for="input-theme">{{ entry_theme_database }}</label>
-                                                            <div class="col-sm-9">
-                                                                <div class="row">
-                                                                    <div class="col-sm-6">
-                                                                        <select id="input-theme" class="form-control" name="file">
-                                                                            {% for key, value in database %}
-                                                                                <option value="{{ key }}">{{ value }}</option>
-                                                                            {% endfor %}
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-sm-6">
-                                                                        <button type="button" id="button-import" class="btn btn-primary btn-theme-option"><i class="fa fa-upload"></i> {{ button_import }}</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label" for="input-theme">{{ entry_custom_js }}</label>
+                                                    <div class="col-sm-9">
+                                                        <textarea class="form-control code-area" rows="15" name="module_dvcontrolpanel_custom_js[{{ store.store_id }}]">{{ module_dvcontrolpanel_custom_js[store.store_id] }}</textarea>
                                                     </div>
                                                 </div>
                                             </div>

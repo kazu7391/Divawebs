@@ -131,12 +131,6 @@ class ControllerExtensionModuleDvcontrolpanel extends Controller
         $data['cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true);
 
         /* General */
-        if (isset($this->request->post['module_dvcontrolpanel_lazy_load'])) {
-            $data['module_dvcontrolpanel_lazy_load'] = $this->request->post['module_dvcontrolpanel_lazy_load'];
-        } else {
-            $data['module_dvcontrolpanel_lazy_load'] = $this->config->get('module_dvcontrolpanel_lazy_load');
-        }
-
         if (isset($this->request->post['module_dvcontrolpanel_sticky_header'])) {
             $data['module_dvcontrolpanel_sticky_header'] = $this->request->post['module_dvcontrolpanel_sticky_header'];
         } else {
@@ -554,7 +548,19 @@ class ControllerExtensionModuleDvcontrolpanel extends Controller
         } else {
             $data['module_dvcontrolpanel_product_row'] = $this->config->get('module_dvcontrolpanel_product_row');
         }
-        
+
+        if (isset($this->request->post['module_dvcontrolpanel_custom_css'])) {
+            $data['module_dvcontrolpanel_custom_css'] = $this->request->post['module_dvcontrolpanel_custom_css'];
+        } else {
+            $data['module_dvcontrolpanel_custom_css'] = $this->config->get('module_dvcontrolpanel_custom_css');
+        }
+
+        if (isset($this->request->post['module_dvcontrolpanel_custom_js'])) {
+            $data['module_dvcontrolpanel_custom_js'] = $this->request->post['module_dvcontrolpanel_custom_js'];
+        } else {
+            $data['module_dvcontrolpanel_custom_js'] = $this->config->get('module_dvcontrolpanel_custom_js');
+        }
+
         $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
         $this->document->addScript('view/javascript/divawebs/jscolor.min.js');
         $this->document->addScript('view/javascript/divawebs/switch-toggle/js/bootstrap-toggle.min.js');

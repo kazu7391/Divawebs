@@ -100,35 +100,10 @@
   {% endif %}
 
   <!-- General -->
-  <!-- Lazy Load -->
-  {% if lazy_load %}
-    <script type="text/javascript" src="catalog/view/javascript/diva/lazyload/jquery.lazy.min.js"></script>
-    <script>
-      $(document).ready(function () {
-        $('img').addClass('img-lazy');
-        $('#product-product img').removeClass('img-lazy');
-        $('img.img-lazy').each(function () {
-          var src = $(this).attr('src');
-          {% if loader_img %}
-          $(this).attr('src', 'image/{{ loader_img }}');
-          {% else %}
-          $(this).attr('src', 'image/diva/ajax-loader.gif');
-          {% endif %}
-          $(this).attr('data-src', src);
-        });
-
-        $('img.img-lazy').lazy({
-          effect: "fadeIn",
-          effectTime: 1000
-        });
-      });
-    </script>
-  {% endif %}
-
   <!-- Sticky Menu -->
   {% if sticky_header %}
   <script>
-    alert('a');
+    // Sticky Header JS Code
   </script>
   {% endif %}
 
