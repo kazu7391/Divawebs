@@ -34,7 +34,10 @@
 .theme-option-container .btn-primary {background-color: #eb5202;border-color: #eb5202;}
 .theme-option-container .hoz-ul-sections {
     background-color: #e8e8e8;
-    margin: 15px -15px 15px -15px;
+    margin: -15px -15px 15px -15px;
+}
+.theme-option-container .hoz-ul-sections.ul-feature-cate {
+    margin-top: 15px;
 }
 .theme-option-container .tab-content .hoz-ul-sections {
     margin: -15px;
