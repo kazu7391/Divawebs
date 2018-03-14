@@ -5,13 +5,13 @@
     padding: 10px;
     margin: 10px 0;
     width: 100%;
-    border-radius: 50px;
-    -moz-border-radius: 50px;
-    -webkit-border-radius: 50px;
-    min-height: 300px;
-    background: rgba(229, 249, 209, 0.92);
-    border: #e1ffc1;
-    box-shadow: 0 -1px 0 1px #2ea545;
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    min-height: 280px;
+    background: #eee;
+    border: #ccc;
+    box-shadow: 0 -1px 0 1px #ccc;
 }
 
 .widget-info-group { display: block; text-align: center; margin-top: 10px;}
@@ -156,9 +156,9 @@
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     min-height: 40px;
-    background: rgba(229, 249, 209, 0.92);
-    border: #e1ffc1;
-    box-shadow: -2px -1px 0 1px #2ea545;
+    background: #ccc;
+    border: #ccc;
+    box-shadow: 0px -1px 0 1px #777;
 }
 .row-content .text-insert-module { text-align: center; padding: 5px 0; }
 .row-content .text-insert-module span {font-size: 14px;color: #fff;font-weight: bold;}
@@ -210,7 +210,7 @@
 .btn-remove, .btn-edit { font-size: 0; float: right; }
 .btn-remove::before, .btn-edit:before {font-family: FontAwesome;font-size: 14px;top: 0px;position: absolute;}
 .btn-remove::before {
-    content: "\f057";
+    content: "\f1f8";
     color: #fff;
     right: 0;
 }
