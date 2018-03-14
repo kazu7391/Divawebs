@@ -294,6 +294,7 @@ var builder = {
         var row_pos = container.closest('.widget-row').find('.main-row-pos').val();
         var text_insert_module = $('#text-insert-module').val();
         var text_add_module = $('#text-add-module').val();
+        var text_add_sub_row = $('#text-add-sub-row').val();
         var text_columns_error_format = $('#text-columns-error-format').val();
         var text_columns = $("#text-columns").val();
         var text_custom_columns = $('#text-custom-columns').val();
@@ -323,7 +324,7 @@ var builder = {
                         html += '<div class="col-sm-' + col + ' main-column">';
                         html += '   <input type="hidden" class="main-col-pos" value="' + col_count + '" />';
                         html += '   <input type="hidden" class="main-col-format" value="' + col + '" name="widget['+ row_pos + '][main_cols]['+ col_count +'][format]" />';
-                        html += '   <a class="a-sub-row-add" href="javascript:void(0);" onclick="builder.drawSubRow($(this))">Add Row in this Column</a>';
+                        html += '   <a class="a-sub-row-add" href="javascript:void(0);" onclick="builder.drawSubRow($(this))">' + text_add_sub_row + '</a>';
                         html += '   <div class="main-col-content main-col-' + col_count + '">';
                         html +=     container.find('.main-col-' + col_count).html();
                         html += '   </div>';
@@ -333,12 +334,11 @@ var builder = {
                         html += '<div class="col-sm-' + col + ' main-column">';
                         html += '   <input type="hidden" class="main-col-pos" value="' + col_count + '" />';
                         html += '   <input type="hidden" class="main-col-format" value="' + col + '" name="widget['+ row_pos + '][main_cols]['+ col_count +'][format]" />';
-                        html += '   <a class="a-sub-row-add" href="javascript:void(0);" onclick="builder.drawSubRow($(this))">Add Row in this Column</a>';
+                        html += '   <a class="a-sub-row-add" href="javascript:void(0);" onclick="builder.drawSubRow($(this))">' + text_add_sub_row + '</a>';
                         html += '   <div class="main-col-content main-col-' + col_count + '">';
                         html += '       <div class="sub-row sub-row-0">';
                         html += '           <div class="sub-row-action">';
                         html += '               <div class="action-group">';
-                        html += '                   <span class="row-identify">' + text_columns + '</span>';
                         html += '                   <div class="sub-col-count">';
                         html += '                       <a href="javascript:void(0);" onclick="builder.plusSubColumn($(this))" rel="1" class="col-plus"></a>';
                         html += '                       <span class="count">1</span>';
@@ -405,7 +405,6 @@ var builder = {
         html += '   <div class="sub-row sub-row-' + sub_row_pos + '">';
         html += '       <div class="sub-row-action">';
         html += '           <div class="action-group">';
-        html += '               <span class="row-identify">' + text_columns + '</span>';
         html += '               <div class="sub-col-count">';
         html += '                   <a href="javascript:void(0);" onclick="builder.plusSubColumn($(this))" rel="1" class="col-plus"></a>';
         html += '                   <span class="count">1</span>';
@@ -445,12 +444,12 @@ var builder = {
         var text_add_module = $('#text-add-module').val();
         var text_custom_columns = $('#text-custom-columns').val();
         var text_custom_classname = $('#text-custom-classname').val();
+        var text_add_sub_row = $('#text-add-sub-row').val();
         var html = "";
         html += '<div class="widget-row col-sm-12">';
         html += '   <div class="row-action">';
         html += '       <div class="action-group">';
         html += '           <input type="text" class="form-control input-class-name" name="widget['+ row_number + '][class]" value="" placeholder="'+ text_custom_classname +'" />';
-        html += '           <span class="row-identify">'+ text_columns +'</span>';
         html += '           <div class="col-count">';
         html += '               <a href="javascript:void(0);" onclick="builder.plusMainColumn($(this));" rel="1" class="col-plus"></a>';
         html += '               <span class="count" >1</span>';
@@ -467,12 +466,11 @@ var builder = {
             '       <div class="col-sm-12 main-column">' +
             '           <input type="hidden" class="main-col-pos" value="0" />' +
             '           <input type="hidden" class="main-col-format" name="widget['+ row_number + '][main_cols][0][format]" value="12" />' +
-            '           <a class="a-sub-row-add" href="javascript:void(0);" onclick="builder.drawSubRow($(this))">Add Row in this Column</a>' +
+            '           <a class="a-sub-row-add" href="javascript:void(0);" onclick="builder.drawSubRow($(this))">' + text_add_sub_row + '</a>' +
             '           <div class="main-col-content main-col-0">' +
             '               <div class="sub-row sub-row-0">' +
             '                   <div class="sub-row-action">' +
             '                       <div class="action-group">' +
-            '                           <span class="row-identify">'+ text_columns +'</span>' +
             '                           <div class="sub-col-count">' +
             '                               <a href="javascript:void(0);" onclick="builder.plusSubColumn($(this))" rel="1" class="col-plus"></a>' +
             '                               <span class="count">1</span>' +

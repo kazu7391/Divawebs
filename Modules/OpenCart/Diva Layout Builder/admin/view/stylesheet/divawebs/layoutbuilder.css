@@ -22,9 +22,9 @@
 .widget-info-group .btn-insert:visited {
     background: #fff;
     border: 2px dashed #eb5202;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
     padding: 15px 25px;
     font-size: 13px;
     font-weight: bold;
@@ -54,7 +54,7 @@
     cursor: -webkit-grabbing;
 }
 
-.row-action { display: inline-block; width: 100%; text-align: right; padding: 10px 20px; }
+.row-action {display: inline-block;width: 100%;text-align: right;padding: 15px 20px;}
 .row-action .action-group .row-identify {display: inline;font-size: 14px;font-weight: bold;color: #fff;}
 .row-action .action-group .col-count { display: inline; margin: 0 30px 0 5px; }
 .row-action .action-group .a-group { display: inline; }
@@ -78,20 +78,20 @@
     color: #fff;
 }
 .row-action .action-group .a-column-custom::before {
-    content: "\f0db";
+    content: "\f1a5";
     color: #fff;
 }
 
 .row-action .action-group .a-row-delete::before {
-    content: "\f057";
-    color: red;
+    content: "\f1f8";
+    color: #fff;
     margin-left: 5px;
 }
 
-.sub-row-action { display: inline-block; width: 100%; text-align: left; padding: 10px 20px; }
+.sub-row-action {display: inline-block;width: 100%;text-align: left;padding: 5px 10px;}
 .sub-row-action .action-group .row-identify {display: inline;font-size: 14px;font-weight: bold;color: #fff;}
 .sub-row-action .action-group .sub-col-count { display: inline; margin: 0 30px 0 5px; }
-.sub-row-action .action-group .a-group { display: inline; }
+.sub-row-action .action-group .a-group {display: inline;float:  right;}
 .sub-row-action .action-group .sub-col-count .count {font-size: 14px;margin: 0 5px;font-weight: bold;color: #eb5202;}
 .sub-row-action .action-group .form-control { display: inline; width: auto; height: auto; line-height: inherit; margin-right: 10px; box-shadow: inset 0 1px 1px #2ea545; border-radius: 20px; }
 
@@ -112,13 +112,13 @@
     color: #fff;
 }
 .sub-row-action .action-group .a-column-custom::before {
-    content: "\f0db";
+    content: "\f1a5";
     color: #fff;
 }
 
 .sub-row-action .action-group .a-row-delete::before {
-    content: "\f057";
-    color: red;
+    content: "\f1f8";
+    color: #fff;
     margin-left: 5px;
 }
 
@@ -168,7 +168,7 @@
     padding-right: 5px;
     text-align: center;
 }
-.row-content .main-column .a-sub-row-add {font-size: 12px;font-weight: bolder;color: #eb5202;line-height: 40px;border: 2px dashed #eb5202;display: inline-block;vertical-align: top;border-radius: 10px;padding: 0 20px;}
+.row-content .main-column .a-sub-row-add {font-size: 11px;font-weight: bolder;color: #eb5202;line-height: 30px;border: 2px dashed #eb5202;display: inline-block;vertical-align: top;border-radius: 5px;padding: 0 15px;}
 .row-content .main-column .a-sub-row-add:before {
     content: '\f067';
     font-family: 'FontAwesome';

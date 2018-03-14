@@ -23,8 +23,8 @@
             <div class="panel-body">
                 <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-dvlayoutbuilder" class="form-horizontal">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label" for="input-name">{{ entry_name }}</label>
+                        <div class="col-sm-6">
                             <input type="text" name="name" value="{{ name }}" placeholder="{{ entry_name }}" id="input-name" class="form-control" />
                             {% if error_name %}
                                 <div class="text-danger">{{ error_name }}</div>
@@ -33,17 +33,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
-                        <div class="col-sm-10">
-                            <select name="status" id="input-status" class="form-control">
-                                {% if status %}
-                                    <option value="1" selected="selected">{{ text_enabled }}</option>
-                                    <option value="0">{{ text_disabled }}</option>
-                                {% else %}
-                                    <option value="1">{{ text_enabled }}</option>
-                                    <option value="0" selected="selected">{{ text_disabled }}</option>
-                                {% endif %}
-                            </select>
+                        <label class="col-sm-3 control-label" for="input-status">{{ entry_status }}</label>
+                        <div class="col-sm-6">
+                            <input type="hidden" name="status" value="0" />
+                            <input type="checkbox" class="ckb-switch" name="status" id="input-status"
+                                   data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
+                                    {% if status %} value="1" checked {% else %} value="0" {% endif %}>
                         </div>
                     </div>
 
@@ -65,7 +60,6 @@
                                         <div class="row-action">
                                             <div class="action-group">
                                                 <input type="text" class="form-control input-class-name" name="widget[{{ widget_row }}][class]" value="{{ main_row.class }}" placeholder="{{ text_custom_classname }}" />
-                                                <span class="row-identify">{{ text_columns }}</span>
                                                 <div class="col-count">
                                                     <a href="javascript:void(0);" onclick="builder.plusMainColumn($(this));" rel="1" class="col-plus"></a>
                                                     <span class="count">{{ main_col_count }}</span>
@@ -101,7 +95,6 @@
                                                                 <div class="sub-row sub-row-{{ widget_sub_row }}">
                                                                     <div class="sub-row-action">
                                                                         <div class="action-group">
-                                                                            <span class="row-identify">{{ text_columns }}</span>
                                                                             <div class="sub-col-count">
                                                                                 <a href="javascript:void(0);" onclick="builder.plusSubColumn($(this))" rel="1" class="col-plus"></a>
                                                                                 <span class="count">{{ sub_col_count }}</span>
@@ -179,7 +172,6 @@
                                                             <div class="sub-row sub-row-{{ widget_sub_row }}">
                                                                 <div class="sub-row-action">
                                                                     <div class="action-group">
-                                                                        <span class="row-identify">{{ text_columns }}</span>
                                                                         <div class="sub-col-count">
                                                                             <a href="javascript:void(0);" onclick="builder.plusSubColumn($(this))" rel="1" class="col-plus"></a>
                                                                             <span class="count">1</span>
@@ -224,7 +216,6 @@
                                     <div class="row-action">
                                         <div class="action-group">
                                             <input type="text" class="form-control input-class-name" name="widget[0][class]" value="" placeholder="{{ text_custom_classname }}" />
-                                            <span class="row-identify">{{ text_columns }}</span>
                                             <div class="col-count">
                                                 <a href="javascript:void(0);" onclick="builder.plusMainColumn($(this));" rel="1" class="col-plus"></a>
                                                 <span class="count">1</span>
@@ -249,7 +240,6 @@
                                                 <div class="sub-row sub-row-{{ widget_sub_row }}">
                                                     <div class="sub-row-action">
                                                         <div class="action-group">
-                                                            <span class="row-identify">{{ text_columns }}</span>
                                                             <div class="sub-col-count">
                                                                 <a href="javascript:void(0);" onclick="builder.plusSubColumn($(this))" rel="1" class="col-plus"></a>
                                                                 <span class="count">1</span>
@@ -344,6 +334,7 @@
 <input type="hidden" id="text-custom-classname" value="{{ text_custom_classname }}" />
 <input type="hidden" id="text-number-min-over" value="{{ text_number_min_over }}" />
 <input type="hidden" id="text-number-max-over" value="{{ text_number_max_over }}" />
+<input type="hidden" id="text-add-sub-row" value="{{ text_add_sub_row }}" />
 <input type="hidden" id="text-columns-error-format" value="{{ text_columns_error_format }}" />
 
 <div class="popup-background"></div>
