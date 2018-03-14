@@ -18,6 +18,8 @@ class ControllerExtensionModuleDvmenu extends Controller
     public function index() {
         $this->load->language('extension/module/dvmenu');
 
+        $this->document->setTitle($this->language->get('page_title'));
+
         $this->load->model('setting/module');
         $this->load->model('diva/ultimatemenu');
 
