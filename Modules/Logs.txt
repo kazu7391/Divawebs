@@ -1,45 +1,16 @@
 ** OPENCART
-- Theme Option (Quick View + Layered Navigation) (logo)
-  * General
-  	+ Lazy Load
-  	+ Scroll to Top
-  	+ Sticky Header
-  	+ Ajax Loader
-  * Font
-  	+ Body (background)
-  	+ Link
-  	+ Header
-  	+ Button
-  * Catalog mode (price, cart, wishlist/compare)
-  	+ Header (cart, currency)
-  	+ Module (rotate, quick view, label)
-  	+ Category (product des, label)
-  	+ Product Detail (Options)
-  * Product Detail
-  	+ Social
-  	+ Related
-  	+ Tax
-  	+ Tags
-  * Category
-  	+ Category Image
-  	+ Description
-  	+ Sub Cate
-  	+ Label
-  * Layout
-  	+ Choose Layout
+- Theme Option (Quick View + Layered Navigation)  (Done)
 - Ajax Login   (	fa-user)
-- Bestseller Page   (fa-bar-chart)
 - Blog		(fa-ticket)
-- Feature Category (fa-tag) (Done)
+- Feature Category (fa-tag)                       (Done)
 - Instagram	(fa-instagram)
-- Layout Builder  (fa-cubes) (editing CSS)
-- Mega Menu	(fa-bars) 
-- New Products Page (fa-sort-amount-desc)
+- Layout Builder  (fa-cubes)                      (Done)
+- Mega Menu	(fa-bars)
 - Search Category  (fa-search)
 - Twitter	(fa-twitter)
-- CMS Block	(fa-object-group)
+- CMS Block	(fa-object-group)                     (Done)
 - Newsletter		(fa-envelope)
-- Slideshow 		(fa-window-maximize)
+- Slideshow 		(fa-window-maximize)              
 - Testimonial		(fa-comments)
 - Product Tabs		(fa-shopping-bag)
 - Categories Tabs	(fa-tags)
