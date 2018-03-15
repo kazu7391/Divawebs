@@ -3,8 +3,7 @@ class ModelDivaControlpanel extends Model
 {
     public function setupData() {
         $this->setupBlogData();
-        $this->setupStaticBlockData();
-        $this->setupBannerData();
+        $this->setupSliderData();
         $this->setupTestimonialData();
         $this->setupMenuData();
         $this->setupFeaturedCategories();
@@ -46,41 +45,10 @@ class ModelDivaControlpanel extends Model
 		) DEFAULT COLLATE=utf8_general_ci;");
     }
 
-    public function setupStaticBlockData() {
+    public function setupSliderData() {
         $this->db->query("
-			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvstaticblock` (
-			  `staticblock_id` int(11) NOT NULL AUTO_INCREMENT,
-			  `status` tinyint(1) NOT NULL,
-			  `identify` varchar(255) DEFAULT NULL,
-			  `link` varchar(255) DEFAULT NULL,
-			  `type` tinyint(1) DEFAULT NULL,
-			  `banner_store` varchar(255) DEFAULT '0',
-			  `sort_order` tinyint(1) DEFAULT NULL,
-			  PRIMARY KEY (`staticblock_id`)
-        ) DEFAULT COLLATE=utf8_general_ci;");
-
-        $this->db->query("
-			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvstaticblock_description` (
-			  `staticblock_description_id` int(11) NOT NULL AUTO_INCREMENT,
-			  `staticblock_id` int(11) NOT NULL,
-			  `language_id` int(11) NOT NULL,
-			  `title` varchar(64) NOT NULL,
-			  `sub_title` varchar(64) DEFAULT NULL,
-			  `description` text,
-			  PRIMARY KEY (`staticblock_description_id`,`language_id`)
-		) DEFAULT COLLATE=utf8_general_ci;");
-
-        $this->db->query("
-			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvstaticblock_to_store` (
-			  `staticblock_id` int(11) DEFAULT NULL,
-			  `store_id` tinyint(4) DEFAULT NULL
-		) DEFAULT COLLATE=utf8_general_ci;");
-    }
-
-    public function setupBannerData() {
-        $this->db->query("
-			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvbanner` (
-                `dvbanner_id` int(11) NOT NULL AUTO_INCREMENT,
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvslider` (
+                `dvslider_id` int(11) NOT NULL AUTO_INCREMENT,
                 `name` varchar(64) NOT NULL,
                 `status` tinyint(1) NOT NULL,
                 `auto` tinyint(1) DEFAULT NULL,
@@ -89,30 +57,30 @@ class ModelDivaControlpanel extends Model
                 `nextback` tinyint(1) DEFAULT NULL,
                 `contrl` tinyint(1) DEFAULT NULL,
                 `effect` varchar(64) NOT NULL,
-                PRIMARY KEY (`dvbanner_id`)
+                PRIMARY KEY (`dvslider_id`)
 		) DEFAULT COLLATE=utf8_general_ci;");
 
         $this->db->query("
-			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvbanner_image` (
-                `dvbanner_image_id` int(11) NOT NULL AUTO_INCREMENT,
-                `dvbanner_id` int(11) NOT NULL,
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvslider_image` (
+                `dvslider_image_id` int(11) NOT NULL AUTO_INCREMENT,
+                `dvslider_id` int(11) NOT NULL,
                 `link` varchar(255) NOT NULL,
                 `type` int(11) NOT NULL,
-                `banner_store` varchar(110) DEFAULT '0',
+                `slider_store` varchar(110) DEFAULT '0',
                 `image` varchar(255) NOT NULL,
                 `secondary_image` varchar(255) DEFAULT NULL,
-                PRIMARY KEY (`dvbanner_image_id`)
+                PRIMARY KEY (`dvslider_image_id`)
 		) DEFAULT COLLATE=utf8_general_ci;");
 
         $this->db->query("
-			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvbanner_image_description` (
-                `dvbanner_image_id` int(11) NOT NULL,
-                `dvbanner_id` int(11) NOT NULL,
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvslider_image_description` (
+                `dvslider_image_id` int(11) NOT NULL,
+                `dvslider_id` int(11) NOT NULL,
                 `language_id` int(11) NOT NULL,
                 `title` varchar(64) NOT NULL,
                 `sub_title` varchar(64) DEFAULT NULL,
                 `description` text,
-                PRIMARY KEY (`dvbanner_image_id`,`language_id`)
+                PRIMARY KEY (`dvslider_image_id`,`language_id`)
 		) DEFAULT COLLATE=utf8_general_ci;");
     }
 

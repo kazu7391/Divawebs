@@ -73,14 +73,6 @@
                 );
             }
 
-            if($this->user->hasPermission('access', 'extension/module/occmsblock')) {
-                $adminmenu[] = array(
-                    'name'     => $this->language->get('text_cms_block'),
-                    'href'     => $this->url->link('extension/module/occmsblock/cmslist', 'user_token=' . $this->session->data['user_token'], true),
-                    'children' => array()
-                );
-            }
-
             if($this->user->hasPermission('access', 'extension/module/ocslideshow')) {
                 $adminmenu[] = array(
                     'name'     => $this->language->get('text_slideshow'),

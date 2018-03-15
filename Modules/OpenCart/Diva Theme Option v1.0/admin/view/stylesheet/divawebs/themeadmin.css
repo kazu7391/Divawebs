@@ -5,7 +5,7 @@
     border: none;
     background: #36404a;
 }
-.theme-option-container .panel-default .panel-heading {
+.theme-option-container > .panel-default > .panel-heading {
     color: #fff;
     border-color: #eb5202;
     background: #000;
