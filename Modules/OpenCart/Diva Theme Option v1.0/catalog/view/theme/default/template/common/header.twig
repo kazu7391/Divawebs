@@ -126,6 +126,19 @@
       });
     </script>
   {% endif %}
+
+  <!-- Advance -->
+  {% if custom_css %}
+    <style>
+      {{ custom_css }}
+    </style>
+  {% endif %}
+
+  {% if custom_js %}
+    <script>
+      {{ custom_js }}
+    </script>
+  {% endif %}
 </head>
 <body>
 <nav id="top">

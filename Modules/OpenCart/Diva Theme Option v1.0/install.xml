@@ -139,7 +139,11 @@
             <search><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "product_image SET product_id = '" . (int)$product_id . "', image = '" . $this->db->escape($product_image['image']) . "', sort_order = '" . (int)$product_image['sort_order'] . "'");]]></search>
             <add position="replace">
                 <![CDATA[
-                    $this->db->query("INSERT INTO " . DB_PREFIX . "product_image SET product_id = '" . (int)$product_id . "', image = '" . $this->db->escape($product_image['image']) . "', sort_order = '" . (int)$product_image['sort_order'] . "', is_rotate = '" . (int)$product_image['is_rotate'] . "', product_option_value_id = '" . (int)$product_image['product_option_value_id'] . "'");
+                    if(isset($product_image['product_option_value_id']) && $product_image['product_option_value_id']) {
+                        $this->db->query("INSERT INTO " . DB_PREFIX . "product_image SET product_id = '" . (int)$product_id . "', image = '" . $this->db->escape($product_image['image']) . "', sort_order = '" . (int)$product_image['sort_order'] . "', is_rotate = '" . (int)$product_image['is_rotate'] . "', product_option_value_id = '" . (int)$product_image['product_option_value_id'] . "'");
+                    } else {
+                        $this->db->query("INSERT INTO " . DB_PREFIX . "product_image SET product_id = '" . (int)$product_id . "', image = '" . $this->db->escape($product_image['image']) . "', sort_order = '" . (int)$product_image['sort_order'] . "', is_rotate = '" . (int)$product_image['is_rotate'] . "'");
+                    }
                 ]]>
             </add>
         </operation>
@@ -877,13 +881,6 @@
         $data['store_id'] = $this->config->get('config_store_id');
 
         /* General */
-        /* Lazy Load */
-        if(isset($this->config->get('module_dvcontrolpanel_lazy_load')[$data['store_id']])) {
-            $data['lazy_load'] = (int) $this->config->get('module_dvcontrolpanel_lazy_load')[$data['store_id']];
-        } else {
-            $data['lazy_load'] = 0;
-        }
-
         /* Sticky Header */
         if(isset($this->config->get('module_dvcontrolpanel_sticky_header')[$data['store_id']])) {
             $data['sticky_header'] = (int) $this->config->get('module_dvcontrolpanel_sticky_header')[$data['store_id']];
@@ -1043,6 +1040,19 @@
         } else {
 			$data['use_quick_view'] = false;
         }
+
+        /* Advance */
+        if(isset($this->config->get('module_dvcontrolpanel_custom_css')[$data['store_id']])) {
+            $data['custom_css'] = $this->config->get('module_dvcontrolpanel_custom_css')[$data['store_id']];
+        } else {
+            $data['custom_css'] = false;
+        }
+
+        if(isset($this->config->get('module_dvcontrolpanel_custom_js')[$data['store_id']])) {
+            $data['custom_js'] = $this->config->get('module_dvcontrolpanel_custom_js')[$data['store_id']];
+        } else {
+            $data['custom_js'] = false;
+        }
         	]]></add>
         </operation>
     </file>
@@ -1052,7 +1062,9 @@
         <operation>
             <search><![CDATA[$this->response->setOutput($this->load->view('design/layout_form', $data));]]></search>
             <add position="replace"><![CDATA[
-                $this->response->setOutput($this->load->view('design/diva_layout', $data));
+                $this->load->language('design/layout');
+
+                $this->response->setOutput($this->load->view('diva/design/diva_layout', $data));
             ]]></add>
         </operation>
     </file>
