@@ -348,9 +348,19 @@
         <button type="button" class="btn-close btn-default pull-right" onclick="closePopup();">Close</button>
     </div>
 </div>
-{{ footer }}
-
-<script type="text/javascript">
+<script>
+    $(document).ready(function() {
+        $('.toggle.btn').on('click', function () {
+            var ckb_status = parseInt($(this).find('.ckb-switch').val());
+            if(ckb_status == 1) {
+                $(this).find('.ckb-switch').val('0');
+            } else {
+                $(this).find('.ckb-switch').val('1');
+            }
+        });
+    })
+</script>
+<script>
     $('.btn-insert').click(function () {
         var row_number = $('.widget-row:last .main-row-pos').val();
         if(row_number == null) {
@@ -396,3 +406,4 @@
         builder.closeAllModules();
     });
 </script>
+{{ footer }}
