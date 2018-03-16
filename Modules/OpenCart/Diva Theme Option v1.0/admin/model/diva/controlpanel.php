@@ -82,6 +82,9 @@ class ModelDivaControlpanel extends Model
                 `description` text,
                 PRIMARY KEY (`dvslider_image_id`,`language_id`)
 		) DEFAULT COLLATE=utf8_general_ci;");
+
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'diva/slider');
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'diva/slider');
     }
 
     public function setupTestimonialData() {

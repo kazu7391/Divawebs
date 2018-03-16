@@ -73,10 +73,10 @@
                 );
             }
 
-            if($this->user->hasPermission('access', 'extension/module/ocslideshow')) {
+            if($this->user->hasPermission('access', 'diva/slider')) {
                 $adminmenu[] = array(
                     'name'     => $this->language->get('text_slideshow'),
-                    'href'     => $this->url->link('extension/module/ocslideshow/form', 'user_token=' . $this->session->data['user_token'], true),
+                    'href'     => $this->url->link('diva/slider', 'user_token=' . $this->session->data['user_token'], true),
                     'children' => array()
                 );
             }
