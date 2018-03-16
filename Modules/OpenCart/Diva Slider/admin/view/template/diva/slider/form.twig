@@ -20,233 +20,198 @@
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
             </div>
         {% endif %}
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
-            </div>
-            <div class="panel-body">
-                <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-slider" class="form-horizontal">
-                    <div class="form-group required">
-                        <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="name" value="{{ name }}" placeholder="{{ entry_name }}" id="input-name" class="form-control" />
-                            {% if error_name %}
-                                <div class="text-danger">{{ error_name }}</div>
-                            {% endif %}
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
-                        <div class="col-sm-10">
-                            <select name="status" id="input-status" class="form-control">
-                                {% if status %}
-                                    <option value="1" selected="selected">{{ text_enabled }}</option>
-                                    <option value="0">{{ text_disabled }}</option>
-                                {% else %}
-                                    <option value="1">{{ text_enabled }}</option>
-                                    <option value="0" selected="selected">{{ text_disabled }}</option>
+        <div class="theme-option-container">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_form_edit }}</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-slider" class="form-horizontal">
+                        <div class="form-group required">
+                            <label class="col-sm-3 control-label" for="input-name">{{ entry_slider_name }}</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="name" value="{{ name }}" placeholder="{{ entry_slider_name }}" id="input-name" class="form-control" />
+                                {% if error_name %}
+                                    <div class="text-danger">{{ error_name }}</div>
                                 {% endif %}
-                            </select>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-effect">{{ entry_effect }}</label>
-                        <div class="col-sm-10">
-                            <select name="effect" id="input-effect" class="form-control">
-                                {% for effect1 in effect_option %}
-                                    <option {% if effect1['value'] == effect %}  selected ="selected"  {% endif %}  value="{% if  effect1['value'] %}  {{ effect1['label'] }}  {% endif %}">{% if  effect1['value'] %}  {{ effect1['label'] }}  {% endif %} </option>
-                                {% endfor %}
-                            </select>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="input-status">{{ entry_status }}</label>
+                            <div class="col-sm-6">
+                                <input type="hidden" name="status" value="0" />
+                                <input type="checkbox" class="ckb-switch" name="status" id="input-status"
+                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
+                                        {% if status %} value="1" checked {% else %} value="0" {% endif %}>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group required">
-                        <label class="col-sm-2 control-label" for="input-delay">{{ entry_delay }}</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="delay" value="{{ delay }}" placeholder="{{ entry_delay }}" id="input-delay" class="form-control" />
-                            {% if error_delay %}
-                                <div class="text-danger">{{ error_delay }}</div>
-                            {% endif %}
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-auto">{{ entry_auto }}</label>
-                        <div class="col-sm-10">
-                            <select name="auto" id="input-auto" class="form-control">
-                                {% if auto %}
-                                    <option value="1" selected="selected">{{ text_enabled }}</option>
-                                    <option value="0">{{ text_disabled }}</option>
-                                {% else %}
-                                    <option value="1">{{ text_enabled }}</option>
-                                    <option value="0" selected="selected">{{ text_disabled }}</option>
+                        <div class="form-group required">
+                            <label class="col-sm-3 control-label" for="input-delay">{{ entry_delay }}</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="delay" value="{{ delay }}" placeholder="{{ entry_delay }}" id="input-delay" class="form-control" />
+                                {% if error_delay %}
+                                    <div class="text-danger">{{ error_delay }}</div>
                                 {% endif %}
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-hover">{{ entry_hover }}</label>
-                        <div class="col-sm-10">
-                            <select name="hover" id="input-hover" class="form-control">
-                                {% if hover %}
-                                    <option value="1" selected="selected">{{ text_enabled }}</option>
-                                    <option value="0">{{ text_disabled }}</option>
-                                {% else %}
-                                    <option value="1">{{ text_enabled }}</option>
-                                    <option value="0" selected="selected">{{ text_disabled }}</option>
-                                {% endif %}
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-nextback">{{ entry_nextback }}</label>
-                        <div class="col-sm-10">
-                            <select name="nextback" id="input-nextback" class="form-control">
-                                {% if nextback %}
-                                    <option value="1" selected="selected">{{ text_enabled }}</option>
-                                    <option value="0">{{ text_disabled }}</option>
-                                {% else %}
-                                    <option value="1">{{ text_enabled }}</option>
-                                    <option value="0" selected="selected">{{ text_disabled }}</option>
-                                {% endif %}
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-contrl">{{ entry_contrl }}</label>
-                        <div class="col-sm-10">
-                            <select name="contrl" id="input-contrl" class="form-control">
-                                {% if contrl %}
-                                    <option value="1" selected="selected">{{ text_enabled }}</option>
-                                    <option value="0">{{ text_disabled }}</option>
-                                {% else %}
-                                    <option value="1">{{ text_enabled }}</option>
-                                    <option value="0" selected="selected">{{ text_disabled }}</option>
-                                {% endif %}
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <ul class="nav nav-pills nav-stacked" id="module">
-                                {% set module_row = 1 %}
-                                {% for dvslider_image in dvslider_images %}
-                                    <li><a href="#tab-module{{ dvslider_image['key'] }}" data-toggle="tab"><i class="fa fa-minus-circle" onclick="$('a[href=\'#tab-module{{ dvslider_image['key'] }}\']').parent().remove(); $('#tab-module{{ dvslider_image['key'] }}').remove(); $('#module a:first').tab('show');"></i> {{ tab_banner }}  {{ module_row }}</a></li>
-                                    {% set module_row = module_row +1 %}
-                                {% endfor %}
-                                <li id="module-add"><a onclick="addModule();"><i class="fa fa-plus-circle"></i> {{ button_add_banner }}</a></li>
-                            </ul>
+                            </div>
                         </div>
 
-                        <div class="col-sm-10">
-                            <div class="tab-content">
-                                {% set image_row = 0 %}
-                                {% for dvslider_image in dvslider_images %}
-                                    <div class="tab-pane" id="tab-module{{ dvslider_image['key'] }}">
-                                        <ul class="nav nav-tabs" id="language{{ dvslider_image['key'] }}">
-                                            {% for language in languages %}
-                                                <li><a href="#tab-module{{ dvslider_image['key'] }}-language{{ language['language_id'] }}" data-toggle="tab"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" title="{{ language['name'] }}" /> {{ language['name'] }}</a></li>
-                                            {% endfor %}
-                                        </ul>
-                                        <div class="tab-content">
-                                            {% for language in languages %}
-                                                <div class="tab-pane" id="tab-module{{ dvslider_image['key'] }}-language{{ language['language_id'] }}">
-                                                    <div class="form-group">
-                                                        <label class="col-sm-2 control-label" for="input-title{{ dvslider_image['key'] }}-language{{ language['language_id'] }}">{{ entry_title }}</label>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="input-auto">{{ entry_auto }}</label>
+                            <div class="col-sm-6">
+                                <input type="hidden" name="auto" value="0" />
+                                <input type="checkbox" class="ckb-switch" name="auto" id="input-auto"
+                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
+                                        {% if auto %} value="1" checked {% else %} value="0" {% endif %}>
+                            </div>
+                        </div>
 
-                                                        <div class="col-sm-10">
-                                                            <input type="text" id="input-title{{ dvslider_image['key'] }}-language{{ language['language_id'] }}" name="dvslider_image[{{ image_row }}][dvslider_image_description][{{ language['language_id'] }}][title]" value="{% if dvslider_image['dvslider_image_description'][language['language_id']] %} {{ dvslider_image['dvslider_image_description'][language['language_id']]['title'] }} {% else %}  {% endif %}" placeholder="{{ entry_title }}" class="form-control" />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="input-hover">{{ entry_hover }}</label>
+                            <div class="col-sm-6">
+                                <input type="hidden" name="hover" value="0" />
+                                <input type="checkbox" class="ckb-switch" name="hover" id="input-auto"
+                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
+                                        {% if hover %} value="1" checked {% else %} value="0" {% endif %}>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="input-nextback">{{ entry_nextback }}</label>
+                            <div class="col-sm-6">
+                                <input type="hidden" name="nextback" value="0" />
+                                <input type="checkbox" class="ckb-switch" name="nextback" id="input-auto"
+                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
+                                        {% if nextback %} value="1" checked {% else %} value="0" {% endif %}>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="input-contrl">{{ entry_contrl }}</label>
+                            <div class="col-sm-6">
+                                <input type="hidden" name="contrl" value="0" />
+                                <input type="checkbox" class="ckb-switch" name="contrl" id="input-auto"
+                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
+                                        {% if contrl %} value="1" checked {% else %} value="0" {% endif %}>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-2">
+                                <ul class="nav nav-pills nav-stacked" id="module">
+                                    {% set module_row = 1 %}
+                                    {% for dvslider_image in dvslider_images %}
+                                        <li><a class="btn btn-theme-option" href="#tab-module{{ dvslider_image['key'] }}" data-toggle="tab"><i class="fa fa-minus-circle" onclick="$('a[href=\'#tab-module{{ dvslider_image['key'] }}\']').parent().remove(); $('#tab-module{{ dvslider_image['key'] }}').remove(); $('#module a:first').tab('show');"></i> {{ tab_banner }}  {{ module_row }}</a></li>
+                                        {% set module_row = module_row +1 %}
+                                    {% endfor %}
+                                    <li id="module-add"><a class="btn btn-theme-option" onclick="addModule();"><i class="fa fa-plus-circle"></i> {{ button_add_banner }}</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="col-sm-10">
+                                <div class="tab-content">
+                                    {% set image_row = 0 %}
+                                    {% for dvslider_image in dvslider_images %}
+                                        <div class="tab-pane" id="tab-module{{ dvslider_image['key'] }}">
+                                            <ul class="nav nav-tabs" id="language{{ dvslider_image['key'] }}">
+                                                {% for language in languages %}
+                                                    <li><a href="#tab-module{{ dvslider_image['key'] }}-language{{ language['language_id'] }}" data-toggle="tab"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" title="{{ language['name'] }}" /> {{ language['name'] }}</a></li>
+                                                {% endfor %}
+                                            </ul>
+                                            <div class="tab-content">
+                                                {% for language in languages %}
+                                                    <div class="tab-pane" id="tab-module{{ dvslider_image['key'] }}-language{{ language['language_id'] }}">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-2 control-label" for="input-title{{ dvslider_image['key'] }}-language{{ language['language_id'] }}">{{ entry_title }}</label>
+
+                                                            <div class="col-sm-10">
+                                                                <input type="text" id="input-title{{ dvslider_image['key'] }}-language{{ language['language_id'] }}" name="dvslider_image[{{ image_row }}][dvslider_image_description][{{ language['language_id'] }}][title]" value="{% if dvslider_image['dvslider_image_description'][language['language_id']] %} {{ dvslider_image['dvslider_image_description'][language['language_id']]['title'] }} {% else %}  {% endif %}" placeholder="{{ entry_title }}" class="form-control" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-2 control-label" for="input-subtitle{{ dvslider_image['key'] }}-language{{ language['language_id'] }}">{{ entry_subtitle }}</label>
+                                                            <div class="col-sm-10">
+                                                                <input type="text" id="input-subtitle{{ dvslider_image['key'] }}-language{{ language['language_id'] }}" name="dvslider_image[{{ image_row }}][dvslider_image_description][{{ language['language_id'] }}][sub_title]" value="{% if dvslider_image['dvslider_image_description'][language['language_id']] %} {{ dvslider_image['dvslider_image_description'][language['language_id']]['sub_title'] }} {% else %}  {% endif %}" placeholder="{{ entry_title }}" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-2 control-label" for="input-description{{ dvslider_image['key'] }}-language{{ language['language_id'] }}">{{ entry_description }}</label>
+                                                            <div class="col-sm-10">
+                                                                <textarea name="dvslider_image[{{ image_row }}][dvslider_image_description][{{ language['language_id'] }}][description]" placeholder="{{ entry_description }}" id="input-description{{ dvslider_image['key'] }}-language{{ language['language_id'] }}" class="form-control">{% if dvslider_image['dvslider_image_description'][language['language_id']] %} {{ dvslider_image['dvslider_image_description'][language['language_id']]['description'] }} {% else %}  {% endif %}</textarea>
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                {% endfor %}
 
-                                                    <div class="form-group">
-                                                        <label class="col-sm-2 control-label" for="input-subtitle{{ dvslider_image['key'] }}-language{{ language['language_id'] }}">{{ entry_subtitle }}</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="text" id="input-subtitle{{ dvslider_image['key'] }}-language{{ language['language_id'] }}" name="dvslider_image[{{ image_row }}][dvslider_image_description][{{ language['language_id'] }}][sub_title]" value="{% if dvslider_image['dvslider_image_description'][language['language_id']] %} {{ dvslider_image['dvslider_image_description'][language['language_id']]['sub_title'] }} {% else %}  {% endif %}" placeholder="{{ entry_title }}" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-2 control-label" for="input-description{{ dvslider_image['key'] }}-language{{ language['language_id'] }}">{{ entry_description }}</label>
-                                                        <div class="col-sm-10">
-                                                            <textarea name="dvslider_image[{{ image_row }}][dvslider_image_description][{{ language['language_id'] }}][description]" placeholder="{{ entry_description }}" id="input-description{{ dvslider_image['key'] }}-language{{ language['language_id'] }}" class="form-control">{% if dvslider_image['dvslider_image_description'][language['language_id']] %} {{ dvslider_image['dvslider_image_description'][language['language_id']]['description'] }} {% else %}  {% endif %}</textarea>
-                                                        </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label" for="input-link{{ dvslider_image['key'] }}-language{{ language['language_id'] }}">{{ entry_link }}</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" id="input-link{{ dvslider_image['key'] }}-language{{ language['language_id'] }}" name="dvslider_image[{{ image_row }}][link]" value="{% if dvslider_image['link'] %}  {{ dvslider_image['link'] }} {% endif %}" placeholder="{{ entry_link }}" class="form-control" />
                                                     </div>
                                                 </div>
-                                            {% endfor %}
 
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="input-link{{ dvslider_image['key'] }}-language{{ language['language_id'] }}">{{ entry_link }}</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" id="input-link{{ dvslider_image['key'] }}-language{{ language['language_id'] }}" name="dvslider_image[{{ image_row }}][link]" value="{% if dvslider_image['link'] %}  {{ dvslider_image['link'] }} {% endif %}" placeholder="{{ entry_link }}" class="form-control" />
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label" for="thumb-image-{{ dvslider_image['key'] }}-{{ token_random }}">{{ entry_image }}</label>
+                                                    <div class="col-sm-10">
+                                                        <a href="" id="thumb-image-{{ dvslider_image['key'] }}-{{ token_random }}" data-toggle="image" class="img-thumbnail"><img src="{% if dvslider_image['thumb'] %} {{ dvslider_image['thumb'] }} {% else %}  {{ placeholder }} {% endif %}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+                                                        <input type="hidden"  name="dvslider_image[{{ image_row }}][image]"  value="{{ dvslider_image['image'] }}" id="input-image{{ dvslider_image['key'] }}-{{ token_random }}" />
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="thumb-image-{{ dvslider_image['key'] }}-{{ token_random }}">{{ entry_image }}</label>
-                                                <div class="col-sm-10">
-                                                    <a href="" id="thumb-image-{{ dvslider_image['key'] }}-{{ token_random }}" data-toggle="image" class="img-thumbnail"><img src="{% if dvslider_image['thumb'] %} {{ dvslider_image['thumb'] }} {% else %}  {{ placeholder }} {% endif %}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
-                                                    <input type="hidden"  name="dvslider_image[{{ image_row }}][image]"  value="{{ dvslider_image['image'] }}" id="input-image{{ dvslider_image['key'] }}-{{ token_random }}" />
-                                                </div>
-                                            </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label" for="input-type">{{ entry_type }}</label>
+                                                    <div class="col-sm-10">
+                                                        <select name="dvslider_image[{{ image_row }}][type]" id="input-type" class="form-control">
+                                                            {% if dvslider_image['type'] %}
+                                                                {% if dvslider_image['type'] == 1 %}
+                                                                    <option selected="selected" value="1">Type 1</option>
+                                                                {% else %}
 
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="input-type">{{ entry_type }}</label>
-                                                <div class="col-sm-10">
-                                                    <select name="dvslider_image[{{ image_row }}][type]" id="input-type" class="form-control">
-                                                        {% if dvslider_image['type'] %}
-                                                            {% if dvslider_image['type'] == 1 %}
-                                                                <option selected="selected" value="1">Type 1</option>
+                                                                    <option value="1">Type 1</option>
+                                                                {% endif %}
+                                                                {% if dvslider_image['type'] == 2 %}
+                                                                    <option selected="selected" value="2">Type 2</option>
+                                                                {% else %}
+                                                                    <option value="2">Type 2</option>
+                                                                {% endif %}
+                                                                {% if dvslider_image['type'] == 3 %}
+                                                                    <option selected="selected" value="3">Type 3</option>
+                                                                {% else %}
+                                                                    <option value="3">Type 3</option>
+                                                                {% endif %}
                                                             {% else %}
-
                                                                 <option value="1">Type 1</option>
-                                                            {% endif %}
-                                                            {% if dvslider_image['type'] == 2 %}
-                                                                <option selected="selected" value="2">Type 2</option>
-                                                            {% else %}
                                                                 <option value="2">Type 2</option>
-                                                            {% endif %}
-                                                            {% if dvslider_image['type'] == 3 %}
-                                                                <option selected="selected" value="3">Type 3</option>
-                                                            {% else %}
                                                                 <option value="3">Type 3</option>
                                                             {% endif %}
-                                                        {% else %}
-                                                            <option value="1">Type 1</option>
-                                                            <option value="2">Type 2</option>
-                                                            <option value="3">Type 3</option>
-                                                        {% endif %}
-                                                    </select>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">{{ entry_store }}</label>
-                                                <div class="col-sm-10">
-                                                    <div class="well well-sm" style="height: 150px; overflow: auto;">
-                                                        {% for store in stores %}
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="dvslider_image[{{ image_row }}][slider_store][]" value="{{ store['store_id']  }}" {% if store['store_id'] in dvslider_image['slider_store'] %}  checked="checked" {% endif %}  />
-                                                                    {{ store['name']  }}
-                                                                </label>
-                                                            </div>
-                                                        {% endfor %}
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">{{ entry_store }}</label>
+                                                    <div class="col-sm-10">
+                                                        <div class="well well-sm" style="height: 150px; overflow: auto;">
+                                                            {% for store in stores %}
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" name="dvslider_image[{{ image_row }}][slider_store][]" value="{{ store['store_id']  }}" {% if store['store_id'] in dvslider_image['slider_store'] %} checked="checked" {% endif %} /> {{ store['name'] }}
+                                                                    </label>
+                                                                </div>
+                                                            {% endfor %}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                {% endfor %}
+                                    {% endfor %}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -320,16 +285,13 @@
 
         html +='<div class="checkbox">';
         html +='<label>';
-        html +='<input type="checkbox" name="dvslider_image[' + token + '][slider_store][]" value="{{ store['store_id'] }}" />{{ store['name'] }} ';
+        html +='<input type="checkbox" name="dvslider_image[' + token + '][slider_store][]" value="{{ store['store_id'] }}" /> {{ store['name'] }} ';
         html +='</label>';
         html +='</div>';
         {% endfor %}
         html +='</div>';
         html +='</div>';
         html +='</div>';
-
-
-
 
         html += '  </div>';
         html += '</div>';
@@ -342,7 +304,7 @@
         });
         {% endfor %}
 
-        $('#module-add').before('<li><a href="#tab-module' + token + '" data-toggle="tab"><i class="fa fa-minus-circle" onclick="$(\'a[href=\\\'#tab-module' + token + '\\\']\').parent().remove(); $(\'#tab-module' + token + '\').remove(); $(\'#module a:first\').tab(\'show\');"></i> {{ tab_banner }} ' + module_row + '</a></li>');
+        $('#module-add').before('<li><a class="btn btn-theme-option" href="#tab-module' + token + '" data-toggle="tab"><i class="fa fa-minus-circle" onclick="$(\'a[href=\\\'#tab-module' + token + '\\\']\').parent().remove(); $(\'#tab-module' + token + '\').remove(); $(\'#module a:first\').tab(\'show\');"></i> {{ tab_banner }} ' + module_row + '</a></li>');
 
         $('#module a[href=\'#tab-module' + token + '\']').tab('show');
 
@@ -357,4 +319,16 @@
     $('#language{{ dvslider_image['key'] }} li:first-child a').tab('show');
     {% endfor %}
     //--></script>
+<script>
+    $(document).ready(function() {
+        $('.toggle.btn').on('click', function () {
+            var ckb_status = parseInt($(this).find('.ckb-switch').val());
+            if(ckb_status == 1) {
+                $(this).find('.ckb-switch').val('0');
+            } else {
+                $(this).find('.ckb-switch').val('1');
+            }
+        });
+    })
+</script>
 {{ footer }}

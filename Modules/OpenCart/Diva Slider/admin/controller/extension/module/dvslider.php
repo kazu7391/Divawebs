@@ -108,14 +108,6 @@ class ControllerExtensionModuleDvslider extends Controller
             $data['status'] = '';
         }
 
-        if (isset($this->request->post['effect'])) {
-            $data['effect'] = $this->request->post['effect'];
-        } elseif (!empty($banner_info)) {
-            $data['effect'] = $banner_info['effect'];
-        } else {
-            $data['effect'] = '';
-        }
-
         if (isset($this->request->post['slider'])) {
             $data['slider'] = $this->request->post['slider'];
         } elseif (!empty($module_info) && isset($module_info['slider'])) {
@@ -149,6 +141,10 @@ class ControllerExtensionModuleDvslider extends Controller
         $data['languages'] = $this->model_localisation_language->getLanguages();
         $data['dvsliders'] = $this->model_diva_slider->getSliders();
 
+        $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
+        $this->document->addScript('view/javascript/divawebs/switch-toggle/js/bootstrap-toggle.min.js');
+        $this->document->addStyle('view/javascript/divawebs/switch-toggle/css/bootstrap-toggle.min.css');
+        
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');

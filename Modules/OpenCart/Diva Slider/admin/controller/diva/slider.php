@@ -248,19 +248,6 @@ class ControllerDivaSlider extends Controller
             $url .= '&page=' . $this->request->get['page'];
         }
 
-        $data['sort_name'] = $this->url->link('diva/slider', 'user_token=' . $this->session->data['user_token'] . '&sort=name' . $url, true);
-        $data['sort_status'] = $this->url->link('diva/slider', 'user_token=' . $this->session->data['user_token'] . '&sort=status' . $url, true);
-
-        $url = '';
-
-        if (isset($this->request->get['sort'])) {
-            $url .= '&sort=' . $this->request->get['sort'];
-        }
-
-        if (isset($this->request->get['order'])) {
-            $url .= '&order=' . $this->request->get['order'];
-        }
-
         $pagination = new Pagination();
         $pagination->total = $sliders_total;
         $pagination->page = $page;
@@ -270,8 +257,8 @@ class ControllerDivaSlider extends Controller
 
         $data['pagination'] = $pagination->render();
         $data['results'] = sprintf($this->language->get('text_pagination'), ($sliders_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($sliders_total - $this->config->get('config_limit_admin'))) ? $sliders_total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $sliders_total, ceil($sliders_total / $this->config->get('config_limit_admin')));
-        $data['sort'] = $sort;
-        $data['order'] = $order;
+
+        $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
 
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
@@ -357,14 +344,6 @@ class ControllerDivaSlider extends Controller
             $data['name'] = '';
         }
 
-        if (isset($this->request->post['effect'])) {
-            $data['effect'] = $this->request->post['effect'];
-        } elseif (!empty($slider_info)) {
-            $data['effect'] = $slider_info['effect'];
-        } else {
-            $data['effect'] = '';
-        }
-
         if (isset($this->request->post['status'])) {
             $data['status'] = $this->request->post['status'];
         } elseif (!empty($slider_info)) {
@@ -379,14 +358,6 @@ class ControllerDivaSlider extends Controller
             $data['auto'] = $slider_info['auto'];
         } else {
             $data['auto'] = true;
-        }
-
-        if (isset($this->request->post['effect'])) {
-            $data['effect'] = $this->request->post['effect'];
-        } elseif (!empty($slider_info)) {
-            $data['effect'] = $slider_info['effect'];
-        } else {
-            $data['effect'] = 'random';
         }
 
         if (isset($this->request->post['delay'])) {
@@ -451,7 +422,7 @@ class ControllerDivaSlider extends Controller
                     'dvslider_image_description' => $dvslider_image['dvslider_image_description'],
                     'link'                       => $dvslider_image['link'],
                     'type'                       => $dvslider_image['type'],
-                    'slider_store'               => explode(',',$dvslider_image['banner_store']),
+                    'slider_store'               => explode(',',$dvslider_image['slider_store']),
                     'image'                      => $image,
                     'thumb'                      => $this->model_tool_image->resize($image, 100, 100)
                 );
@@ -467,28 +438,6 @@ class ControllerDivaSlider extends Controller
             }
         }
 
-        $effect_options =  array(
-            array('value'=>'fade', 'label'=>'fade'),
-            array('value'=>'slide', 'label'=>'slide'),
-            array('value'=>'random', 'label'=>'random'),
-            array('value'=>'sliceDown', 'label'=>'sliceDown'),
-            array('value'=>'sliceDownLeft', 'label'=>'sliceDownLeft'),
-            array('value'=>'sliceUp', 'label'=>'sliceUp'),
-            array('value'=>'sliceUpLeft', 'label'=>'sliceUpLeft'),
-            array('value'=>'sliceUpDown', 'label'=>'sliceUpDown'),
-            array('value'=>'sliceUpDownLeft', 'label'=>'sliceUpDownLeft'),
-            array('value'=>'fold', 'label'=>'fold'),
-            array('value'=>'slideInRight', 'label'=>'slideInRight'),
-            array('value'=>'slideInLeft', 'label'=>'slideInLeft'),
-            array('value'=>'boxRandom', 'label'=>'boxRandom'),
-            array('value'=>'boxRain', 'label'=>'boxRain'),
-            array('value'=>'boxRainReverse', 'label'=>'boxRainReverse'),
-            array('value'=>'boxRainGrow', 'label'=>'boxRainGrow'),
-            array('value'=>'boxRainGrowReverse', 'label'=>'boxRainGrowReverse')
-        );
-
-        $data['effect_option']  = $effect_options ;
-
         $this->load->model('setting/store');
 
         $data['stores'] = $this->model_setting_store->getStores();
@@ -496,9 +445,13 @@ class ControllerDivaSlider extends Controller
             'store_id'  => 0,
             'name'      => 'Default Store'
         );
-        
+
         $data['no_image'] = $this->model_tool_image->resize('no_image.png', 100, 100);
         $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+
+        $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
+        $this->document->addScript('view/javascript/divawebs/switch-toggle/js/bootstrap-toggle.min.js');
+        $this->document->addStyle('view/javascript/divawebs/switch-toggle/css/bootstrap-toggle.min.css');
 
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
