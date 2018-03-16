@@ -390,6 +390,9 @@ class ModelDivaUltimatemenu extends Model
         $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "dvmegamenu_top_item_description`;");
         $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "dvmegamenu_top_item`;");
         $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "dvmegamenu`;");
+
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'access', 'diva/ultimatemenu');
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'modify', 'diva/ultimatemenu');
     }
 
     public function getLanguageByCode($language_code) {
