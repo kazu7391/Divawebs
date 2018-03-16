@@ -31,6 +31,7 @@
 .theme-option-container .notification {text-align: center;margin-top: 15px;font-size: 14px;}
 .theme-option-container .notification .fa-warning {color: #f27636;margin-right: 5px;}
 .theme-option-container .btn.toggle-on {background-color: #eb5202;border-color: #eb5202;}
+.theme-option-container .btn-primary {background-color: #eb5202;border-color: #eb5202;}
 .theme-option-container .code-area {background-color: #364049;color: #fff;resize: none;}
 .theme-option-container .hoz-ul-sections {
     background-color: #e8e8e8;
