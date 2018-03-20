@@ -8,6 +8,7 @@ $_['tab_banner']            = 'Banner';
 
 // Text
 $_['text_edit']             = 'Edit DIVA Slider Module';
+$_['text_edit_slider']      = 'Edit Slider';
 $_['text_form_edit']        = 'Slider Form';
 $_['text_success']          = 'Success: You have modified module!';
 $_['text_extension']        = 'Extensions';

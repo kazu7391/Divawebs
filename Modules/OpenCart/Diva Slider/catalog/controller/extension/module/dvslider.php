@@ -32,7 +32,7 @@ class ControllerExtensionModuleDvslider extends Controller
                     $data['dvsliders'][] = array(
                         'title'         => $result['title'],
                         'sub_title'     => $result['sub_title'],
-                        'description'   => $result['description'],
+                        'description'   => html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'),
                         'link'          => $result['link'],
                         'type'          => $result['type'],
                         'image'         => $this->model_tool_image->resize($result['image'], $setting['width'], $setting['height'])

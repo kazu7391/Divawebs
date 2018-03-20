@@ -1,63 +1,57 @@
-<div class="banner7">
-    <div class="oc-banner7-container">
-        <div class="flexslider oc-nivoslider">
-            <div class="oc-loading"></div>
-            <div id="oc-inivoslider1" class="nivoSlider">
-
-                {% set config = slider[0] %}
-                {% set i=1 %}
-                {% for s in dvsliders %}
-                    {% set i=i+1 %}
-                    <img style="display: none;" src="{{ s['image'] }}" alt="" title="#banner7-caption{{ i }}"  />
-                {% endfor %}
-
-            </div>
-
-            {% set i=1 %}
-            {% for s in dvsliders %}
-                {% set i=i+1 %}
-                <div id="banner7-caption{{ i }}" class="banner7-caption nivo-html-caption nivo-caption move-slides-effect" data-class="slide-movetype{{ s['type'] }}">
-                    <div class="banner7-title">
-                        {%  if s['title'] and s['title'] != ""  %}
-                            <h3>{{ s['title'] }}</h3>
-                        {% endif %}
-                    </div>
-                    <div class="sub-title">
-                        {%  if s['sub_title'] and s['sub_title'] != "" %}
-                            <h3>{{ s['sub_title'] }}</h3>
-                        {% endif %}
-                    </div>
-                    <div class="banner7-des">
-                        {{ s['description'] }}
-                    </div>
-                    {% if s['link'] %}
-                        <div class="banner7-readmore">
-                            <a href="{{ s['link'] }}" title="{{ text_link_button }}">{{ text_link_button }}</a>
-                        </div>
-                    {% endif %}
-                </div>
-            {% endfor %}
-            <script type="text/javascript">
-                $(window).load(function() {
-                    $('#oc-inivoslider1').nivoSlider();
-                    $('#oc-inivoslider1').nivoSlider({
-                        effect:  'random',
-                        slices: 15,
-                        boxCols: 8,
-                        boxRows: 4,
-                        manualAdvance: {% if config['auto'] and config['auto'] == 1 %} false {% else %}   true  {% endif %} ,
-                        animSpeed:500,
-                        pauseTime: {% if config['delay'] %}  {{ config['delay'] }} {% else %}   3000  {% endif %} ,
-                        startSlide: 0,
-                        controlNav:  {% if config['contrl'] and config['contrl'] == 1 %} true {% else %}   false  {% endif %} ,
-                        directionNav:  {% if config['nextback'] and config['nextback'] == 1 %} true {% else %}   false  {% endif %} ,
-                        controlNavThumbs: false,
-                        pauseOnHover:  {% if config['hover'] and config['hover'] == 1 %} true {% else %}   false  {% endif %} ,
-                        prevText: 'Prev',
-                        nextText: 'Next'
-                    });
-                });
-            </script>
-        </div>
+<div class="slider-container">
+    <div class="slide-loading"></div>
+    <div id="diva-slider" class="diva-slider">
+        {% set config = slider[0] %}
+        {% set i=1 %}
+        {% for s in dvsliders %}
+            {% set i=i+1 %}
+            <img style="display: none;" src="{{ s['image'] }}" alt="" title="#slide-caption{{ i }}"  />
+        {% endfor %}
     </div>
+
+    {% set i=1 %}
+    {% for s in dvsliders %}
+        {% set i=i+1 %}
+        <div id="slide-caption{{ i }}" class="slide-caption nivo-html-caption nivo-caption">
+            <div class="slide-title">
+                {%  if s['title'] and s['title'] != ""  %}
+                    <h3>{{ s['title'] }}</h3>
+                {% endif %}
+            </div>
+            <div class="sub-title">
+                {%  if s['sub_title'] and s['sub_title'] != "" %}
+                    <h3>{{ s['sub_title'] }}</h3>
+                {% endif %}
+            </div>
+            <div class="slide-des">
+                {{ s['description'] }}
+            </div>
+            {% if s['link'] %}
+                <div class="slide-readmore">
+                    <a href="{{ s['link'] }}" title="{{ text_link_button }}">{{ text_link_button }}</a>
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
 </div>
+<script type="text/javascript">
+    $(window).load(function() {
+        $('#diva-slider').nivoSlider();
+        $('#diva-slider').nivoSlider({
+            effect:  'random',
+            slices: 15,
+            boxCols: 8,
+            boxRows: 4,
+            manualAdvance: {% if config['auto'] and config['auto'] == 1 %} false {% else %}   true  {% endif %} ,
+            animSpeed:500,
+            pauseTime: {% if config['delay'] %}  {{ config['delay'] }} {% else %}   3000  {% endif %} ,
+            startSlide: 0,
+            controlNav:  {% if config['contrl'] and config['contrl'] == 1 %} true {% else %}   false  {% endif %} ,
+            directionNav:  {% if config['nextback'] and config['nextback'] == 1 %} true {% else %}   false  {% endif %} ,
+            controlNavThumbs: false,
+            pauseOnHover:  {% if config['hover'] and config['hover'] == 1 %} true {% else %}   false  {% endif %} ,
+            prevText: 'Prev',
+            nextText: 'Next'
+        });
+    });
+</script>
