@@ -3,7 +3,7 @@
     <div class="page-header">
         <div class="container-fluid">
             <div class="pull-right">
-                <button type="submit" form="form-ocsearchcategory" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+                <button type="submit" form="form-dvsearch" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
                 <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
             <h1>{{ heading_title }}</h1>
             <ul class="breadcrumb">
@@ -19,78 +19,65 @@
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
             </div>
         {% endif %}
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
-            </div>
-            <div class="panel-body">
-                <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-ocsearchcategory" class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
-                        <div class="col-sm-10">
-                            <select name="module_ocsearchcategory_status" id="input-status" class="form-control">
-                                {% if module_ocsearchcategory_status %}
-                                    <option value="1" selected="selected">{{ text_enabled }}</option>
-                                    <option value="0">{{ text_disabled }}</option>
-                                {% else %}
-                                    <option value="1">{{ text_enabled }}</option>
-                                    <option value="0" selected="selected">{{ text_disabled }}</option>
-                                {% endif %}
-                            </select>
+        <div class="theme-option-container">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-dvsearch" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="input-status">{{ entry_status }}</label>
+                            <div class="col-sm-6">
+                                <input type="hidden" name="module_dvsearch_status" value="0" />
+                                <input type="checkbox" class="ckb-switch" name="module_dvsearch_status" id="input-status"
+                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
+                                        {% if module_dvsearch_status %} value="1" checked {% else %} value="0" {% endif %}>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-ajax-enabled">{{ entry_ajax_enabled }}</label>
-                        <div class="col-sm-10">
-                            <select name="module_ocsearchcategory_ajax_enabled" id="input-ajax-enabled" class="form-control">
-                                {% if module_ocsearchcategory_ajax_enabled %}
-                                    <option value="1" selected="selected">{{ text_enabled }}</option>
-                                    <option value="0">{{ text_disabled }}</option>
-                                {% else %}
-                                    <option value="1">{{ text_enabled }}</option>
-                                    <option value="0" selected="selected">{{ text_disabled }}</option>
-                                {% endif %}
-                            </select>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="input-ajax-enabled">{{ entry_ajax_enabled }}</label>
+                            <div class="col-sm-6">
+                                <input type="hidden" name="module_dvsearch_ajax" value="0" />
+                                <input type="checkbox" class="ckb-switch" name="module_dvsearch_ajax" id="input-ajax-enabled"
+                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
+                                        {% if module_dvsearch_ajax %} value="1" checked {% else %} value="0" {% endif %}>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-image">{{ entry_image }}</label>
-                        <div class="col-sm-10">
-                            <a href="" id="thumb-image" data-toggle="image" class="img-thumbnail"><img src="{{ thumb }}" alt="" title=""  /></a>
-                            <input type="hidden" name="module_ocsearchcategory_loader_img" value="{{ module_ocsearchcategory_loader_img }}" id="input-image" />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="input-pimage">{{ entry_product_image }}</label>
+                            <div class="col-sm-6">
+                                <input type="hidden" name="module_dvsearch_show_img" value="0" />
+                                <input type="checkbox" class="ckb-switch" name="module_dvsearch_show_img" id="input-pimage"
+                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
+                                        {% if module_dvsearch_show_img %} value="1" checked {% else %} value="0" {% endif %}>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-pimage">{{ entry_product_image }}</label>
-                        <div class="col-sm-10">
-                            <select name="module_ocsearchcategory_product_img" id="input-pimage" class="form-control">
-                                {% if module_ocsearchcategory_product_img %}
-                                    <option value="1" selected="selected">{{ text_enabled }}</option>
-                                    <option value="0">{{ text_disabled }}</option>
-                                {% else %}
-                                    <option value="1">{{ text_enabled }}</option>
-                                    <option value="0" selected="selected">{{ text_disabled }}</option>
-                                {% endif %}
-                            </select>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="input-price">{{ entry_product_price }}</label>
+                            <div class="col-sm-6">
+                                <input type="hidden" name="module_dvsearch_show_price" value="0" />
+                                <input type="checkbox" class="ckb-switch" name="module_dvsearch_show_price" id="input-price"
+                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
+                                        {% if module_dvsearch_show_price %} value="1" checked {% else %} value="0" {% endif %}>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-price">{{ entry_product_price }}</label>
-                        <div class="col-sm-10">
-                            <select name="module_ocsearchcategory_product_price" id="input-price" class="form-control">
-                                {% if module_ocsearchcategory_product_price %}
-                                    <option value="1" selected="selected">{{ text_enabled }}</option>
-                                    <option value="0">{{ text_disabled }}</option>
-                                {% else %}
-                                    <option value="1">{{ text_enabled }}</option>
-                                    <option value="0" selected="selected">{{ text_disabled }}</option>
-                                {% endif %}
-                            </select>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('.toggle.btn').on('click', function () {
+            var ckb_status = parseInt($(this).find('.ckb-switch').val());
+            if(ckb_status == 1) {
+                $(this).find('.ckb-switch').val('0');
+            } else {
+                $(this).find('.ckb-switch').val('1');
+            }
+        });
+    })
+</script>
 {{ footer }}
