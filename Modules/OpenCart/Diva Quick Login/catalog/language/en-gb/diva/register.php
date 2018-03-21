@@ -6,7 +6,7 @@ $_['heading_title']        = 'Register Account';
 // Text
 $_['text_account']         = 'Account';
 $_['text_register']        = 'Register';
-$_['text_account_already'] = 'If you already have an account with us, please login at the <a onclick="ocajaxlogin.appendLoginForm()" href="javascript:void(0);">login form</a>.';
+$_['text_account_already'] = 'If you already have an account with us, please login at the <a onclick="dvlogin.appendLoginForm()" href="javascript:void(0);">login form</a>.';
 $_['text_your_details']    = 'Your Personal Details';
 $_['text_your_address']    = 'Your Address';
 $_['text_newsletter']      = 'Newsletter';

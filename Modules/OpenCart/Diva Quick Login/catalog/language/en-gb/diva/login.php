@@ -1,7 +1,7 @@
 <?php
 
 // Heading
-$_['heading_title']  = 'Ajax Login';
+$_['heading_title']  = 'Quick Login';
 
 // Text
 $_['text_account']                 = 'Account';

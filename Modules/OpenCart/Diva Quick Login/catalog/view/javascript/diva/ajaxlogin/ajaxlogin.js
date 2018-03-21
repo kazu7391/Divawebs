@@ -1,18 +1,18 @@
 $(document).ready(function () {
-    var enable_status = $('#input-opc-status').val();
-    if(enable_status == '1') {
-        ocajaxlogin.changeEvent();
+    var status = $('#quicklogin-status').val();
+    if(status == '1') {
+        dvlogin.changeEvent();
     }
 });
 
 $(document).ajaxComplete(function () {
-    var enable_status = $('#input-opc-status').val();
-    if(enable_status == '1') {
-        ocajaxlogin.changeEvent();
+    var status = $('#quicklogin-status').val();
+    if(status == '1') {
+        dvlogin.changeEvent();
     }
 });
 
-var ocajaxlogin = {
+var dvlogin = {
     'loginAction' : function(email, password) {
         $.ajax({
             url: 'index.php?route=diva/login/login',
@@ -40,7 +40,7 @@ var ocajaxlogin = {
 
                         $('body').before('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success_message'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
                     }
-                    ocajaxlogin.closeForm();
+                    dvlogin.closeForm();
                     $('.ajax-load-img').hide();
                     $('.login-form-content .alert-danger').remove();
                 } else {
@@ -70,7 +70,7 @@ var ocajaxlogin = {
             success: function (json) {
                 $('.ajax-load-img').hide();
                 if(json['success'] == true) {
-                    ocajaxlogin.appendSuccess();
+                    dvlogin.appendSuccess();
                 } else {
 
                     // Error Warning
@@ -151,14 +151,14 @@ var ocajaxlogin = {
                     $('#cart > ul').load('index.php?route=common/cart/info ul li');
                 }
                 $('#ajax-loader').hide();
-                ocajaxlogin.appendLogoutSuccess();
+                dvlogin.appendLogoutSuccess();
             }
         });
     },
     
     'appendLoginForm' : function() {
-        ocajaxlogin.resetLoginForm();
-        ocajaxlogin.resetRegisterForm();
+        dvlogin.resetLoginForm();
+        dvlogin.resetRegisterForm();
         $('.ajax-body-login').show();
         $('.account-register').hide('400');
         $('#ajax-login-block').show();
@@ -166,8 +166,8 @@ var ocajaxlogin = {
     },
     
     'appendRegisterForm' : function() {
-        ocajaxlogin.resetLoginForm();
-        ocajaxlogin.resetRegisterForm();
+        dvlogin.resetLoginForm();
+        dvlogin.resetRegisterForm();
         $('.ajax-body-login').show();
         $('.account-login').hide('400');
         $('#ajax-login-block').show();
@@ -204,16 +204,16 @@ var ocajaxlogin = {
         $('.account-success').hide();
         $('.logout-success').hide();
         $('.ajax-body-login').hide();
-        ocajaxlogin.resetLoginForm();
-        ocajaxlogin.resetRegisterForm();
+        dvlogin.resetLoginForm();
+        dvlogin.resetRegisterForm();
     },
     
     'changeEvent' : function () {
         $('#dv-register-link').attr('href', 'javascript:void(0);')
-            .attr('onclick', 'ocajaxlogin.appendRegisterForm()');
+            .attr('onclick', 'dvlogin.appendRegisterForm()');
         $('#dv-login-link').attr('href', 'javascript:void(0);')
-            .attr('onclick', 'ocajaxlogin.appendLoginForm()');
+            .attr('onclick', 'dvlogin.appendLoginForm()');
         $('#dv-logout-link').attr('href', 'javascript:void(0);')
-            .attr('onclick', 'ocajaxlogin.logoutAction()');
+            .attr('onclick', 'dvlogin.logoutAction()');
     }
 };

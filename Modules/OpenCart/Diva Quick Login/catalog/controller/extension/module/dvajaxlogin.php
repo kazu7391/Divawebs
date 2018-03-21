@@ -2,7 +2,7 @@
 class ControllerExtensionModuleDvajaxlogin extends Controller
 {
     public function index() {
-        $this->load->language('extension/module/dvajaxlogin');
+        $this->load->language('diva/module/dvajaxlogin');
 
         $enable_status = $this->config->get('module_dvajaxlogin_status');
         if($enable_status == '1') {
