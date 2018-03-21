@@ -11,7 +11,6 @@ $_['text_success']          = 'Success: You have modified module!';
 // Entry
 $_['entry_status']          = 'Status';
 $_['entry_redirect_status'] = 'Redirect to Account';
-$_['entry_loader_img']      = 'Loader Image';
 
 //Error
 $_['error_permission']      = 'Warning: You do not have permission to modify this module!';

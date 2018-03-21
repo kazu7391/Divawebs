@@ -68,22 +68,6 @@ class ControllerExtensionModuleDvajaxlogin extends Controller
             $data['module_dvajaxlogin_redirect_status'] = $this->config->get('module_dvajaxlogin_redirect_status');
         }
 
-        if (isset($this->request->post['module_dvajaxlogin_loader_img'])) {
-            $data['module_dvajaxlogin_loader_img'] = $this->request->post['module_dvajaxlogin_loader_img'];
-        } else {
-            $data['module_dvajaxlogin_loader_img'] = $this->config->get('module_dvajaxlogin_loader_img');
-        }
-
-        if (isset($this->request->post['module_dvajaxlogin_loader_img']) && is_file(DIR_IMAGE . $this->request->post['module_dvajaxlogin_loader_img'])) {
-            $data['thumb'] = $this->model_tool_image->resize($this->request->post['module_dvajaxlogin_loader_img'], 50, 50);
-        } elseif (is_file(DIR_IMAGE . $this->config->get('module_dvajaxlogin_loader_img'))) {
-            $data['thumb'] = $this->model_tool_image->resize($this->config->get('module_dvajaxlogin_loader_img'), 50, 50);
-        } else {
-            $data['thumb'] = $this->model_tool_image->resize('no_image.png', 50, 50);
-        }
-
-        $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 50, 50);
-
         $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
         $this->document->addScript('view/javascript/divawebs/switch-toggle/js/bootstrap-toggle.min.js');
         $this->document->addStyle('view/javascript/divawebs/switch-toggle/css/bootstrap-toggle.min.css');
