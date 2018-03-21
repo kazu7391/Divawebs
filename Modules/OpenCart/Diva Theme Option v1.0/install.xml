@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <modification>
-    <code>oc_theme_option</code>
-    <name>OC Theme Option</name>
-    <version>1.18</version>
-    <author>Plaza Theme</author>
+    <code>diva_configuration</code>
+    <name>DIVA Configuration</name>
+    <version>1.0</version>
+    <author>Divawebs</author>
 
     <!-- Menu Left in Admin -->
     <file path="admin/controller/common/column_left.php">
@@ -885,13 +885,6 @@
             $data['scroll_top'] = (int) $this->config->get('module_dvcontrolpanel_scroll_top')[$data['store_id']];
         } else {
             $data['scroll_top'] = 0;
-        }
-
-        /* Loader Image */
-        if(isset($this->config->get('module_dvcontrolpanel_loader_img')[$data['store_id']])) {
-            $data['loader_img'] = $this->config->get('module_dvcontrolpanel_loader_img')[$data['store_id']];
-        } else {
-            $data['loader_img'] = false;
         }
 
         /* Font & CSS */

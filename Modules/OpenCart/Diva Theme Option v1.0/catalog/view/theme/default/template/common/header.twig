@@ -151,16 +151,16 @@
       <ul class="list-inline">
         <li><a href="{{ contact }}"><i class="fa fa-phone"></i></a> <span class="hidden-xs hidden-sm hidden-md">{{ telephone }}</span></li>
         <li class="dropdown"><a href="{{ account }}" title="{{ text_account }}" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_account }}</span> <span class="caret"></span></a>
-          <ul class="dropdown-menu dropdown-menu-right">
+          <ul class="dropdown-menu dropdown-menu-right dv-account">
             {% if logged %}
             <li><a href="{{ account }}">{{ text_account }}</a></li>
             <li><a href="{{ order }}">{{ text_order }}</a></li>
             <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
             <li><a href="{{ download }}">{{ text_download }}</a></li>
-            <li><a href="{{ logout }}">{{ text_logout }}</a></li>
+            <li><a id="dv-logout-link" href="{{ logout }}">{{ text_logout }}</a></li>
             {% else %}
-            <li><a href="{{ register }}">{{ text_register }}</a></li>
-            <li><a href="{{ login }}">{{ text_login }}</a></li>
+            <li><a id="dv-register-link" href="{{ register }}">{{ text_register }}</a></li>
+            <li><a id="dv-login-link" href="{{ login }}">{{ text_login }}</a></li>
             {% endif %}
           </ul>
         </li>
