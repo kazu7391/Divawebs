@@ -38,6 +38,10 @@
 {% for analytic in analytics %}
 {{ analytic }}
 {% endfor %}
+  <!-- Ajax Search -->
+  {% if search_status %}
+      <link href="catalog/view/theme/default/stylesheet/diva/ajaxsearch/search.css" rel="stylesheet" type="text/css" />
+  {% endif %}
   <!-- Quick view -->
   {% if use_quick_view %}
     <script src="catalog/view/javascript/diva/cloudzoom/cloud-zoom.1.0.2.min.js" type="text/javascript"></script>
