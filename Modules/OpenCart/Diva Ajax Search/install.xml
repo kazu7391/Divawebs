@@ -11,8 +11,10 @@
 				$search_status = $this->config->get('module_dvsearch_status');
 				if($search_status) {
 					$data['search'] = $this->load->controller('extension/module/dvsearch');
+					$data['search_status'] = true;
 				} else {
 					$data['search'] = $this->load->controller('common/search');
+					$data['search_status'] = false;
 				}
 			]]></add>
 		</operation>
