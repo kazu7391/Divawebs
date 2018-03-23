@@ -123,6 +123,18 @@ class ControllerExtensionModuleDvtweet extends Controller
     }
 
     public function install() {
+        $config = array(
+            'module_dvtweet_id' => 'divawebs',
+            'module_dvtweet_status' => 1,
+            'module_dvtweet_limit' => 3,
+            'module_dvtweet_show_time' => 1,
+            'module_dvtweet_consumer_key' => '7aQm44MGRc1OUNsZv45retuYq',
+            'module_dvtweet_consumer_secret' => 'YK0WGasUF5hq8SX7wSq7NZVQRinsOx3gx0YD0NYBIzYZVZZRGF',
+            'module_dvtweet_access_token' => '952805191929090048-LYcMJq5IjALqXRsglkMAVpgX4a7qRUP',
+            'module_dvtweet_access_token_secret' => 'zJ2nLNfbsZX3MmEjM275zHS3rMJWmbKEMSOWVULPVUwME'
+        );
 
+        $this->load->model('setting/setting');
+        $this->model_setting_setting->editSetting('module_dvtweet', $config);
     }
 }

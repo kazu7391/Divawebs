@@ -8,7 +8,7 @@ $_['text_success']              = 'Success: You have modified this module!';
 $_['text_edit']                 = 'Edit DIVA Tweet';
 
 // Entry
-$_['entry_id']                  = 'Twitter Username';
+$_['entry_id']                  = 'Username';
 $_['entry_status']              = 'Status';
 $_['entry_limit']               = 'Limit';
 $_['entry_show_time']           = 'Show Time';
@@ -19,4 +19,4 @@ $_['entry_access_token_secret'] = 'Access Token Secret';
 
 // Error
 $_['error_permission']          = 'Warning: You do not have permission to modify this module!';
-$_['error_id'] 			        = "Tweet ID required!";
+$_['error_id'] 			        = "Twitter Username required!";
