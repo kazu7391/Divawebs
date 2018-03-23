@@ -7,7 +7,7 @@
 - Layout Builder  (fa-cubes)                      (Done)
 - Mega Menu	(fa-bars)
 - Search Category  (fa-search)					  (Done)
-- Twitter	(fa-twitter)
+- Twitter	(fa-twitter)						  (Done)
 - CMS Block	(fa-object-group)                     (Done)
 - Newsletter		(fa-envelope)
 - Slideshow 		(fa-film)          			  (Done)    
