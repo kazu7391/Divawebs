@@ -26,10 +26,10 @@
                 </div>
                 <div class="panel-body">
                     <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-menu" class="form-horizontal">
-                        <div class="col-md-3 frm-left">
+                        <div class="frm-left">
                             <div class="form-group">
-                                <label class="col-sm-12" for="input-menu-name">{{ entry_menu_name }}</label>
-                                <div class="col-sm-12">
+                                <label class="col col-label" for="input-menu-name">{{ entry_menu_name }}</label>
+                                <div class="col col-input">
                                     <input id="input-menu-name" type="text" name="name" class="form-control" value="{{ name }}" />
                                     {% if error_name %}
                                         <div class="text-danger">{{ error_name }}</div>
@@ -37,8 +37,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-12" for="input-menu-status">{{ entry_status }}</label>
-                                <div class="col-sm-12">
+                                <label class="col col-label" for="input-menu-status">{{ entry_status }}</label>
+                                <div class="col col-input">
                                     <select name="status" id="input-menu-status" class="form-control">
                                         {% if status %}
                                             <option value="1" selected="selected">{{ text_enabled }}</option>
@@ -51,8 +51,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-12" for="input-menu-type">{{ entry_menu_type }}</label>
-                                <div class="col-sm-12">
+                                <label class="col col-label" for="input-menu-type">{{ entry_menu_type }}</label>
+                                <div class="col col-input">
                                     <select name="menu_type" id="input-menu-type" class="form-control">
                                         <option value="horizontal" {% if menu_type == 'horizontal' %} selected="selected" {% endif %}>{{ text_horizontal }}</option>
                                         <option value="vertical" {% if menu_type == 'vertical' %} selected="selected" {% endif %}>{{ text_vertical }}</option>
@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-9 frm-right">
+                        <div class="frm-right">
                             <div class="form-group">
                                 <div class="col-sm-6 col-text"><h4>{{ text_menu_item_settings }}</h4></div>
                                 <div class="col-sm-6 control-label col-btn">

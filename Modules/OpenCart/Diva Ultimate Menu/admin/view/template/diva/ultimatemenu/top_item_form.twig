@@ -8,13 +8,13 @@
         <div class="frm-button">
             <button type="button" class="btn btn-primary btn-submit" onclick="dvmenu.submitTopItemForm({{ menu_id }})" title="{{ button_save }}"><i class="fa fa-save"></i> Save</button>
         </div>
-        <div class="col-md-2 frm-left">
+        <div class="frm-left">
             <ul class="frm-list">
                 <li class="active"><a href="#tab-general" data-toggle="tab">{{ text_general_setting }}</a></li>
                 <li><a href="#tab-content" data-toggle="tab">{{ text_content_setting }}</a></li>
             </ul>
         </div>
-        <div class="col-md-10 frm-right">
+        <div class="frm-right">
             {% if error_warning %}
             <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
