@@ -81,10 +81,10 @@
                 );
             }
 
-            if($this->user->hasPermission('access', 'catalog/octestimonial')) {
+            if($this->user->hasPermission('access', 'diva/testimonial')) {
                 $adminmenu[] = array(
                     'name'     => $this->language->get('text_testimonial'),
-                    'href'     => $this->url->link('catalog/octestimonial', 'user_token=' . $this->session->data['user_token'], true),
+                    'href'     => $this->url->link('diva/testimonial', 'user_token=' . $this->session->data['user_token'], true),
                     'children' => array()
                 );
             }

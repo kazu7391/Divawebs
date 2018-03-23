@@ -82,7 +82,8 @@ class ModelDivaControlpanel extends Model
                 `description` text,
                 PRIMARY KEY (`dvslider_image_id`,`language_id`)
 		) DEFAULT COLLATE=utf8_general_ci;");
-
+        
+        $this->load->model('user/user_group');
         $this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'diva/slider');
         $this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'diva/slider');
     }
@@ -105,6 +106,10 @@ class ModelDivaControlpanel extends Model
                 `content` text,
                 PRIMARY KEY (`dvtestimonial_id`,`language_id`)
             ) DEFAULT COLLATE=utf8_general_ci;");
+
+        $this->load->model('user/user_group');
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'diva/testimonial');
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'diva/testimonial');
     }
 
     public function setupMenuData() {
@@ -166,16 +171,17 @@ class ModelDivaControlpanel extends Model
 	            PRIMARY KEY (`sub_menu_item_id`,`language_id`)
 		) DEFAULT COLLATE=utf8_general_ci;");
 
+        $this->load->model('user/user_group');
         $this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'diva/ultimatemenu');
         $this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'diva/ultimatemenu');
     }
 
     public function setupFeaturedCategories() {
+        $this->load->model('user/user_group');
         $this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'diva/featuredcate');
         $this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'diva/featuredcate');
 
         $this->load->model('diva/featuredcate');
-
         $this->model_diva_featuredcate->createFeaturedCate();
     }
 
