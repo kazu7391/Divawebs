@@ -18,7 +18,8 @@
 .frm-settings + .frm-settings { border-top: 1px solid #dcdcdc; }
 .frm-settings h4 { font-weight: 600; }
 .form-group .form-sp { margin-bottom: 10px; text-transform: uppercase; }
-.panel-body .frm-right {/*! min-height: 275px; */}
+.panel-body .frm-left { float: left; width: 100%;}
+.panel-body .frm-right { float: left; width: 100%; }
 .frm-title {
     display: block;
     text-transform: uppercase;
@@ -150,7 +151,7 @@
 }
 .frm-container .frm-body .frm-list li a:before {
     content: "1";
-    
+
     width: 30px;
     height: 30px;
     background: #fff;
@@ -202,6 +203,7 @@
     margin: 0;
     padding: 0 5px;
     width: 30%;
+    text-align:  center;
 }
 .form-group + .form-group {
     border-top:0;
@@ -261,7 +263,7 @@
     height: 595px;
     padding: 15px 0;
     border: solid 1px #dcdcdc;
-    background-color: #ededed;
+    background-color: #000000;
     overflow: auto;
     border-radius: 6px;
     -moz-border-radius: 6px;
@@ -312,8 +314,8 @@
     border: 1px solid #eb5202;
     padding: 10px;
     overflow: auto;
-    background: #fff;
-    font-size: 12px;
+    background: #eb5202;
+    font-size: 14px;
     border-radius: 3px;
 }
 .widget-content .widget-resize-action {
@@ -321,15 +323,28 @@
     width: 100%;
 }
 .widget-content .widget-resize-action .a-left {
-    color: #1e91cf;
-    float: left;
+    color: #eb5202;
     margin: 0 5px;
+    position: absolute;
+    top: 35%;
+    background:  #fff;
+    border: 1px solid #ffffff;
+    width:  20px;
+    text-align:  center;
+    display: none;
+}
+.widget-content:hover .widget-resize-action .a-left {
+    display: block;
 }
 .widget-content .widget-resize-action .a-left:hover {
-    color: #eb5202;
-    float: left;
+    color: #fff;
+    background-color:  #eb5202;
     margin: 0 5px;
 }
+.widget-content .widget-resize-action .a-resize-minus {
+    left: 0%;
+}
+.widget-content .widget-resize-action .a-resize-plus {right: 0%;}
 .widget-content .widget-resize-action .a-right {
     float: right;
     margin: 0 5px;
@@ -344,6 +359,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color: #FFF;
 }
 .widget-content .widget-name-container .name {
     font-weight: bold;

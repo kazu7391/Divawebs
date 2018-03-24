@@ -1,6 +1,8 @@
 <?php
 class ControllerDivaUltimatemenu extends Controller
 {
+    private $error = array();
+
     public function menuList() {
         $this->load->language('extension/module/dvmenu');
 
@@ -223,8 +225,6 @@ class ControllerDivaUltimatemenu extends Controller
         $data['results'] = sprintf($this->language->get('text_pagination'), ($menus_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($menus_total - $this->config->get('config_limit_admin'))) ? $menus_total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $menus_total, ceil($menus_total / $this->config->get('config_limit_admin')));
 
         $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
-        $this->document->addScript('view/javascript/divawebs/switch-toggle/js/bootstrap-toggle.min.js');
-        $this->document->addStyle('view/javascript/divawebs/switch-toggle/css/bootstrap-toggle.min.css');
 
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
