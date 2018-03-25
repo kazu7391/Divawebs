@@ -61,10 +61,11 @@
 }
 .frm-right .menu_item_container .top_item > div .a-config {color: #f5f5f5;}
 .frm-right .menu_item_container .top_item {border-color: #eb5202;background: #eb5202;color: #f5f5f5;margin: 0;padding: 12px 15px;}
-.frm-right .menu_item_container .second_item_container {margin-left: 15px;margin-top: 5px;}
+.frm-right .menu_item_container .second_item_container {margin-left: 15px;}
+.frm-right .menu_item_container .second_item_container {margin-left: 15px;}
 .frm-right .menu_item_container .second_item > div .a-config {color: #fff;}
 .frm-right .menu_item_container .second_item {border-color: rgb(157, 157, 157); background: rgb(86, 74, 74) none repeat scroll 0% 0%; color: rgb(255, 255, 255);padding: 9px 15px;}
-.frm-right .menu_item_container .third_item_container {margin-left: 15px;margin-top: 5px;}
+.frm-right .menu_item_container .third_item_container {margin-left: 15px;}
 .frm-right .menu_item_container .third_item > div .a-config {color: #333;}
 .frm-right .menu_item_container .third_item > div .a-delete {color: #333;}
 .frm-right .menu_item_container .third_item {border-color: #bbbbbb;background: #e6e4e4;color: #333;padding: 5px 15px;}
@@ -312,7 +313,7 @@
 }
 .widget-content {
     border: 1px solid #eb5202;
-    padding: 10px;
+    padding: 10px 20px;
     overflow: auto;
     background: #eb5202;
     font-size: 14px;
@@ -326,7 +327,7 @@
     color: #eb5202;
     margin: 0 5px;
     position: absolute;
-    top: 35%;
+    top: 30%;
     background:  #fff;
     border: 1px solid #ffffff;
     width:  20px;
@@ -345,9 +346,11 @@
     left: 0%;
 }
 .widget-content .widget-resize-action .a-resize-plus {right: 0%;}
-.widget-content .widget-resize-action .a-right {
+.widget-content .widget-name-container .a-right {
     float: right;
-    margin: 0 5px;
+    margin: 0px 5px;
+    color: #fff;
+    cursor: pointer;
 }
 .widget-content .widget-resize-action .a-delete {
     color: red;
@@ -363,7 +366,7 @@
 }
 .widget-content .widget-name-container .name {
     font-weight: bold;
-    margin-left: 5px;
+    float: left;
 }
 .modal {
     z-index: 3050;
@@ -373,7 +376,7 @@
     border: none;
 }
 .widget-block.ui-state-highlight .widget-content {
-    height: 62px;
+    height: 50px;
     background: #FAFAFA;
     box-shadow: 0 -1px 0 1px #6E6E6E;
     border: #A4A4A4;
