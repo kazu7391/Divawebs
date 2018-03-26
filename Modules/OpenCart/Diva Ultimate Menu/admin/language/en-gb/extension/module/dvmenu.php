@@ -4,18 +4,18 @@ $_['heading_title']     = '<b style="color: #eb5202;"><i><i class="fa fa-bars"><
 $_['page_title']        = 'DIVA Ultimate Menu';
 
 // Tab
-$_['tab_second_item']   = 'Second Level Items';
-$_['tab_third_item']    = 'Third Level Items';
+$_['tab_second_item']   = 'Sub Items';
+$_['tab_third_item']    = 'Sub - Sub Items';
 
 // Text
 $_['text_extension']    = 'Extensions';
 $_['text_success']      = 'Success: You have modified DIVA Ultimate Menu module!';
 $_['text_edit']         = 'Edit DIVA Ultimate Menu Module';
-$_['text_menu_bar_setting']     = 'Menu Bar Settings';
-$_['text_flyout_menu_setting']  = 'Flyout Menu Settings';
-$_['text_general_setting']      = 'General Settings';
-$_['text_mega_menu_setting']    = 'Mega Menu Settings';
-$_['text_top_item_setting']     = 'Top Level Items Settings';
+$_['text_menu_bar_setting']     = 'Menu Bar';
+$_['text_flyout_menu_setting']  = 'Flyout Menu';
+$_['text_general_setting']      = 'General';
+$_['text_mega_menu_setting']    = 'Mega Menu';
+$_['text_top_item_setting']     = 'Top Items';
 $_['text_yes']          = 'Yes';
 $_['text_no']           = 'No';
 $_['text_hover']        = 'Hover';
@@ -50,7 +50,7 @@ $_['text_horizontal']   = 'Horizontal';
 $_['text_vertical']     = 'Vertical';
 $_['text_mobile']       = 'Mobile';
 $_['text_menu_item_settings']   = 'Menu Items Editor';
-$_['text_add_top_item']         = 'Add Top Item';
+$_['text_add_top_item']         = 'Add Item';
 $_['text_no_items']             = 'There is no menu items!';
 $_['text_no_children_items']    = 'There is no children items!';
 $_['text_item_form']            = 'Menu Item Configuration';
@@ -69,7 +69,7 @@ $_['text_slider']       = 'Slider';
 $_['text_link']         = 'Link';
 $_['text_megamenu_info']        = 'This configuration is only used for Mega Menu type (not Flyout Menu)';
 $_['text_link_info']    = 'If the Sub Menu Content is Category, this link is Category link. If not, the link will be kept.';
-$_['text_add_sub_item']         = 'Add Sub Item';
+$_['text_add_sub_item']         = 'Add Item';
 $_['text_disable_link']         = 'Disable Link';
 $_['text_hide_title']   = 'Hide Title';
 $_['text_title']        = 'Title';
@@ -82,28 +82,28 @@ $_['text_success_item']         = 'Success: You have modified Menu Items!';
 $_['text_confirm_delete']       = 'Do you want to delete this item?';
 $_['text_confirm_multiple_delete']  = 'Do you want to delete these items?';
 $_['text_sub_menu_info']        = 'If you choose "Children Items", the menu content will show children items of this items';
-$_['text_no_menus']     = 'No menus';
+$_['text_no_menus']     = 'No menu';
 $_['text_for_menu']     = 'This option is used for Vertical Menu';
-$_['text_delete_items']         = 'Delete Items';
+$_['text_delete_items']         = 'Delete';
 $_['text_choose_delete_items']  = 'Please choose items to delete';
 
 // Entry
 $_['entry_name']        = 'Module Name';
 $_['entry_status']      = 'Status';
-$_['entry_menu_height'] = 'Menu Height';
+$_['entry_menu_height'] = 'Height';
 $_['entry_event']       = 'Mouse Event';
-$_['entry_effect']      = 'Menu Effect';
-$_['entry_menu_background']     = 'Menu Background';
-$_['entry_menu_padding']        = 'Menu Padding';
+$_['entry_effect']      = 'Effect';
+$_['entry_menu_background']     = 'Background';
+$_['entry_menu_padding']        = 'Padding';
 $_['entry_item_align']          = 'Item Align';
-$_['entry_item_background']     = 'Item Background';
+$_['entry_item_background']     = 'Background';
 $_['entry_item_font']   = 'Font';
-$_['entry_menu_width']  = 'Menu Width';
-$_['entry_menu_name']   = 'Menu Name';
-$_['entry_item_name']   = 'Item Name';
-$_['entry_title']       = 'Item Title';
+$_['entry_menu_width']  = 'Width';
+$_['entry_menu_name']   = 'Name';
+$_['entry_item_name']   = 'Name';
+$_['entry_title']       = 'Title';
 $_['entry_link']        = 'Link';
-$_['entry_menu_type']   = 'Menu Type';
+$_['entry_menu_type']   = 'Type';
 $_['entry_position']    = 'Position';
 $_['entry_sub_menu_type']       = 'Sub Menu Type';
 $_['entry_sub_menu_content_type']   = 'Sub Menu Content Type';
@@ -116,7 +116,7 @@ $_['entry_menu_text_color']     = 'Text Color';
 $_['entry_number_items']        = 'Show Items';
 
 // Column
-$_['column_name']       = 'Menu Name';
+$_['column_name']       = 'Name';
 $_['column_status']     = 'Status';
 $_['column_action']     = 'Action';
 
