@@ -173,7 +173,7 @@ class ControllerDivaTestimonial extends Controller
                 'sort_order'      => $result['sort_order'],
                 'status'     => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
                 'selected'   => isset($this->request->post['selected']) && in_array($result['testimonial_id'], $this->request->post['selected']),
-                'action'     => $action
+                'url' => $this->url->link('diva/testimonial/update', 'user_token=' . $this->session->data['user_token'] . '&testimonial_id=' . $result['dvtestimonial_id'], true)
             );
         }
 
@@ -355,5 +355,42 @@ class ControllerDivaTestimonial extends Controller
         $data['column_left'] = $this->load->controller('common/column_left');
 
         $this->response->setOutput($this->load->view('diva/testimonial/form', $data));
+    }
+
+    private function validateForm() {
+        if (!$this->user->hasPermission('modify', 'diva/testimonial')) {
+            $this->error['warning'] = $this->language->get('error_permission');
+        }
+
+        $testimonial = $this->request->post['testimonial_description'];
+
+        if (isset($testimonial['customer_name']) && (strlen(utf8_decode($testimonial['customer_name'])) < 3) || (strlen(utf8_decode($testimonial['customer_name'])) > 255)) {
+            $this->error['customer_name']= $this->language->get('error_name');
+        }
+        if ((strlen(utf8_decode($testimonial['content'])) < 3)) {
+            $this->error['content'] = $this->language->get('error_description');
+        }
+
+
+        if (!$this->error) {
+            return TRUE;
+        } else {
+            if (!isset($this->error['warning'])) {
+                $this->error['warning'] = $this->language->get('error_required_data');
+            }
+            return FALSE;
+        }
+    }
+
+    private function validateDelete() {
+        if (!$this->user->hasPermission('modify', 'diva/testimonial')) {
+            $this->error['warning'] = $this->language->get('error_permission');
+        }
+
+        if (!$this->error) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 }
