@@ -11,7 +11,7 @@
 - CMS Block	(fa-object-group)                     (Done)
 - Newsletter		(fa-envelope)
 - Slideshow 		(fa-film)          			  (Done)    
-- Testimonial		(fa-comments)
+- Testimonial		(fa-comments)				  (Done)
 - Product Tabs		(fa-shopping-bag)
 - Categories Tabs	(fa-tags)
 - Featured Products	(fa-bookmark)
