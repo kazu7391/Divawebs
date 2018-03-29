@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']     = '<b style="color: #eb5202;"><i><i class="fa fa-bars"></i> DIVA Ultimate Menu</i></b>';
+$_['heading_title']     = '<b style="color: #eb5202;"><i><i class="c fa fa-bars"></i> DIVA Ultimate Menu</i></b>';
 $_['page_title']        = 'DIVA Ultimate Menu';
 
 // Tab
