@@ -7,5 +7,5 @@ $_['text_blog'] = "Blog";
 $_['text_article'] = "Articles";
 $_['text_article_list'] = "Articles Lists";
 $_['text_blog_config'] = "Configuration";
-$_['text_testimonial'] = "Testimonials";
+$_['text_testimonial'] = "Testimonial";
 $_['text_slideshow'] = "Sliders Management";
