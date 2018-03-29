@@ -27,8 +27,8 @@
                 <div class="panel-body">
                     <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-instagram" class="form-horizontal">
                         <div class="form-group required">
-                            <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 control-label" for="input-name">{{ entry_name }}</label>
+                            <div class="col-sm-6">
                                 <input type="text" name="name" value="{{ name }}" placeholder="{{ entry_name }}" id="input-name" class="form-control" />
                                 {% if error_name %}
                                     <div class="text-danger">{{ error_name }}</div>
@@ -36,23 +36,18 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
-                            <div class="col-sm-10">
-                                <select name="status" id="input-status" class="form-control">
-                                    {% if status %}
-                                        <option value="1" selected="selected">{{ text_enabled }}</option>
-                                        <option value="0">{{ text_disabled }}</option>
-                                    {% else %}
-                                        <option value="1">{{ text_enabled }}</option>
-                                        <option value="0" selected="selected">{{ text_disabled }}</option>
-                                    {% endif %}
-                                </select>
+                            <label class="col-sm-3 control-label" for="input-status">{{ entry_status }}</label>
+                            <div class="col-sm-6">
+                                <input type="hidden" name="status" value="0" />
+                                <input type="checkbox" class="ckb-switch" name="status" id="input-status"
+                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
+                                        {% if status %} value="1" checked {% else %} value="0" {% endif %}>
                             </div>
                         </div>
                         <div class="form-group required">
-                            <label class="col-sm-2 control-label" for="input-userid">{{ entry_userid }}</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="userid" value="{{ userid }}" placeholder="{{ entry_userid }}" id="input-userid" class="form-control" />
+                            <label class="col-sm-3 control-label" for="input-userid">{{ entry_userid }}</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="user_id" value="{{ user_id }}" placeholder="{{ entry_userid }}" id="input-userid" class="form-control" />
                                 <div class="text-info" style="margin-top: 5px;"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{ help_userid }}</div>
                                 {% if error_userid %}
                                     <div class="text-danger" style="margin-top: 5px;">{{ error_userid }}</div>
@@ -60,8 +55,8 @@
                             </div>
                         </div>
                         <div class="form-group required">
-                            <label class="col-sm-2 control-label" for="input-access-token">{{ entry_access_token }}</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 control-label" for="input-access-token">{{ entry_access_token }}</label>
+                            <div class="col-sm-9">
                                 <input type="text" name="access_token" value="{{ access_token }}" placeholder="{{ entry_access_token }}" id="input-access-token" class="form-control" />
                                 <div class="text-info" style="margin-top: 5px;"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{ help_access_token }}</div>
                                 {% if error_access_token %}
@@ -70,20 +65,20 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-limit">{{ entry_limit }}</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 control-label" for="input-limit">{{ entry_limit }}</label>
+                            <div class="col-sm-3">
                                 <input type="text" name="limit" value="{{ limit }}" placeholder="{{ entry_limit }}" id="input-limit" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-rows">{{ entry_rows }}</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 control-label" for="input-rows">{{ entry_rows }}</label>
+                            <div class="col-sm-3">
                                 <input type="text" name="rows" value="{{ rows }}" placeholder="{{ entry_rows }}" id="input-rows" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-mode">{{ entry_view_mode }}</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 control-label" for="input-mode">{{ entry_view_mode }}</label>
+                            <div class="col-sm-6">
                                 <select class="form-control" id="input-mode" name="view_mode">
                                     <option value="gallery" {% if view_mode == 'gallery' %} selected="selected" {% endif %} >{{ text_gallery_mode }}</option>
                                     <option value="slider"  {% if view_mode == 'slider' %}  selected="selected" {% endif %} >{{ text_slider_mode }}</option>
@@ -91,47 +86,42 @@
                             </div>
                         </div>
                         <div class="form-group mode-slider">
-                            <label class="col-sm-2 control-label" for="input-item">{{ entry_item }}</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 control-label" for="input-item">{{ entry_item }}</label>
+                            <div class="col-sm-3">
                                 <input type="text" name="item" value="{{ item }}" placeholder="{{ entry_item }}" id="input-item" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group mode-slider">
-                            <label class="col-sm-2 control-label" for="input-speed">{{ entry_speed }}</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 control-label" for="input-speed">{{ entry_speed }}</label>
+                            <div class="col-sm-3">
                                 <input type="text" name="speed" value="{{ speed }}" placeholder="{{ entry_speed }}" id="input-speed" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group mode-slider">
-                            <label class="col-sm-2 control-label" for="input-autoplay">{{ entry_autoplay }}</label>
-                            <div class="col-sm-10">
-                                <select name="autoplay" id="input-autoplay" class="form-control">
-                                    {% if autoplay %}
-                                        <option value="1" selected="selected">{{ text_yes }}</option>
-                                        <option value="0">{{ text_no }}</option>
-                                    {% else %}
-                                        <option value="1">{{ text_yes }}</option>
-                                        <option value="0" selected="selected">{{ text_no }}</option>
-                                    {% endif %}
-                                </select>
+                            <label class="col-sm-3 control-label" for="input-auto">{{ entry_auto }}</label>
+                            <div class="col-sm-6">
+                                <input type="hidden" name="auto" value="0" />
+                                <input type="checkbox" class="ckb-switch" name="auto" id="input-auto"
+                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
+                                        {% if auto %} value="1" checked {% else %} value="0" {% endif %}>
                             </div>
                         </div>
                         <div class="form-group mode-slider">
-                            <label class="col-sm-2 control-label" for="input-shownextback">{{ entry_shownextback }}</label>
-                            <div class="col-sm-10">
-                                <select id="input-shownextback" name="shownextback" class="form-control">
-                                    <option value="0"  {% if shownextback==0 %} selected="selected" {% endif %} >{{ text_no }}</option>
-                                    <option value="1"  {% if shownextback==1 %} selected="selected" {% endif %} >{{ text_yes }}</option>
-                                </select>
+                            <label class="col-sm-3 control-label" for="input-navigation">{{ entry_navigation }}</label>
+                            <div class="col-sm-6">
+                                <input type="hidden" name="navigation" value="0" />
+                                <input type="checkbox" class="ckb-switch" name="navigation" id="input-navigation"
+                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
+                                        {% if navigation %} value="1" checked {% else %} value="0" {% endif %}>
                             </div>
                         </div>
                         <div class="form-group mode-slider">
-                            <label class="col-sm-2 control-label" for="input-shownav">{{ entry_shownav }}</label>
-                            <div class="col-sm-10">
-                                <select id="input-shownav" name="shownav" class="form-control">
-                                    <option value="0"  {% if shownav==0 %} selected="selected" {% endif %} >{{ text_no }}</option>
-                                    <option value="1"  {% if shownav==1 %} selected="selected" {% endif %} >{{ text_yes }}</option>
-                                </select>
+                            <label class="col-sm-3 control-label" for="input-pagination">{{ entry_pagination }}</label>
+                            <div class="col-sm-6">
+                                <input type="hidden" name="pagination" value="0" />
+                                <input type="checkbox" class="ckb-switch" name="pagination" id="input-pagination"
+                                       data-toggle="toggle" data-on="{{ text_enabled }}" data-off="{{ text_disabled }}" data-width="100" data-height="36"
+                                        {% if pagination %} value="1" checked {% else %} value="0" {% endif %}>
                             </div>
                         </div>
                     </form>
@@ -156,6 +146,15 @@
                 $('.mode-slider').hide();
             }
         })
+
+        $('.toggle.btn').on('click', function () {
+            var ckb_status = parseInt($(this).find('.ckb-switch').val());
+            if(ckb_status == 1) {
+                $(this).find('.ckb-switch').val('0');
+            } else {
+                $(this).find('.ckb-switch').val('1');
+            }
+        });
     })
 </script>
 {{ footer }}

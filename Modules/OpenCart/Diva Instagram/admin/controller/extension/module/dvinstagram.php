@@ -106,12 +106,12 @@ class ControllerExtensionModuleDvinstagram extends Controller
             $data['view_mode'] = 'gallery';
         }
 
-        if (isset($this->request->post['userid'])) {
-            $data['userid'] = $this->request->post['userid'];
+        if (isset($this->request->post['user_id'])) {
+            $data['user_id'] = $this->request->post['user_id'];
         } elseif (!empty($module_info)) {
-            $data['userid'] = $module_info['userid'];
+            $data['user_id'] = $module_info['user_id'];
         } else {
-            $data['userid'] = '';
+            $data['user_id'] = '';
         }
 
         if (isset($this->request->post['access_token'])) {
@@ -198,7 +198,7 @@ class ControllerExtensionModuleDvinstagram extends Controller
             $this->error['name'] = $this->language->get('error_name');
         }
 
-        if (!$this->request->post['userid']) {
+        if (!$this->request->post['user_id']) {
             $this->error['userid'] = $this->language->get('error_userid');
         }
 
