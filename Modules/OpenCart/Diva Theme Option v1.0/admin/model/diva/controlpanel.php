@@ -39,10 +39,35 @@ class ModelDivaControlpanel extends Model
 		) DEFAULT COLLATE=utf8_general_ci;");
 
         $this->db->query("
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvpost_list` (
+			    `post_list_id` INT(11) NOT NULL AUTO_INCREMENT,
+                `name` VARCHAR(255) NOT NULL,
+                `status` TINYINT(1) NOT NULL DEFAULT '0',
+            PRIMARY KEY (`article_list_id`),
+	        INDEX `name` (`name`)
+		) DEFAULT COLLATE=utf8_general_ci;");
+
+        $this->db->query("
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvpost_to_list` (
+			    `post_list_id` INT(11) NOT NULL,
+                `post_id` INT(11) NOT NULL
+		) DEFAULT COLLATE=utf8_general_ci;");
+
+        $this->db->query("
 			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvpost_to_store` (
 			    `post_id` INT(11) NOT NULL,
                 `store_id` INT(11) NOT NULL
 		) DEFAULT COLLATE=utf8_general_ci;");
+
+        $this->load->model('user/user_group');
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'diva/blog/post');
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'diva/blog/post');
+
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'diva/blog/list');
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'diva/blog/list');
+        
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'diva/blog/setting');
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'diva/blog/setting');
     }
 
     public function setupSliderData() {
