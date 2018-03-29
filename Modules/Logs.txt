@@ -3,7 +3,7 @@
 - Ajax Login   (	fa-user)					  (Done)
 - Blog		(fa-ticket)
 - Feature Category (fa-tag)                       (Done)
-- Instagram	(fa-instagram)
+- Instagram	(fa-instagram)						  (Done)
 - Layout Builder  (fa-cubes)                      (Done)
 - Mega Menu	(fa-bars)
 - Search Category  (fa-search)					  (Done)
