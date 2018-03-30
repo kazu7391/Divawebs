@@ -1,16 +1,14 @@
 <?php
 // Heading
-$_['heading_title']          = 'Blog Posts';
+$_['heading_title']          = '<b style="color: #eb5202;"><i>Blog Posts</i></b>';
+$_['page_title']             = 'Blog Posts';
 
 // Text
 $_['text_success']           = 'Success: You have modified posts!';
 $_['text_list']              = 'Posts List';
 $_['text_add']               = 'Add Post';
 $_['text_edit']              = 'Edit Post';
-$_['text_default']           = 'Default';
 $_['text_extension']         = 'Extensions';
-$_['text_plus']              = '+';
-$_['text_minus']             = '-';
 
 // Column
 $_['column_name']            = 'Name';
@@ -38,7 +36,7 @@ $_['help_keyword']           = 'Do not use spaces, instead replace spaces with "
 // Error
 $_['error_warning']          = 'Warning: Please check the form carefully for errors!';
 $_['error_permission']       = 'Warning: You do not have permission to modify post!';
-$_['error_name']             = 'Article Name must be greater than 3 and less than 255 characters!';
+$_['error_name']             = 'Post Name must be greater than 3 and less than 255 characters!';
 $_['error_meta_title']       = 'Meta Title must be greater than 3 and less than 255 characters!';
 $_['error_keyword']          = 'SEO keyword already in use!';
 

@@ -6,7 +6,7 @@ class ControllerDivaBlogPost extends Controller
     public function index() {
         $this->load->language('diva/blog/post');
 
-        $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->setTitle($this->language->get('page_title'));
 
         $this->load->model('diva/blog');
 
@@ -16,7 +16,7 @@ class ControllerDivaBlogPost extends Controller
     public function add() {
         $this->load->language('diva/blog/post');
 
-        $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->setTitle($this->language->get('page_title'));
 
         $this->load->model('diva/blog');
 
@@ -56,7 +56,7 @@ class ControllerDivaBlogPost extends Controller
     public function edit() {
         $this->load->language('diva/blog/post');
 
-        $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->setTitle($this->language->get('page_title'));
 
         $this->load->model('diva/blog');
 
@@ -96,7 +96,7 @@ class ControllerDivaBlogPost extends Controller
     public function delete() {
         $this->load->language('diva/blog/post');
 
-        $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->setTitle($this->language->get('page_title'));
 
         $this->load->model('diva/blog');
 
@@ -138,7 +138,7 @@ class ControllerDivaBlogPost extends Controller
     public function copy() {
         $this->load->language('diva/blog/post');
 
-        $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->setTitle($this->language->get('page_title'));
 
         $this->load->model('diva/blog');
 
@@ -356,6 +356,10 @@ class ControllerDivaBlogPost extends Controller
         $data['sort'] = $sort;
         $data['order'] = $order;
 
+        $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
+        $this->document->addScript('view/javascript/divawebs/switch-toggle/js/bootstrap-toggle.min.js');
+        $this->document->addStyle('view/javascript/divawebs/switch-toggle/css/bootstrap-toggle.min.css');
+
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
@@ -533,11 +537,15 @@ class ControllerDivaBlogPost extends Controller
             $data['post_store'] = array(0);
         }
 
+        $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
+        $this->document->addScript('view/javascript/divawebs/switch-toggle/js/bootstrap-toggle.min.js');
+        $this->document->addStyle('view/javascript/divawebs/switch-toggle/css/bootstrap-toggle.min.css');
+
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->load->view('diva/blog/blog/form', $data));
+        $this->response->setOutput($this->load->view('diva/blog/post/form', $data));
     }
 
     protected function validateForm() {
@@ -560,8 +568,12 @@ class ControllerDivaBlogPost extends Controller
 
             $url_alias_info = $this->model_design_seo_url->getSeoUrlsByKeyword($this->request->post['keyword']);
 
-            if ($url_alias_info && isset($this->request->get['post_id']) && $url_alias_info['query'] != 'post_id=' . $this->request->get['post_id']) {
-                $this->error['keyword'] = sprintf($this->language->get('error_keyword'));
+            foreach ($url_alias_info as $surl) {
+                if ($url_alias_info && isset($this->request->get['post_id']) && $surl['query'] != 'post_id=' . $this->request->get['post_id']) {
+                    $this->error['keyword'] = sprintf($this->language->get('error_keyword'));
+
+                    break;
+                }
             }
 
             if ($url_alias_info && !isset($this->request->get['post_id'])) {

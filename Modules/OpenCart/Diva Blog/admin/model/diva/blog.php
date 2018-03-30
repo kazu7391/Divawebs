@@ -26,7 +26,7 @@ class ModelDivaBlog extends Model
     }
 
     public function editPost($post_id, $data) {
-        $this->db->query("UPDATE " . DB_PREFIX . "dvpost SET author = '" . $this->db->escape($data['author']) . "', image = '" . $this->db->escape($data['image']) . "', sort_order = '" . (int)$data['sort_order'] . "', status = '" . (int)$data['status'] . "', date_modified = NOW() WHERE article_id = '" . (int) $post_id . "'");
+        $this->db->query("UPDATE " . DB_PREFIX . "dvpost SET author = '" . $this->db->escape($data['author']) . "', image = '" . $this->db->escape($data['image']) . "', sort_order = '" . (int)$data['sort_order'] . "', status = '" . (int)$data['status'] . "', date_modified = NOW() WHERE post_id = '" . (int) $post_id . "'");
 
         $this->db->query("DELETE FROM " . DB_PREFIX . "dvpost_description WHERE post_id = '" . (int) $post_id . "'");
 

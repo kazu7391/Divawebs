@@ -84,7 +84,12 @@ class ControllerDivaBlogSetting extends Controller
         );
 
         $data['breadcrumbs'][] = array(
-            'text' => $this->language->get('text_edit'),
+            'text' => $this->language->get('text_extension'),
+            'href' => $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true)
+        );
+
+        $data['breadcrumbs'][] = array(
+            'text' => $this->language->get('heading_title'),
             'href' => $this->url->link('diva/blog/setting', 'user_token=' . $this->session->data['user_token'], true)
         );
 
@@ -138,6 +143,8 @@ class ControllerDivaBlogSetting extends Controller
         } else {
             $data['module_dvblog_post_height'] = $this->config->get('module_dvblog_post_height');
         }
+
+        $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
 
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');

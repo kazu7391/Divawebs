@@ -29,92 +29,96 @@
         {% endif %}
         <div class="row">
             <div id="filter-post" class="col-md-3 col-md-push-9 col-sm-12 hidden-sm hidden-xs">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-filter"></i> {{ text_filter }}</h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <label class="control-label" for="input-name">{{ entry_name }}</label>
-                            <input type="text" name="filter_name" value="{{ filter_name }}" placeholder="{{ entry_name }}" id="input-name" class="form-control" />
+                <div class="theme-option-container">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-filter"></i> {{ text_filter }}</h3>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label" for="input-status">{{ entry_status }}</label>
-                            <select name="filter_status" id="input-status" class="form-control">
-                                <option value=""></option>
-                                {% if filter_status == '1' %}
-                                    <option value="1" selected="selected">{{ text_enabled }}</option>
-                                {% else %}
-                                    <option value="1">{{ text_enabled }}</option>
-                                {% endif %}
-                                {% if filter_status == '0' %}
-                                    <option value="0" selected="selected">{{ text_disabled }}</option>
-                                {% else %}
-                                    <option value="0">{{ text_disabled }}</option>
-                                {% endif %}
-                            </select>
-                        </div>
-                        <div class="form-group text-right">
-                            <button type="button" id="button-filter" class="btn btn-default"><i class="fa fa-filter"></i> {{ button_filter }}</button>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="control-label" for="input-name">{{ entry_name }}</label>
+                                <input type="text" name="filter_name" value="{{ filter_name }}" placeholder="{{ entry_name }}" id="input-name" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="input-status">{{ entry_status }}</label>
+                                <select name="filter_status" id="input-status" class="form-control">
+                                    <option value=""></option>
+                                    {% if filter_status == '1' %}
+                                        <option value="1" selected="selected">{{ text_enabled }}</option>
+                                    {% else %}
+                                        <option value="1">{{ text_enabled }}</option>
+                                    {% endif %}
+                                    {% if filter_status == '0' %}
+                                        <option value="0" selected="selected">{{ text_disabled }}</option>
+                                    {% else %}
+                                        <option value="0">{{ text_disabled }}</option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                            <div class="form-group text-right">
+                                <button type="button" id="button-filter" class="btn btn-default btn-theme-option"><i class="fa fa-filter"></i> {{ button_filter }}</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-9 col-md-pull-3 col-sm-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-list"></i> {{ text_list }}</h3>
-                    </div>
-                    <div class="panel-body">
-                        <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-post">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
-                                        <td class="text-left">
-                                            {% if sort == 'ad.name' %}
-                                                <a href="{{ sort_name }}" class="{{ order|lower }}">{{ column_name }}</a>
-                                            {% else %}
-                                                <a href="{{ sort_name }}">{{ column_name }}</a>
-                                            {% endif %}
-                                        </td>
-                                        <td class="text-left">{{ column_author }}</td>
-                                        <td class="text-left">{% if sort == 'a.status' %}
-                                                <a href="{{ sort_status }}" class="{{ order|lower }}">{{ column_status }}</a>
-                                            {% else %}
-                                                <a href="{{ sort_status }}">{{ column_status }}</a>
-                                            {% endif %}</td>
-                                        <td class="text-right">{{ column_action }}</td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% if posts %}
-                                        {% for post in posts %}
-                                            <tr>
-                                                <td class="text-center">{% if post.post_id in selected %}
-                                                        <input type="checkbox" name="selected[]" value="{{ post.post_id }}" checked="checked" />
-                                                    {% else %}
-                                                        <input type="checkbox" name="selected[]" value="{{ post.post_id }}" />
-                                                    {% endif %}</td>
-                                                <td class="text-left">{{ post.name }}</td>
-                                                <td class="text-left">{{ post.author }}</td>
-                                                <td class="text-left">{{ post.status }}</td>
-                                                <td class="text-right"><a href="{{ post.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-cog"></i></a></td>
-                                            </tr>
-                                        {% endfor %}
-                                    {% else %}
+                <div class="theme-option-container">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-list"></i> {{ text_list }}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-post">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
                                         <tr>
-                                            <td class="text-center" colspan="8">{{ text_no_results }}</td>
+                                            <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+                                            <td class="text-left">
+                                                {% if sort == 'ad.name' %}
+                                                    <a href="{{ sort_name }}" class="{{ order|lower }}">{{ column_name }}</a>
+                                                {% else %}
+                                                    <a href="{{ sort_name }}">{{ column_name }}</a>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-left">{{ column_author }}</td>
+                                            <td class="text-left">{% if sort == 'a.status' %}
+                                                    <a href="{{ sort_status }}" class="{{ order|lower }}">{{ column_status }}</a>
+                                                {% else %}
+                                                    <a href="{{ sort_status }}">{{ column_status }}</a>
+                                                {% endif %}</td>
+                                            <td class="text-right">{{ column_action }}</td>
                                         </tr>
-                                    {% endif %}
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        {% if posts %}
+                                            {% for post in posts %}
+                                                <tr>
+                                                    <td class="text-center">{% if post.post_id in selected %}
+                                                            <input type="checkbox" name="selected[]" value="{{ post.post_id }}" checked="checked" />
+                                                        {% else %}
+                                                            <input type="checkbox" name="selected[]" value="{{ post.post_id }}" />
+                                                        {% endif %}</td>
+                                                    <td class="text-left">{{ post.name }}</td>
+                                                    <td class="text-left">{{ post.author }}</td>
+                                                    <td class="text-left">{{ post.status }}</td>
+                                                    <td class="text-right"><a href="{{ post.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-cog"></i></a></td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% else %}
+                                            <tr>
+                                                <td class="text-center" colspan="8">{{ text_no_results }}</td>
+                                            </tr>
+                                        {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                            <div class="row theme-option-pagination">
+                                <div class="col-sm-6 text-left">{{ pagination }}</div>
+                                <div class="col-sm-6 text-right">{{ results }}</div>
                             </div>
-                        </form>
-                        <div class="row">
-                            <div class="col-sm-6 text-left">{{ pagination }}</div>
-                            <div class="col-sm-6 text-right">{{ results }}</div>
                         </div>
                     </div>
                 </div>

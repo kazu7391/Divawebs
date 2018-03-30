@@ -6,7 +6,7 @@ class ControllerDivaBlogList extends Controller
     public function index() {
         $this->load->language('diva/blog/list');
 
-        $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->setTitle($this->language->get('page_title'));
 
         $this->load->model('diva/blog');
 
@@ -16,7 +16,7 @@ class ControllerDivaBlogList extends Controller
     public function add() {
         $this->load->language('diva/blog/list');
 
-        $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->setTitle($this->language->get('page_title'));
 
         $this->load->model('diva/blog');
 
@@ -41,7 +41,7 @@ class ControllerDivaBlogList extends Controller
     public function edit() {
         $this->load->language('diva/blog/list');
 
-        $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->setTitle($this->language->get('page_title'));
 
         $this->load->model('diva/blog');
 
@@ -65,7 +65,7 @@ class ControllerDivaBlogList extends Controller
     public function delete() {
         $this->load->language('diva/blog/list');
 
-        $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->setTitle($this->language->get('page_title'));
 
         $this->load->model('diva/blog');
 
@@ -91,7 +91,7 @@ class ControllerDivaBlogList extends Controller
     public function copy() {
         $this->load->language('diva/blog/list');
 
-        $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->setTitle($this->language->get('page_title'));
 
         $this->load->model('diva/blog');
 
@@ -212,6 +212,10 @@ class ControllerDivaBlogList extends Controller
 
         $data['results'] = sprintf($this->language->get('text_pagination'), ($post_list_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($post_list_total - $this->config->get('config_limit_admin'))) ? $post_list_total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $post_list_total, ceil($post_list_total / $this->config->get('config_limit_admin')));
 
+        $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
+        $this->document->addScript('view/javascript/divawebs/switch-toggle/js/bootstrap-toggle.min.js');
+        $this->document->addStyle('view/javascript/divawebs/switch-toggle/css/bootstrap-toggle.min.css');
+        
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
@@ -312,6 +316,10 @@ class ControllerDivaBlogList extends Controller
                 );
             }
         }
+
+        $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
+        $this->document->addScript('view/javascript/divawebs/switch-toggle/js/bootstrap-toggle.min.js');
+        $this->document->addStyle('view/javascript/divawebs/switch-toggle/css/bootstrap-toggle.min.css');
 
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
