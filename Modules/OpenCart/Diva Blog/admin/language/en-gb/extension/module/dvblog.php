@@ -11,9 +11,6 @@ $_['text_blog']                         = 'Blog';
 $_['text_blog_article']                 = 'Articles';
 $_['text_blog_article_list']            = 'Articles List';
 
-//Button
-$_['button_article_list']               = "Articles Lists";
-
 // Entry
 $_['entry_name']                        = 'Module Name';
 $_['entry_title']                       = 'Title';
@@ -25,7 +22,7 @@ $_['entry_navigation']                  = 'Show Navigation';
 $_['entry_pagination']                  = 'Show Pagination';
 $_['entry_width']                       = 'Article Image Width';
 $_['entry_height']                      = 'Article Image Height';
-$_['entry_article_list']                = 'Article List';
+$_['entry_post_list']                = 'Post List';
 $_['entry_status']                      = 'Status';
 $_['entry_article_limit']               = 'Default Articles Per Page (Pagination)';
 $_['entry_meta_title'] 	                = 'Meta Title';

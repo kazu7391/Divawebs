@@ -305,7 +305,7 @@ class ModelDivaBlog extends Model
 			    `post_list_id` INT(11) NOT NULL AUTO_INCREMENT,
                 `name` VARCHAR(255) NOT NULL,
                 `status` TINYINT(1) NOT NULL DEFAULT '0',
-            PRIMARY KEY (`article_list_id`),
+            PRIMARY KEY (`post_list_id`),
 	        INDEX `name` (`name`)
 		) DEFAULT COLLATE=utf8_general_ci;");
 
@@ -322,6 +322,9 @@ class ModelDivaBlog extends Model
 		) DEFAULT COLLATE=utf8_general_ci;");
 
         $this->load->model('user/user_group');
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'diva/blog');
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'diva/blog');
+
         $this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'diva/blog/post');
         $this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'diva/blog/post');
 
@@ -340,6 +343,9 @@ class ModelDivaBlog extends Model
         $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "dvpost_to_store`");
 
         $this->load->model('user/user_group');
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'access', 'diva/blog');
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'modify', 'diva/blog');
+
         $this->model_user_user_group->removePermission($this->user->getGroupId(), 'access', 'diva/blog/post');
         $this->model_user_user_group->removePermission($this->user->getGroupId(), 'modify', 'diva/blog/post');
 
