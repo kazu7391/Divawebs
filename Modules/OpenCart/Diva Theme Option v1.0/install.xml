@@ -41,26 +41,26 @@
             // Blog
             $blog = array();
 
-            if ($this->user->hasPermission('access', 'blog/article')) {
+            if ($this->user->hasPermission('access', 'diva/blog/post')) {
                 $blog[] = array(
-                    'name'     => $this->language->get('text_article'),
-                    'href'     => $this->url->link('blog/article', 'user_token=' . $this->session->data['user_token'], true),
+                    'name'     => $this->language->get('text_posts'),
+                    'href'     => $this->url->link('diva/blog/post', 'user_token=' . $this->session->data['user_token'], true),
                     'children' => array()
                 );
             }
 
-            if ($this->user->hasPermission('access', 'blog/articlelist')) {
+            if ($this->user->hasPermission('access', 'diva/blog/list')) {
                 $blog[] = array(
-                    'name'     => $this->language->get('text_article_list'),
-                    'href'     => $this->url->link('blog/articlelist', 'user_token=' . $this->session->data['user_token'], true),
+                    'name'     => $this->language->get('text_posts_list'),
+                    'href'     => $this->url->link('diva/blog/list', 'user_token=' . $this->session->data['user_token'], true),
                     'children' => array()
                 );
             }
 
-            if ($this->user->hasPermission('access', 'blog/config')) {
+            if ($this->user->hasPermission('access', 'diva/blog/setting')) {
                 $blog[] = array(
-                    'name'     => $this->language->get('text_blog_config'),
-                    'href'     => $this->url->link('blog/config', 'user_token=' . $this->session->data['user_token'], true),
+                    'name'     => $this->language->get('text_blog_setting'),
+                    'href'     => $this->url->link('diva/blog/setting', 'user_token=' . $this->session->data['user_token'], true),
                     'children' => array()
                 );
             }
