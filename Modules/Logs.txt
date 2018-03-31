@@ -1,7 +1,7 @@
 ** OPENCART
 - Theme Option (Quick View + Layered Navigation)  (Done)
 - Ajax Login   (	fa-user)					  (Done)
-- Blog		(fa-ticket)
+- Blog		(fa-ticket)							  (Done)
 - Feature Category (fa-tag)                       (Done)
 - Instagram	(fa-instagram)						  (Done)
 - Layout Builder  (fa-cubes)                      (Done)
