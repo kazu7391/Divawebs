@@ -6,6 +6,6 @@ $_['text_advance_menu'] = 'Ultimate Menu';
 $_['text_blog'] = "Blog";
 $_['text_posts'] = "Posts";
 $_['text_posts_list'] = "Posts Lists";
-$_['text_blog_setting'] = "Settings";
+$_['text_blog_setting'] = "Page Settings";
 $_['text_testimonial'] = "Testimonial";
 $_['text_slideshow'] = "Sliders Management";
