@@ -1,0 +1,50 @@
+{{ header }}
+<div class="container">
+    <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+            <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="container">
+    <div class="main">
+        <div class="row">{{ column_left }}
+            {% if column_left and column_right %}
+                {% set class = 'col-sm-6' %}
+            {% elseif column_left or column_right %}
+                {% set class = 'col-sm-9' %}
+            {% else %}
+                {% set class = 'col-sm-12' %}
+            {% endif %}
+            <div id="content" class="{{ class }}">{{ content_top }}
+                <div class="page-title post-titles"><h3>{{ heading_title }}</h3></div>
+                {% if posts %}
+                    <div class="post-page">
+                        {% set i = 0 %}
+                        {% for post in posts %}
+                            {% set i = i + 1 %}
+                            <div class="post-layout post-list">
+                                <div class="post-item {{ (i % 2 == 0) ? 'even' : 'odd' }}">
+                                    <div class="post-item-inner">
+                                        <div class="post-intro">
+                                            <div class="post-name"><h3><a href="{{ post.href }}">{{ post.name }}</a></h3></div>
+                                            <p class="post-date">{{ post.date_added }}{% if post.author %}{{ " | " ~ post.author }}{% endif %}</p>
+                                            <div class="intro-content"><img src="{{ post.image }}" />{{ post.intro_text }}</div>
+                                        </div>
+                                        <a class="a-show-more" href="{{ post.href }}">{{ button_show }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 show-page">{{ pagination }}</div>
+                        <div class="col-sm-6">{{ results }}</div>
+                    </div>
+                {% else %}
+                    <p>{{ text_empty }}</p>
+                {% endif %}
+                {{ content_bottom }}</div>
+            {{ column_right }}</div>
+    </div></div>
+{{ footer }}
