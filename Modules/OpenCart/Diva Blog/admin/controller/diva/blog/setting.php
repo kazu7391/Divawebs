@@ -9,9 +9,31 @@ class ControllerDivaBlogSetting extends Controller
         $this->document->setTitle($this->language->get('page_title'));
 
         $this->load->model('setting/setting');
+        $this->load->model('setting/store');
+        $this->load->model('diva/blog');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
             $this->model_setting_setting->editSetting('module_dvblog', $this->request->post);
+
+            $blog_seo_url = $this->request->post['module_dvblog_seo_url'];
+
+            $stores = array();
+
+            $stores[] = array(
+                'store_id' => 0,
+                'name'     => $this->language->get('text_default')
+            );
+
+            $sts = $this->model_setting_store->getStores();
+
+            foreach ($sts as $store) {
+                $stores[] = array(
+                    'store_id' => $store['store_id'],
+                    'name'     => $store['name']
+                );
+            }
+
+            $this->model_diva_blog->addBlogSeoUrl($blog_seo_url, $stores);
 
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -75,6 +97,10 @@ class ControllerDivaBlogSetting extends Controller
         } else {
             $data['error_image_post'] = '';
         }
+
+        $this->load->model('localisation/language');
+
+        $data['languages'] = $this->model_localisation_language->getLanguages();
 
         $data['breadcrumbs'] = array();
 
@@ -142,6 +168,12 @@ class ControllerDivaBlogSetting extends Controller
             $data['module_dvblog_post_height'] = $this->request->post['module_dvblog_post_height'];
         } else {
             $data['module_dvblog_post_height'] = $this->config->get('module_dvblog_post_height');
+        }
+
+        if (isset($this->request->post['module_dvblog_seo_url'])) {
+            $data['module_dvblog_seo_url'] = $this->request->post['module_dvblog_seo_url'];
+        } else {
+            $data['module_dvblog_seo_url'] = $this->config->get('module_dvblog_seo_url');
         }
 
         $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');

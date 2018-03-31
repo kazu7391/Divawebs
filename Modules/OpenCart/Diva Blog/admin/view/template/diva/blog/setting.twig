@@ -34,6 +34,40 @@
                     <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-blog" class="form-horizontal">
                         <fieldset>
                             <div class="form-group required">
+                                <label class="col-sm-3 control-label">{{ entry_blog_image_size }}</label>
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" placeholder="{{ entry_width }}" name="module_dvblog_blog_width" value="{{ module_dvblog_blog_width }}" />
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" placeholder="{{ entry_height }}" name="module_dvblog_blog_height" value="{{ module_dvblog_blog_height }}" />
+                                        </div>
+                                    </div>
+                                    {% if error_image_blog %}
+                                        <div class="text-danger">{{ error_image_blog }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="form-group required">
+                                <label class="col-sm-3 control-label">{{ entry_image_post }}</label>
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" placeholder="{{ entry_width }}" name="module_dvblog_post_width" value="{{ module_dvblog_post_width }}" />
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" placeholder="{{ entry_height }}" name="module_dvblog_post_height" value="{{ module_dvblog_post_height }}" />
+                                        </div>
+                                    </div>
+                                    {% if error_image_post %}
+                                        <div class="text-danger">{{ error_image_post }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="form-group required">
                                 <label class="col-sm-3 control-label" for="input-blog-limit"><span data-toggle="tooltip" title="{{ help_post_limit }}">{{ entry_post_limit }}</span></label>
                                 <div class="col-sm-3">
                                     <input type="text" name="module_dvblog_post_limit" value="{{ module_dvblog_post_limit }}" placeholder="{{ entry_post_limit }}" id="input-blog-limit" class="form-control" />
@@ -73,37 +107,15 @@
                                 </div>
                             </div>
 
-                            <div class="form-group required">
-                                <label class="col-sm-3 control-label">{{ entry_blog_image_size }}</label>
-                                <div class="col-sm-6">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <input type="text" class="form-control" placeholder="{{ entry_width }}" name="module_dvblog_blog_width" value="{{ module_dvblog_blog_width }}" />
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="input-seo-url">{{ entry_seo_url }}</label>
+                                <div class="col-sm-9">
+                                    {% for language in languages %}
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>
+                                            <input type="text" id="input-seo-url{{ language.language_id }}" class="form-control" name="module_dvblog_seo_url[{{ language.language_id }}]" value="{{ module_dvblog_seo_url[language.language_id] }}" placeholder="" />
                                         </div>
-                                        <div class="col-sm-6">
-                                            <input type="text" class="form-control" placeholder="{{ entry_height }}" name="module_dvblog_blog_height" value="{{ module_dvblog_blog_height }}" />
-                                        </div>
-                                    </div>
-                                    {% if error_image_blog %}
-                                        <div class="text-danger">{{ error_image_blog }}</div>
-                                    {% endif %}
-                                </div>
-                            </div>
-
-                            <div class="form-group required">
-                                <label class="col-sm-3 control-label">{{ entry_image_post }}</label>
-                                <div class="col-sm-6">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <input type="text" class="form-control" placeholder="{{ entry_width }}" name="module_dvblog_post_width" value="{{ module_dvblog_post_width }}" />
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <input type="text" class="form-control" placeholder="{{ entry_height }}" name="module_dvblog_post_height" value="{{ module_dvblog_post_height }}" />
-                                        </div>
-                                    </div>
-                                    {% if error_image_post %}
-                                        <div class="text-danger">{{ error_image_post }}</div>
-                                    {% endif %}
+                                    {% endfor %}
                                 </div>
                             </div>
                         </fieldset>

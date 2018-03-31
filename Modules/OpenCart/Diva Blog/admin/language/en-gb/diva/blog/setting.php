@@ -17,6 +17,7 @@ $_['entry_meta_keyword'] 	    = 'Meta Tag Keywords';
 $_['entry_meta_description']    = 'Meta Tag Description';
 $_['entry_image_post']          = 'Post Image Size in Post Page';
 $_['entry_blog_image_size']     = 'Post Image Size in Blog Page';
+$_['entry_seo_url']             = 'Blog Page SEO Url';
 
 // Help
 $_['help_post_limit'] 	        = 'Determines number of posts are shown per page.';

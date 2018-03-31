@@ -10,13 +10,17 @@ class ModelDivaBlog extends Model
             $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_description SET post_id = '" . (int) $post_id . "', language_id = '" . (int) $language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', intro_text = '" . $this->db->escape($value['intro_text']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");
         }
 
-        if (isset($data['keyword'])) {
-            $this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET query = 'post_id=" . (int) $post_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
-        }
-
         if (isset($data['post_store'])) {
             foreach ($data['post_store'] as $store_id) {
                 $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_to_store SET post_id = '" . (int) $post_id . "', store_id = '" . (int) $store_id . "'");
+            }
+        }
+
+        if (isset($data['keyword'])) {
+            foreach ($data['post_store'] as $store_id) {
+                foreach ($data['post_description'] as $language_id => $value) {
+                    $this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET store_id = '" . (int) $store_id . "', language_id = '" . (int) $language_id . "', query = 'post_id=" . (int) $post_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
+                }
             }
         }
 
@@ -34,17 +38,21 @@ class ModelDivaBlog extends Model
             $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_description SET post_id = '" . (int) $post_id . "', language_id = '" . (int) $language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', intro_text = '" . $this->db->escape($value['intro_text']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");
         }
 
-        $this->db->query("DELETE FROM " . DB_PREFIX . "seo_url WHERE query = 'post_id=" . (int) $post_id . "'");
-
-        if ($data['keyword']) {
-            $this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET query = 'post_id=" . (int) $post_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
-        }
-
         $this->db->query("DELETE FROM " . DB_PREFIX . "dvpost_to_store WHERE post_id = '" . (int) $post_id . "'");
 
         if (isset($data['post_store'])) {
             foreach ($data['post_store'] as $store_id) {
                 $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_to_store SET post_id = '" . (int) $post_id . "', store_id = '" . (int) $store_id . "'");
+            }
+        }
+
+        $this->db->query("DELETE FROM " . DB_PREFIX . "seo_url WHERE query = 'post_id=" . (int) $post_id . "'");
+
+        if (isset($data['keyword'])) {
+            foreach ($data['post_store'] as $store_id) {
+                foreach ($data['post_description'] as $language_id => $value) {
+                    $this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET store_id = '" . (int) $store_id . "', language_id = '" . (int) $language_id . "', query = 'post_id=" . (int) $post_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
+                }
             }
         }
 
@@ -271,6 +279,18 @@ class ModelDivaBlog extends Model
         $query = $this->db->query($sql);
 
         return $query->row['total'];
+    }
+    
+    public function addBlogSeoUrl($data, $stores) {
+        if($data) {
+            $this->db->query("DELETE FROM " . DB_PREFIX . "seo_url WHERE query = 'dvblog'");
+
+            foreach ($stores as $store) {
+                foreach ($data as $language_id => $keyword) {
+                    $this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET store_id = '" . (int) $store['store_id'] . "', language_id = '" . (int) $language_id . "', query = 'dvblog', keyword = '" . $this->db->escape($keyword) . "'");
+                }
+            }
+        }
     }
 
     public function install() {
