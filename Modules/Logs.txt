@@ -5,7 +5,7 @@
 - Feature Category (fa-tag)                       (Done)
 - Instagram	(fa-instagram)						  (Done)
 - Layout Builder  (fa-cubes)                      (Done)
-- Mega Menu	(fa-bars)
+- Mega Menu	(fa-bars)							  (Done)
 - Search Category  (fa-search)					  (Done)
 - Twitter	(fa-twitter)						  (Done)
 - CMS Block	(fa-object-group)                     (Done)
