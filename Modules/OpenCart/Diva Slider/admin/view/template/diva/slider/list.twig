@@ -21,10 +21,15 @@
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
             </div>
         {% endif %}
+        {% if success %}
+            <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endif %}
         <div class="theme-option-container">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+                    <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit_slider }}</h3>
                 </div>
                 <div class="panel-body">
                     <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-slider" class="form-horizontal">
