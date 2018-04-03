@@ -1,6 +1,40 @@
 <?php
 class ModelDivaNewsletter extends Model
 {
+    public function getMails($data = array()) {
+        $sql = "SELECT * FROM " . DB_PREFIX . "dvnewsletter_email";
+
+        if (isset($data['start']) || isset($data['limit'])) {
+            if ($data['start'] < 0) {
+                $data['start'] = 0;
+            }
+
+            if ($data['limit'] < 1) {
+                $data['limit'] = 20;
+            }
+
+            $sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+        }
+
+        $query = $this->db->query($sql);
+
+        return $query->rows;
+    }
+
+    public function getTotalMails() {
+        $query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "dvnewsletter_email");
+
+        return $query->row['total'];
+    }
+
+    public function editSubscribe($mail_id, $subscribe) {
+        $this->db->query("UPDATE " . DB_PREFIX . "dvnewsletter_email SET subscribe = '" . (int) $subscribe . "' WHERE newsletter_id = '" . (int) $mail_id . "'");
+    }
+
+    public function deleteMail($mail_id) {
+        $this->db->query("DELETE FROM " . DB_PREFIX . "dvnewsletter_email WHERE newsletter_id = '" . (int) $mail_id . "'");
+    }
+
     public function install() {
         $this->db->query("
 			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvnewsletter_email` (
