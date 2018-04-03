@@ -4,16 +4,28 @@
     {% set newsletter_class = "newsletter-block" %}
 {% endif %}
 <div class="newsletter-container {{ newsletter_class }}">
+    {% if popup %}
+        <a href="javascript:void(0)" class="a-close-newsletter" onclick="dvnewsletter.closePopup();">{{ text_close }}</a>
+    {% endif %}
     <div class="newsletter-heading">
         <h3>{{ heading_title }}</h3>
     </div>
     <div class="newsletter-content">
-        <p class="newsletter-subtitle">{{ text_subtitle }}</p>
-        <p class="newsletter-description">{{ text_description }}</p>
+        {% if popup %}
+            <p class="newsletter-subtitle">{{ text_subtitle }}</p>
+            <p class="newsletter-description">{{ text_description }}</p>
+        {% endif %}
         <div class="content">
             <label>{{ entry_mail }}</label>
             <input type="text" class="newsletter_email" name="mail_subscribe" value="" placeholder="{{ entry_mail_subscribe }}" />
-            <button type="button" class="btn btn-primary" onclick="">{{ button_subscribe }}</button>
+            <button type="button" class="btn btn-primary" onclick="dvnewsletter.saveMail($(this));">{{ button_subscribe }}</button>
         </div>
+        {% if popup %}
+            <div class="notice">
+                <input type="checkbox" class="cbk_newsletter" />
+                <span>{{ text_notification }}</span>
+            </div>
+        {% endif %}
     </div>
+    <div class="newsletter-notification"></div>
 </div>

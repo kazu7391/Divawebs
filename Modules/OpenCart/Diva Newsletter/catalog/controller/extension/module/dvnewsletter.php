@@ -12,6 +12,8 @@ class ControllerExtensionModuleDvnewsletter extends Controller
             $data['popup'] = false;
         }
 
+        $this->document->addScript('catalog/view/javascript/diva/newsletter/mail.js');
+
         return $this->load->view('diva/module/dvnewsletter', $data);
     }
 }
