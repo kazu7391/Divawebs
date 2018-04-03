@@ -3,6 +3,7 @@
     <div class="page-header">
         <div class="container-fluid">
             <div class="pull-right">
+                <a href="{{ send_form }}" data-toggle="tooltip" title="{{ button_mail_form }}" class="btn btn-primary"><i class="fa fa-envelope"></i></a>
                 <button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-newsletter').submit() : false;"><i class="fa fa-trash-o"></i></button>
             </div>
             <h1>{{ heading_title }}</h1>
@@ -20,6 +21,11 @@
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
             </div>
         {% endif %}
+        {% if success %}
+            <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endif %}
         <div class="theme-option-container">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -31,9 +37,9 @@
                             <table class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
-                                    <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+                                    <td style="width: 50px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
                                     <td class="text-left">{{ column_mail }}</td>
-                                    <td class="text-left">{{ column_subcribe }}</td>
+                                    <td class="text-left" width="200px">{{ column_status }}</td>
                                     <td class="text-right">{{ column_action }}</td>
                                 </tr>
                                 </thead>
@@ -47,10 +53,14 @@
                                                     <input type="checkbox" name="selected[]" value="{{ mail.mail_id }}" />
                                                 {% endif %} </td>
                                             <td class="text-left">{{ mail.mail }}</td>
-                                            <td class="text-left">{{ mail.subscribe }}</td>
-                                            <td class="text-right"><a href="{{ mail.edit }}" data-toggle="tooltip" title="{{ text_change_subscribe }}" class="btn btn-theme-option"><i class="fa fa-cog"></i></a></td>
+                                            <td class="text-left"><span class="subscribe-status {% if mail.status %}subscribe{% else %}unsubscribe{% endif %}">{{ mail.subscribe }}</span></td>
+                                            <td class="text-right"><a href="{{ mail.edit }}" data-toggle="tooltip" title="{{ text_change_subscribe }}" class="btn btn-theme-option"><i class="fa fa-exchange"></i></a></td>
                                         </tr>
                                     {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td class="text-center" colspan="4">{{ text_no_results }}</td>
+                                    </tr>
                                 {% endif %}
                                 </tbody>
                             </table>

@@ -18,11 +18,50 @@ class ControllerDivaNewsletter extends Controller
 
         $this->load->model('diva/newsletter');
 
+        if(isset($this->request->get['mail_id']) && isset($this->request->get['subscribe'])) {
+            $mail_id = $this->request->get['mail_id'];
+            $subscribe_status = $this->request->get['subscribe'];
+
+            $this->model_diva_newsletter->editSubscribe($mail_id, $subscribe_status);
+
+            $this->session->data['success'] = $this->language->get('text_success');
+
+            $url = '';
+
+            if (isset($this->request->get['page'])) {
+                $url .= '&page=' . $this->request->get['page'];
+            }
+
+            $this->response->redirect($this->url->link('diva/newsletter', 'user_token=' . $this->session->data['user_token'] . $url, true));
+        }
+
         $this->getList();
     }
     
     public function delete() {
-        
+        $this->language->load('diva/newsletter');
+
+        $this->document->setTitle($this->language->get('page_title'));
+
+        $this->load->model('diva/newsletter');
+
+        if(($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateDelete()) {
+            foreach ($this->request->post['selected'] as $mail_id) {
+                $this->model_diva_newsletter->deleteMail($mail_id);
+            }
+
+            $this->session->data['success'] = $this->language->get('text_success');
+
+            $url = '';
+
+            if (isset($this->request->get['page'])) {
+                $url .= '&page=' . $this->request->get['page'];
+            }
+
+            $this->response->redirect($this->url->link('diva/newsletter', 'user_token=' . $this->session->data['user_token'] . $url, true));
+        }
+
+        $this->getList();
     }
     
     public function getList() {
@@ -51,7 +90,8 @@ class ControllerDivaNewsletter extends Controller
         );
 
         $data['delete'] = $this->url->link('diva/newsletter/delete', 'user_token=' . $this->session->data['user_token'] . $url, true);
-        
+        $data['send_form'] = $this->url->link('diva/newsletter/sendForm', 'user_token=' . $this->session->data['user_token'] . $url, true);
+
         $data['mails'] = array();
 
         $filter_data = array(
@@ -73,7 +113,8 @@ class ControllerDivaNewsletter extends Controller
             $data['mails'][] = array(
                 'mail_id' => $result['newsletter_id'],
                 'mail' => $result['mail'],
-                'subscribe' => $result['subscribe'] ? 'Subscribe' : 'Unsubcribe',
+                'subscribe' => $result['subscribe'] ? $this->language->get('text_subscribe') : $this->language->get('text_unsubscribe'),
+                'status' => $result['subscribe'],
                 'edit' => $this->url->link('diva/newsletter/editSubscribe', 'user_token=' . $this->session->data['user_token'] . '&mail_id=' . $result['newsletter_id'] . '&subscribe=' . $changeStatus . $url, true)
             );
         }
@@ -115,5 +156,33 @@ class ControllerDivaNewsletter extends Controller
         $data['footer'] = $this->load->controller('common/footer');
 
         $this->response->setOutput($this->load->view('diva/newsletter/list', $data));
+    }
+
+    public function sendForm() {
+        $this->language->load('diva/newsletter');
+
+        $this->document->setTitle($this->language->get('page_title'));
+
+        $this->load->model('diva/newsletter');
+
+        $data = array();
+
+        $this->response->setOutput($this->load->view('diva/newsletter/mail', $data));
+    }
+
+    public function sendMail() {
+
+    }
+
+    protected function validateDelete() {
+        if (!$this->user->hasPermission('modify', 'diva/slider')) {
+            $this->error['warning'] = $this->language->get('error_permission');
+        }
+
+        if (!$this->error) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
