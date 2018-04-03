@@ -90,3 +90,15 @@
     background-color: #eb5202;
     border-color: #eb5202;
 }
+.theme-option-container .subscribe-status {
+    padding: 10px;
+    border-radius: 3px;
+}
+.theme-option-container .subscribe-status.subscribe {
+    background: #2fa51e;
+    color: #fff;
+}
+.theme-option-container .subscribe-status.unsubscribe {
+    background: #d40c0c;
+    color: #fff;
+}

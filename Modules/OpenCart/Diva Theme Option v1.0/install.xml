@@ -88,6 +88,14 @@
                     'children' => array()
                 );
             }
+
+            if($this->user->hasPermission('access', 'diva/newsletter')) {
+                $adminmenu[] = array(
+                    'name'     => $this->language->get('text_newsletter'),
+                    'href'     => $this->url->link('diva/newsletter', 'user_token=' . $this->session->data['user_token'], true),
+                    'children' => array()
+                );
+            }
             
             $data['menus'][] = array(
                 'id'       => 'menu-panel',

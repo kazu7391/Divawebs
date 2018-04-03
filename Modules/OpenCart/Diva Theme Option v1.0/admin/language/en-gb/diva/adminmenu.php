@@ -9,3 +9,4 @@ $_['text_posts_list'] = "Posts Lists";
 $_['text_blog_setting'] = "Page Settings";
 $_['text_testimonial'] = "Testimonial";
 $_['text_slideshow'] = "Sliders Management";
+$_['text_newsletter'] = "Newsletter Emails";
