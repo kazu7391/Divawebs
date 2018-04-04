@@ -93,6 +93,10 @@
 .theme-option-container .subscribe-status {
     padding: 10px;
     border-radius: 3px;
+    min-width: 100px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
 }
 .theme-option-container .subscribe-status.subscribe {
     background: #2fa51e;
