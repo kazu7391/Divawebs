@@ -6,14 +6,30 @@ $_['page_title']    		= 'DIVA Newsletter';
 // Text
 $_['text_edit']             = 'Newsletter Emails';
 $_['text_success']        	= 'Success: You have modified newsletter e-mail!';
+$_['text_default']        	= 'Default';
 $_['text_mail_list']        = 'Newsletter List';
+$_['text_mail_form']        = 'Mail Form';
 $_['text_change_subscribe'] = 'Change Subscribe Status';
 $_['text_subscribe']        = 'Subscribe';
 $_['text_unsubscribe']      = 'Unsubscribe';
 $_['text_change_subscribe'] = 'Change Subscribe Status';
+$_['text_all']              = 'All DIVA Subscriber';
+$_['text_specified']        = 'Specified DIVA Subscriber';
 
 // Buttons
 $_['button_mail_form']      = 'Mail Form';
+
+// Help
+$_['help_subscribers']      = 'Choose specified subscriber to send mail';
+
+
+// Entry
+$_['entry_store']           = 'From';
+$_['entry_to']              = 'To';
+$_['entry_subscribers']     = 'Subscribers';
+$_['entry_subject']         = 'Subject';
+$_['entry_message']         = 'Message';
+
 
 // Columns
 $_['column_mail']           = 'E-Mail';

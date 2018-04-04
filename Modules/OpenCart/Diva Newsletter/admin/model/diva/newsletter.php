@@ -3,6 +3,10 @@ class ModelDivaNewsletter extends Model
 {
     public function getMails($data = array()) {
         $sql = "SELECT * FROM " . DB_PREFIX . "dvnewsletter_email";
+        
+        if(isset($data['filter_mail'])) {
+            $sql .= " WHERE mail LIKE '%" . $this->db->escape($data['filter_mail']) . "%'";
+        }
 
         if (isset($data['start']) || isset($data['limit'])) {
             if ($data['start'] < 0) {
