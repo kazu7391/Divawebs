@@ -53,7 +53,7 @@
                                                     <input type="checkbox" name="selected[]" value="{{ mail.mail_id }}" />
                                                 {% endif %} </td>
                                             <td class="text-left">{{ mail.mail }}</td>
-                                            <td class="text-center"><span class="subscribe-status {% if mail.status %}subscribe{% else %}unsubscribe{% endif %}">{{ mail.subscribe }}</span></td>
+                                            <td class="text-center"><span class="item-status {% if mail.status %}enabled{% else %}disabled{% endif %}">{{ mail.subscribe }}</span></td>
                                             <td class="text-right"><a href="{{ mail.edit }}" data-toggle="tooltip" title="{{ text_change_subscribe }}" class="btn btn-theme-option"><i class="fa fa-exchange"></i></a></td>
                                         </tr>
                                     {% endfor %}

@@ -99,7 +99,7 @@ class ControllerDivaNewsletter extends Controller
             'limit' => $this->config->get('config_limit_admin')
         );
 
-        $mails_total = $this->model_diva_newsletter->getTotalMails();
+        $mails_total = $this->model_diva_newsletter->getTotalMails($filter_data);
         
         $results = $this->model_diva_newsletter->getMails($filter_data);
 
@@ -249,33 +249,32 @@ class ControllerDivaNewsletter extends Controller
 
                 switch ($this->request->post['to']) {
                     case 'all':
-                        $customer_data = array(
-                            'filter_newsletter' => 1,
+                        $filter_data = array(
+                            'filter_subscribe' => 1,
                             'start'             => ($page - 1) * 10,
                             'limit'             => 10
                         );
 
-                        $email_total = $this->model_diva_newsletter->getTotalCustomers($customer_data);
+                        $email_total = $this->model_diva_newsletter->getTotalMails($filter_data);
 
-                        $results = $this->model_diva_newsletter->getCustomers($customer_data);
+                        $results = $this->model_diva_newsletter->getMails($filter_data);
 
                         foreach ($results as $result) {
-                            $emails[] = $result['email'];
+                            if($result['subscribe']) {
+                                $emails[] = $result['mail'];
+                            }
                         }
+
                         break;
                     case 'specified':
-                        $customer_data = array(
-                            'start' => ($page - 1) * 10,
-                            'limit' => 10
-                        );
-
-                        $email_total = $this->model_customer_customer->getTotalCustomers($customer_data);
-
-                        $results = $this->model_customer_customer->getCustomers($customer_data);
-
-                        foreach ($results as $result) {
-                            $emails[] = $result['email'];
+                        $subscribers = $this->request->post['subscribers'];
+                        
+                        foreach ($subscribers as $subscriber) {
+                            $newsletter = $this->model_diva_newsletter->getMail($subscriber);
+                            $emails[] = $newsletter['mail'];
+                            $email_total++;
                         }
+
                         break;
                 }
 
@@ -288,7 +287,7 @@ class ControllerDivaNewsletter extends Controller
                     $json['success'] = sprintf($this->language->get('text_sent'), $start, $email_total);
 
                     if ($end < $email_total) {
-                        $json['next'] = str_replace('&amp;', '&', $this->url->link('marketing/contact/send', 'user_token=' . $this->session->data['user_token'] . '&page=' . ($page + 1), true));
+                        $json['next'] = str_replace('&amp;', '&', $this->url->link('diva/newsletter/sendMail', 'user_token=' . $this->session->data['user_token'] . '&page=' . ($page + 1), true));
                     } else {
                         $json['next'] = '';
                     }

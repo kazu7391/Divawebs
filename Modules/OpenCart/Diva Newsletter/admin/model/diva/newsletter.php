@@ -1,6 +1,12 @@
 <?php
 class ModelDivaNewsletter extends Model
 {
+    public function getMail($newsletter_id) {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "dvnewsletter_email WHERE newsletter_id = '" . (int) $newsletter_id . "'");
+
+        return $query->row;
+    }
+
     public function getMails($data = array()) {
         $sql = "SELECT * FROM " . DB_PREFIX . "dvnewsletter_email";
         
@@ -25,8 +31,26 @@ class ModelDivaNewsletter extends Model
         return $query->rows;
     }
 
-    public function getTotalMails() {
-        $query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "dvnewsletter_email");
+    public function getTotalMails($data = array()) {
+        $sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "dvnewsletter_email";
+
+        if(isset($data['filter_subscribe'])) {
+            $sql .= " WHERE subscribe = '" . $this->db->escape($data['filter_subscribe']) . "'";
+        }
+
+        if (isset($data['start']) || isset($data['limit'])) {
+            if ($data['start'] < 0) {
+                $data['start'] = 0;
+            }
+
+            if ($data['limit'] < 1) {
+                $data['limit'] = 20;
+            }
+
+            $sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+        }
+
+        $query = $this->db->query($sql);
 
         return $query->row['total'];
     }
