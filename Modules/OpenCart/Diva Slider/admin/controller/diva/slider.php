@@ -214,11 +214,12 @@ class ControllerDivaSlider extends Controller
             );
 
             $data['dvsliders'][] = array(
-                'dvslider_id' => $result['dvslider_id'],
-                'name'      => $result['name'],
-                'status'    => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
-                'selected'  => isset($this->request->post['selected']) && in_array($result['dvslider_id'], $this->request->post['selected']),
-                'action'    => $action
+                'dvslider_id'   => $result['dvslider_id'],
+                'status'        => $result['status'],
+                'name'          => $result['name'],
+                'status_text'   => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
+                'selected'      => isset($this->request->post['selected']) && in_array($result['dvslider_id'], $this->request->post['selected']),
+                'action'        => $action
             );
         }
 

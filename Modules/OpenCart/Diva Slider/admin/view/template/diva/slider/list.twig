@@ -39,7 +39,7 @@
                                 <tr>
                                     <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
                                     <td class="text-left">{{ column_name }}</td>
-                                    <td class="text-left">{{ column_status }}</td>
+                                    <td class="text-center" width="200px">{{ column_status }}</td>
                                     <td class="text-right">{{ column_action }}</td>
                                 </tr>
                                 </thead>
@@ -47,13 +47,13 @@
                                 {% if dvsliders %}
                                     {% for dvslider in dvsliders %}
                                         <tr>
-                                            <td class="text-center"> {% if dvslider['dvslider_id'] in selected %}
-                                                    <input type="checkbox" name="selected[]" value="{{ dvslider['dvslider_id'] }}" checked="checked" />
+                                            <td class="text-center"> {% if dvslider.dvslider_id in selected %}
+                                                    <input type="checkbox" name="selected[]" value="{{ dvslider.dvslider_id }}" checked="checked" />
                                                 {% else %}
-                                                    <input type="checkbox" name="selected[]" value="{{ dvslider['dvslider_id'] }}" />
+                                                    <input type="checkbox" name="selected[]" value="{{ dvslider.dvslider_id }}" />
                                                 {% endif %} </td>
-                                            <td class="text-left">{{ dvslider['name'] }}</td>
-                                            <td class="text-left">{{ dvslider['status'] }}</td>
+                                            <td class="text-left">{{ dvslider.name }}</td>
+                                            <td class="text-center"><span class="item-status {% if dvslider.status %}enabled{% else %}disabled{% endif %}">{{ dvslider.status_text }}</span></td>
                                             <td class="text-right"><a href="{{ dvslider['action'][0]['href'] }}" data-toggle="tooltip" title="{{ text_edit_slider }}" class="btn btn-theme-option"><i class="fa fa-cog"></i></a></td>
                                         </tr>
                                     {% endfor %}
