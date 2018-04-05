@@ -186,10 +186,11 @@ class ControllerDivaUltimatemenu extends Controller
         if($menus) {
             foreach ($menus as $menu) {
                 $data['menu_list'][] = array(
-                    'menu_id'   => $menu['menu_id'],
-                    'name'      => $menu['name'],
-                    'status'    => $menu['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-                    'url'       => $this->url->link('diva/ultimatemenu/edit', 'user_token=' . $this->session->data['user_token'] . '&menu_id=' . $menu['menu_id'] . $url, true)
+                    'menu_id'       => $menu['menu_id'],
+                    'status'        => $menu['status'],
+                    'name'          => $menu['name'],
+                    'status_text'   => $menu['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+                    'url'           => $this->url->link('diva/ultimatemenu/edit', 'user_token=' . $this->session->data['user_token'] . '&menu_id=' . $menu['menu_id'] . $url, true)
                 );
             }
         }
