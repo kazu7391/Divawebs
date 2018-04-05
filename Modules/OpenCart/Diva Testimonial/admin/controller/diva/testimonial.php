@@ -168,12 +168,13 @@ class ControllerDivaTestimonial extends Controller
                 'href' => $this->url->link('diva/testimonial/update', 'user_token=' . $this->session->data['user_token'] . '&testimonial_id=' . $result['dvtestimonial_id'], true)
             );
             $data['testimonials'][] = array(
-                'testimonial_id' => $result['dvtestimonial_id'],
-                'customer_name'       => $result['customer_name'],
-                'sort_order'      => $result['sort_order'],
-                'status'     => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
-                'selected'   => isset($this->request->post['selected']) && in_array($result['testimonial_id'], $this->request->post['selected']),
-                'url' => $this->url->link('diva/testimonial/update', 'user_token=' . $this->session->data['user_token'] . '&testimonial_id=' . $result['dvtestimonial_id'], true)
+                'testimonial_id'    => $result['dvtestimonial_id'],
+                'status'            => $result['status'],
+                'customer_name'     => $result['customer_name'],
+                'sort_order'        => $result['sort_order'],
+                'status_text'       => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
+                'selected'          => isset($this->request->post['selected']) && in_array($result['testimonial_id'], $this->request->post['selected']),
+                'url'               => $this->url->link('diva/testimonial/update', 'user_token=' . $this->session->data['user_token'] . '&testimonial_id=' . $result['dvtestimonial_id'], true)
             );
         }
 
