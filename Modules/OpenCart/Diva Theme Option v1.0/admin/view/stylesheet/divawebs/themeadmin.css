@@ -90,7 +90,7 @@
     background-color: #eb5202;
     border-color: #eb5202;
 }
-.theme-option-container .subscribe-status {
+.theme-option-container .item-status {
     padding: 10px;
     border-radius: 3px;
     min-width: 100px;
@@ -98,11 +98,11 @@
     vertical-align: top;
     text-align: center;
 }
-.theme-option-container .subscribe-status.subscribe {
+.theme-option-container .item-status.enabled {
     background: #2fa51e;
     color: #fff;
 }
-.theme-option-container .subscribe-status.unsubscribe {
+.theme-option-container .item-status.disabled {
     background: #d40c0c;
     color: #fff;
 }

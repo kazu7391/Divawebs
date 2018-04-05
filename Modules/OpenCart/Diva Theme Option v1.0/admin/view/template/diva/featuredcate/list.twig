@@ -54,9 +54,9 @@
                                         <td class="text-left">{{ category.name }}</td>
                                         <td class="text-center">
                                             {% if category.is_featured == 1 %}
-                                                <span>{{ text_yes }}</span>
+                                                <span class="item-status enabled">{{ text_enabled }}</span>
                                             {% else %}
-                                                <span>{{ text_no }}</span>
+                                                <span class="item-status disabled">{{ text_disabled }}</span>
                                             {% endif %}
                                         </td>
                                         <td class="text-center">{% if category.secondary_image %}
