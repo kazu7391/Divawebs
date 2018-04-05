@@ -167,10 +167,11 @@ class ControllerDivaBlogList extends Controller
 
         foreach ($results as $result) {
             $data['post_list'][] = array(
-                'post_list_id' => $result['post_list_id'],
-                'name'       => $result['name'],
-                'status'     => ($result['status']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-                'edit'       => $this->url->link('diva/blog/list/edit', 'user_token=' . $this->session->data['user_token'] . '&post_list_id=' . $result['post_list_id'] . $url, true)
+                'post_list_id'  => $result['post_list_id'],
+                'status'        => $result['status'],
+                'name'          => $result['name'],
+                'status_text'   => ($result['status']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+                'edit'          => $this->url->link('diva/blog/list/edit', 'user_token=' . $this->session->data['user_token'] . '&post_list_id=' . $result['post_list_id'] . $url, true)
             );
         }
 

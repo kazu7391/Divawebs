@@ -83,7 +83,7 @@
                                                 {% endif %}
                                             </td>
                                             <td class="text-left">{{ column_author }}</td>
-                                            <td class="text-left">{% if sort == 'a.status' %}
+                                            <td class="text-center" width="200px">{% if sort == 'a.status' %}
                                                     <a href="{{ sort_status }}" class="{{ order|lower }}">{{ column_status }}</a>
                                                 {% else %}
                                                     <a href="{{ sort_status }}">{{ column_status }}</a>
@@ -102,7 +102,7 @@
                                                         {% endif %}</td>
                                                     <td class="text-left">{{ post.name }}</td>
                                                     <td class="text-left">{{ post.author }}</td>
-                                                    <td class="text-left">{{ post.status }}</td>
+                                                    <td class="text-center"><span class="item-status {% if post.status %}enabled{% else %}disabled{% endif %}">{{ post.status_text }}</span></td>
                                                     <td class="text-right"><a href="{{ post.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-cog"></i></a></td>
                                                 </tr>
                                             {% endfor %}
