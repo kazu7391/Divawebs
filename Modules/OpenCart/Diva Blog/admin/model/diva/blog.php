@@ -8,19 +8,15 @@ class ModelDivaBlog extends Model
 
         foreach ($data['post_description'] as $language_id => $value) {
             $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_description SET post_id = '" . (int) $post_id . "', language_id = '" . (int) $language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', intro_text = '" . $this->db->escape($value['intro_text']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");
+
+            foreach ($data['post_store'] as $store_id) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET store_id = '" . (int) $store_id . "', language_id = '" . (int) $language_id . "', query = 'post_id=" . (int) $post_id . "', keyword = '" . $this->db->escape($value['seo_url']) . "'");
+            }
         }
 
         if (isset($data['post_store'])) {
             foreach ($data['post_store'] as $store_id) {
                 $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_to_store SET post_id = '" . (int) $post_id . "', store_id = '" . (int) $store_id . "'");
-            }
-        }
-
-        if (isset($data['keyword'])) {
-            foreach ($data['post_store'] as $store_id) {
-                foreach ($data['post_description'] as $language_id => $value) {
-                    $this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET store_id = '" . (int) $store_id . "', language_id = '" . (int) $language_id . "', query = 'post_id=" . (int) $post_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
-                }
             }
         }
 
@@ -34,8 +30,14 @@ class ModelDivaBlog extends Model
 
         $this->db->query("DELETE FROM " . DB_PREFIX . "dvpost_description WHERE post_id = '" . (int) $post_id . "'");
 
+        $this->db->query("DELETE FROM " . DB_PREFIX . "seo_url WHERE query = 'post_id=" . (int) $post_id . "'");
+
         foreach ($data['post_description'] as $language_id => $value) {
             $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_description SET post_id = '" . (int) $post_id . "', language_id = '" . (int) $language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', intro_text = '" . $this->db->escape($value['intro_text']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");
+
+            foreach ($data['post_store'] as $store_id) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET store_id = '" . (int) $store_id . "', language_id = '" . (int) $language_id . "', query = 'post_id=" . (int) $post_id . "', keyword = '" . $this->db->escape($value['seo_url']) . "'");
+            }
         }
 
         $this->db->query("DELETE FROM " . DB_PREFIX . "dvpost_to_store WHERE post_id = '" . (int) $post_id . "'");
@@ -43,16 +45,6 @@ class ModelDivaBlog extends Model
         if (isset($data['post_store'])) {
             foreach ($data['post_store'] as $store_id) {
                 $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_to_store SET post_id = '" . (int) $post_id . "', store_id = '" . (int) $store_id . "'");
-            }
-        }
-
-        $this->db->query("DELETE FROM " . DB_PREFIX . "seo_url WHERE query = 'post_id=" . (int) $post_id . "'");
-
-        if (isset($data['keyword'])) {
-            foreach ($data['post_store'] as $store_id) {
-                foreach ($data['post_description'] as $language_id => $value) {
-                    $this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET store_id = '" . (int) $store_id . "', language_id = '" . (int) $language_id . "', query = 'post_id=" . (int) $post_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
-                }
             }
         }
 
@@ -81,9 +73,11 @@ class ModelDivaBlog extends Model
     }
 
     public function getPost($post_id) {
-        $query = $this->db->query("SELECT DISTINCT *, (SELECT keyword FROM " . DB_PREFIX . "seo_url WHERE query = 'post_id=" . (int) $post_id . "') AS keyword FROM " . DB_PREFIX . "dvpost p LEFT JOIN " . DB_PREFIX . "dvpost_description pd ON (p.post_id = pd.post_id) WHERE p.post_id = '" . (int) $post_id . "' AND pd.language_id = '" . (int) $this->config->get('config_language_id') . "'");
+        $query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "dvpost p LEFT JOIN " . DB_PREFIX . "dvpost_description pd ON (p.post_id = pd.post_id) WHERE p.post_id = '" . (int) $post_id . "' AND pd.language_id = '" . (int) $this->config->get('config_language_id') . "'");
 
-        return $query->row;
+        $post_data = $query->row;
+
+        return $post_data;
     }
 
     public function getPostStores($post_id) {
@@ -160,6 +154,14 @@ class ModelDivaBlog extends Model
                 'meta_keyword'     => $result['meta_keyword'],
                 'intro_text'       => $result['intro_text']
             );
+        }
+
+        $sql = "SELECT * FROM " . DB_PREFIX . "seo_url su LEFT JOIN " . DB_PREFIX . "dvpost_to_store dts ON (dts.store_id = su.store_id) WHERE dts.post_id = '" . (int) $post_id . "' AND su.query = 'post_id=" . (int) $post_id . "'";
+
+        $query = $this->db->query($sql);
+
+        foreach ($query->rows as $result) {
+            $post_description_data[$result['language_id']]['seo_url'] = $result['keyword'];
         }
 
         return $post_description_data;

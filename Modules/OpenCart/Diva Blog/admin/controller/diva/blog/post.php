@@ -460,14 +460,6 @@ class ControllerDivaBlogPost extends Controller
             $data['post_description'] = array();
         }
 
-        if (isset($this->request->post['keyword'])) {
-            $data['keyword'] = $this->request->post['keyword'];
-        } elseif (!empty($post_info)) {
-            $data['keyword'] = $post_info['keyword'];
-        } else {
-            $data['keyword'] = '';
-        }
-
         if (isset($this->request->post['sort_order'])) {
             $data['sort_order'] = $this->request->post['sort_order'];
         } elseif (!empty($post_info)) {
@@ -562,23 +554,23 @@ class ControllerDivaBlogPost extends Controller
             if ((utf8_strlen($value['meta_title']) < 3) || (utf8_strlen($value['meta_title']) > 255)) {
                 $this->error['meta_title'][$language_id] = $this->language->get('error_meta_title');
             }
-        }
 
-        if (utf8_strlen($this->request->post['keyword']) > 0) {
-            $this->load->model('design/seo_url');
+            if (utf8_strlen($value['seo_url']) > 0) {
+                $this->load->model('design/seo_url');
 
-            $url_alias_info = $this->model_design_seo_url->getSeoUrlsByKeyword($this->request->post['keyword']);
+                $url_alias_info = $this->model_design_seo_url->getSeoUrlsByKeyword($value['seo_url']);
 
-            foreach ($url_alias_info as $surl) {
-                if ($url_alias_info && isset($this->request->get['post_id']) && $surl['query'] != 'post_id=' . $this->request->get['post_id']) {
-                    $this->error['keyword'] = sprintf($this->language->get('error_keyword'));
+                foreach ($url_alias_info as $surl) {
+                    if ($url_alias_info && isset($this->request->get['post_id']) && $surl['query'] != 'post_id=' . $this->request->get['post_id']) {
+                        $this->error['keyword'] = sprintf($this->language->get('error_keyword'));
 
-                    break;
+                        break;
+                    }
                 }
-            }
 
-            if ($url_alias_info && !isset($this->request->get['post_id'])) {
-                $this->error['keyword'] = sprintf($this->language->get('error_keyword'));
+                if ($url_alias_info && !isset($this->request->get['post_id'])) {
+                    $this->error['keyword'] = sprintf($this->language->get('error_keyword'));
+                }
             }
         }
 

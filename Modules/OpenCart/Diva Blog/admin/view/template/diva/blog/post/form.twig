@@ -131,9 +131,9 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label" for="input-keyword"><span data-toggle="tooltip" title="{{ help_keyword }}">{{ entry_keyword }}</span></label>
+                                            <label class="col-sm-3 control-label" for="input-keyword{{ language.language_id }}"><span data-toggle="tooltip" title="{{ help_keyword }}">{{ entry_keyword }}</span></label>
                                             <div class="col-sm-9">
-                                                <input type="text" name="keyword" value="{{ keyword }}" placeholder="{{ entry_keyword }}" id="input-keyword" class="form-control" />
+                                                <input type="text" name="post_description[{{ language.language_id }}][seo_url]" value="{{ post_description[language.language_id].seo_url }}" placeholder="{{ entry_keyword }}" id="input-keyword{{ language.language_id }}" class="form-control" />
                                                 {% if error_keyword %}
                                                     <div class="text-danger">{{ error_keyword }}</div>
                                                 {% endif %}
