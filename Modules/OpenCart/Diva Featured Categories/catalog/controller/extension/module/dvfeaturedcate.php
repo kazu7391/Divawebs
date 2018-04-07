@@ -12,7 +12,7 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller
         $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/swiper.min.css');
         $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
         $this->document->addScript('catalog/view/javascript/jquery/swiper/js/swiper.jquery.js');
-        if (file_exists('catalog/view/theme/' . $this->config->get('theme_' . $this->config->get('config_theme') . '_directory') . '/stylesheet/oczoom/zoom.css')) {
+        if (file_exists('catalog/view/theme/' . $this->config->get('theme_' . $this->config->get('config_theme') . '_directory') . '/stylesheet/diva/module.css')) {
             $this->document->addStyle('catalog/view/theme/' . $this->config->get('theme_' . $this->config->get('config_theme') . '_directory') . '/stylesheet/diva/module.css');
         } else {
             $this->document->addStyle('catalog/view/theme/default/stylesheet/diva/module.css');
