@@ -272,7 +272,7 @@ class ControllerDivaQuickview extends Controller
 
             $data['options'] = array();
 
-            foreach ($this->model_catalog_product->getProductOptions($this->request->get['product_id']) as $option) {
+            foreach ($this->model_catalog_product->getProductOptions($product_id) as $option) {
                 $product_option_value_data = array();
 
                 foreach ($option['product_option_value'] as $option_value) {
