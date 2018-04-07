@@ -151,7 +151,7 @@ class ControllerExtensionModuleDvinstagram extends Controller
         } elseif (!empty($module_info)) {
             $data['speed'] = $module_info['speed'];
         } else {
-            $data['speed'] = 3000;
+            $data['speed'] = 500;
         }
 
         if (isset($this->request->post['navigation'])) {
