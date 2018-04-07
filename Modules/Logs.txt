@@ -9,7 +9,7 @@
 - Search Category  (fa-search)					  (Done)
 - Twitter	(fa-twitter)						  (Done)
 - CMS Block	(fa-object-group)                     (Done)
-- Newsletter		(fa-envelope)
+- Newsletter		(fa-envelope)				  (Done)	
 - Slideshow 		(fa-film)          			  (Done)    
 - Testimonial		(fa-comments)				  (Done)
 - Product Tabs		(fa-shopping-bag)
