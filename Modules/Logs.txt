@@ -19,5 +19,5 @@
 - New Products Slider 	(fa-sort-amount-desc)
 - Bestseller Slider  (fa-bar-chart)
 - Price Countdown	(fa-percent)
-- Random Slider		(fa-barcode)
+- Random Slider		(fa-barcode)				  (Done)
 - Special Slider
