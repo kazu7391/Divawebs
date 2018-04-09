@@ -114,6 +114,14 @@ class ControllerExtensionModuleDvrandom extends Controller
             $data['height'] = 200;
         }
 
+        if (isset($this->request->post['description'])) {
+            $data['description'] = $this->request->post['description'];
+        } elseif (!empty($module_info)) {
+            $data['description'] = $module_info['description'];
+        } else {
+            $data['description'] = 1;
+        }
+
         if (isset($this->request->post['rows'])) {
             $data['rows'] = $this->request->post['rows'];
         } elseif (!empty($module_info)) {

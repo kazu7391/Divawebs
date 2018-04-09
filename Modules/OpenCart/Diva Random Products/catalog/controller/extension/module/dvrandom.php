@@ -65,6 +65,12 @@ class ControllerExtensionModuleDvrandom extends Controller
         }
 
         /* Module Settings */
+        if (isset($setting['description']) && $setting['description']) {
+            $data['show_description'] = true;
+        } else {
+            $data['show_description'] = false;
+        }
+
         if(isset($setting['limit'])) {
             $limit = (int) $setting['limit'];
         } else {

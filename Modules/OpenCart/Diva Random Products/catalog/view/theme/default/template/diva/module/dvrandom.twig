@@ -29,7 +29,7 @@
                         </div>
                         <div class="caption">
                             <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
-                            {% if product.description %}
+                            {% if show_description and product.description %}
                                 <p>{{ product.description }}</p>
                             {% endif %}
 

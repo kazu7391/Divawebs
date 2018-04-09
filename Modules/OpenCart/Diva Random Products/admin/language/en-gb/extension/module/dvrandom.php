@@ -13,6 +13,7 @@ $_['entry_name']        = 'Module Name';
 $_['entry_status']      = 'Status';
 $_['entry_width']       = 'Width';
 $_['entry_height']      = 'Height';
+$_['entry_description'] = 'Description';
 $_['entry_items']       = 'Items';
 $_['entry_limit']       = 'Limit';
 $_['entry_speed']       = 'Speed';
