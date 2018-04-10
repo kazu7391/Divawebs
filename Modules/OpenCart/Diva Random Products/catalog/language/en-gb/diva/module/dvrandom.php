@@ -1,5 +1,7 @@
 <?php
-$_['title'] = "Random Products";
+$_['title']     = "Random Products";
 
+// Text
+$_['text_tax']  = 'Ex Tax:';
 $_['text_sale'] = "Sale";
-$_['text_new'] = "New";
+$_['text_new']  = "New";

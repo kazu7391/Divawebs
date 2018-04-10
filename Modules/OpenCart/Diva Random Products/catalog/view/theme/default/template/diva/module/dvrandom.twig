@@ -11,10 +11,10 @@
                             <a href="{{ product.href }}">
                                 {% if show_module_label %}
                                     {% if product.special %}
-                                        <span class="pro-label">{{ text_sale }}</span>
+                                        <span class="pro-label sale">{{ text_sale }}</span>
                                     {% else %}
                                         {% if product.is_new %}
-                                            <span class="pro-label">{{ text_new }}</span>
+                                            <span class="pro-label new">{{ text_new }}</span>
                                         {% endif %}
                                     {% endif %}
                                 {% endif %}
