@@ -193,7 +193,6 @@ class ControllerExtensionModuleDvmostviewed extends Controller
                 'is_new'        => $is_new,
                 'rating'        => $rating,
                 'description'   => $description,
-                'reviews'       => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
                 'href'    	    => $this->url->link('product/product', 'product_id=' . $result['product_id']),
             );
         }
