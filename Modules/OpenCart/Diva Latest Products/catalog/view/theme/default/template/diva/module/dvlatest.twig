@@ -1,0 +1,104 @@
+<div class="latest-container">
+    <div class="block-title">
+        <strong>{{ title }}</strong>
+    </div>
+    <div class="swiper-viewport">
+        <div class="swiper-container latest-slides">
+            <div class="swiper-wrapper">
+                {% for product in products %}
+                    <div class="product-thumb transition swiper-slide">
+                        <div class="image {% if product.rotate_image %}rotate-image-container{% endif %}">
+                            <a href="{{ product.href }}">
+                                {% if show_module_label %}
+                                    {% if product.special %}
+                                        <span class="pro-label sale">{{ text_sale }}</span>
+                                    {% endif %}
+                                {% endif %}
+                                {% if product.rotate_image %}
+                                    <img src="{{ product.rotate_image }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive img-rotate-image" />
+                                {% endif %}
+                                <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" />
+                            </a>
+                            {% if show_module_quickview %}
+                                <button type="button" title="{{ product.name }}" onclick="dvquickview.ajaxView('{{ product.href }}')"><i class="fa fa-search-plus"></i></button>
+                            {% endif %}
+                        </div>
+                        <div class="caption">
+                            <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
+                            {% if show_description and product.description %}
+                                <p>{{ product.description }}</p>
+                            {% endif %}
+
+                            {% if product.rating %}
+                                <div class="rating">
+                                    {% for i in 5 %}
+                                        {% if product.rating < i %}
+                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                        {% else %}
+                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+
+                            {% if show_module_price and product.price %}
+                                <p class="price">
+                                    {% if not product.special %}
+                                        {{ product.price }}
+                                    {% else %}
+                                        <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+                                    {% endif %}
+                                    {% if product.tax %}
+                                        <span class="price-tax">{{ text_tax }} {{ product.tax }}</span>
+                                    {% endif %}
+                                </p>
+                            {% endif %}
+                        </div>
+                        <div class="button-group">
+                            {% if show_module_cart %}
+                                <button type="button" onclick="cart.add('{{ product.product_id }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span></button>
+                            {% endif %}
+
+                            {% if show_module_wishlist %}
+                                <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
+                            {% endif %}
+
+                            {% if show_module_compare %}
+                                <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% if slide.pagination %}
+            <div class="swiper-pagination latest-pagination"></div>
+        {% endif %}
+
+        {% if slide.navigation %}
+            <div class="swiper-pager">
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(".latest-slides").swiper({
+        spaceBetween: 20,
+        {% if slide.pagination %}
+        pagination: '.latest-pagination',
+        paginationClickable: true,
+        {% endif %}
+        {% if slide.navigation %}
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        {% endif %}
+        speed: {% if slide.speed %} {{ slide.speed }} {% else %} 300 {% endif %},
+        slidesPerView: {{ slide.items }},
+        slidesPerColumn: {{ slide.rows }},
+        autoplay: {% if slide.auto %} 3000 {% else %} false {% endif %},
+        loop: false
+    });
+</script>
