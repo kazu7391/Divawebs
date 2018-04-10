@@ -16,7 +16,7 @@
 - Categories Tabs	(fa-tags)
 - Featured Products	(fa-bookmark)
 - Most Viewed  		(fa-eye)					  (Done)
-- New Products Slider 	(fa-sort-amount-desc)
+- New Products Slider 	(fa-sort-amount-desc)	  (Done)
 - Bestseller Slider  (fa-bar-chart)
 - Price Countdown	(fa-percent)
 - Random Slider		(fa-barcode)				  (Done)
