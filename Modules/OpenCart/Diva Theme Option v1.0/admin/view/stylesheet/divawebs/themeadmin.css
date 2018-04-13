@@ -106,3 +106,56 @@
     background: #d40c0c;
     color: #fff;
 }
+.theme-option-container .dv-dashboard-menu > li {
+
+}
+.theme-option-container .dv-dashboard-menu li,
+.theme-option-container .dv-dashboard-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.theme-option-container .dv-dashboard-menu li a {
+    display: block;
+    padding: 10px;
+    border-color: #2b3642;
+}
+.theme-option-container .dv-dashboard-menu li a:hover,
+.theme-option-container .dv-dashboard-menu li a:focus{
+    background-color: #555;
+    color: #fff;
+    border-bottom: 1px solid #555;
+}
+.theme-option-container .dv-dashboard-menu > li > a {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 15px;
+    border-color: #2b3642;
+}
+.theme-option-container .dv-dashboard-menu > li > a:hover,
+.theme-option-container .dv-dashboard-menu > li > a:focus {
+    font-size: 13px;
+    font-weight: 600;
+    background-color: #000;
+    color: #fff;
+    border-bottom: 1px solid #000;
+}
+.theme-option-container .dv-dashboard-menu li a.parent:after {
+    font-family: FontAwesome;
+    float: right;
+    margin-right: 8px;
+}
+.theme-option-container .dv-dashboard-menu li a.parent:after {
+    content: "\f107";
+}
+.theme-option-container .dv-dashboard-menu li a.collapsed:after {
+    content: "\f105";
+}
+.theme-option-container .dv-dashboard-menu li li a:before {
+    content: "\f101";
+    font-size: 13px;
+    font-family: FontAwesome;
+    margin-left: 10px;
+    margin-right: 10px;
+    transition: margin ease 0.5s;
+}

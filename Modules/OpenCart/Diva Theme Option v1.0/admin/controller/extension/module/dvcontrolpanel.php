@@ -4,6 +4,7 @@ class ControllerExtensionModuleDvcontrolpanel extends Controller
     private $error = array();
 
     public function index() {
+        $this->load->language('diva/adminmenu');
         $this->load->language('extension/module/dvcontrolpanel');
 
         $this->document->setTitle($this->language->get('page_title'));
@@ -81,7 +82,7 @@ class ControllerExtensionModuleDvcontrolpanel extends Controller
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_extension'),
-            'href' => $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true)
+            'href' => $this->url->link('diva/module', 'user_token=' . $this->session->data['user_token'], true)
         );
 
         $data['breadcrumbs'][] = array(
@@ -128,7 +129,7 @@ class ControllerExtensionModuleDvcontrolpanel extends Controller
         $data['action'] = $this->url->link('extension/module/dvcontrolpanel', 'user_token=' . $this->session->data['user_token'], true);
         $data['action_import'] = $this->url->link('extension/module/dvcontrolpanel/import', 'user_token=' . $this->session->data['user_token'], true);
 
-        $data['cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true);
+        $data['cancel'] = $this->url->link('diva/module', 'user_token=' . $this->session->data['user_token'], true);
 
         /* General */
         if (isset($this->request->post['module_dvcontrolpanel_sticky_header'])) {
@@ -561,6 +562,89 @@ class ControllerExtensionModuleDvcontrolpanel extends Controller
             $data['module_dvcontrolpanel_custom_js'] = $this->config->get('module_dvcontrolpanel_custom_js');
         }
 
+        $data['diva_menus'] = array();
+
+        if($this->user->hasPermission('access', 'extension/module/dvcontrolpanel')) {
+            $data['diva_menus'][] = array(
+                'title' => '<i class="a fa fa-magic"></i> ' . $this->language->get('text_control_panel'),
+                'url'   => $this->url->link('extension/module/dvcontrolpanel', 'user_token=' . $this->session->data['user_token'], true)
+            );
+        }
+
+        if($this->user->hasPermission('access', 'diva/module')) {
+            $data['diva_menus'][] = array(
+                'title' => '<i class="a fa fa-puzzle-piece"></i> ' . $this->language->get('text_theme_module'),
+                'url'   => $this->url->link('diva/module', 'user_token=' . $this->session->data['user_token'], true)
+            );
+        }
+
+        if($this->user->hasPermission('access', 'diva/featuredcate')) {
+            $data['diva_menus'][] = array(
+                'title' => '<i class="a fa fa-tag"></i> ' . $this->language->get('text_special_category'),
+                'url'   => $this->url->link('diva/featuredcate', 'user_token=' . $this->session->data['user_token'], true)
+            );
+        }
+
+        if($this->user->hasPermission('access', 'diva/ultimatemenu')) {
+            $data['diva_menus'][] = array(
+                'title' => '<i class="a fa fa-bars"></i> ' . $this->language->get('text_ultimate_menu'),
+                'url'   => $this->url->link('diva/ultimatemenu/menuList', 'user_token=' . $this->session->data['user_token'], true)
+            );
+        }
+
+        if ($this->user->hasPermission('access', 'diva/blog')) {
+            $blog_menu = array();
+
+            if ($this->user->hasPermission('access', 'diva/blog/post')) {
+                $blog_menu[] = array(
+                    'title' => $this->language->get('text_posts'),
+                    'url'   => $this->url->link('diva/blog/post', 'user_token=' . $this->session->data['user_token'], true)
+                );
+            }
+
+            if ($this->user->hasPermission('access', 'diva/blog/list')) {
+                $blog_menu[] = array(
+                    'title' => $this->language->get('text_posts_list'),
+                    'url'   => $this->url->link('diva/blog/list', 'user_token=' . $this->session->data['user_token'], true)
+                );
+            }
+
+            if ($this->user->hasPermission('access', 'diva/blog/setting')) {
+                $blog_menu[] = array(
+                    'title' => $this->language->get('text_blog_setting'),
+                    'url'   => $this->url->link('diva/blog/setting', 'user_token=' . $this->session->data['user_token'], true)
+                );
+            }
+
+            if($blog_menu) {
+                $data['diva_menus'][] = array(
+                    'title' => '<i class="a fa fa-ticket"></i> ' . $this->language->get('text_blog'),
+                    'child' => $blog_menu
+                );
+            }
+        }
+
+        if($this->user->hasPermission('access', 'diva/slider')) {
+            $data['diva_menus'][] = array(
+                'title' => '<i class="a fa fa-film"></i> ' . $this->language->get('text_slider'),
+                'url'   => $this->url->link('diva/slider', 'user_token=' . $this->session->data['user_token'], true)
+            );
+        }
+
+        if($this->user->hasPermission('access', 'diva/testimonial')) {
+            $data['diva_menus'][] = array(
+                'title' => '<i class="a fa fa-comment"></i> ' . $this->language->get('text_testimonial'),
+                'url'   => $this->url->link('diva/testimonial', 'user_token=' . $this->session->data['user_token'], true)
+            );
+        }
+
+        if($this->user->hasPermission('access', 'diva/newsletter')) {
+            $data['diva_menus'][] = array(
+                'title' => '<i class="a fa fa-envelope"></i> ' . $this->language->get('text_newsletter'),
+                'url'   => $this->url->link('diva/newsletter', 'user_token=' . $this->session->data['user_token'], true)
+            );
+        }
+
         $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
         $this->document->addScript('view/javascript/divawebs/jscolor.min.js');
         $this->document->addScript('view/javascript/divawebs/switch-toggle/js/bootstrap-toggle.min.js');
@@ -627,6 +711,52 @@ class ControllerExtensionModuleDvcontrolpanel extends Controller
     public function install() {
         $this->load->model('diva/controlpanel');
         $this->model_diva_controlpanel->setupData();
+
+        $this->load->model('setting/setting');
+
+        $data = array(
+            'module_dvcontrolpanel_status' => 1
+        );
+
+        $this->model_setting_setting->editSetting('module_dvcontrolpanel', $data, 0);
+
+        $this->load->model('user/user_group');
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'diva/module');
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'diva/module');
+    }
+
+    public function uninstall() {
+        $this->load->model('user/user_group');
+
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'access', 'extension/module/dvcontrolpanel');
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'modify', 'extension/module/dvcontrolpanel');
+
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'access', 'diva/blog');
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'modify', 'diva/blog');
+
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'access', 'diva/blog/post');
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'modify', 'diva/blog/post');
+
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'access', 'diva/blog/list');
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'modify', 'diva/blog/list');
+
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'access', 'diva/blog/setting');
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'modify', 'diva/blog/setting');
+
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'access', 'diva/slider');
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'modify', 'diva/slider');
+
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'access', 'diva/testimonial');
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'modify', 'diva/testimonial');
+
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'access', 'diva/ultimatemenu');
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'modify', 'diva/ultimatemenu');
+
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'access', 'diva/featuredcate');
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'modify', 'diva/featuredcate');
+
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'access', 'diva/newsletter');
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'modify', 'diva/newsletter');
     }
 
     protected function validate() {

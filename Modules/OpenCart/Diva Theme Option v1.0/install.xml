@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <modification>
-    <code>diva_configuration</code>
-    <name>DIVA Configuration</name>
+    <code>diva_control_panel</code>
+    <name>DIVA Control Panel</name>
     <version>1.0</version>
     <author>Divawebs</author>
 
@@ -12,98 +12,14 @@
             <add position="before"><![CDATA[
             $this->load->language('diva/adminmenu');
 
-            $adminmenu = array();
-
             if($this->user->hasPermission('access', 'extension/module/dvcontrolpanel')) {
-                $adminmenu[] = array(
-                    'name'     => $this->language->get('text_theme_config'),
-                    'href'     => $this->url->link('extension/module/dvcontrolpanel', 'user_token=' . $this->session->data['user_token'], true),
-                    'children' => array()
+                $data['menus'][] = array(
+                    'id'       => 'diva-dashboard',
+                    'icon'     => 'fa-diva',
+                    'name'     => $this->language->get('text_theme_dashboard'),
+                    'href'     => $this->url->link('extension/module/dvcontrolpanel', 'user_token=' . $this->session->data['user_token'], true)
                 );
             }
-
-            if($this->user->hasPermission('access', 'diva/featuredcate')) {
-                $adminmenu[] = array(
-                    'name'     => $this->language->get('text_category_thumbnail'),
-                    'href'     => $this->url->link('diva/featuredcate', 'user_token=' . $this->session->data['user_token'], true),
-                    'children' => array()
-                );
-            }
-
-            if($this->user->hasPermission('access', 'diva/ultimatemenu')) {
-                $adminmenu[] = array(
-                    'name'     => $this->language->get('text_advance_menu'),
-                    'href'     => $this->url->link('diva/ultimatemenu/menuList', 'user_token=' . $this->session->data['user_token'], true),
-                    'children' => array()
-                );
-            }
-
-            // Blog
-            $blog = array();
-
-            if ($this->user->hasPermission('access', 'diva/blog/post')) {
-                $blog[] = array(
-                    'name'     => $this->language->get('text_posts'),
-                    'href'     => $this->url->link('diva/blog/post', 'user_token=' . $this->session->data['user_token'], true),
-                    'children' => array()
-                );
-            }
-
-            if ($this->user->hasPermission('access', 'diva/blog/list')) {
-                $blog[] = array(
-                    'name'     => $this->language->get('text_posts_list'),
-                    'href'     => $this->url->link('diva/blog/list', 'user_token=' . $this->session->data['user_token'], true),
-                    'children' => array()
-                );
-            }
-
-            if ($this->user->hasPermission('access', 'diva/blog/setting')) {
-                $blog[] = array(
-                    'name'     => $this->language->get('text_blog_setting'),
-                    'href'     => $this->url->link('diva/blog/setting', 'user_token=' . $this->session->data['user_token'], true),
-                    'children' => array()
-                );
-            }
-
-            if($blog) {
-                $adminmenu[] = array(
-                    'name'      => $this->language->get('text_blog'),
-                    'href'      => '',
-                    'children'  => $blog
-                );
-            }
-
-            if($this->user->hasPermission('access', 'diva/slider')) {
-                $adminmenu[] = array(
-                    'name'     => $this->language->get('text_slideshow'),
-                    'href'     => $this->url->link('diva/slider', 'user_token=' . $this->session->data['user_token'], true),
-                    'children' => array()
-                );
-            }
-
-            if($this->user->hasPermission('access', 'diva/testimonial')) {
-                $adminmenu[] = array(
-                    'name'     => $this->language->get('text_testimonial'),
-                    'href'     => $this->url->link('diva/testimonial', 'user_token=' . $this->session->data['user_token'], true),
-                    'children' => array()
-                );
-            }
-
-            if($this->user->hasPermission('access', 'diva/newsletter')) {
-                $adminmenu[] = array(
-                    'name'     => $this->language->get('text_newsletter'),
-                    'href'     => $this->url->link('diva/newsletter', 'user_token=' . $this->session->data['user_token'], true),
-                    'children' => array()
-                );
-            }
-            
-            $data['menus'][] = array(
-                'id'       => 'menu-panel',
-                'icon'     => 'fa-diva',
-                'name'     => $this->language->get('text_theme_menu'),
-                'href'     => '',
-                'children' => $adminmenu
-            );
             ]]></add>
         </operation>
     </file>

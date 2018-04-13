@@ -61,6 +61,9 @@ class ModelDivaControlpanel extends Model
 		) DEFAULT COLLATE=utf8_general_ci;");
 
         $this->load->model('user/user_group');
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'diva/blog');
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'diva/blog');
+
         $this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'diva/blog/post');
         $this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'diva/blog/post');
 
