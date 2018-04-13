@@ -1,13 +1,13 @@
 <?php
 // Heading
-$_['heading_title']         = '<b style="color: #eb5202;"><i><i class="b fa fa-puzzle-piece"></i> DIVA Layout Builder</i></b>';
-$_['heading_primary_title'] = '<b style="color: #eb5202;"><i><i class="fa fa-puzzle-piece"></i> DIVA Layout Builder</i></b>';
-$_['page_title']            = "DIVA Layout Builder";
+$_['heading_title']         = '<b style="color: #eb5202;"><i><i class="b fa fa-cubes"></i> DIVA Page Builder</i></b>';
+$_['heading_primary_title'] = '<b style="color: #eb5202;"><i><i class="fa fa-cubes"></i> DIVA Page Builder</i></b>';
+$_['page_title']            = "DIVA Page Builder";
 
 // Text
 $_['text_success']          = "Success: You have modified module!";
 $_['text_extension']        = 'Extensions';
-$_['text_primary_edit']     = "Edit DIVA Layout Builder";
+$_['text_primary_edit']     = "Edit DIVA Page Builder";
 $_['text_columns']          = "Columns";
 $_['text_custom_columns']   = "Custom Columns";
 $_['text_custom_classname'] = "Classname of Row";
