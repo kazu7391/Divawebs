@@ -11,71 +11,79 @@
         </div>
     </div>
     <div class="container-fluid">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-puzzle-piece"></i> {{ text_list }}</h3>
-            </div>
-            <div class="panel-body">
-                <div id="extension">
-                    <fieldset>
-                        <legend>{{ heading_title }}</legend>
-                        {% if error_warning %}
-                            <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
-                                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            </div>
-                        {% endif %}
-                        {% if success %}
-                            <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
-                                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            </div>
-                        {% endif %}
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                <tr>
-                                    <td class="text-left">{{ column_name }}</td>
-                                    <td class="text-left">{{ column_status }}</td>
-                                    <td class="text-right">{{ column_action }}</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                {% if extensions %}
-                                    {% for extension in extensions %}
-                                        <tr>
-                                            <td><b>{{ extension.name }}</b></td>
-                                            <td class="text-left">{% if not extension.module %}<span class="ext-status {{ extension.status|lower }}">{{ extension.status }}</span>{% endif %}</td>
-                                            <td class="text-right">{% if extension.installed %}
-                                                    {% if extension.module %} <a href="{{ extension.edit }}" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></a> {% else %} <a href="{{ extension.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a> {% endif %}
-                                                {% else %}
-                                                    <button type="button" class="btn btn-primary" disabled="disabled"><i class="fa fa-pencil"></i></button>
-                                                {% endif %}
-                                                {% if not extension.installed %}<a href="{{ extension.install }}" data-toggle="tooltip" title="{{ button_install }}" class="btn btn-success"><i class="fa fa-plus-circle"></i></a> {% else %} <a href="{{ extension.uninstall }}" data-toggle="tooltip" title="{{ button_uninstall }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></a>{% endif %}</td>
-                                        </tr>
-                                        {% for module in extension.module %}
-                                            <tr>
-                                                <td class="text-left">&nbsp;&nbsp;&nbsp;<i class="fa fa-folder-open"></i>&nbsp;&nbsp;&nbsp;{{ module.name }}</td>
-                                                <td class="text-left"><span class="ext-status {{ module.status|lower }}">{{ module.status }}</span></td>
-                                                <td class="text-right"><a href="{{ module.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-info"><i class="fa fa-pencil"></i></a> <a href="{{ module.delete }}" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-warning"><i class="fa fa-trash-o"></i></a></td>
-                                            </tr>
-                                        {% endfor %}
-                                    {% endfor %}
-                                {% else %}
-                                    <tr>
-                                        <td class="text-center" colspan="3">{{ text_no_results }}</td>
-                                    </tr>
-                                {% endif %}
-                                </tbody>
-
-                            </table>
+        <div class="row">
+            <div class="col-md-3 col-sm-12">
+                <div class="theme-option-container">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-puzzle-piece"></i> {{ text_list }}</h3>
                         </div>
-                    </fieldset>
-                    <style>
-                        .ext-status {color: #fff; padding: 5px; border-radius: 4px;}
-                        .ext-status.enabled {background-color: green;}
-                        .ext-status.disabled {background-color: red;}
-                    </style>
-
+                        <div class="panel-body"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <div class="theme-option-container">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-puzzle-piece"></i> {{ text_list }}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div id="extension">
+                                <fieldset>
+                                    <legend>{{ heading_title }}</legend>
+                                    {% if error_warning %}
+                                        <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        </div>
+                                    {% endif %}
+                                    {% if success %}
+                                        <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        </div>
+                                    {% endif %}
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+                                                <td class="text-left">{{ column_name }}</td>
+                                                <td class="text-center" width="200px">{{ column_status }}</td>
+                                                <td class="text-right" width="200px">{{ column_action }}</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if extensions %}
+                                                {% for extension in extensions %}
+                                                    <tr>
+                                                        <td><b>{{ extension.name }}</b></td>
+                                                        <td class="text-left">{% if not extension.module %}<span class="ext-status {{ extension.status|lower }}">{{ extension.status }}</span>{% endif %}</td>
+                                                        <td class="text-right">{% if extension.installed %}
+                                                                {% if extension.module %} <a href="{{ extension.edit }}" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></a> {% else %} <a href="{{ extension.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a> {% endif %}
+                                                            {% else %}
+                                                                <button type="button" class="btn btn-primary" disabled="disabled"><i class="fa fa-pencil"></i></button>
+                                                            {% endif %}
+                                                            {% if not extension.installed %}<a href="{{ extension.install }}" data-toggle="tooltip" title="{{ button_install }}" class="btn btn-success"><i class="fa fa-plus-circle"></i></a> {% else %} <a href="{{ extension.uninstall }}" data-toggle="tooltip" title="{{ button_uninstall }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></a>{% endif %}</td>
+                                                    </tr>
+                                                    {% for module in extension.module %}
+                                                        <tr>
+                                                            <td class="text-left">&nbsp;&nbsp;&nbsp;<i class="fa fa-folder-open"></i>&nbsp;&nbsp;&nbsp;{{ module.name }}</td>
+                                                            <td class="text-center"><span class="">{{ module.status }}</span></td>
+                                                            <td class="text-right"><a href="{{ module.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-info"><i class="fa fa-pencil"></i></a> <a href="{{ module.delete }}" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-warning"><i class="fa fa-trash-o"></i></a></td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                {% endfor %}
+                                            {% else %}
+                                                <tr>
+                                                    <td class="text-center" colspan="3">{{ text_no_results }}</td>
+                                                </tr>
+                                            {% endif %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

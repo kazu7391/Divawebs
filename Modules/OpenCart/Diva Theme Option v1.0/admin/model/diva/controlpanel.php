@@ -44,7 +44,7 @@ class ModelDivaControlpanel extends Model
 			    `post_list_id` INT(11) NOT NULL AUTO_INCREMENT,
                 `name` VARCHAR(255) NOT NULL,
                 `status` TINYINT(1) NOT NULL DEFAULT '0',
-            PRIMARY KEY (`article_list_id`),
+            PRIMARY KEY (`post_list_id`),
 	        INDEX `name` (`name`)
 		) DEFAULT COLLATE=utf8_general_ci;");
 

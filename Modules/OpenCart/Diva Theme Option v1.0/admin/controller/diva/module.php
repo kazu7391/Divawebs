@@ -104,6 +104,8 @@ class ControllerDivaModule extends Controller
 
         array_multisort($sort_order, SORT_ASC, $data['extensions']);
 
+        $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
+        
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
