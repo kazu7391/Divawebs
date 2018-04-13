@@ -42,8 +42,9 @@
     -moz-border-radius: 15px;
     -webkit-border-radius: 15px;
     border: 0;
-    background: #222;
+    background: #fff;
     /*cursor: grab;*/
+    border: 1px solid #eb5202;
     cursor: -moz-grab;
     cursor: -webkit-grab;
 }
@@ -59,7 +60,7 @@
 .row-action .action-group .col-count { display: inline; margin: 0 30px 0 5px; }
 .row-action .action-group .a-group { display: inline; }
 .row-action .action-group .col-count .count {font-size: 16px;margin: 0 5px;font-weight: bold;color: #eb5202;}
-.row-action .action-group .form-control {display: inline;width: auto;height: auto;line-height: inherit;margin-right: 10px;box-shadow: none;border-radius: 15px;background: #333;float: left;border-color: #fff;color: #fff;}
+.row-action .action-group .form-control {display: inline;width: auto;height: auto;line-height: inherit;margin-right: 10px;box-shadow: none;border-radius: 15px;background: #fff;float: left;border-color: #eb5202;color: #eb5202;}
 
 .row-action .action-group .col-count .col-plus::before,
 .row-action .action-group .col-count .col-minus::before,
@@ -71,20 +72,20 @@
 
 .row-action .action-group .col-count .col-plus::before {
     content: "\f0fe";
-    color: #fff;
+    color: #eb5202;
 }
 .row-action .action-group .col-count .col-minus::before {
     content: "\f146";
-    color: #fff;
+    color: #eb5202;
 }
 .row-action .action-group .a-column-custom::before {
     content: "\f1a5";
-    color: #fff;
+    color: #eb5202;
 }
 
 .row-action .action-group .a-row-delete::before {
     content: "\f1f8";
-    color: #fff;
+    color: #eb5202;
     margin-left: 5px;
 }
 
@@ -105,27 +106,27 @@
 
 .sub-row-action .action-group .sub-col-count .col-plus::before {
     content: "\f0fe";
-    color: #fff;
+    color: #eb5202;
 }
 .sub-row-action .action-group .sub-col-count .col-minus::before {
     content: "\f146";
-    color: #fff;
+    color: #eb5202;
 }
 .sub-row-action .action-group .a-column-custom::before {
     content: "\f1a5";
-    color: #fff;
+    color: #eb5202;
 }
 
 .sub-row-action .action-group .a-row-delete::before {
     content: "\f1f8";
-    color: #fff;
+    color: #eb5202;
     margin-left: 5px;
 }
 
 .row-content {font-size: 14px;display: inline-block;margin-top: 5px;width: 100%;}
 .row-content .col-action { text-align: center; float: left; width: 100%; margin-bottom: 5px; }
 .row-content .col-action a {
-    color: #fff;
+    color: #eb5202;
     line-height: 40px;
     display: inline-block;
     vertical-align: top;
@@ -144,7 +145,7 @@
     padding: 5px 10px;
     width: 100%;
     min-height: 45px;
-    border: 1px dashed;
+    border: 1px dashed #eb5202;
 }
 .row-content .droparea .ui-state-highlight {
     float: left;

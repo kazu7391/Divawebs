@@ -313,7 +313,7 @@
 }
 .widget-content {
     border: 1px solid #eb5202;
-    padding: 10px 20px;
+    padding: 10px 10px;
     overflow: auto;
     background: #eb5202;
     font-size: 14px;
@@ -352,21 +352,27 @@
     color: #fff;
     cursor: pointer;
 }
+.widget-content .widget-name-container .a-config{position: absolute;right: 44px;}
+.widget-content .widget-name-container .a-delete{
+    position: absolute;
+    right: 25px;
+}
 .widget-content .widget-resize-action .a-delete {
     color: red;
 }
 .widget-content .widget-name-container {
     float: left;
     width: 100%;
-    margin: 5px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    /* margin: 5px; */
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+    /* white-space: nowrap; */
     color: #FFF;
 }
 .widget-content .widget-name-container .name {
     font-weight: bold;
     float: left;
+    padding-right: 40px;
 }
 .modal {
     z-index: 3050;
