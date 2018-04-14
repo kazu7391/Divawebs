@@ -103,7 +103,7 @@ class ControllerExtensionModuleDvlayoutbuilder extends Controller
         foreach ($extensions as $code) {
             if($code == "dvlayoutbuilder") continue;
 
-            $this->language->load('extension/module/' . $code);
+            $this->load->language('extension/module/' . $code);
 
             $module_data = array();
 
