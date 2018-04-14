@@ -16,9 +16,26 @@
                 <div class="theme-option-container">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><i class="fa fa-puzzle-piece"></i> {{ text_list }}</h3>
+                            <h3 class="panel-title">{{ text_dashboard_menu }}</h3>
                         </div>
-                        <div class="panel-body"></div>
+                        <ul class="nav nav-tabs menu-sections dv-dashboard-menu">
+                            {% set i = 0 %}
+                            {% for menu in diva_menus %}
+                                {% if menu.child %}
+                                    <li>
+                                        <a href="#dvcollapse_{{ i }}" data-toggle="collapse" class="parent collapsed">{{ menu.title }}</a>
+                                        <ul id="dvcollapse_{{ i }}" class="collapse">
+                                            {% for item in menu.child %}
+                                                <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                {% else %}
+                                    <li><a href="{{ menu.url }}">{{ menu.title }}</a></li>
+                                {% endif %}
+                                {% set i = i + 1 %}
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -31,7 +48,6 @@
                         <div class="panel-body">
                             <div id="extension">
                                 <fieldset>
-                                    <legend>{{ heading_title }}</legend>
                                     {% if error_warning %}
                                         <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
                                             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -48,7 +64,7 @@
                                             <tr>
                                                 <td class="text-left">{{ column_name }}</td>
                                                 <td class="text-center" width="200px">{{ column_status }}</td>
-                                                <td class="text-right" width="200px">{{ column_action }}</td>
+                                                <td class="text-right" width="100px">{{ column_action }}</td>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -56,7 +72,11 @@
                                                 {% for extension in extensions %}
                                                     <tr>
                                                         <td><b>{{ extension.name }}</b></td>
-                                                        <td class="text-left">{% if not extension.module %}<span class="ext-status {{ extension.status|lower }}">{{ extension.status }}</span>{% endif %}</td>
+                                                        <td class="text-center">
+                                                            {% if not extension.module %}
+                                                                <span class="item-status {% if extension.status %}enabled{% else %}disabled{% endif %}">{{ extension.stt_text }}</span>
+                                                            {% endif %}
+                                                        </td>
                                                         <td class="text-right">{% if extension.installed %}
                                                                 {% if extension.module %} <a href="{{ extension.edit }}" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></a> {% else %} <a href="{{ extension.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a> {% endif %}
                                                             {% else %}
@@ -67,7 +87,7 @@
                                                     {% for module in extension.module %}
                                                         <tr>
                                                             <td class="text-left">&nbsp;&nbsp;&nbsp;<i class="fa fa-folder-open"></i>&nbsp;&nbsp;&nbsp;{{ module.name }}</td>
-                                                            <td class="text-center"><span class="">{{ module.status }}</span></td>
+                                                            <td class="text-center"><span class="item-status {% if module.status %}enabled{% else %}disabled{% endif %}">{{ module.stt_text }}</span></td>
                                                             <td class="text-right"><a href="{{ module.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-info"><i class="fa fa-pencil"></i></a> <a href="{{ module.delete }}" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-warning"><i class="fa fa-trash-o"></i></a></td>
                                                         </tr>
                                                     {% endfor %}

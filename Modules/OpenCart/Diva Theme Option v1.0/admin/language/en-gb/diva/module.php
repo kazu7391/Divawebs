@@ -1,6 +1,7 @@
 <?php
 // Heading
-$_['heading_title']     = 'DIVA Modules';
+$_['heading_title']     = '<b style="color: #eb5202;"><i><i class="fa fa-puzzle-piece"></i> DIVA Modules</i></b>';
+$_['page_title']        = 'DIVA Modules';
 
 // Text
 $_['text_success']      = 'Success: You have modified extensions!';

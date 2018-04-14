@@ -3,6 +3,7 @@ class ControllerDivaModule extends Controller
 {
     public function index() {
         $this->load->language('diva/module');
+        $this->load->language('diva/adminmenu');
 
         $this->load->model('setting/extension');
 
@@ -22,7 +23,7 @@ class ControllerDivaModule extends Controller
             $data['success'] = '';
         }
 
-        $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->setTitle($this->language->get('page_title'));
 
         $data['breadcrumbs'] = array();
 
@@ -33,7 +34,7 @@ class ControllerDivaModule extends Controller
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'], true)
+            'href' => $this->url->link('diva/module', 'user_token=' . $this->session->data['user_token'], true)
         );
 
         $data['user_token'] = $this->session->data['user_token'];
@@ -78,7 +79,8 @@ class ControllerDivaModule extends Controller
                     $module_data[] = array(
                         'module_id' => $module['module_id'],
                         'name'      => $module['name'],
-                        'status'    => (isset($setting_info['status']) && $setting_info['status']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+                        'status'    => (isset($setting_info['status']) && $setting_info['status']) ? 1 : 0,
+                        'stt_text'  => (isset($setting_info['status']) && $setting_info['status']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
                         'edit'      => $this->url->link('extension/module/' . $extension, 'user_token=' . $this->session->data['user_token'] . '&module_id=' . $module['module_id'], true),
                         'delete'    => $this->url->link('diva/module/delete', 'user_token=' . $this->session->data['user_token'] . '&module_id=' . $module['module_id'], true)
                     );
@@ -86,7 +88,8 @@ class ControllerDivaModule extends Controller
 
                 $data['extensions'][] = array(
                     'name'      => $this->language->get('extension')->get('heading_title'),
-                    'status'    => $this->config->get('module_' . $extension . '_status') ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+                    'status'    => $this->config->get('module_' . $extension . '_status') ? 1 : 0,
+                    'stt_text'  => $this->config->get('module_' . $extension . '_status') ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
                     'module'    => $module_data,
                     'install'   => $this->url->link('diva/module/install', 'user_token=' . $this->session->data['user_token'] . '&extension=' . $extension, true),
                     'uninstall' => $this->url->link('diva/module/uninstall', 'user_token=' . $this->session->data['user_token'] . '&extension=' . $extension, true),
@@ -103,6 +106,89 @@ class ControllerDivaModule extends Controller
         }
 
         array_multisort($sort_order, SORT_ASC, $data['extensions']);
+
+        $data['diva_menus'] = array();
+
+        if($this->user->hasPermission('access', 'extension/module/dvcontrolpanel')) {
+            $data['diva_menus'][] = array(
+                'title' => '<i class="a fa fa-magic"></i> ' . $this->language->get('text_control_panel'),
+                'url'   => $this->url->link('extension/module/dvcontrolpanel', 'user_token=' . $this->session->data['user_token'], true)
+            );
+        }
+
+        if($this->user->hasPermission('access', 'diva/module')) {
+            $data['diva_menus'][] = array(
+                'title' => '<i class="a fa fa-puzzle-piece"></i> ' . $this->language->get('text_theme_module'),
+                'url'   => $this->url->link('diva/module', 'user_token=' . $this->session->data['user_token'], true)
+            );
+        }
+
+        if($this->user->hasPermission('access', 'diva/featuredcate')) {
+            $data['diva_menus'][] = array(
+                'title' => '<i class="a fa fa-tag"></i> ' . $this->language->get('text_special_category'),
+                'url'   => $this->url->link('diva/featuredcate', 'user_token=' . $this->session->data['user_token'], true)
+            );
+        }
+
+        if($this->user->hasPermission('access', 'diva/ultimatemenu')) {
+            $data['diva_menus'][] = array(
+                'title' => '<i class="a fa fa-bars"></i> ' . $this->language->get('text_ultimate_menu'),
+                'url'   => $this->url->link('diva/ultimatemenu/menuList', 'user_token=' . $this->session->data['user_token'], true)
+            );
+        }
+
+        if ($this->user->hasPermission('access', 'diva/blog')) {
+            $blog_menu = array();
+
+            if ($this->user->hasPermission('access', 'diva/blog/post')) {
+                $blog_menu[] = array(
+                    'title' => $this->language->get('text_posts'),
+                    'url'   => $this->url->link('diva/blog/post', 'user_token=' . $this->session->data['user_token'], true)
+                );
+            }
+
+            if ($this->user->hasPermission('access', 'diva/blog/list')) {
+                $blog_menu[] = array(
+                    'title' => $this->language->get('text_posts_list'),
+                    'url'   => $this->url->link('diva/blog/list', 'user_token=' . $this->session->data['user_token'], true)
+                );
+            }
+
+            if ($this->user->hasPermission('access', 'diva/blog/setting')) {
+                $blog_menu[] = array(
+                    'title' => $this->language->get('text_blog_setting'),
+                    'url'   => $this->url->link('diva/blog/setting', 'user_token=' . $this->session->data['user_token'], true)
+                );
+            }
+
+            if($blog_menu) {
+                $data['diva_menus'][] = array(
+                    'title' => '<i class="a fa fa-ticket"></i> ' . $this->language->get('text_blog'),
+                    'child' => $blog_menu
+                );
+            }
+        }
+
+        if($this->user->hasPermission('access', 'diva/slider')) {
+            $data['diva_menus'][] = array(
+                'title' => '<i class="a fa fa-film"></i> ' . $this->language->get('text_slider'),
+                'url'   => $this->url->link('diva/slider', 'user_token=' . $this->session->data['user_token'], true)
+            );
+        }
+
+        if($this->user->hasPermission('access', 'diva/testimonial')) {
+            $data['diva_menus'][] = array(
+                'title' => '<i class="a fa fa-comment"></i> ' . $this->language->get('text_testimonial'),
+                'url'   => $this->url->link('diva/testimonial', 'user_token=' . $this->session->data['user_token'], true)
+            );
+        }
+
+        if($this->user->hasPermission('access', 'diva/newsletter')) {
+            $data['diva_menus'][] = array(
+                'title' => '<i class="a fa fa-envelope"></i> ' . $this->language->get('text_newsletter'),
+                'url'   => $this->url->link('diva/newsletter', 'user_token=' . $this->session->data['user_token'], true)
+            );
+        }
 
         $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
         
