@@ -159,3 +159,33 @@
     margin-right: 10px;
     transition: margin ease 0.5s;
 }
+/*Slider show admin*/
+#form-slider {
+    
+}
+#form-slider #module {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 30px;
+}
+#form-slider #module li {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 5px 0 0;
+}
+#form-slider #module li .btn-theme-option {
+    background: #fff !important;
+    color: #333 !important;
+    border-color: #ddd; 
+}
+#form-slider #module li.active .btn-theme-option {
+    background-color: #eb5202 !Important;
+    color: #fff !important;
+    border-color: #eb5202 !important;
+}
+#form-slider #module li .btn-theme-option i {
+    float: right;
+    line-height: inherit;
+    margin-left: 10px;
+}
+/*----*/
