@@ -36,24 +36,24 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">{{ text_dashboard_menu }}</h3>
                         </div>
-                            <ul class="nav nav-tabs menu-sections dv-dashboard-menu">
-                                {% set i = 0 %}
-                                {% for menu in diva_menus %}
-                                    {% if menu.child %}
-                                        <li>
-                                            <a href="#dvcollapse_{{ i }}" data-toggle="collapse" class="parent collapsed">{{ menu.title }}</a>
-                                            <ul id="dvcollapse_{{ i }}" class="collapse">
-                                                {% for item in menu.child %}
-                                                    <li><a href="{{ item.url }}">{{ item.title }}</a></li>
-                                                {% endfor %}
-                                            </ul>
-                                        </li>
-                                    {% else %}
-                                        <li><a href="{{ menu.url }}">{{ menu.title }}</a></li>
-                                    {% endif %}
-                                    {% set i = i + 1 %}
-                                {% endfor %}
-                            </ul>
+                        <ul class="nav nav-tabs menu-sections dv-dashboard-menu">
+                            {% set i = 0 %}
+                            {% for menu in diva_menus %}
+                                {% if menu.child %}
+                                    <li {% if menu.active %} class="active" {% endif %}>
+                                        <a href="#dvcollapse_{{ i }}" data-toggle="collapse" class="parent {% if not menu.active %} collapsed {% endif %}">{{ menu.title }}</a>
+                                        <ul id="dvcollapse_{{ i }}" class="collapse {% if menu.active %} in {% endif %}">
+                                            {% for item in menu.child %}
+                                                <li {% if item.active %} class="active" {% endif %}><a href="{{ item.url }}">{{ item.title }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                {% else %}
+                                    <li {% if menu.active %} class="active" {% endif %}><a href="{{ menu.url }}">{{ menu.title }}</a></li>
+                                {% endif %}
+                                {% set i = i + 1 %}
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
             </div>
