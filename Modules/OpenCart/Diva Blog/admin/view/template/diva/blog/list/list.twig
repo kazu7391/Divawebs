@@ -37,16 +37,16 @@
                             {% set i = 0 %}
                             {% for menu in diva_menus %}
                                 {% if menu.child %}
-                                    <li>
-                                        <a href="#dvcollapse_{{ i }}" data-toggle="collapse" class="parent collapsed">{{ menu.title }}</a>
-                                        <ul id="dvcollapse_{{ i }}" class="collapse">
+                                    <li {% if menu.active %} class="active" {% endif %}>
+                                        <a href="#dvcollapse_{{ i }}" data-toggle="collapse" class="parent {% if not menu.active %} collapsed {% endif %}">{{ menu.title }}</a>
+                                        <ul id="dvcollapse_{{ i }}" class="collapse {% if menu.active %} in {% endif %}">
                                             {% for item in menu.child %}
-                                                <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+                                                <li {% if item.active %} class="active" {% endif %}><a href="{{ item.url }}">{{ item.title }}</a></li>
                                             {% endfor %}
                                         </ul>
                                     </li>
                                 {% else %}
-                                    <li><a href="{{ menu.url }}">{{ menu.title }}</a></li>
+                                    <li {% if menu.active %} class="active" {% endif %}><a href="{{ menu.url }}">{{ menu.title }}</a></li>
                                 {% endif %}
                                 {% set i = i + 1 %}
                             {% endfor %}
@@ -69,7 +69,7 @@
                                             <td style="width: 10px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
                                             <td class="text-left">{{ column_name }}</td>
                                             <td class="text-center" width="200px">{{ column_status }}</td>
-                                            <td class="text-right" width="200px">{{ column_action }}</td>
+                                            <td class="text-right" width="100px">{{ column_action }}</td>
                                         </tr>
                                         </thead>
                                         <tbody>
