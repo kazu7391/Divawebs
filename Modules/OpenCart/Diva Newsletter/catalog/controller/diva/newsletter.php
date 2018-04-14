@@ -2,7 +2,7 @@
 class ControllerDivaNewsletter extends Controller
 {
     public function subscribe() {
-        $this->language->load('diva/module/dvnewsletter');
+        $this->load->language('diva/module/dvnewsletter');
 
         $this->load->model('diva/newsletter');
 

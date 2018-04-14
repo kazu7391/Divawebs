@@ -26,49 +26,80 @@
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
             </div>
         {% endif %}
-        <div class="theme-option-container">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
-                </div>
-                <div class="panel-body">
-                    <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-newsletter" class="form-horizontal">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                <tr>
-                                    <td style="width: 50px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
-                                    <td class="text-left">{{ column_mail }}</td>
-                                    <td class="text-center" width="200px">{{ column_status }}</td>
-                                    <td class="text-right" width="200px">{{ column_action }}</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% if mails %}
-                                    {% for mail in mails %}
-                                        <tr>
-                                            <td class="text-center"> {% if mail.mail_id in selected %}
-                                                    <input type="checkbox" name="selected[]" value="{{ mail.mail_id }}" checked="checked" />
-                                                {% else %}
-                                                    <input type="checkbox" name="selected[]" value="{{ mail.mail_id }}" />
-                                                {% endif %} </td>
-                                            <td class="text-left">{{ mail.mail }}</td>
-                                            <td class="text-center"><span class="item-status {% if mail.status %}enabled{% else %}disabled{% endif %}">{{ mail.subscribe }}</span></td>
-                                            <td class="text-right"><a href="{{ mail.edit }}" data-toggle="tooltip" title="{{ text_change_subscribe }}" class="btn btn-theme-option"><i class="fa fa-exchange"></i></a></td>
-                                        </tr>
-                                    {% endfor %}
-                                {% else %}
-                                    <tr>
-                                        <td class="text-center" colspan="4">{{ text_no_results }}</td>
-                                    </tr>
-                                {% endif %}
-                                </tbody>
-                            </table>
+        <div class="row">
+            <div class="col-md-3 col-sm-12">
+                <div class="theme-option-container">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ text_dashboard_menu }}</h3>
                         </div>
-                    </form>
-                    <div class="row theme-option-pagination">
-                        <div class="col-sm-6 text-left">{{ pagination }}</div>
-                        <div class="col-sm-6 text-right">{{ results }}</div>
+                        <ul class="nav nav-tabs menu-sections dv-dashboard-menu">
+                            {% set i = 0 %}
+                            {% for menu in diva_menus %}
+                                {% if menu.child %}
+                                    <li>
+                                        <a href="#dvcollapse_{{ i }}" data-toggle="collapse" class="parent collapsed">{{ menu.title }}</a>
+                                        <ul id="dvcollapse_{{ i }}" class="collapse">
+                                            {% for item in menu.child %}
+                                                <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                {% else %}
+                                    <li><a href="{{ menu.url }}">{{ menu.title }}</a></li>
+                                {% endif %}
+                                {% set i = i + 1 %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <div class="theme-option-container">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-newsletter" class="form-horizontal">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <td style="width: 50px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+                                            <td class="text-left">{{ column_mail }}</td>
+                                            <td class="text-center" width="200px">{{ column_status }}</td>
+                                            <td class="text-right" width="200px">{{ column_action }}</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% if mails %}
+                                            {% for mail in mails %}
+                                                <tr>
+                                                    <td class="text-center"> {% if mail.mail_id in selected %}
+                                                            <input type="checkbox" name="selected[]" value="{{ mail.mail_id }}" checked="checked" />
+                                                        {% else %}
+                                                            <input type="checkbox" name="selected[]" value="{{ mail.mail_id }}" />
+                                                        {% endif %} </td>
+                                                    <td class="text-left">{{ mail.mail }}</td>
+                                                    <td class="text-center"><span class="item-status {% if mail.status %}enabled{% else %}disabled{% endif %}">{{ mail.subscribe }}</span></td>
+                                                    <td class="text-right"><a href="{{ mail.edit }}" data-toggle="tooltip" title="{{ text_change_subscribe }}" class="btn btn-theme-option"><i class="fa fa-exchange"></i></a></td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% else %}
+                                            <tr>
+                                                <td class="text-center" colspan="4">{{ text_no_results }}</td>
+                                            </tr>
+                                        {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                            <div class="row theme-option-pagination">
+                                <div class="col-sm-6 text-left">{{ pagination }}</div>
+                                <div class="col-sm-6 text-right">{{ results }}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
