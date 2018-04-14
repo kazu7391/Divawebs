@@ -5,6 +5,8 @@ class ControllerDivaTestimonial extends Controller
 
     public function index() {
         $this->load->language('diva/testimonial');
+        $this->load->language('diva/adminmenu');
+
         $this->load->model('diva/testimonial');
 
         $this->getList();
@@ -12,6 +14,7 @@ class ControllerDivaTestimonial extends Controller
 
     public function insert() {
         $this->load->language('diva/testimonial');
+
         $this->load->model('diva/testimonial');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
@@ -40,6 +43,7 @@ class ControllerDivaTestimonial extends Controller
 
     public function update() {
         $this->load->language('diva/testimonial');
+
         $this->load->model('diva/testimonial');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
@@ -68,6 +72,8 @@ class ControllerDivaTestimonial extends Controller
 
     public function delete() {
         $this->load->language('diva/testimonial');
+        $this->load->language('diva/adminmenu');
+
         $this->load->model('diva/testimonial');
 
         if (isset($this->request->post['selected']) && $this->validateDelete()) {
@@ -223,6 +229,89 @@ class ControllerDivaTestimonial extends Controller
             unset($this->session->data['success']);
         } else {
             $data['success'] = '';
+        }
+        
+        $data['diva_menus'] = array();
+
+        if($this->user->hasPermission('access', 'extension/module/dvcontrolpanel')) {
+            $data['diva_menus'][] = array(
+                'title' => '<i class="a fa fa-magic"></i> ' . $this->language->get('text_control_panel'),
+                'url'   => $this->url->link('extension/module/dvcontrolpanel', 'user_token=' . $this->session->data['user_token'], true)
+            );
+        }
+
+        if($this->user->hasPermission('access', 'diva/module')) {
+            $data['diva_menus'][] = array(
+                'title' => '<i class="a fa fa-puzzle-piece"></i> ' . $this->language->get('text_theme_module'),
+                'url'   => $this->url->link('diva/module', 'user_token=' . $this->session->data['user_token'], true)
+            );
+        }
+
+        if($this->user->hasPermission('access', 'diva/featuredcate')) {
+            $data['diva_menus'][] = array(
+                'title' => '<i class="a fa fa-tag"></i> ' . $this->language->get('text_special_category'),
+                'url'   => $this->url->link('diva/featuredcate', 'user_token=' . $this->session->data['user_token'], true)
+            );
+        }
+
+        if($this->user->hasPermission('access', 'diva/ultimatemenu')) {
+            $data['diva_menus'][] = array(
+                'title' => '<i class="a fa fa-bars"></i> ' . $this->language->get('text_ultimate_menu'),
+                'url'   => $this->url->link('diva/ultimatemenu/menuList', 'user_token=' . $this->session->data['user_token'], true)
+            );
+        }
+
+        if ($this->user->hasPermission('access', 'diva/blog')) {
+            $blog_menu = array();
+
+            if ($this->user->hasPermission('access', 'diva/blog/post')) {
+                $blog_menu[] = array(
+                    'title' => $this->language->get('text_posts'),
+                    'url'   => $this->url->link('diva/blog/post', 'user_token=' . $this->session->data['user_token'], true)
+                );
+            }
+
+            if ($this->user->hasPermission('access', 'diva/blog/list')) {
+                $blog_menu[] = array(
+                    'title' => $this->language->get('text_posts_list'),
+                    'url'   => $this->url->link('diva/blog/list', 'user_token=' . $this->session->data['user_token'], true)
+                );
+            }
+
+            if ($this->user->hasPermission('access', 'diva/blog/setting')) {
+                $blog_menu[] = array(
+                    'title' => $this->language->get('text_blog_setting'),
+                    'url'   => $this->url->link('diva/blog/setting', 'user_token=' . $this->session->data['user_token'], true)
+                );
+            }
+
+            if($blog_menu) {
+                $data['diva_menus'][] = array(
+                    'title' => '<i class="a fa fa-ticket"></i> ' . $this->language->get('text_blog'),
+                    'child' => $blog_menu
+                );
+            }
+        }
+
+        if($this->user->hasPermission('access', 'diva/slider')) {
+            $data['diva_menus'][] = array(
+                'title' => '<i class="a fa fa-film"></i> ' . $this->language->get('text_slider'),
+                'url'   => $this->url->link('diva/slider', 'user_token=' . $this->session->data['user_token'], true)
+            );
+        }
+
+        if($this->user->hasPermission('access', 'diva/testimonial')) {
+            $data['diva_menus'][] = array(
+                'title' => '<i class="a fa fa-comment"></i> ' . $this->language->get('text_testimonial'),
+                'url'   => $this->url->link('diva/testimonial', 'user_token=' . $this->session->data['user_token'], true)
+            );
+        }
+
+        if($this->user->hasPermission('access', 'diva/newsletter')) {
+            $data['diva_menus'][] = array(
+                'title' => '<i class="a fa fa-envelope"></i> ' . $this->language->get('text_newsletter'),
+                'url'   => $this->url->link('diva/newsletter', 'user_token=' . $this->session->data['user_token'], true)
+            );
         }
 
         $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
