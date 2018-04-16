@@ -21,7 +21,7 @@ class ControllerExtensionModuleDvtestimonial extends Controller
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true));
+            $this->response->redirect($this->url->link('diva/module', 'user_token=' . $this->session->data['user_token'], true));
         }
 
         if (isset($this->error['warning'])) {
@@ -48,9 +48,26 @@ class ControllerExtensionModuleDvtestimonial extends Controller
             $data['error_height'] = '';
         }
 
+        $data['breadcrumbs'] = array();
+
+        $data['breadcrumbs'][] = array(
+            'href'      => $this->url->link('common/dashboard', 'user_token=' . $this->session->data['user_token'], true),
+            'text'      => $this->language->get('text_home')
+        );
+
+        $data['breadcrumbs'][] = array(
+            'text' => $this->language->get('text_extension'),
+            'href' => $this->url->link('diva/module', 'user_token=' . $this->session->data['user_token'], true)
+        );
+
+        $data['breadcrumbs'][] = array(
+            'text'      => $this->language->get('heading_title'),
+            'href'      => $this->url->link('extension/module/dvtestimonial', 'user_token=' . $this->session->data['user_token'], true)
+        );
+
         $data['action'] = $this->url->link('extension/module/dvtestimonial', 'user_token=' . $this->session->data['user_token'], true);
         $data['testimonial_link'] = $this->url->link('diva/testimonial', 'user_token=' . $this->session->data['user_token'], true);
-        $data['cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true);
+        $data['cancel'] = $this->url->link('diva/module', 'user_token=' . $this->session->data['user_token'], true);
 
         if (isset($this->request->get['module_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
             $module_info = $this->model_setting_module->getModule($this->request->get['module_id']);
@@ -144,23 +161,6 @@ class ControllerExtensionModuleDvtestimonial extends Controller
         } else {
             $data['pagination'] = 0;
         }
-
-        $data['breadcrumbs'] = array();
-
-        $data['breadcrumbs'][] = array(
-            'href'      => $this->url->link('common/dashboard', 'user_token=' . $this->session->data['user_token'], true),
-            'text'      => $this->language->get('text_home')
-        );
-
-        $data['breadcrumbs'][] = array(
-            'text' => $this->language->get('text_extension'),
-            'href' => $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true)
-        );
-
-        $data['breadcrumbs'][] = array(
-            'text'      => $this->language->get('heading_title'),
-            'href'      => $this->url->link('extension/module/dvtestimonial', 'user_token=' . $this->session->data['user_token'], true)
-        );
 
         $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
         $this->document->addScript('view/javascript/divawebs/switch-toggle/js/bootstrap-toggle.min.js');

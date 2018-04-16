@@ -34,7 +34,7 @@ class ControllerExtensionModuleDvmenu extends Controller
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true));
+            $this->response->redirect($this->url->link('diva/module', 'user_token=' . $this->session->data['user_token'], true));
         }
 
         if (isset($this->error['warning'])) {
@@ -67,7 +67,7 @@ class ControllerExtensionModuleDvmenu extends Controller
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_extension'),
-            'href' => $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true)
+            'href' => $this->url->link('diva/module', 'user_token=' . $this->session->data['user_token'], true)
         );
 
         if (!isset($this->request->get['module_id'])) {
@@ -89,7 +89,7 @@ class ControllerExtensionModuleDvmenu extends Controller
         }
 
         $data['menu_editor_link'] = $this->url->link('diva/ultimatemenu/menulist', 'user_token=' . $this->session->data['user_token'], true);
-        $data['cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true);
+        $data['cancel'] = $this->url->link('diva/module', 'user_token=' . $this->session->data['user_token'], true);
 
         if (isset($this->request->get['module_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
             $module_info = $this->model_setting_module->getModule($this->request->get['module_id']);
