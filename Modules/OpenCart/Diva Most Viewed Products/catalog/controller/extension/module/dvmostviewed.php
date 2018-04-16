@@ -4,6 +4,7 @@ class ControllerExtensionModuleDvmostviewed extends Controller
     public function index($setting) {
         $this->language->load('diva/module/dvmostviewed');
 
+        $this->load->model('catalog/product');
         $this->load->model('diva/product');
         $this->load->model('tool/image');
         $this->load->model('diva/rotateimage');
