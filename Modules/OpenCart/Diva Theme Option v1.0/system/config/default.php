@@ -71,8 +71,11 @@ $_['model_autoload']       = array();
 require_once(DIR_SYSTEM . 'Mobile_Detect.php');
 $detect = new Mobile_Detect;
 $_['action_default']       = 'common/home';
-if ( $detect->isMobile() ) {
-    $_['action_default']       = 'diva/mobile';
+if ( $detect->isTablet() ) {
+    $_['action_default']       = 'diva/responsive/tablet';
+}
+if( $detect->isMobile() && !$detect->isTablet() ){
+    $_['action_default']       = 'diva/responsive/mobile';
 }
 $_['action_router']        = 'startup/router';
 $_['action_error']         = 'error/not_found';
