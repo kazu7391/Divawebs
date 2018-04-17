@@ -2,7 +2,7 @@
 class ControllerExtensionModuleDvslider extends Controller
 {
     public function index($setting) {
-        $this->language->load('diva/module/dvslider');
+        $this->load->language('diva/module/dvslider');
 
         $this->load->model('diva/slider');
         $this->load->model('tool/image');

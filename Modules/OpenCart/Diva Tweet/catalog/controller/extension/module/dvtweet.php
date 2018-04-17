@@ -2,7 +2,7 @@
 class ControllerExtensionModuleDvtweet extends Controller
 {
     public function index() {
-        $this->language->load('diva/module/dvtweet');
+        $this->load->language('diva/module/dvtweet');
         $data['heading_title'] = $this->language->get('heading_title');
 
         $data['dvtweet_user'] = $this->config->get('module_dvtweet_id');

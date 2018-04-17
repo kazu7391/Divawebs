@@ -2,7 +2,7 @@
 class ControllerExtensionModuleDvnewsletter extends Controller
 {
     public function index($setting) {
-        $this->language->load('diva/module/dvnewsletter');
+        $this->load->language('diva/module/dvnewsletter');
 
         $data = array();
 

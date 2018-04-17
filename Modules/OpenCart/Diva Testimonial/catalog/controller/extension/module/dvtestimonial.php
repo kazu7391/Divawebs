@@ -2,7 +2,7 @@
 class ControllerExtensionModuleDvtestimonial extends Controller
 {
     public function index($setting) {
-        $this->language->load('diva/module/dvtestimonial');
+        $this->load->language('diva/module/dvtestimonial');
 
         $this->load->model('diva/testimonial');
         $this->load->model('tool/image');

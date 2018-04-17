@@ -2,7 +2,7 @@
 class ControllerExtensionModuleDvrandom extends Controller
 {
     public function index($setting) {
-        $this->language->load('diva/module/dvrandom');
+        $this->load->language('diva/module/dvrandom');
 
         $this->load->model('catalog/product');
         $this->load->model('diva/product');

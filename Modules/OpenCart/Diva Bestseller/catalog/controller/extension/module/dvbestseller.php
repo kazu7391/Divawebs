@@ -2,7 +2,7 @@
 class ControllerExtensionModuleDvbestseller extends Controller
 {
     public function index($setting) {
-        $this->language->load('diva/module/dvbestseller');
+        $this->load->language('diva/module/dvbestseller');
 
         $this->load->model('catalog/product');
         $this->load->model('tool/image');
