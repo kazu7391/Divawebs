@@ -17,7 +17,11 @@
 - Featured Products	(fa-bookmark)
 - Most Viewed  		(fa-eye)					  (Done)
 - New Products Slider 	(fa-sort-amount-desc)	  (Done)
-- Bestseller Slider  (fa-bar-chart)
-- Price Countdown	(fa-percent)
+- Bestseller Slider  (fa-bar-chart)				  (Done)
 - Random Slider		(fa-barcode)				  (Done)
-- Special Slider
+- Special Slider	(fa-percent)
+
+* Update
+- Width in Mega Menu
+- Countdown in Product page
+- AMP
