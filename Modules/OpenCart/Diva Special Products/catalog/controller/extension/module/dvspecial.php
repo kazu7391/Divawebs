@@ -5,12 +5,14 @@ class ControllerExtensionModuleDvspecial extends Controller
         $this->load->language('diva/module/dvspecial');
 
         $this->load->model('catalog/product');
+        $this->load->model('diva/product');
         $this->load->model('tool/image');
         $this->load->model('diva/rotateimage');
 
         $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/swiper.min.css');
         $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
         $this->document->addScript('catalog/view/javascript/jquery/swiper/js/swiper.jquery.js');
+        $this->document->addScript('catalog/view/javascript/diva/countdown/countdown.js');
         if (file_exists('catalog/view/theme/' . $this->config->get('theme_' . $this->config->get('config_theme') . '_directory') . '/stylesheet/diva/module.css')) {
             $this->document->addStyle('catalog/view/theme/' . $this->config->get('theme_' . $this->config->get('config_theme') . '_directory') . '/stylesheet/diva/module.css');
         } else {
@@ -121,25 +123,20 @@ class ControllerExtensionModuleDvspecial extends Controller
 
         $use_hover_image = $data['show_module_hover'];
 
-        /* Get new product */
-        $filter_data = array(
-            'sort'  => 'p.date_added',
-            'order' => 'DESC',
-            'start' => 0,
-            'limit' => 10
-        );
-
-        $new_results = $this->model_catalog_product->getProducts($filter_data);
-        /* End */
+        $new_results = $this->model_catalog_product->getLatestProducts(10);
 
         $data['products'] = array();
 
-        $filter_data = array(
-            'start' => 0,
-            'limit' => $limit
-        );
+        if($data['show_countdown']) {
+            $results = $this->model_diva_product->getCountdownSpecials($limit);
+        } else {
+            $filter_data = array(
+                'start' => 0,
+                'limit' => $limit
+            );
+            $results = $this->model_catalog_product->getProductSpecials($filter_data);
+        }
 
-        $results = $this->model_catalog_product->getProductSpecials($filter_data);
 
         foreach ($results as $result) {
             if ($result['image']) {
@@ -172,10 +169,22 @@ class ControllerExtensionModuleDvspecial extends Controller
                 $description = false;
             }
 
+            if (isset($result['date_start']) && $result['date_start']) {
+                $date_start = $result['date_start'] ;
+            } else {
+                $date_start = false;
+            }
+
+            if(isset($result['date_end']) &&  $result['date_end']) {
+                $date_end = $result['date_end'] ;
+            } else {
+                $date_end = false;
+            }
+
             $is_new = false;
             if ($new_results) {
-                foreach($new_results as $new_r) {
-                    if($result['product_id'] == $new_r['product_id']) {
+                foreach($new_results as $new_product) {
+                    if($result['product_id'] == $new_product['product_id']) {
                         $is_new = true;
                     }
                 }
@@ -202,6 +211,8 @@ class ControllerExtensionModuleDvspecial extends Controller
                 'price'   	    => $price,
                 'special' 	    => $special,
                 'is_new'        => $is_new,
+                'date_start'  	=> $date_start,
+                'date_end'    	=> $date_end,
                 'rating'        => $rating,
                 'description'   => $description,
                 'href'    	    => $this->url->link('product/product', 'product_id=' . $result['product_id']),
