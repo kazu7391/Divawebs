@@ -59,7 +59,6 @@
                                     <div class="widget-row col-sm-12">
                                         <div class="row-action">
                                             <div class="action-group">
-                                                <input type="text" class="form-control input-class-name" name="widget[{{ widget_row }}][class]" value="{{ main_row.class }}" placeholder="{{ text_custom_classname }}" />
                                                 <div class="col-count">
                                                     <a href="javascript:void(0);" onclick="builder.plusMainColumn($(this));" rel="1" class="col-plus"></a>
                                                     <span class="count">{{ main_col_count }}</span>
@@ -165,6 +164,7 @@
                                                                         {% endfor %}
                                                                     </div>
                                                                     <input type="hidden" class="sub-row-pos" value="{{ widget_sub_row }}" />
+                                                                    <input type="hidden" class="input-class-name" name="widget[{{ widget_row }}][class]" value="{{ main_row.class }}" placeholder="{{ text_custom_classname }}" />
                                                                 </div>
                                                                 {% set widget_sub_row = widget_sub_row + 1 %}
                                                             {% endfor %}
@@ -215,13 +215,11 @@
                                 <div class="widget-row col-sm-12">
                                     <div class="row-action">
                                         <div class="action-group">
-                                            <input type="text" class="form-control input-class-name" name="widget[0][class]" value="" placeholder="{{ text_custom_classname }}" />
-                                            <div class="col-count">
-                                                <a href="javascript:void(0);" onclick="builder.plusMainColumn($(this));" rel="1" class="col-plus"></a>
-                                                <span class="count">1</span>
-                                                <a href="javascript:void(0);" onclick="builder.minusMainColumn($(this));" rel="1" class="col-minus"></a>
-                                            </div>
+                                            <a href="javascript:void(0);" onclick="builder.plusMainColumn($(this));" rel="1" class="col-plus"></a>
+                                            <span class="count">1</span>
+                                            <a href="javascript:void(0);" onclick="builder.minusMainColumn($(this));" rel="1" class="col-minus"></a>
                                             <div class="a-group">
+
                                                 <a class="a-column-custom" title="{{ text_custom_columns }}" onclick="builder.customMainColumns($(this));" href="javascript:void(0);"></a>
                                                 <a class="a-row-delete" onclick="builder.removeRow($(this));" href="javascript:void(0);"></a>
                                             </div>
@@ -234,7 +232,6 @@
                                         <div class="col-sm-12 main-column">
                                             <input type="hidden" class="main-col-pos" value="{{ main_col_count }}" />
                                             <input type="hidden" class="main-col-format" name="widget[0][main_cols][0][format]" value="12" />
-                                            <a class="a-sub-row-add" href="javascript:void(0);" onclick="builder.drawSubRow($(this))">{{ text_add_sub_row }}</a>
                                             <div class="main-col-content main-col-{{ main_col_count }}">
                                                 {% set widget_sub_row = 0 %}
                                                 <div class="sub-row sub-row-{{ widget_sub_row }}">
@@ -255,13 +252,13 @@
                                                     <div class="sub-row-content">
                                                         <div class="col-sm-12 column-area">
                                                             <div class="module-area droparea ui-droppable ui-sortable sub-col-{{ sub_col_count }}">
-                                                                <div class="text-insert-module"><span class="">{{ text_insert_module }}</span></div>
-                                                            </div>
-                                                            <div class="col-action">
-                                                                <div class="action-group">
-                                                                    <a class="a-module-add" onclick="builder.showAllModules($(this))" href="javascript:void(0);"><i class="fa fa-plus"></i> {{ text_add_module }}</a>
+                                                                <div class="col-action">
+                                                                    <div class="action-group">
+                                                                        <a class="a-module-add" title="{{ text_add_module }}" onclick="builder.showAllModules($(this))" href="javascript:void(0);"><i class="fa fa-plus"></i></a>
+                                                                    </div>
                                                                 </div>
                                                             </div>
+
                                                             <input type="hidden" class="sub-col-pos" value="{{ sub_col_count }}" />
                                                             <input type="hidden" class="sub-col-format" name="widget[0][main_cols][0][sub_rows][0][sub_cols][0][format]" value="12" />
                                                         </div>
@@ -269,16 +266,19 @@
                                                     <input type="hidden" class="sub-row-pos" value="{{ widget_sub_row }}" />
                                                 </div>
                                             </div>
+                                            <div class="sub-row-add">
+                                                <a class="a-sub-row-add" title="{{ text_add_sub_row }}" href="javascript:void(0);" onclick="builder.drawSubRow($(this))"><i class="fa fa-plus-square"></i></a>
+                                            </div>
                                         </div>
                                     </div>
                                     <input type="hidden" class="main-row-pos" value="{{ widget_row }}" />
+                                    <input type="hidden" class="input-class-name" name="widget[0][class]" value="" placeholder="{{ text_custom_classname }}" />
                                 </div>
                             {% endif %}
                         </div>
                         <div class="widget-info-group col-sm-12">
-                            <button type="button" class="btn-insert btn">
-                                <i class="fa fa-plus"></i>
-                                <span>{{ text_add_row }}</span>
+                            <button type="button" class="btn-insert">
+                                <i class="fa fa-plus-square"></i>
                             </button>
                         </div>
                     </div>

@@ -1,12 +1,6 @@
 $(document).ready(function(){
     builder.reArrangeLayout();
     builder.triggerDragnDrop();
-
-    $('.widget-row').click(function () {
-        $(this).css('cursor', 'grabbing');
-        $(this).css('cursor', '-moz-grabbing');
-        $(this).css('cursor', '-webkit-grabbing');
-    })
 });
 
 var builder = {
@@ -563,7 +557,7 @@ var builder = {
         html +=	'</div>';
 
         $('.widget-container .row-' + row_pos + ' .main-col-' + col_pos + ' .sub-row-' + sub_row_pos + ' .sub-col-' + sub_col_pos + ' .text-insert-module').hide();
-        $('.widget-container .row-' + row_pos + ' .main-col-' + col_pos + ' .sub-row-' + sub_row_pos + ' .sub-col-' + sub_col_pos).append(html);
+        $('.widget-container .row-' + row_pos + ' .main-col-' + col_pos + ' .sub-row-' + sub_row_pos + ' .sub-col-' + sub_col_pos).prepend(html);
         builder.closeAllModules();
         builder.reArrangeLayout();
         builder.triggerDragnDrop();
