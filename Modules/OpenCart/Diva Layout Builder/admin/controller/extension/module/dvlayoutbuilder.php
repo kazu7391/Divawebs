@@ -127,6 +127,8 @@ class ControllerExtensionModuleDvlayoutbuilder extends Controller
             }
         }
 
+        $this->load->language('extension/module/dvlayoutbuilder');
+
         $this->document->addStyle('view/javascript/jquery/jquery-ui/jquery-ui.min.css');
         $this->document->addScript('view/javascript/jquery/jquery-ui/jquery-ui.min.js');
         $this->document->addStyle('view/stylesheet/divawebs/layoutbuilder.css');

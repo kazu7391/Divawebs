@@ -211,7 +211,6 @@ var builder = {
         var row_pos = container.closest('.widget-row').find('.main-row-pos').val();
         var main_col_pos = container.closest('.main-column').find('.main-col-pos').val();
         var sub_row_pos = container.closest('.sub-row').find('.sub-row-pos').val();
-        var text_insert_module = $('#text-insert-module').val();
         var text_add_module = $('#text-add-module').val();
         var text_columns_error_format = $('#text-columns-error-format').val();
 
@@ -241,11 +240,6 @@ var builder = {
                         html += '               <div class="module-area droparea ui-droppable ui-sortable sub-col-' + col_count + '">';
                         html +=                 container.find('.sub-col-' + col_count).html();
                         html += '               </div>';
-                        html += '               <div class="col-action">';
-                        html += '                   <div class="action-group">';
-                        html += '                       <a class="a-module-add" onclick="builder.showAllModules($(this))" href="javascript:void(0);"><i class="fa fa-plus"></i> ' + text_add_module + '</a>';
-                        html += '                   </div>';
-                        html += '               </div>';
                         html += '               <input type="hidden" class="sub-col-pos" value="' + col_count + '" />';
                         html += '               <input type="hidden" class="sub-col-format" name="widget['+ row_pos + '][main_cols]['+ main_col_pos +'][sub_rows]['+ sub_row_pos +'][sub_cols]['+ col_count +'][format]" value="' + col + '" />';
                         html += '           </div>';
@@ -254,11 +248,10 @@ var builder = {
                     } else {
                         html += '           <div class="col-sm-' + col + ' column-area">';
                         html += '               <div class="module-area droparea ui-droppable ui-sortable sub-col-' + col_count + '">';
-                        html += '                   <div class="text-insert-module"><span>'+ text_insert_module +'</span></div>';
-                        html += '               </div>';
-                        html += '               <div class="col-action">';
-                        html += '                   <div class="action-group">';
-                        html += '                       <a class="a-module-add" onclick="builder.showAllModules($(this))" href="javascript:void(0);"><i class="fa fa-plus"></i> ' + text_add_module + '</a>';
+                        html += '                   <div class="col-action">';
+                        html += '                       <div class="action-group">';
+                        html += '                           <a class="a-module-add" title="' + text_add_module + '" onclick="builder.showAllModules($(this))" href="javascript:void(0);"><i class="fa fa-plus"></i></a>';
+                        html += '                       </div>';
                         html += '                   </div>';
                         html += '               </div>';
                         html += '               <input type="hidden" class="sub-col-pos" value="' + col_count + '" />';
@@ -286,11 +279,9 @@ var builder = {
         var col_count = 0;
         var isDraw = false;
         var row_pos = container.closest('.widget-row').find('.main-row-pos').val();
-        var text_insert_module = $('#text-insert-module').val();
         var text_add_module = $('#text-add-module').val();
         var text_add_sub_row = $('#text-add-sub-row').val();
         var text_columns_error_format = $('#text-columns-error-format').val();
-        var text_columns = $("#text-columns").val();
         var text_custom_columns = $('#text-custom-columns').val();
 
         var columns = cols.split('+').map(function (str) {
@@ -318,9 +309,11 @@ var builder = {
                         html += '<div class="col-sm-' + col + ' main-column">';
                         html += '   <input type="hidden" class="main-col-pos" value="' + col_count + '" />';
                         html += '   <input type="hidden" class="main-col-format" value="' + col + '" name="widget['+ row_pos + '][main_cols]['+ col_count +'][format]" />';
-                        html += '   <a class="a-sub-row-add" href="javascript:void(0);" onclick="builder.drawSubRow($(this))">' + text_add_sub_row + '</a>';
                         html += '   <div class="main-col-content main-col-' + col_count + '">';
                         html +=     container.find('.main-col-' + col_count).html();
+                        html += '   </div>';
+                        html += '   <div class="sub-row-add">';
+                        html += '       <a class="a-sub-row-add" title="' + text_add_sub_row + '" href="javascript:void(0);" onclick="builder.drawSubRow($(this))"><i class="fa fa-plus-square"></i></a>';
                         html += '   </div>';
                         html += '</div>';
                         col_count++;
@@ -328,7 +321,6 @@ var builder = {
                         html += '<div class="col-sm-' + col + ' main-column">';
                         html += '   <input type="hidden" class="main-col-pos" value="' + col_count + '" />';
                         html += '   <input type="hidden" class="main-col-format" value="' + col + '" name="widget['+ row_pos + '][main_cols]['+ col_count +'][format]" />';
-                        html += '   <a class="a-sub-row-add" href="javascript:void(0);" onclick="builder.drawSubRow($(this))">' + text_add_sub_row + '</a>';
                         html += '   <div class="main-col-content main-col-' + col_count + '">';
                         html += '       <div class="sub-row sub-row-0">';
                         html += '           <div class="sub-row-action">';
@@ -348,11 +340,10 @@ var builder = {
                         html += '           <div class="sub-row-content">';
                         html += '               <div class="col-sm-12 column-area">';
                         html += '                   <div class="module-area droparea ui-droppable ui-sortable sub-col-0">';
-                        html += '                       <div class="text-insert-module"><span>'+ text_insert_module +'</span></div>';
-                        html += '                   </div>';
-                        html += '                   <div class="col-action">';
-                        html += '                       <div class="action-group">';
-                        html += '                           <a class="a-module-add" onclick="builder.showAllModules($(this))" href="javascript:void(0);"><i class="fa fa-plus"></i> ' + text_add_module + '</a>';
+                        html += '                       <div class="col-action">';
+                        html += '                           <div class="action-group">';
+                        html += '                               <a class="a-module-add" title="' + text_add_module + '" onclick="builder.showAllModules($(this))" href="javascript:void(0);"><i class="fa fa-plus"></i></a>';
+                        html += '                           </div>';
                         html += '                       </div>';
                         html += '                   </div>';
                         html += '                   <input type="hidden" class="sub-col-pos" value="0" />';
@@ -361,6 +352,9 @@ var builder = {
                         html += '           </div>';
                         html += '           <input type="hidden" class="sub-row-pos" value="0" />';
                         html += '       </div>';
+                        html += '   </div>';
+                        html += '   <div class="sub-row-add">';
+                        html += '       <a class="a-sub-row-add" title="' + text_add_sub_row + '" href="javascript:void(0);" onclick="builder.drawSubRow($(this))"><i class="fa fa-plus-square"></i></a>';
                         html += '   </div>';
                         html += '</div>';
                         col_count++;
@@ -383,7 +377,6 @@ var builder = {
         var html = "";
         var text_insert_module = $('#text-insert-module').val();
         var text_add_module = $('#text-add-module').val();
-        var text_columns = $("#text-columns").val();
         var text_custom_columns = $('#text-custom-columns').val();
 
         var main_column_container = element.closest('.main-column');
@@ -414,11 +407,10 @@ var builder = {
         html += '       <div class="sub-row-content">';
         html += '           <div class="col-sm-12 column-area">';
         html += '               <div class="module-area droparea ui-droppable ui-sortable sub-col-0">';
-        html += '                   <div class="text-insert-module"><span>'+ text_insert_module +'</span></div>';
-        html += '               </div>';
-        html += '               <div class="col-action">';
-        html += '                   <div class="action-group">';
-        html += '                       <a class="a-module-add" onclick="builder.showAllModules($(this))" href="javascript:void(0);"><i class="fa fa-plus"></i> ' + text_add_module + '</a>';
+        html += '                   <div class="col-action">';
+        html += '                       <div class="action-group">';
+        html += '                           <a class="a-module-add" title="' + text_add_module + '" onclick="builder.showAllModules($(this))" href="javascript:void(0);"><i class="fa fa-plus"></i></a>';
+        html += '                       </div>';
         html += '                   </div>';
         html += '               </div>';
         html += '               <input type="hidden" class="sub-col-pos" value="0" />';
@@ -433,7 +425,6 @@ var builder = {
     },
 
     'drawMainRow' : function (row_number) {
-        var text_columns = $("#text-columns").val();
         var text_insert_module = $("#text-insert-module").val();
         var text_add_module = $('#text-add-module').val();
         var text_custom_columns = $('#text-custom-columns').val();
@@ -443,13 +434,13 @@ var builder = {
         html += '<div class="widget-row col-sm-12">';
         html += '   <div class="row-action">';
         html += '       <div class="action-group">';
-        html += '           <input type="text" class="form-control input-class-name" name="widget['+ row_number + '][class]" value="" placeholder="'+ text_custom_classname +'" />';
         html += '           <div class="col-count">';
         html += '               <a href="javascript:void(0);" onclick="builder.plusMainColumn($(this));" rel="1" class="col-plus"></a>';
         html += '               <span class="count" >1</span>';
         html += '               <a href="javascript:void(0);" onclick="builder.minusMainColumn($(this));" rel="1" class="col-minus"></a>';
         html += '           </div>';
         html += '           <div class="a-group">';
+        html += '               <input type="text" class="form-control input-class-name" name="widget['+ row_number + '][class]" value="" placeholder="'+ text_custom_classname +'" />';
         html += '               <a class="a-column-custom" onclick="builder.customMainColumns($(this));" href="javascript:void(0);" title="' + text_custom_columns + '"></a>';
         html += '               <a class="a-row-delete" onclick="builder.removeRow($(this));" href="javascript:void(0);"></a>';
         html += '           </div>';
@@ -460,7 +451,6 @@ var builder = {
             '       <div class="col-sm-12 main-column">' +
             '           <input type="hidden" class="main-col-pos" value="0" />' +
             '           <input type="hidden" class="main-col-format" name="widget['+ row_number + '][main_cols][0][format]" value="12" />' +
-            '           <a class="a-sub-row-add" href="javascript:void(0);" onclick="builder.drawSubRow($(this))">' + text_add_sub_row + '</a>' +
             '           <div class="main-col-content main-col-0">' +
             '               <div class="sub-row sub-row-0">' +
             '                   <div class="sub-row-action">' +
@@ -480,11 +470,10 @@ var builder = {
             '                   <div class="sub-row-content">' +
             '                       <div class="col-sm-12 column-area">' +
             '                           <div class="module-area droparea ui-droppable ui-sortable sub-col-0">' +
-            '                               <div class="text-insert-module"><span>'+ text_insert_module +'</span></div>' +
-            '                           </div> ' +
-            '                           <div class="col-action"> ' +
-            '                               <div class="action-group">' +
-            '                                   <a class="a-module-add" onclick="builder.showAllModules($(this))" href="javascript:void(0);"><i class="fa fa-plus"></i> ' + text_add_module + '</a> ' +
+            '                               <div class="col-action"> ' +
+            '                                   <div class="action-group">' +
+            '                                       <a class="a-module-add" title="' + text_add_module + '" onclick="builder.showAllModules($(this))" href="javascript:void(0);"><i class="fa fa-plus"></i></a> ' +
+            '                                   </div> ' +
             '                               </div> ' +
             '                           </div> ' +
             '                           <input type="hidden" class="sub-col-pos" value="0" />' +
@@ -493,6 +482,9 @@ var builder = {
             '                   </div> ' +
             '                   <input type="hidden" class="sub-row-pos" value="0" />' +
             '               </div> ' +
+            '           </div> ' +
+            '           <div class="sub-row-add">' +
+            '               <a class="a-sub-row-add" title="' + text_add_sub_row + '" href="javascript:void(0);" onclick="builder.drawSubRow($(this))"><i class="fa fa-plus-square"></i></a>' +
             '           </div> ' +
             '       </div> ' +
             '   </div> ' +
