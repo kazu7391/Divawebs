@@ -158,23 +158,21 @@
     background-color: #385477;
     margin: 10px 0 0;
     text-align: left;
+    position:  relative;
 }
 .layout-module-info:hover, .layout-module-info:active, .layout-module-info:focus { cursor: move; }
-.layout-module-info .top .module-info{ position: relative; }
+.layout-module-info .top .module-info{position: relative;margin: 15px;}
 .layout-module-info .top .module-info p {overflow: hidden;white-space: nowrap;text-overflow: ellipsis;margin: 0;color: #fff;font-size: 14px;text-align: center;}
-.layout-module-info .top {padding: 15px;}
-.btn-remove, .btn-edit { font-size: 0; float: right; }
-.btn-remove::before, .btn-edit:before {font-family: FontAwesome;font-size: 14px;top: 0px;position: absolute;}
-.btn-remove::before {
-    content: "\f1f8";
-    color: #fff;
+.layout-module-info .top {}
+.layout-module-info .top .module-action {
+    position:  absolute;
+    top: 0;
     right: 0;
 }
-.btn-edit::before {
-    content: "\f085";
-    color: #fff;
-    right: 25px;
-}
+.layout-module-info .top .module-action a {font-size: 12px;padding: 16px 20px;display:  none;color: #fff;background: #313e4c;float:  left;}
+.layout-module-info .top .module-action .a-module-edit:hover {background: #5a2504}
+.layout-module-info .top .module-action .a-module-remove:hover {background: #ce1010}
+.layout-module-info:hover .top .module-action a {display: block;}
 .col-sm-5 .layout-module-info .top .module-info p,
 .col-sm-4 .layout-module-info .top .module-info p,
 .col-sm-3 .layout-module-info .top .module-info p { width: 80%; }

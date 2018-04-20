@@ -244,7 +244,6 @@ var builder = {
                         html += '               <input type="hidden" class="sub-col-format" name="widget['+ row_pos + '][main_cols]['+ main_col_pos +'][sub_rows]['+ sub_row_pos +'][sub_cols]['+ col_count +'][format]" value="' + col + '" />';
                         html += '           </div>';
                         col_count++;
-                        container.find('.sub-col-' + col_count).find('.text-insert-module').hide();
                     } else {
                         html += '           <div class="col-sm-' + col + ' column-area">';
                         html += '               <div class="module-area droparea ui-droppable ui-sortable sub-col-' + col_count + '">';
@@ -375,7 +374,6 @@ var builder = {
 
     'drawSubRow'  : function (element) {
         var html = "";
-        var text_insert_module = $('#text-insert-module').val();
         var text_add_module = $('#text-add-module').val();
         var text_custom_columns = $('#text-custom-columns').val();
 
@@ -425,7 +423,6 @@ var builder = {
     },
 
     'drawMainRow' : function (row_number) {
-        var text_insert_module = $("#text-insert-module").val();
         var text_add_module = $('#text-add-module').val();
         var text_custom_columns = $('#text-custom-columns').val();
         var text_custom_classname = $('#text-custom-classname').val();
@@ -535,8 +532,10 @@ var builder = {
         html += '	<div class="top">';
         html += '		<div class="module-info">';
         html += '			<p>' + name + '</p>';
-        html += '		    <a class="btn-edit" href="javascript:void(0);" onclick="loadModule(\'' + url + '\')"></a>';
-        html += '			<a class="btn-remove" href="javascript:void(0);" onclick="builder.removeModule($(this))"></a>';
+        html += '		</div>';
+        html += '		<div class="module-action">';
+        html += '		    <a class="a-module-edit" href="javascript:void(0);" onclick="loadModule(\'' + url + '\')"><i class="fa fa-pencil"></i></a>';
+        html += '			<a class="a-module-remove" href="javascript:void(0);" onclick="builder.removeModule($(this))"><i class="fa fa-times"></i></a>';
         html += '		</div>';
         html += '	</div>';
         html += '	<input type="hidden" class="module-in-main-row" value="' + row_pos +'" />';
@@ -548,7 +547,6 @@ var builder = {
         html += '	<input type="hidden" class="module-url" name="widget['+ row_pos + '][main_cols]['+ col_pos +'][sub_rows]['+ sub_row_pos +'][sub_cols]['+ sub_col_pos +'][info][module][0][url]" value="' + url +'" />';
         html +=	'</div>';
 
-        $('.widget-container .row-' + row_pos + ' .main-col-' + col_pos + ' .sub-row-' + sub_row_pos + ' .sub-col-' + sub_col_pos + ' .text-insert-module').hide();
         $('.widget-container .row-' + row_pos + ' .main-col-' + col_pos + ' .sub-row-' + sub_row_pos + ' .sub-col-' + sub_col_pos).prepend(html);
         builder.closeAllModules();
         builder.reArrangeLayout();
@@ -556,13 +554,8 @@ var builder = {
     },
 
     'removeModule' : function (container) {
-        var module_area = container.closest('.module-area');
         container.closest('.layout-module-info').remove();
-        if(module_area.has('.layout-module-info').length) {
-            module_area.find('.text-insert-module').hide();
-        } else {
-            module_area.find('.text-insert-module').show();
-        }
+
         builder.reArrangeLayout();
         builder.triggerDragnDrop();
     },
@@ -590,12 +583,6 @@ var builder = {
                         $(this).find('.sub-col-pos').val(sub_col_pos);
                         $(this).find('.sub-col-format').attr('name', 'widget[' + main_row_pos + '][main_cols][' + main_col_pos + '][sub_rows][' + sub_row_pos + '][sub_cols][' + sub_col_pos + '][format]');
                         $(this).find('.module-area').removeClass().addClass('module-area droparea ui-droppable ui-sortable sub-col-' + sub_col_pos);
-
-                        if($(this).has('.layout-module-info').length) {
-                            $(this).find('.text-insert-module').hide();
-                        } else {
-                            $(this).find('.text-insert-module').show();
-                        }
 
                         var module_pos = 0;
                         $(this).find('.layout-module-info').each(function () {

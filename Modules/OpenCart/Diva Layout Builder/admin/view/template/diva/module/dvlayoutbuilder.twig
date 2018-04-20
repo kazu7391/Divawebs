@@ -133,8 +133,10 @@
                                                                                                         <div class="top">
                                                                                                             <div class="module-info">
                                                                                                                 <p>{{ module_name }}</p>
-                                                                                                                <a class="btn-edit" href="javascript:void(0);" onclick="loadModule('{{ module_url }}')"></a>
-                                                                                                                <a class="btn-remove" href="javascript:void(0);" onclick="builder.removeModule($(this))"></a>
+                                                                                                            </div>
+                                                                                                            <div class="module-action">
+                                                                                                                <a class="a-module-edit" href="javascript:void(0);" onclick="loadModule('{{ module_url }}')"><i class="fa fa-pencil"></i></a>
+                                                                                                                <a class="a-module-remove" href="javascript:void(0);" onclick="builder.removeModule($(this))"><i class="fa fa-times"></i></a>
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <input type="hidden" class="module-in-main-row" value="{{ widget_row }}" />
@@ -328,7 +330,6 @@
 </div>
 
 <input type="hidden" id="text-columns" value="{{ text_columns }}" />
-<input type="hidden" id="text-insert-module" value="{{ text_insert_module }}" />
 <input type="hidden" id="text-add-module" value="{{ text_add_module }}" />
 <input type="hidden" id="text-custom-columns" value="{{ text_custom_columns }}" />
 <input type="hidden" id="text-custom-classname" value="{{ text_specified_class }}" />

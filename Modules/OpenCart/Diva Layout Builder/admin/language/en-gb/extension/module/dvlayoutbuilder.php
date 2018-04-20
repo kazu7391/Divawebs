@@ -7,7 +7,7 @@ $_['page_title']            = "DIVA Layout Composer";
 // Text
 $_['text_success']          = "Success: You have modified module!";
 $_['text_extension']        = 'Extensions';
-$_['text_primary_edit']     = "Edit DIVA Layout Composer";
+$_['text_primary_edit']     = "Layout Composer";
 $_['text_columns']          = "Columns";
 $_['text_custom_columns']   = "Edit Columns";
 $_['text_specified_class']  = "Specified Class";
@@ -19,9 +19,9 @@ $_['text_number_max_over']  = "The columns number must be less than 12";
 $_['text_number_min_over']  = "The columns number must be more than 0";
 
 // Entry
-$_['entry_name']        = "Layout Name";
-$_['entry_status']      = "Status";
+$_['entry_name']            = "Layout Name";
+$_['entry_status']          = "Status";
 
 // Error
-$_['error_permission']  = 'Warning: You do not have permission to modify this module!';
-$_['error_name']        = 'Module Name must be between 3 and 64 characters!';
+$_['error_permission']      = 'Warning: You do not have permission to modify this module!';
+$_['error_name']            = 'Module Name must be between 3 and 64 characters!';
