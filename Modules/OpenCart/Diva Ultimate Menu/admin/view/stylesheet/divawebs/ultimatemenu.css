@@ -35,7 +35,7 @@
 }
 .menu_item_container {/*! margin: 0 20px; */padding: 0 50px;}
 .menu_item_container .top_item_container {}
-.menu_item_container .top_item_content {margin-bottom: 15px;background: #000;padding: 4px 4px 4px 50px;}
+.menu_item_container .top_item_content {margin-bottom: 5px;background: #000;padding: 4px 4px 4px 50px;}
 .menu_item_container .top_item_content:last-child {margin-bottom: 0px;}
 .menu_item_container .top_item_content:hover {cursor: move;}
 .menu_item_container .item {line-height: 10px;margin: 0;}
@@ -79,13 +79,27 @@
 .menu_item_container .third_item > div .a-delete {color: #333;}
 .menu_item_container .third_item {background: #242d38;color: #fff;padding: 10px 15px;position:  relative;}
 .menu_item_container .third_item .del-name .ck-del { border: solid 1px #bbbbbb; }
-.ui-state-highlight { min-height: 40px; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; background: #dcdcdc; border: 1px dashed #000; margin-bottom: 5px;}
+.ui-state-highlight { min-height: 50px; background: url(../../image/bg/pattern.png) repeat; margin-bottom: 5px; border: 0;}
 .ui-top-highlight { margin-bottom: 5px; }
-.btn-widget {
+.menu_item_container .btn-action {
+    text-align: center;
+    margin-top: 10px;
+}
+.menu_item_container .btn-action .btn-add {
+    width: 100%;
+    background: #f6f6f6;
+    border: 1px dashed #43556c;
+    color: #709ad2;
+    font-size: 20px;
+}
+.menu_item_container .btn-action .btn-add:hover {
+    color: #385377;
+}
+.menu_item_container .btn-widget {
     background-color: #dc0909;
     color: #fff;
 }
-.btn-widget:hover {
+.menu_item_container .btn-widget:hover {
     background-color: #ec4d3a;
     color: #ffffff;
 }
