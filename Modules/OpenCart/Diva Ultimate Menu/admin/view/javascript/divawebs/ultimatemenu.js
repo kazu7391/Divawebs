@@ -292,7 +292,6 @@ var dvmenu = {
                         html += '           <div class="del-action">';
                         html += '               <input type="checkbox" class="ck-del top-ck-del" value="' + top_items[i]['menu_item_id'] + '" />';
                         html += '           </div>';
-                        html += '           <i class="fa fa-ellipsis-v" aria-hidden="true"></i>';
                         html += '           <div class="name"><span>' + top_items[i]['name'] + '</span></div>';
                         html += '       </div>';
                         html += '       <div class="action col-sm-6">';
@@ -312,7 +311,6 @@ var dvmenu = {
                                 html += '           <div class="del-action">';
                                 html += '               <input type="checkbox" class="ck-del sub-ck-del" value="' + sub_items[j]['item_id'] + '" />';
                                 html += '           </div>';
-                                html += '           <i class="fa fa-ellipsis-v" aria-hidden="true"></i>';
                                 html += '           <div class="name"><span>' + sub_items[j]['name'] + '</span></div>';
                                 html += '       </div>';
                                 html += '       <div class="action col-sm-6">';
@@ -332,7 +330,6 @@ var dvmenu = {
                                         html += '           <div class="del-action">';
                                         html += '               <input type="checkbox" class="ck-del sub-ck-del" value="' + s_items[k]['item_id'] + '" />';
                                         html += '           </div>';
-                                        html += '           <i class="fa fa-ellipsis-v" aria-hidden="true"></i>';
                                         html += '           <div class="name"><span>' + s_items[k]['name'] + '</span></div>';
                                         html += '       </div>';
                                         html += '       <div class="action col-sm-6">';
