@@ -56,11 +56,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="frm-right">
+                        <div class="frm-right frm-menu">
                             <div class="form-group">
-                                <div class="col-sm-12 control-label col-btn">
-                                    <button type="button" class="btn btn-widget" onclick="dvmenu.appendTopItemNewForm('{{ top_items_form_url }}')"><i class="fa fa-plus"></i> {{ text_add_top_item }}</button>
-                                    <button type="button" class="btn btn-widget btn-delete" onclick="dvmenu.deleteCheckItems()"><i class="fa fa-trash"></i> {{ text_delete_items }}</button>
+                                <div class="frm-title col-sm-6">{{ text_item_hierarchy }}</div>
+                                <div class="col-sm-6 control-label col-btn">
+                                    <button type="button" class="btn btn-widget btn-delete" onclick="dvmenu.deleteCheckItems()"><i class="fa fa-times"></i></button>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -70,7 +70,8 @@
                                             {% for top_item in top_items %}
                                                 <div class="top_item_content">
                                                     <div class="top_item item row">
-                                                        <div class="del-name col-sm-6">
+                                                        <a href="" data-toggle="collapse" class="parent collapsed expand"><i class="fa fa-plus"></i></a>
+                                                        <div class="del-name">
                                                             <div class="del-action">
                                                                 <input type="checkbox" class="ck-del top-ck-del" value="{{ top_item.menu_item_id }}" />
                                                             </div>
@@ -78,9 +79,9 @@
                                                                 <span>{{ top_item.name }}</span>
                                                             </div>
                                                         </div>
-                                                        <div class="action col-sm-6">
+                                                        <div class="action">
                                                             <a href="javascript:void(0)" onclick="dvmenu.appendTopItemNewForm('{{ top_item.url }}')" class="a-config"><i class="fa fa-cogs"></i></a>
-                                                            <a href="javascript:void(0)" onclick="dvmenu.deleteMenuItem('{{ top_item.del_url }}')" class="a-delete"><i class="fa fa-trash"></i></a>
+                                                            <a href="javascript:void(0)" onclick="dvmenu.deleteMenuItem('{{ top_item.del_url }}')" class="a-delete a-config"><i class="fa fa-trash"></i></a>
                                                             <a href="javascript:void(0)" onclick="dvmenu.appendAddSubItemForm('{{ top_item.menu_item_id }}', '2')" class="a-config"><i class="fa fa-plus"></i> {{ text_add_sub_item }}</a>
                                                         </div>
                                                     </div>

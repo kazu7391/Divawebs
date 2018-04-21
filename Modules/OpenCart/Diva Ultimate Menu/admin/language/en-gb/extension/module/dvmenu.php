@@ -84,8 +84,8 @@ $_['text_confirm_multiple_delete']  = 'Do you want to delete these items?';
 $_['text_sub_menu_info']        = 'If you choose "Children Items", the menu content will show children items of this items';
 $_['text_no_menus']     = 'No menu';
 $_['text_for_menu']     = 'This option is used for Vertical Menu';
-$_['text_delete_items']         = 'Delete';
-$_['text_choose_delete_items']  = 'Please choose items to delete';
+$_['text_choose_delete_items']  = 'Please choose items!';
+$_['text_item_hierarchy']       = 'Menu Items Hierarchy';
 
 // Entry
 $_['entry_name']        = 'Module Name';
