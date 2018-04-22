@@ -67,10 +67,13 @@
                                 <div class="menu_item_container">
                                     {% if top_items %}
                                         <div class="top_item_container top_sortable">
+                                            {% set top_count = 0 %}
                                             {% for top_item in top_items %}
                                                 <div class="top_item_content">
                                                     <div class="top_item item row">
-                                                        <a href="" data-toggle="collapse" class="parent collapsed expand"><i class="fa fa-plus"></i></a>
+                                                        {% if top_item.sub_items %}
+                                                            <a href="#second-content-{{ top_count }}" data-toggle="collapse" class="parent collapsed expand"></a>
+                                                        {% endif %}
                                                         <div class="del-name">
                                                             <div class="del-action">
                                                                 <input type="checkbox" class="ck-del top-ck-del" value="{{ top_item.menu_item_id }}" />
@@ -80,17 +83,21 @@
                                                             </div>
                                                         </div>
                                                         <div class="action">
-                                                            <a href="javascript:void(0)" onclick="dvmenu.appendTopItemNewForm('{{ top_item.url }}')" class="a-config"><i class="fa fa-cogs"></i></a>
-                                                            <a href="javascript:void(0)" onclick="dvmenu.deleteMenuItem('{{ top_item.del_url }}')" class="a-delete a-config"><i class="fa fa-trash"></i></a>
-                                                            <a href="javascript:void(0)" onclick="dvmenu.appendAddSubItemForm('{{ top_item.menu_item_id }}', '2')" class="a-config"><i class="fa fa-plus"></i> {{ text_add_sub_item }}</a>
+                                                            <a href="javascript:void(0)" title="{{ text_add_sub_item }}" onclick="dvmenu.appendAddSubItemForm('{{ top_item.menu_item_id }}', '2')" class="a-config"><i class="fa fa-plus"></i></a>
+                                                            <a href="javascript:void(0)" onclick="dvmenu.appendTopItemNewForm('{{ top_item.url }}')" class="a-config"><i class="fa fa-pencil"></i></a>
+                                                            <a href="javascript:void(0)" onclick="dvmenu.deleteMenuItem('{{ top_item.del_url }}')" class="a-delete a-config"><i class="fa fa-times"></i></a>
                                                         </div>
                                                     </div>
                                                     {% if top_item.sub_items %}
-                                                        <div class="second_item_container second_sortable">
+                                                        <div class="second_item_container second_sortable collapse" id="second-content-{{ top_count }}">
+                                                            {% set second_count = 0 %}
                                                             {% for sub_item in top_item.sub_items %}
                                                                 <div class="second_item_content">
                                                                     <div class="second_item item row">
-                                                                        <div class="del-name col-sm-6">
+                                                                        {% if sub_item.sub_items %}
+                                                                            <a href="#third-content-{{ top_count }}-{{ second_count }}" data-toggle="collapse" class="parent collapsed expand"></a>
+                                                                        {% endif %}
+                                                                        <div class="del-name">
                                                                             <div class="del-action">
                                                                                 <input type="checkbox" class="ck-del sub-ck-del" value="{{ sub_item.item_id }}" />
                                                                             </div>
@@ -98,18 +105,18 @@
                                                                                 <span>{{ sub_item.name }}</span>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="action col-sm-6">
-                                                                            <a href="javascript:void(0)" onclick="dvmenu.appendEditSubItemForm('{{ sub_item.item_id }}')" class="a-config"><i class="fa fa-cogs"></i></a>
-                                                                            <a href="javascript:void(0)" onclick="dvmenu.deleteMenuItem('{{ sub_item.del_url }}')" class="a-delete"><i class="fa fa-trash"></i></a>
-                                                                            <a href="javascript:void(0)" onclick="dvmenu.appendAddSubItemForm('{{ sub_item.item_id }}', '3')" class="a-config"><i class="fa fa-plus"></i> {{ text_add_sub_item }}</a>
+                                                                        <div class="action">
+                                                                            <a href="javascript:void(0)" title="{{ text_add_sub_item }}" onclick="dvmenu.appendAddSubItemForm('{{ sub_item.item_id }}', '3')" class="a-config"><i class="fa fa-plus"></i></a>
+                                                                            <a href="javascript:void(0)" onclick="dvmenu.appendEditSubItemForm('{{ sub_item.item_id }}')" class="a-config"><i class="fa fa-pencil"></i></a>
+                                                                            <a href="javascript:void(0)" onclick="dvmenu.deleteMenuItem('{{ sub_item.del_url }}')" class="a-delete a-config"><i class="fa fa-times"></i></a>
                                                                         </div>
                                                                     </div>
                                                                     {% if sub_item.sub_items %}
-                                                                        <div class="third_item_container third_sortable">
+                                                                        <div class="third_item_container third_sortable collapse" id="third-content-{{ top_count }}-{{ second_count }}">
                                                                             {% for s_item in sub_item.sub_items %}
                                                                                 <div class="third_item_content">
                                                                                     <div class="third_item item row">
-                                                                                        <div class="del-name col-sm-6">
+                                                                                        <div class="del-name">
                                                                                             <div class="del-action">
                                                                                                 <input type="checkbox" class="ck-del sub-ck-del" value="{{ s_item.item_id }}" />
                                                                                             </div>
@@ -117,9 +124,9 @@
                                                                                                 <span>{{ s_item.name }}</span>
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div class="action col-sm-6">
-                                                                                            <a href="javascript:void(0)" onclick="dvmenu.appendEditSubItemForm('{{ s_item.item_id }}')" class="a-config"><i class="fa fa-cogs"></i></a>
-                                                                                            <a href="javascript:void(0)" onclick="dvmenu.deleteMenuItem('{{ s_item.del_url }}')" class="a-delete"><i class="fa fa-trash"></i></a>
+                                                                                        <div class="action">
+                                                                                            <a href="javascript:void(0)" onclick="dvmenu.appendEditSubItemForm('{{ s_item.item_id }}')" class="a-config"><i class="fa fa-pencil"></i></a>
+                                                                                            <a href="javascript:void(0)" onclick="dvmenu.deleteMenuItem('{{ s_item.del_url }}')" class="a-delete a-config"><i class="fa fa-times"></i></a>
                                                                                         </div>
                                                                                     </div>
                                                                                     <input type="hidden" class="sub-item-position3" name="sub_item_position3[{{ s_item.item_id }}]" value="{{ s_item.position }}" />
@@ -129,19 +136,21 @@
                                                                     {% endif %}
                                                                     <input type="hidden" class="sub-item-position2" name="sub_item_position2[{{ sub_item.item_id }}]" value="{{ sub_item.position }}" />
                                                                 </div>
+                                                                {% set second_count = second_count + 1 %}
                                                             {% endfor %}
                                                         </div>
                                                     {% endif %}
                                                     <input type="hidden" class="top-item-position" name="top_item_position[{{ top_item.menu_item_id }}]" value="{{ top_item.position }}" />
                                                 </div>
+                                                {% set top_count = top_count + 1 %}
                                             {% endfor %}
                                         </div>
                                     {% else %}
                                         <p class="text-center">{{ text_no_items }}</p>
                                     {% endif %}
-                                    <div class="btn-action">
-                                        <button type="button" class="btn btn-add" onclick="dvmenu.appendTopItemNewForm('{{ top_items_form_url }}')"><i class="fa fa-plus-square"></i></button>
-                                    </div>
+                                </div>
+                                <div class="btn-action">
+                                    <button type="button" class="btn btn-add" onclick="dvmenu.appendTopItemNewForm('{{ top_items_form_url }}')"><i class="fa fa-plus-square"></i></button>
                                 </div>
                             </div>
                         </div>

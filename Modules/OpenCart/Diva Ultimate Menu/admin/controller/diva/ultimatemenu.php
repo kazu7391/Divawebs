@@ -526,13 +526,13 @@ class ControllerDivaUltimatemenu extends Controller
             foreach ($results as $result) {
                 $sub_items_lv2 = $this->model_diva_ultimatemenu->getSubItems($result['menu_item_id'], 2);
 
-                $sub_items2 = array();
+                $sub_items2 = false;
 
                 if($sub_items_lv2) {
                     foreach ($sub_items_lv2 as $item) {
                         $sub_items_lv3 = $this->model_diva_ultimatemenu->getSubItems($item['sub_menu_item_id'], 3);
 
-                        $sub_items3 = array();
+                        $sub_items3 = false;
 
                         if($sub_items_lv3) {
                             foreach ($sub_items_lv3 as $s_item) {

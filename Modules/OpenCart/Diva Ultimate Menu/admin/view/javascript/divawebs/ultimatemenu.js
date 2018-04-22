@@ -288,53 +288,59 @@ var dvmenu = {
                     for(i in top_items) {
                         html += '<div class="top_item_content">';
                         html += '   <div class="top_item item row">';
-                        html += '       <div class="del-name col-sm-6">';
+                        if(top_items[i]['sub_items']) {
+                            html += '   <a href="#second-content-' + i + '" data-toggle="collapse" class="parent collapsed expand"></a>';
+                        }
+                        html += '       <div class="del-name">';
                         html += '           <div class="del-action">';
                         html += '               <input type="checkbox" class="ck-del top-ck-del" value="' + top_items[i]['menu_item_id'] + '" />';
                         html += '           </div>';
                         html += '           <div class="name"><span>' + top_items[i]['name'] + '</span></div>';
                         html += '       </div>';
-                        html += '       <div class="action col-sm-6">';
-                        html += '           <a href="javascript:void(0)" onclick="dvmenu.appendTopItemNewForm(\'' + top_items[i]['url'] + '\')" class="a-config"><i class="fa fa-cogs"></i></a>';
-                        html += '           <a href="javascript:void(0)" onclick="dvmenu.deleteMenuItem(\'' + top_items[i]['del_url'] + '\')" class="a-delete"><i class="fa fa-trash"></i></a>';
-                        html += '           <a href="javascript:void(0)" onclick="dvmenu.appendAddSubItemForm(\'' + top_items[i]['menu_item_id'] + '\', \'2\')" class="a-config"><i class="fa fa-plus"></i> ' + text_add_sub_item + '</a>';
+                        html += '       <div class="action">';
+                        html += '           <a href="javascript:void(0)" title="' + text_add_sub_item + '" onclick="dvmenu.appendAddSubItemForm(\'' + top_items[i]['menu_item_id'] + '\', \'2\')" class="a-config"><i class="fa fa-plus"></i></a>';
+                        html += '           <a href="javascript:void(0)" onclick="dvmenu.appendTopItemNewForm(\'' + top_items[i]['url'] + '\')" class="a-config"><i class="fa fa-pencil"></i></a>';
+                        html += '           <a href="javascript:void(0)" onclick="dvmenu.deleteMenuItem(\'' + top_items[i]['del_url'] + '\')" class="a-delete a-config"><i class="fa fa-times"></i></a>';
                         html += '       </div>';
                         html += '   </div>';
 
                         if(top_items[i]['sub_items']) {
                             sub_items = top_items[i]['sub_items'];
-                            html += '<div class="second_item_container second_sortable">';
+                            html += '<div class="second_item_container second_sortable collapse" id="second-content-' + i + '">';
                             for(j in sub_items) {
                                 html += '<div class="second_item_content">';
                                 html += '   <div class="second_item item row">';
-                                html += '       <div class="del-name col-sm-6">';
+                                if(sub_items[j]['sub_items']) {
+                                    html += '   <a href="#third-content-' + i + '-' + j + '" data-toggle="collapse" class="parent collapsed expand"></a>';
+                                }
+                                html += '       <div class="del-name">';
                                 html += '           <div class="del-action">';
                                 html += '               <input type="checkbox" class="ck-del sub-ck-del" value="' + sub_items[j]['item_id'] + '" />';
                                 html += '           </div>';
                                 html += '           <div class="name"><span>' + sub_items[j]['name'] + '</span></div>';
                                 html += '       </div>';
-                                html += '       <div class="action col-sm-6">';
-                                html += '           <a href="javascript:void(0)" onclick="dvmenu.appendEditSubItemForm(\'' + sub_items[j]['item_id'] + '\')" class="a-config"><i class="fa fa-cogs"></i></a>';
-                                html += '           <a href="javascript:void(0)" onclick="dvmenu.deleteMenuItem(\'' + sub_items[j]['del_url'] + '\')" class="a-delete"><i class="fa fa-trash"></i></a>';
-                                html += '           <a href="javascript:void(0)" onclick="dvmenu.appendAddSubItemForm(\'' + sub_items[j]['item_id'] + '\', \'3\')" class="a-config"><i class="fa fa-plus"></i> ' + text_add_sub_item + '</a>';
+                                html += '       <div class="action">';
+                                html += '           <a href="javascript:void(0)" title="' + text_add_sub_item + '" onclick="dvmenu.appendAddSubItemForm(\'' + sub_items[j]['item_id'] + '\', \'3\')" class="a-config"><i class="fa fa-plus"></i></a>';
+                                html += '           <a href="javascript:void(0)" onclick="dvmenu.appendEditSubItemForm(\'' + sub_items[j]['item_id'] + '\')" class="a-config"><i class="fa fa-pencil"></i></a>';
+                                html += '           <a href="javascript:void(0)" onclick="dvmenu.deleteMenuItem(\'' + sub_items[j]['del_url'] + '\')" class="a-delete a-config"><i class="fa fa-times"></i></a>';
                                 html += '       </div>';
                                 html += '   </div>';
 
                                 if(sub_items[j]['sub_items']) {
                                     s_items = sub_items[j]['sub_items'];
-                                    html += '<div class="third_item_container third_sortable">';
+                                    html += '<div class="third_item_container third_sortable collapse" id="third-content-' + i + '-' + j + '">';
                                     for(k in s_items) {
                                         html += '<div class="third_item_content">';
                                         html += '   <div class="third_item item row">';
-                                        html += '       <div class="del-name col-sm-6">';
+                                        html += '       <div class="del-name">';
                                         html += '           <div class="del-action">';
                                         html += '               <input type="checkbox" class="ck-del sub-ck-del" value="' + s_items[k]['item_id'] + '" />';
                                         html += '           </div>';
                                         html += '           <div class="name"><span>' + s_items[k]['name'] + '</span></div>';
                                         html += '       </div>';
-                                        html += '       <div class="action col-sm-6">';
-                                        html += '           <a href="javascript:void(0)" onclick="dvmenu.appendEditSubItemForm(\'' + s_items[k]['item_id'] + '\')" class="a-config"><i class="fa fa-cogs"></i></a>';
-                                        html += '           <a href="javascript:void(0)" onclick="dvmenu.deleteMenuItem(\'' + s_items[k]['del_url'] + '\')" class="a-delete"><i class="fa fa-trash"></i></a>';
+                                        html += '       <div class="action">';
+                                        html += '           <a href="javascript:void(0)" onclick="dvmenu.appendEditSubItemForm(\'' + s_items[k]['item_id'] + '\')" class="a-config"><i class="fa fa-pencil"></i></a>';
+                                        html += '           <a href="javascript:void(0)" onclick="dvmenu.deleteMenuItem(\'' + s_items[k]['del_url'] + '\')" class="a-delete a-config"><i class="fa fa-times"></i></a>';
                                         html += '       </div>';
                                         html += '   </div>';
                                         html += '   <input type="hidden" class="sub-item-position3" name="sub_item_position3[' + s_items[k]['item_id'] + ']" value="' + s_items[k]['position'] + '"/>';
