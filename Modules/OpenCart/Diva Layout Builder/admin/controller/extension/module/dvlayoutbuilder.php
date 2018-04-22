@@ -131,11 +131,11 @@ class ControllerExtensionModuleDvlayoutbuilder extends Controller
 
         $this->document->addStyle('view/javascript/jquery/jquery-ui/jquery-ui.min.css');
         $this->document->addScript('view/javascript/jquery/jquery-ui/jquery-ui.min.js');
-        $this->document->addStyle('view/stylesheet/divawebs/layoutbuilder.css');
+        $this->document->addStyle('view/stylesheet/divawebs/layoutbuilder.min.css');
         $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
         $this->document->addScript('view/javascript/divawebs/switch-toggle/js/bootstrap-toggle.min.js');
         $this->document->addStyle('view/javascript/divawebs/switch-toggle/css/bootstrap-toggle.min.css');
-        $this->document->addScript('view/javascript/divawebs/layoutbuilder.js');
+        $this->document->addScript('view/javascript/divawebs/layoutbuilder.min.js');
 
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
