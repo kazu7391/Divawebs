@@ -2,33 +2,32 @@
     <div class="slide-loading"></div>
     <div id="diva-slider" class="diva-slider">
         {% set config = slider[0] %}
-        {% set i=1 %}
-        {% for s in dvsliders %}
-            {% set i=i+1 %}
-            <img style="display: none;" src="{{ s['image'] }}" alt="" title="#slide-caption{{ i }}"  />
+        {% set i = 1 %}
+        {% for slider in dvsliders %}
+            {% set i = i + 1 %}
+            <img style="display: none;" src="{{ slider['image'] }}" alt="" title="#slide-caption{{ i }}"  />
         {% endfor %}
     </div>
-
-    {% set i=1 %}
-    {% for s in dvsliders %}
-        {% set i=i+1 %}
+    {% set i = 1 %}
+    {% for slider in dvsliders %}
+        {% set i = i + 1 %}
         <div id="slide-caption{{ i }}" class="slide-caption nivo-html-caption nivo-caption">
             <div class="slide-title">
-                {%  if s['title'] and s['title'] != ""  %}
-                    <h3>{{ s['title'] }}</h3>
+                {% if slider.title %}
+                    <h3>{{ slider.title }}</h3>
                 {% endif %}
             </div>
             <div class="sub-title">
-                {%  if s['sub_title'] and s['sub_title'] != "" %}
-                    <h3>{{ s['sub_title'] }}</h3>
+                {% if slider.sub_title %}
+                    <h3>{{ slider.sub_title }}</h3>
                 {% endif %}
             </div>
-            <div class="slide-des">
-                {{ s['description'] }}
+            <div class="slide-description">
+                {{ slider.description }}
             </div>
-            {% if s['link'] %}
+            {% if slider.link %}
                 <div class="slide-readmore">
-                    <a href="{{ s['link'] }}" title="{{ text_link_button }}">{{ text_link_button }}</a>
+                    <a href="{{ slider.link }}" title="{{ text_link_button }}">{{ text_link_button }}</a>
                 </div>
             {% endif %}
         </div>
@@ -36,20 +35,19 @@
 </div>
 <script type="text/javascript">
     $(window).load(function() {
-        $('#diva-slider').nivoSlider();
         $('#diva-slider').nivoSlider({
-            effect:  'random',
             slices: 15,
             boxCols: 8,
             boxRows: 4,
-            manualAdvance: {% if config['auto'] and config['auto'] == 1 %} false {% else %}   true  {% endif %} ,
-            animSpeed:500,
-            pauseTime: {% if config['delay'] %}  {{ config['delay'] }} {% else %}   3000  {% endif %} ,
-            startSlide: 0,
-            controlNav:  {% if config['contrl'] and config['contrl'] == 1 %} true {% else %}   false  {% endif %} ,
-            directionNav:  {% if config['nextback'] and config['nextback'] == 1 %} true {% else %}   false  {% endif %} ,
+            animSpeed: 500,
+            manualAdvance: {% if config.auto and config.auto == '1' %} false {% else %} true {% endif %} ,
+            pauseTime: {% if config.delay %} {{ config.delay }} {% else %} 3000 {% endif %} ,
+            controlNav: {% if config.contrl and config.contrl == '1' %} true {% else %} false {% endif %} ,
+            directionNav: {% if config.nextback and config.nextback == '1' %} true {% else %} false {% endif %} ,
+            pauseOnHover: {% if config.hover and config.hover == '1' %} true {% else %} false {% endif %} ,
             controlNavThumbs: false,
-            pauseOnHover:  {% if config['hover'] and config['hover'] == 1 %} true {% else %}   false  {% endif %} ,
+            effect: 'random',
+            startSlide: 0,
             prevText: 'Prev',
             nextText: 'Next'
         });
