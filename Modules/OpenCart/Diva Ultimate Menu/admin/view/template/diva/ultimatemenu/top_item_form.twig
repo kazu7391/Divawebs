@@ -11,7 +11,7 @@
         <div class="frm-left">
             <ul class="frm-list">
                 <li class="active"><a href="#tab-general" data-toggle="tab">{{ text_general_setting }}</a></li>
-                <li><a href="#tab-content" data-toggle="tab">{{ text_content_setting }}</a></li>
+                <li><a href="#tab-content" data-toggle="tab">{{ text_mega_setting }}</a></li>
             </ul>
         </div>
         <div class="frm-right">
@@ -22,7 +22,6 @@
             {% endif %}
             <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-menu-item" class="form-horizontal">
                 <div class="tab-content">
-                    <!-- General Settings -->
                     <div id="tab-general" class="tab-pane active">
                         <div class="frm-group">
                             <label class="frm-label col-sm-2" for="input-item-name">{{ entry_item_name }}</label>
@@ -55,7 +54,7 @@
                                     <span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /> {{ language.name }}</span>
                                     <input type="text" name="title[{{ language.language_id }}]" value="{{ title[language.language_id] ? title[language.language_id] : '' }}" placeholder="" id="input-title{{ language.language_id }}" class="form-control" />
                                 </div>
-                                {%  endfor %}
+                                {% endfor %}
                             </div>
                             <div class="col-sm-1"></div>
                             <div class="col-sm-3">
@@ -68,9 +67,6 @@
                             <label class="frm-label col-sm-2" for="input-link">{{ entry_link }}</label>
                             <div class="col-sm-6">
                                 <input type="text" id="input-link" name="link" value="{{ link }}" class="form-control" />
-                                <div class="frm-info">
-                                    <i class="fa fa-info-circle" aria-hidden="true"></i> <span>{{ text_link_info }}</span>
-                                </div>
                             </div>
                             <div class="col-sm-1"></div>
                             <div class="col-sm-3">
@@ -80,18 +76,12 @@
                             </div>
                         </div>
                         <div class="frm-group">
-                            <label class="frm-label col-sm-2" for="input-sub-menu-type">{{ entry_sub_menu_type }}</label>
+                            <label class="frm-label col-sm-2" for="input-sub-menu-type">{{ entry_menu_content_type }}</label>
                             <div class="col-sm-4">
                                 <select name="sub_menu_type" id="input-sub-menu-type" class="form-control">
                                     <option value="mega"    {% if sub_menu_type == 'mega' %}    selected="selected" {% endif %}>{{ text_megamenu }}</option>
                                     <option value="flyout"  {% if sub_menu_type == 'flyout' %}  selected="selected" {% endif %}>{{ text_flyoutmenu }}</option>
                                 </select>
-                            </div>
-                        </div>
-                        <div class="frm-group">
-                            <label class="frm-label col-sm-2" for="input-position">{{ entry_position }}</label>
-                            <div class="col-sm-4">
-                                <input type="text" id="input-position" name="position" value="{{ position }}" class="form-control" />
                             </div>
                         </div>
                         <div class="frm-group">
@@ -110,26 +100,23 @@
                                 <input type="hidden" name="icon" value="{{ icon }}" id="input-image" />
                             </div>
                         </div>
+                        <div class="frm-group">
+                            <label class="frm-label col-sm-2" for="input-position">{{ entry_order }}</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="input-position" name="position" value="{{ position }}" class="form-control" />
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Content Settings -->
                     <div id="tab-content" class="tab-pane">
-                        <div class="frm-info">
-                            <i class="fa fa-info-circle" aria-hidden="true"></i> <span>{{ text_megamenu_info }}</span>
-                        </div>
                         <div class="frm-group">
-                            <label class="frm-label col-sm-2" for="input-sub-menu-content-type">{{ entry_sub_menu_content_type }}</label>
+                            <label class="frm-label col-sm-2" for="input-sub-menu-content-type">{{ entry_content_type }}</label>
                             <div class="col-sm-4">
                                 <select name="sub_menu_content_type" id="input-sub-menu-content-type" class="form-control">
                                     <option value="widget"   {% if sub_menu_content_type == 'widget' %}    selected="selected" {% endif %}>{{ text_widget }}</option>
                                     <option value="category" {% if sub_menu_content_type == 'category' %}  selected="selected" {% endif %}>{{ text_category }}</option>
                                     <option value="children" {% if sub_menu_content_type == 'children' %}  selected="selected" {% endif %}>{{ text_children }}</option>
                                 </select>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="frm-info">
-                                    <i class="fa fa-info-circle" aria-hidden="true"></i> <span>{{ text_sub_menu_info }}</span>
-                                </div>
                             </div>
                         </div>
                         <div class="frm-group frm-group-content frm-group-category">
@@ -147,7 +134,7 @@
                             </div>
                         </div>
                         <div class="frm-group frm-group-content frm-group-widget">
-                            <label class="frm-label col-sm-2">{{ entry_megamenu_editor }}</label>
+                            <label class="frm-label col-sm-2">{{ entry_choose_widget }}</label>
                             <div class="col-sm-4">
                                 <select id="widget-type" class="form-control">
                                     <option value="category">{{ text_category }}</option>
@@ -193,10 +180,8 @@
                                     {% for w in widget.widget %}
                                         <div class="widget-block col-sm-{{ w.cols }}">
                                             <div class="widget-content">
-                                                <div class="widget-resize-action">
-                                                    <a class="a-resize-minus a-left" onclick="dvmenu.decreaseColumn($(this))"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
-                                                    <a class="a-resize-plus a-left" onclick="dvmenu.increaseColumn($(this))"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-                                                </div>
+                                                <a class="a-resize-minus a-left" onclick="dvmenu.decreaseColumn($(this))"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+                                                <a class="a-resize-plus a-left" onclick="dvmenu.increaseColumn($(this))"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
                                                 <div class="widget-name-container">
                                                     {% if w.type == 'category' or w.type == 'product' %}
                                                         <span class="name">{{ w.name ? w.name : '...' }}</span>
@@ -206,8 +191,10 @@
                                                         <span class="name">{{ w.name[lang_id] ? w.name[lang_id] : '...' }}</span>
                                                     {% endif %}
 
-                                                    <a class="a-delete a-right" onclick="dvmenu.deleteWidget($(this))"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                                    <a class="a-config a-right" onclick="dvmenu.showWidgetConfiguration($(this))"><i class="fa fa-cogs" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="widget-action">
+                                                    <a class="a-config" onclick="dvmenu.showWidgetConfiguration($(this))"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                    <a class="a-config a-delete" onclick="dvmenu.deleteWidget($(this))"><i class="fa fa-times" aria-hidden="true"></i></a>
                                                 </div>
                                             </div>
 
