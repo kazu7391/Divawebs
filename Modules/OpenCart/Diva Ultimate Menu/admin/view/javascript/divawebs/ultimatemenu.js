@@ -394,14 +394,14 @@ var dvmenu = {
                     for(i in child_categories) {
                         html += '<div class="widget-block col-sm-2">';
                         html += '   <div class="widget-content">';
-                        html += '       <div class="widget-resize-action">';
-                        html += '           <a class="a-resize-minus a-left" onclick="dvmenu.decreaseColumn($(this))"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>';
-                        html += '           <a class="a-resize-plus a-left" onclick="dvmenu.increaseColumn($(this))"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>';
-                        html += '       </div>';
+                        html += '       <a class="a-resize-minus a-left" onclick="dvmenu.decreaseColumn($(this))"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>';
+                        html += '       <a class="a-resize-plus a-left" onclick="dvmenu.increaseColumn($(this))"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>';
                         html += '       <div class="widget-name-container">';
                         html += '           <span class="name">' + child_categories[i]['name'] + '</span>';
-                        html += '           <a class="a-delete a-right" onclick="dvmenu.deleteWidget($(this))"><i class="fa fa-trash" aria-hidden="true"></i></a>';
-                        html += '           <a class="a-config a-right" onclick="dvmenu.showWidgetConfiguration($(this))"><i class="fa fa-cogs" aria-hidden="true"></i></a>';
+                        html += '       </div>';
+                        html += '       <div class="widget-action">';
+                        html += '           <a class="a-config" onclick="dvmenu.showWidgetConfiguration($(this))"><i class="fa fa-pencil" aria-hidden="true"></i></a>';
+                        html += '           <a class="a-delete a-config" onclick="dvmenu.deleteWidget($(this))"><i class="fa fa-times" aria-hidden="true"></i></a>';
                         html += '       </div>';
                         html += '   </div>';
                         html += '   <div class="widget-configuration">';
@@ -460,14 +460,14 @@ var dvmenu = {
 
         html += '<div class="widget-block col-sm-'+ widget_cols +'">';
         html += '   <div class="widget-content">';
-        html += '       <div class="widget-resize-action">';
-        html += '           <a class="a-resize-minus a-left" onclick="dvmenu.decreaseColumn($(this))"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>';
-        html += '           <a class="a-resize-plus a-left" onclick="dvmenu.increaseColumn($(this))"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>';
-        html += '       </div>';
+        html += '       <a class="a-resize-minus a-left" onclick="dvmenu.decreaseColumn($(this))"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>';
+        html += '       <a class="a-resize-plus a-left" onclick="dvmenu.increaseColumn($(this))"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>';
         html += '       <div class="widget-name-container">';
         html += '           <span class="name">...</span>';
-        html += '           <a class="a-delete a-right" onclick="dvmenu.deleteWidget($(this))"><i class="fa fa-trash" aria-hidden="true"></i></a>';
-        html += '           <a class="a-config a-right" onclick="dvmenu.showWidgetConfiguration($(this))"><i class="fa fa-cogs" aria-hidden="true"></i></a>';
+        html += '       </div>';
+        html += '       <div class="widget-action">';
+        html += '           <a class="a-config" onclick="dvmenu.showWidgetConfiguration($(this))"><i class="fa fa-pencil" aria-hidden="true"></i></a>';
+        html += '           <a class="a-delete a-config" onclick="dvmenu.deleteWidget($(this))"><i class="fa fa-times" aria-hidden="true"></i></a>';
         html += '       </div>';
         html += '   </div>';
 

@@ -282,14 +282,14 @@
                                     {% for w in widget.category %}
                                         <div class="widget-block col-sm-{{ w.cols }}">
                                             <div class="widget-content">
-                                                <div class="widget-resize-action">
-                                                    <a class="a-resize-minus a-left" onclick="dvmenu.decreaseColumn($(this))"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
-                                                    <a class="a-resize-plus a-left" onclick="dvmenu.increaseColumn($(this))"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-                                                </div>
+                                                <a class="a-resize-minus a-left" onclick="dvmenu.decreaseColumn($(this))"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+                                                <a class="a-resize-plus a-left" onclick="dvmenu.increaseColumn($(this))"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
                                                 <div class="widget-name-container">
                                                     <span class="name">{{ w.name ? w.name : '...' }}</span>
-                                                    <a class="a-delete a-right" onclick="dvmenu.deleteWidget($(this))"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                                    <a class="a-config a-right" onclick="dvmenu.showWidgetConfiguration($(this))"><i class="fa fa-cogs" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="widget-action">
+                                                    <a class="a-config" onclick="dvmenu.showWidgetConfiguration($(this))"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                    <a class="a-delete a-config" onclick="dvmenu.deleteWidget($(this))"><i class="fa fa-times" aria-hidden="true"></i></a>
                                                 </div>
                                             </div>
 
