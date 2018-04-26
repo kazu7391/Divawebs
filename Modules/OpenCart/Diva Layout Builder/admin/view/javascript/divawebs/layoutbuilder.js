@@ -547,7 +547,7 @@ var builder = {
         html += '	<input type="hidden" class="module-url" name="widget['+ row_pos + '][main_cols]['+ col_pos +'][sub_rows]['+ sub_row_pos +'][sub_cols]['+ sub_col_pos +'][info][module][0][url]" value="' + url +'" />';
         html +=	'</div>';
 
-        $('.widget-container .row-' + row_pos + ' .main-col-' + col_pos + ' .sub-row-' + sub_row_pos + ' .sub-col-' + sub_col_pos).prepend(html);
+        $('.widget-container .row-' + row_pos + ' .main-col-' + col_pos + ' .sub-row-' + sub_row_pos + ' .sub-col-' + sub_col_pos).append(html);
         builder.closeAllModules();
         builder.reArrangeLayout();
         builder.triggerDragnDrop();
