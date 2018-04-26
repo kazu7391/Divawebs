@@ -1,7 +1,7 @@
 <?php
 // Heading
-$_['heading_title']         = '<b style="color: #eb5202;"><i><i class="fa fa-tag"></i> DIVA Featured Categories</i></b>';
-$_['page_title']            = 'DIVA Featured Categories';
+$_['heading_title']         = '<b style="color: #eb5202;"><i><i class="fa fa-tag"></i> DIVA Special Categories</i></b>';
+$_['page_title']            = 'DIVA Special Categories';
 
 // Tabs
 $_['tab_show_cate']         = "Categories Settings";
@@ -11,10 +11,10 @@ $_['tab_slider_settings']   = "Slider Settings";
 // Text
 $_['text_extension']        = 'Extensions';
 $_['text_success']          = 'Success: You have modified module!';
-$_['text_edit']             = 'Edit Featured Categories Module';
-$_['text_show_cate']        = 'Only show Featured Categories';
+$_['text_edit']             = 'Edit Special Categories Module';
+$_['text_show_cate']        = 'Only show Special Categories';
 $_['text_show_pro']         = 'Show products by tabs';
-$_['text_choose_fcate']     = 'Choose Featured categories to show its products';
+$_['text_choose_fcate']     = 'Choose Special categories to show its products';
 
 // Entry
 $_['entry_name']            = 'Module Name';
@@ -34,10 +34,10 @@ $_['entry_showdes']         = 'Description';
 $_['entry_showsub']         = 'Child Categories';
 $_['entry_showsubnumber']   = 'Number of Child Categories';
 $_['entry_use_cate_image']  = 'Category Secondary Image';
-$_['entry_choose_fcates']   = 'Choose Featured categories';
+$_['entry_choose_fcates']   = 'Special Categories';
 
 // Error
-$_['error_permission'] = 'Warning: You do not have permission to modify this module!';
-$_['error_name']       = 'Module Name must be between 3 and 64 characters!';
-$_['error_width']      = 'Width required!';
-$_['error_height']     = 'Height required!';
+$_['error_permission']      = 'Warning: You do not have permission to modify this module!';
+$_['error_name']            = 'Module Name must be between 3 and 64 characters!';
+$_['error_width']           = 'Width required!';
+$_['error_height']          = 'Height required!';
