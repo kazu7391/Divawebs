@@ -14,12 +14,12 @@
 - Testimonial		(fa-comments)				  (Done)
 - Product Tabs		(fa-shopping-bag)
 - Categories Tabs	(fa-tags)
-- Featured Products	(fa-bookmark)
+- Featured Products	(fa-bookmark)				  (Done)
 - Most Viewed  		(fa-eye)					  (Done)
 - New Products Slider 	(fa-sort-amount-desc)	  (Done)
 - Bestseller Slider  (fa-bar-chart)				  (Done)
 - Random Slider		(fa-barcode)				  (Done)
-- Special Slider	(fa-percent)
+- Special Slider	(fa-percent)				  (Done)
 
 * Update
 - Width in Mega Menu
