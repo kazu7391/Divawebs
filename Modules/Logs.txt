@@ -26,3 +26,7 @@
 - Countdown in Product page
 - Update use latest function instead old function
 - AMP
+
+* Bug
+- http://prntscr.com/ja7pjg
+- Testimonial
