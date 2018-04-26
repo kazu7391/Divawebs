@@ -351,6 +351,7 @@
     width:  20px;
     text-align:  center;
     display: none;
+    cursor:  ew-resize;
 }
 .widget-content:hover .a-left {
     display: block;
