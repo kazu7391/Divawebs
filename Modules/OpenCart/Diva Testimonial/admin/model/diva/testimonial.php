@@ -6,7 +6,7 @@ class ModelDivaTestimonial extends Model
 
         $testimonial_id = $this->db->getLastId();
 
-        $this->db->query("INSERT INTO " . DB_PREFIX . "dvtestimonial_description SET dvtestimonial_id = '" . (int) $testimonial_id . "', customer_name = '" . $data['testimonial_description']['customer_name'] . "', image = '" . $this->db->escape($data['image']) . "', content = '" . $data['testimonial_description']['content'] . "'");
+        $this->db->query("INSERT INTO " . DB_PREFIX . "dvtestimonial_description SET dvtestimonial_id = '" . (int) $testimonial_id . "', customer_name = '" . $this->db->escape($data['testimonial_description']['customer_name']) . "', image = '" . $this->db->escape($data['image']) . "', content = '" . $this->db->escape($data['testimonial_description']['content']) . "'");
 
         $this->cache->delete('testimonial');
     }
@@ -16,7 +16,7 @@ class ModelDivaTestimonial extends Model
 
         $this->db->query("DELETE FROM " . DB_PREFIX . "dvtestimonial_description WHERE dvtestimonial_id = '" . (int) $testimonial_id . "'");
 
-        $this->db->query("INSERT INTO " . DB_PREFIX . "dvtestimonial_description SET dvtestimonial_id = '" . (int) $testimonial_id . "', customer_name = '" . $data['testimonial_description']['customer_name'] . "', image = '" . $this->db->escape($data['image']) . "', content = '" .  $data['testimonial_description']['content'] . "'");
+        $this->db->query("INSERT INTO " . DB_PREFIX . "dvtestimonial_description SET dvtestimonial_id = '" . (int) $testimonial_id . "', customer_name = '" . $this->db->escape($data['testimonial_description']['customer_name']) . "', image = '" . $this->db->escape($data['image']) . "', content = '" .  $this->db->escape($data['testimonial_description']['content']) . "'");
     }
 
     public function deleteTestimonial($testimonial_id) {

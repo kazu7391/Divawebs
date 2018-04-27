@@ -12,7 +12,7 @@
 - Newsletter		(fa-envelope)				  (Done)	
 - Slideshow 		(fa-film)          			  (Done)    
 - Testimonial		(fa-comments)				  (Done)
-- Product Tabs		(fa-shopping-bag)
+- Product Tabs		(fa-shopping-bag)			  (Done)
 - Categories Tabs	(fa-tags)
 - Featured Products	(fa-bookmark)				  (Done)
 - Most Viewed  		(fa-eye)					  (Done)
@@ -29,4 +29,3 @@
 
 * Bug
 - http://prntscr.com/ja7pjg
-- Testimonial

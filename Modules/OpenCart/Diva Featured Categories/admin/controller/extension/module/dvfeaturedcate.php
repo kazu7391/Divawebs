@@ -235,14 +235,16 @@ class ControllerExtensionModuleDvfeaturedcate extends Controller {
 
         $data['pro_fcategories'] = array();
 
-        foreach ($fcategories as $category_id) {
-            $category_info = $this->model_catalog_category->getCategory($category_id);
+        if($fcategories) {
+            foreach ($fcategories as $category_id) {
+                $category_info = $this->model_catalog_category->getCategory($category_id);
 
-            if ($category_info) {
-                $data['pro_fcategories'][] = array(
-                    'category_id' => $category_info['category_id'],
-                    'name'        => ($category_info['path']) ? $category_info['path'] . ' &gt; ' . $category_info['name'] : $category_info['name']
-                );
+                if ($category_info) {
+                    $data['pro_fcategories'][] = array(
+                        'category_id' => $category_info['category_id'],
+                        'name'        => ($category_info['path']) ? $category_info['path'] . ' &gt; ' . $category_info['name'] : $category_info['name']
+                    );
+                }
             }
         }
 
