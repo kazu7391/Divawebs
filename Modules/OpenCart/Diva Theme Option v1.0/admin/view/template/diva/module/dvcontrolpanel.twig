@@ -87,6 +87,7 @@
                                         <input type="hidden" name="file" />
                                     </form>
                                     <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-dvcontrolpanel" class="form-horizontal">
+                                        <input type="hidden" name="module_dvcontrolpanel_status" value="1" />
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="tab-general">
                                                 {% for store in stores %}
