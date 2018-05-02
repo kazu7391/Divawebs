@@ -448,7 +448,7 @@ class ControllerExtensionModuleDvmenu extends Controller
 
         $this->document->addScript('view/javascript/divawebs/jscolor.min.js');
         $this->document->addStyle('view/stylesheet/divawebs/themeadmin.css');
-        $this->document->addStyle('view/stylesheet/divawebs/ultimatemenu.css');
+        $this->document->addStyle('view/stylesheet/divawebs/ultimatemenu.min.css');
         $this->document->addScript('view/javascript/divawebs/switch-toggle/js/bootstrap-toggle.min.js');
         $this->document->addStyle('view/javascript/divawebs/switch-toggle/css/bootstrap-toggle.min.css');
 
