@@ -116,16 +116,7 @@ class ControllerExtensionModuleDvtabproduct extends Controller
 
         $use_hover_image = $data['show_module_hover'];
 
-        /* Get new product */
-        $filter_data = array(
-            'sort'  => 'p.date_added',
-            'order' => 'DESC',
-            'start' => 0,
-            'limit' => 10
-        );
-
-        $new_results = $this->model_catalog_product->getProducts($filter_data);
-        /* End */
+        $new_results = $this->model_catalog_product->getLatestProducts(10);
 
         $product_tabs = array();
 

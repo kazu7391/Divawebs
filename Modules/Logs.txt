@@ -24,7 +24,6 @@
 * Update
 - Width in Mega Menu
 - Countdown in Product page
-- Update use latest function instead old function
 - AMP
 
 * Bug
