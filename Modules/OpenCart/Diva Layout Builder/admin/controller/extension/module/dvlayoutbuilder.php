@@ -117,7 +117,7 @@ class ControllerExtensionModuleDvlayoutbuilder extends Controller
                 );
             }
 
-            if ($this->config->has($code . '_status') || $module_data) {
+            if ($this->config->has('module_' . $code . '_status') || $module_data) {
                 $data['extensions'][] = array(
                     'name'   => strip_tags($this->language->get('heading_title')),
                     'code'   => $code,
