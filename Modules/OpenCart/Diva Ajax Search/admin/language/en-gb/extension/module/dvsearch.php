@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']         = '<b style="color: #eb5202;"><i><i class="fa fa-search"></i> DIVA Ajax Search</i></b>';
+$_['heading_title']         = '<b style="color: #eb5202;"><i><i class="s fa fa-search"></i> DIVA Ajax Search</i></b>';
 $_['page_title']            = 'DIVA Ajax Search';
 
 // Text

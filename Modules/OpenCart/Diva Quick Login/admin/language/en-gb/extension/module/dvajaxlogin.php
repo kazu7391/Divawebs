@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']         = '<b style="color: #eb5202;"><i><i class="fa fa-user"></i> DIVA Quick Login</i></b>';
+$_['heading_title']         = '<b style="color: #eb5202;"><i><i class="r fa fa-user"></i> DIVA Quick Login</i></b>';
 $_['page_title']            = 'DIVA Quick Login';
 
 // Text

@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']     = '<b style="color: #eb5202;"><i><i class="fa fa-barcode"></i> DIVA Random Products</i></b>';
+$_['heading_title']     = '<b style="color: #eb5202;"><i><i class="m fa fa-barcode"></i> DIVA Random Products</i></b>';
 $_['page_title']        = 'DIVA Random Products';
 
 // Text

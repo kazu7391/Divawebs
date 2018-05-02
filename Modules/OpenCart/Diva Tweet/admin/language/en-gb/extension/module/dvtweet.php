@@ -1,5 +1,5 @@
 <?php
-$_['heading_title']             = '<b style="color: #eb5202;"><i><i class="fa fa-twitter"></i> DIVA Tweet</i></b>';
+$_['heading_title']             = '<b style="color: #eb5202;"><i><i class="t fa fa-twitter"></i> DIVA Tweet</i></b>';
 $_['page_title']                = 'DIVA Tweet';
 
 // Text

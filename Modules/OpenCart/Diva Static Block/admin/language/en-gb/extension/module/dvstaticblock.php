@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']     = '<b style="color: #eb5202;"><i><i class="fa fa-object-group"></i> DIVA Static Block</i></b>';
+$_['heading_title']     = '<b style="color: #eb5202;"><i><i class="d fa fa-object-group"></i> DIVA Static Block</i></b>';
 $_['page_title']        = 'DIVA Static Block';
 
 // Text

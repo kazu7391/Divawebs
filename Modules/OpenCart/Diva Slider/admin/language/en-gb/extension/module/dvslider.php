@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']         = '<b style="color: #eb5202;"><i><i class="fa fa-film"></i> DIVA Slider</i></b>';
+$_['heading_title']         = '<b style="color: #eb5202;"><i><i class="e fa fa-film"></i> DIVA Slider</i></b>';
 $_['page_title']            = 'DIVA Slider';
 
 //Tab
