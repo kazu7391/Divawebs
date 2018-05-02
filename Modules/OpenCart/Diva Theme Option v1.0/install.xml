@@ -966,6 +966,110 @@
         </operation>
     </file>
 
+    <file path="catalog/controller/common/column_left.php">
+        <operation>
+            <search><![CDATA[class ControllerCommonColumnLeft extends Controller {]]></search>
+            <add position="before"><![CDATA[
+            require_once(DIR_SYSTEM . 'Mobile_Detect.php');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search><![CDATA[$route = 'common/home';]]></search>
+            <add position="replace"><![CDATA[
+            $detect = new Mobile_Detect;
+
+			if ( $detect->isTablet() ) {
+				$route = 'diva/responsive/tablet';
+			} else {
+				if( $detect->isMobile()){
+					$route = 'diva/responsive/mobile';
+				} else {
+					$route = 'common/home';
+				}
+			}
+            ]]></add>
+        </operation>
+    </file>
+
+    <file path="catalog/controller/common/column_right.php">
+        <operation>
+            <search><![CDATA[class ControllerCommonColumnRight extends Controller {]]></search>
+            <add position="before"><![CDATA[
+            require_once(DIR_SYSTEM . 'Mobile_Detect.php');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search><![CDATA[$route = 'common/home';]]></search>
+            <add position="replace"><![CDATA[
+            $detect = new Mobile_Detect;
+
+			if ( $detect->isTablet() ) {
+				$route = 'diva/responsive/tablet';
+			} else {
+				if( $detect->isMobile()){
+					$route = 'diva/responsive/mobile';
+				} else {
+					$route = 'common/home';
+				}
+			}
+            ]]></add>
+        </operation>
+    </file>
+
+    <file path="catalog/controller/common/content_bottom.php">
+        <operation>
+            <search><![CDATA[class ControllerCommonContentBottom extends Controller {]]></search>
+            <add position="before"><![CDATA[
+            require_once(DIR_SYSTEM . 'Mobile_Detect.php');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search><![CDATA[$route = 'common/home';]]></search>
+            <add position="replace"><![CDATA[
+            $detect = new Mobile_Detect;
+
+			if ( $detect->isTablet() ) {
+				$route = 'diva/responsive/tablet';
+			} else {
+				if( $detect->isMobile()){
+					$route = 'diva/responsive/mobile';
+				} else {
+					$route = 'common/home';
+				}
+			}
+            ]]></add>
+        </operation>
+    </file>
+
+    <file path="catalog/controller/common/content_top.php">
+        <operation>
+            <search><![CDATA[class ControllerCommonContentTop extends Controller {]]></search>
+            <add position="before"><![CDATA[
+            require_once(DIR_SYSTEM . 'Mobile_Detect.php');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search><![CDATA[$route = 'common/home';]]></search>
+            <add position="replace"><![CDATA[
+            $detect = new Mobile_Detect;
+
+			if ( $detect->isTablet() ) {
+				$route = 'diva/responsive/tablet';
+			} else {
+				if( $detect->isMobile()){
+					$route = 'diva/responsive/mobile';
+				} else {
+					$route = 'common/home';
+				}
+			}
+            ]]></add>
+        </operation>
+    </file>
+
     <!-- Layouts Position -->
     <file path="admin/controller/design/layout.php">
         <operation>
