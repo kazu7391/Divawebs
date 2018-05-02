@@ -134,15 +134,15 @@
         });
         {% endfor %}
 
-        $('.nav-tabs > li').first().addClass('active');
-        $('.tab-content > .tab-product').hide();
-        $('.tab-content > .tab-product').first().show();
+        $('.product-tabs-section .nav-tabs > li').first().addClass('active');
+        $('.product-tabs-section .tab-content > .tab-product').hide();
+        $('.product-tabs-section .tab-content > .tab-product').first().show();
 
-        $('.nav-tabs a').on('click', function () {
-            $('.nav-tabs > li').removeClass('active');
+        $('.product-tabs-section .nav-tabs a').on('click', function () {
+            $('.product-tabs-section .nav-tabs > li').removeClass('active');
             $(this).closest('li').addClass('active');
 
-            $('.tab-content > .tab-product').hide();
+            $('.product-tabs-section .tab-content > .tab-product').hide();
             var tab = $(this).data('tab');
             $(tab).show();
         });
