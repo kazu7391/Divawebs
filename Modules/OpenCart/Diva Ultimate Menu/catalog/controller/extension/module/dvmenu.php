@@ -384,7 +384,6 @@ class ControllerExtensionModuleDvmenu extends Controller
             'name'                          => $setting['name'],
             'status'                        => $setting['status'],
             'effect'                        => $setting['effect'],  // js
-            'menu_height'                   => $setting['menu_height'],
             'menu_bg'                       => '#' . $setting['menu_bg'],
             'menu_text_color'               => '#' . $setting['menu_text_color'],
             'menu_pd_top'                   => $setting['menu_pd_top'],
@@ -401,7 +400,18 @@ class ControllerExtensionModuleDvmenu extends Controller
             'item_font_weight_hover'        => $setting['item_font_weight_hover'],
             'item_show'                     => (int) $setting['item_show'],
             'mega_menu_bg'                  => '#' . $setting['mega_menu_bg'],
-            'mega_text_color'               => '#' . $setting['mega_text_color'],
+            'mega_sub_item_font_color'               => '#' . $setting['mega_sub_item_font_color'],
+            'mega_sub_item_font_size'               => '#' . $setting['mega_sub_item_font_size'],
+            'mega_sub_item_font_transform'               => '#' . $setting['mega_sub_item_font_transform'],
+            'mega_sub_item_font_weight'               => '#' . $setting['mega_sub_item_font_weight'],
+            'mega_sub_item_hover_font_color'               => '#' . $setting['mega_sub_item_hover_font_color'],
+            'mega_sub_item_hover_font_weight'               => '#' . $setting['mega_sub_item_hover_font_weight'],
+            'mega_sub_sub_item_font_color'               => '#' . $setting['mega_sub_sub_item_font_color'],
+            'mega_sub_sub_item_font_size'               => '#' . $setting['mega_sub_sub_item_font_size'],
+            'mega_sub_sub_item_font_transform'               => '#' . $setting['mega_sub_sub_item_font_transform'],
+            'mega_sub_sub_item_font_weight'               => '#' . $setting['mega_sub_sub_item_font_weight'],
+            'mega_sub_sub_item_hover_font_color'               => '#' . $setting['mega_sub_sub_item_hover_font_color'],
+            'mega_sub_sub_item_hover_font_weight'               => '#' . $setting['mega_sub_sub_item_hover_font_weight'],
             'mega_menu_width'               => $setting['mega_menu_width'],
             'mega_menu_pd_top'              => $setting['mega_menu_pd_top'],
             'mega_menu_pd_right'            => $setting['mega_menu_pd_right'],
@@ -424,13 +434,6 @@ class ControllerExtensionModuleDvmenu extends Controller
             'third_item_font_color_hover'   => '#' . $setting['third_item_font_color_hover'],
             'third_item_font_weight_hover'  => $setting['third_item_font_weight_hover'],
         );
-
-        if (file_exists('catalog/view/theme/' . $this->config->get('config_template') . '/stylesheet/diva/ultimatemenu/menu.css')) {
-            $this->document->addStyle('catalog/view/theme/' . $this->config->get('config_template') . '/stylesheet/diva/ultimatemenu/menu.css');
-        } else {
-            $this->document->addStyle('catalog/view/theme/default/stylesheet/diva/ultimatemenu/menu.css');
-        }
-
         $this->document->addScript('catalog/view/javascript/diva/ultimatemenu/menu.js');
 
         return $this->load->view('diva/module/dvmenu', $data);

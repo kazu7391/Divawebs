@@ -129,14 +129,7 @@ class ControllerExtensionModuleDvmenu extends Controller
         }
 
         // Menu Bar
-        if (isset($this->request->post['menu_height'])) {
-            $data['menu_height'] = $this->request->post['menu_height'];
-        } elseif (!empty($module_info)) {
-            $data['menu_height'] = $module_info['menu_height'];
-        } else {
-            $data['menu_height'] = '40px';
-        }
-
+       
         if (isset($this->request->post['menu_bg'])) {
             $data['menu_bg'] = $this->request->post['menu_bg'];
         } elseif (!empty($module_info)) {
@@ -267,14 +260,102 @@ class ControllerExtensionModuleDvmenu extends Controller
             $data['mega_menu_bg'] = '';
         }
 
-        if (isset($this->request->post['mega_text_color'])) {
-            $data['mega_text_color'] = $this->request->post['mega_text_color'];
+        if (isset($this->request->post['mega_sub_item_font_color'])) {
+            $data['mega_sub_item_font_color'] = $this->request->post['mega_sub_item_font_color'];
         } elseif (!empty($module_info)) {
-            $data['mega_text_color'] = $module_info['mega_text_color'];
+            $data['mega_sub_item_font_color'] = $module_info['mega_sub_item_font_color'];
         } else {
-            $data['mega_text_color'] = '';
+            $data['mega_sub_item_font_color'] = '';
         }
-
+		
+		if (isset($this->request->post['mega_sub_item_font_size'])) {
+            $data['mega_sub_item_font_size'] = $this->request->post['mega_sub_item_font_size'];
+        } elseif (!empty($module_info)) {
+            $data['mega_sub_item_font_size'] = $module_info['mega_sub_item_font_size'];
+        } else {
+            $data['mega_sub_item_font_size'] = '';
+        }
+		
+		if (isset($this->request->post['mega_sub_item_font_transform'])) {
+            $data['mega_sub_item_font_transform'] = $this->request->post['mega_sub_item_font_transform'];
+        } elseif (!empty($module_info)) {
+            $data['mega_sub_item_font_transform'] = $module_info['mega_sub_item_font_transform'];
+        } else {
+            $data['mega_sub_item_font_transform'] = '';
+        }
+		
+		if (isset($this->request->post['mega_sub_item_font_weight'])) {
+            $data['mega_sub_item_font_weight'] = $this->request->post['mega_sub_item_font_weight'];
+        } elseif (!empty($module_info)) {
+            $data['mega_sub_item_font_weight'] = $module_info['mega_sub_item_font_weight'];
+        } else {
+            $data['mega_sub_item_font_weight'] = '';
+        }
+		
+		if (isset($this->request->post['mega_sub_item_hover_font_color'])) {
+            $data['mega_sub_item_hover_font_color'] = $this->request->post['mega_sub_item_hover_font_color'];
+        } elseif (!empty($module_info)) {
+            $data['mega_sub_item_hover_font_color'] = $module_info['mega_sub_item_hover_font_color'];
+        } else {
+            $data['mega_sub_item_hover_font_color'] = '';
+        }
+		
+		if (isset($this->request->post['mega_sub_item_hover_font_weight'])) {
+            $data['mega_sub_item_hover_font_weight'] = $this->request->post['mega_sub_item_hover_font_weight'];
+        } elseif (!empty($module_info)) {
+            $data['mega_sub_item_hover_font_weight'] = $module_info['mega_sub_item_hover_font_weight'];
+        } else {
+            $data['mega_sub_item_hover_font_weight'] = '';
+        }
+		
+		if (isset($this->request->post['mega_sub_sub_item_font_color'])) {
+            $data['mega_sub_sub_item_font_color'] = $this->request->post['mega_sub_sub_item_font_color'];
+        } elseif (!empty($module_info)) {
+            $data['mega_sub_sub_item_font_color'] = $module_info['mega_sub_sub_item_font_color'];
+        } else {
+            $data['mega_sub_sub_item_font_color'] = '';
+        }
+		
+		if (isset($this->request->post['mega_sub_sub_item_font_size'])) {
+            $data['mega_sub_sub_item_font_size'] = $this->request->post['mega_sub_sub_item_font_size'];
+        } elseif (!empty($module_info)) {
+            $data['mega_sub_sub_item_font_size'] = $module_info['mega_sub_sub_item_font_size'];
+        } else {
+            $data['mega_sub_sub_item_font_size'] = '';
+        }
+		
+		if (isset($this->request->post['mega_sub_sub_item_font_transform'])) {
+            $data['mega_sub_sub_item_font_transform'] = $this->request->post['mega_sub_sub_item_font_transform'];
+        } elseif (!empty($module_info)) {
+            $data['mega_sub_sub_item_font_transform'] = $module_info['mega_sub_sub_item_font_transform'];
+        } else {
+            $data['mega_sub_sub_item_font_transform'] = '';
+        }
+		
+		if (isset($this->request->post['mega_sub_sub_item_font_weight'])) {
+            $data['mega_sub_sub_item_font_weight'] = $this->request->post['mega_sub_sub_item_font_weight'];
+        } elseif (!empty($module_info)) {
+            $data['mega_sub_sub_item_font_weight'] = $module_info['mega_sub_sub_item_font_weight'];
+        } else {
+            $data['mega_sub_sub_item_font_weight'] = '';
+        }
+		
+		if (isset($this->request->post['mega_sub_sub_item_hover_font_color'])) {
+            $data['mega_sub_sub_item_hover_font_color'] = $this->request->post['mega_sub_sub_item_hover_font_color'];
+        } elseif (!empty($module_info)) {
+            $data['mega_sub_sub_item_hover_font_color'] = $module_info['mega_sub_sub_item_hover_font_color'];
+        } else {
+            $data['mega_sub_sub_item_hover_font_color'] = '';
+        }
+		
+		if (isset($this->request->post['mega_sub_sub_item_hover_font_weight'])) {
+            $data['mega_sub_sub_item_hover_font_weight'] = $this->request->post['mega_sub_sub_item_hover_font_weight'];
+        } elseif (!empty($module_info)) {
+            $data['mega_sub_sub_item_hover_font_weight'] = $module_info['mega_sub_sub_item_hover_font_weight'];
+        } else {
+            $data['mega_sub_sub_item_hover_font_weight'] = '';
+        }
+		
         if (isset($this->request->post['mega_menu_width'])) {
             $data['mega_menu_width'] = $this->request->post['mega_menu_width'];
         } elseif (!empty($module_info)) {

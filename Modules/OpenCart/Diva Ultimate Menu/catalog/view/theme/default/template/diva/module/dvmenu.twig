@@ -1,11 +1,9 @@
 <style>
     #dv-menu-{{ module_id }} .dv-menu-bar {
-        min-height: {{ menu_setting.menu_height }};
         background: {{ menu_setting.menu_bg }};
         color: {{ menu_setting.menu_text_color }};
     }
     #dv-menu-{{ module_id }}.dv-menu-bar {
-        min-height: {{ menu_setting.menu_height }};
         background: {{ menu_setting.menu_bg }};
         color: {{ menu_setting.menu_text_color }};
     }
@@ -32,12 +30,27 @@
         width: {{ menu_setting.mega_menu_width }};
         background: {{ menu_setting.mega_menu_bg }};
         padding: {{ menu_setting.mega_menu_pd_top }} {{ menu_setting.mega_menu_pd_right }} {{ menu_setting.mega_menu_pd_bottom }} {{ menu_setting.mega_menu_pd_left }};
-        color: {{ menu_setting.mega_text_color }};
     }
-    #dv-menu-{{ module_id }} .mega-menu-container a, #dv-menu-{{ module_id }} .mega-menu-container h1, #dv-menu-{{ module_id }} .mega-menu-container h2, #dv-menu-{{ module_id }} .mega-menu-container h3,
-    #dv-menu-{{ module_id }} .mega-menu-container h4, #dv-menu-{{ module_id }} .mega-menu-container h5, #dv-menu-{{ module_id }} .mega-menu-container h6, #dv-menu-{{ module_id }} .mega-menu-container span {
-        color: {{ menu_setting.mega_text_color }};
-    }
+	#dv-menu-{{ module_id }} .mega-menu-container .a-mega-second-link {
+		color: {{ menu_setting.mega_sub_item_font_color }};
+		font-size: {{ menu_setting.mega_sub_item_font_size }};
+		text-transform: {{ menu_setting.mega_sub_item_font_transform }};
+		font-weight: {{ menu_setting.mega_sub_item_font_weight }};
+	}
+	#dv-menu-{{ module_id }} .mega-menu-container .a-mega-second-link:hover {
+		color: {{ menu_setting.mega_sub_item_hover_font_color }};
+		font-weight: {{ menu_setting.mega_sub_item_hover_font_weight }};
+	}
+	#dv-menu-{{ module_id }} .mega-menu-container .a-mega-second-link .a-mega-third-link {
+		color: {{ menu_setting.mega_sub_sub_item_font_color }};
+		font-size: {{ menu_setting.mega_sub_sub_item_font_size }};
+		text-transform: {{ menu_setting.mega_sub_sub_item_font_transform }};
+		font-weight: {{ menu_setting.mega_sub_sub_item_font_weight }};
+	}
+	#dv-menu-{{ module_id }} .mega-menu-container .a-mega-second-link .a-mega-third-link:hover {
+		color: {{ menu_setting.mega_sub_sub_item_hover_font_color }};
+		font-weight: {{ menu_setting.mega_sub_sub_item_hover_font_weight }};
+	}
     #dv-menu-{{ module_id }} .ul-second-items .li-second-items {
         background: {{ menu_setting.second_item_bg }};
         color: {{ menu_setting.second_item_font_color }};
@@ -118,12 +131,12 @@
                                                         {% if sub_item2.status %}
                                                             <div class="{% if top_item.sub_menu_content_columns %}col-md-{{ top_item.sub_menu_content_columns }}{% endif %} sub-item2-content"
                                                                     {% if top_item.sub_menu_content_columns == false %} style="width: 20%;" data-cols="12/5" {% else %} data-cols="{{ top_item.sub_menu_content_columns }}" {% endif %} >
-                                                                <a class="a-mega-second-link" href="{{ sub_item2.link }}"><h4><strong>{{ sub_item2.title }}</strong></h4></a>
+                                                                <h4><a class="a-mega-second-link" href="{{ sub_item2.link }}">{{ sub_item2.title }}</a></h4>
                                                                 {% if sub_item2.sub_items|length > 0 %}
                                                                     <div class="sub_item3-content">
                                                                         {% for sub_item3 in sub_item2.sub_items %}
                                                                             {% if sub_item3.status %}
-                                                                                <a class="a-mega-third-link" href="{{ sub_item3.link }}"><h5>{{ sub_item3.title }}</h5></a>
+                                                                                <h5><a class="a-mega-third-link" href="{{ sub_item3.link }}">{{ sub_item3.title }}</a></h5>
                                                                             {% endif %}
                                                                         {% endfor %}
                                                                     </div>
@@ -146,11 +159,11 @@
                                                                         {% if widget.image %}
                                                                             <img src="{{ widget.image }}" alt="{{ widget.title }}" class="mega-second-image" />
                                                                         {% endif %}
-                                                                        <a class="a-mega-second-link" href="{{ widget.link }}"><h4><strong>{{ widget.title }}</strong></h4></a>
+                                                                        <h4><a class="a-mega-second-link" href="{{ widget.link }}">{{ widget.title }}</a></h4>
                                                                         {% if widget.children|length > 0 %}
                                                                             <div class="sub_item3-content">
                                                                                 {% for c_category in widget.children %}
-                                                                                    <a class="a-mega-third-link" href="{{ c_category.link }}"><h5>{{ c_category.title }}</h5></a>
+                                                                                    <h5><a class="a-mega-third-link" href="{{ c_category.link }}">{{ c_category.title }}</a></h5>
                                                                                 {% endfor %}
                                                                             </div>
                                                                         {% endif %}
@@ -175,11 +188,11 @@
                                                                             {% if widget.image %}
                                                                                 <img src="{{ widget.image }}" alt="{{ widget.title }}" class="mega-second-image" />
                                                                             {% endif %}
-                                                                            <a class="a-mega-second-link" href="{{ widget.link }}"><h4><strong>{{ widget.title }}</strong></h4></a>
+                                                                            <h4><a class="a-mega-second-link" href="{{ widget.link }}">{{ widget.title }}</a></h4>
                                                                             {% if widget.children|length > 0 %}
                                                                                 <div class="sub_item3-content">
                                                                                     {% for c_category in widget.children %}
-                                                                                        <a class="a-mega-third-link" href="{{ c_category.link }}"><h5>{{ c_category.title }}</h5></a>
+                                                                                        <h5><a class="a-mega-third-link" href="{{ c_category.link }}">{{ c_category.title }}</a></h5>
                                                                                     {% endfor %}
                                                                                 </div>
                                                                             {% endif %}
@@ -191,7 +204,7 @@
                                                                             {% if widget.image %}
                                                                                 <img src="{{ widget.image }}" alt="{{ widget.title }}" class="mega-second-image" />
                                                                             {% endif %}
-                                                                            <a class="a-mega-second-link" href="{{ widget.link }}"><h4><strong>{{ widget.title }}</strong></h4></a>
+                                                                           <h4><a class="a-mega-second-link" href="{{ widget.link }}">{{ widget.title }}</a></h4>
                                                                         </div>
                                                                     {% endif %}
 
@@ -204,7 +217,7 @@
 
                                                                     {% if widget.type == "link" %}
                                                                         <div class="col-md-{{ widget.cols }} sub-item2-content" data-cols="{{ widget.cols }}">
-                                                                            <a class="a-mega-second-link a-widget-link" href="{{ widget.link }}"><h4><strong>{{ widget.title }}</strong></h4></a>
+                                                                            <h4><a class="a-mega-second-link a-widget-link" href="{{ widget.link }}">{{ widget.title }}</a></h4>
                                                                         </div>
                                                                     {% endif %}
                                                                 {% endfor %}
@@ -357,12 +370,12 @@
                                                         {% if sub_item2.status %}
                                                             <div class="{% if top_item.sub_menu_content_columns %}col-md-{{ top_item.sub_menu_content_columns }}{% endif %} sub-item2-content"
                                                                     {% if top_item.sub_menu_content_columns == false %} style="width: 20%;" data-cols="12/5" {% else %} data-cols="{{ top_item.sub_menu_content_columns }}" {% endif %} >
-                                                                <a class="a-mega-second-link" href="{{ sub_item2.link }}"><h4><strong>{{ sub_item2.title }}</strong></h4></a>
+                                                                <h4><a class="a-mega-second-link" href="{{ sub_item2.link }}">{{ sub_item2.title }}</a></h4>
                                                                 {% if sub_item2.sub_items|length > 0 %}
                                                                     <div class="sub_item3-content">
                                                                         {% for sub_item3 in sub_item2.sub_items %}
                                                                             {% if sub_item3.status %}
-                                                                                <a class="a-mega-third-link" href="{{ sub_item3.link }}"><h5>{{ sub_item3.title }}</h5></a>
+                                                                                <h5><a class="a-mega-third-link" href="{{ sub_item3.link }}">{{ sub_item3.title }}</a></h5>
                                                                             {% endif %}
                                                                         {% endfor %}
                                                                     </div>
@@ -383,11 +396,11 @@
                                                                         {% if widget.image %}
                                                                             <img src="{{ widget.image }}" alt="{{ widget.title }}" class="mega-second-image" />
                                                                         {% endif %}
-                                                                        <a class="a-mega-second-link" href="{{ widget.link }}"><h4><strong>{{ widget.title }}</strong></h4></a>
+                                                                        <h4><a class="a-mega-second-link" href="{{ widget.link }}">{{ widget.title }}</a></h4>
                                                                         {% if widget.children|length > 0 %}
                                                                             <div class="sub_item3-content">
                                                                                 {% for c_category in widget.children %}
-                                                                                    <a class="a-mega-third-link" href="{{ c_category.link }}"><h5>{{ c_category.title }}</h5></a>
+                                                                                    <h5><a class="a-mega-third-link" href="{{ c_category.link }}">{{ c_category.title }}</a></h5>
                                                                                 {% endfor %}
                                                                             </div>
                                                                         {% endif %}
@@ -404,11 +417,11 @@
                                                                             {% if widget.image %}
                                                                                 <img src="{{ widget.image }}" alt="{{ widget.title }}" class="mega-second-image" />
                                                                             {% endif %}
-                                                                            <a class="a-mega-second-link" href="{{ widget.link }}"><h4><strong>{{ widget.title }}</strong></h4></a>
+                                                                            <h4><a class="a-mega-second-link" href="{{ widget.link }}">{{ widget.title }}</a></h4>
                                                                             {% if widget.children|length > 0 %}
                                                                                 <div class="sub_item3-content">
                                                                                     {% for c_category in widget.children %}
-                                                                                        <a class="a-mega-third-link" href="{{ c_category.link }}"><h5>{{ c_category.title }}</h5></a>
+                                                                                        <h5><a class="a-mega-third-link" href="{{ c_category.link }}">{{ c_category.title }}</a></h5>
                                                                                     {% endfor %}
                                                                                 </div>
                                                                             {% endif %}
@@ -420,7 +433,7 @@
                                                                             {% if widget.image %}
                                                                                 <img src="{{ widget.image }}" alt="{{ widget.title }}" class="mega-second-image" />
                                                                             {% endif %}
-                                                                            <a class="a-mega-second-link" href="{{ widget.link }}"><h4><strong>{{ widget.title }}</strong></h4></a>
+                                                                            <h4><a class="a-mega-second-link" href="{{ widget.link }}">{{ widget.title }}</a></h4>
                                                                         </div>
                                                                     {% endif %}
 
@@ -433,7 +446,7 @@
 
                                                                     {% if widget.type == "link" %}
                                                                         <div class="col-md-{{ widget.cols }} sub-item2-content" data-cols="{{ widget.cols }}">
-                                                                            <a class="a-mega-second-link a-widget-link" href="{{ widget.link }}"><h4><strong>{{ widget.title }}</strong></h4></a>
+                                                                            <h4><a class="a-mega-second-link a-widget-link" href="{{ widget.link }}">{{ widget.title }}</a></h4>
                                                                         </div>
                                                                     {% endif %}
                                                                 {% endfor %}
@@ -523,10 +536,10 @@
                     {% endfor %}
                     {% if count > item_show %}
                         <li class="li-top-item li-over li-plus">
-                            <a href="javascript:void(0);" class="a-top-link a-plus a-over"><i class="fa fa-plus-square" aria-hidden="true"></i> <span>More Items</span></a>
+                            <a href="javascript:void(0);" class="a-top-link a-plus a-over"><i class="fa fa-plus-square" aria-hidden="true"></i> <span>{{ text_more_item }}</span></a>
                         </li>
                         <li class="li-top-item li-over li-minus over">
-                            <a href="javascript:void(0);" class="a-top-link a-minus a-over"><i class="fa fa-minus-square" aria-hidden="true"></i> <span>Close Items</span></a>
+                            <a href="javascript:void(0);" class="a-top-link a-minus a-over"><i class="fa fa-minus-square" aria-hidden="true"></i> <span>{{ text_close_item }}</span></a>
                         </li>
                     {% endif %}
                 </ul>

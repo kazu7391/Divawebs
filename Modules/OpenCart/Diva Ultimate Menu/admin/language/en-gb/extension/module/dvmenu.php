@@ -36,11 +36,13 @@ $_['text_color']                = 'Color';
 $_['text_size']                 = 'Size';
 $_['text_transform']            = 'Transform';
 $_['text_weight']               = 'Weight';
-$_['text_normal']               = 'Normal';
 $_['text_capitalize']           = 'Capitalize';
 $_['text_uppercase']            = 'UPPERCASE';
 $_['text_lowercase']            = 'lowercase';
 $_['text_light']                = 'Light';
+$_['text_normal']               = 'Normal';
+$_['text_medium']               = 'Medium';
+$_['text_semibold']               = 'Semi-Bold';
 $_['text_bold']                 = 'Bold';
 $_['text_menu_editor']          = 'Menu Editor';
 $_['text_list']                 = 'List';
@@ -109,7 +111,10 @@ $_['entry_choose_menu'] = 'Choose Menu';
 $_['entry_number_cols'] = 'Number of Columns';
 $_['entry_menu_text_color']     = 'Text Color';
 $_['entry_number_items']        = 'Show Items';
-
+$_['entry_menu_sub_item']        = 'Mega Sub Items';
+$_['entry_menu_sub_item_hover']        = 'Mega Sub Items Hover';
+$_['entry_menu_sub_sub_item']        = 'Mega Sub-Sub Items';
+$_['entry_menu_sub_sub_item_hover']        = 'Mega Sub-Sub Items Hover';
 // Column
 $_['column_name']       = 'Name';
 $_['column_status']     = 'Status';

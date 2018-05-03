@@ -81,17 +81,12 @@
 
                             <div class="tab-pane" id="tab-menu-bar">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="input-menu-height">{{ entry_menu_height }}</label>
-                                    <div class="col-sm-2">
-                                        <input type="text" name="menu_height" value="{{ menu_height }}" id="input-menu-height" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-menu-bg">{{ entry_menu_background }}</label>
                                     <div class="col-sm-2">
                                         <input type="text" id="input-menu-bg" class="jscolor form-control" name="menu_bg" value="{{ menu_bg }}" />
                                     </div>
                                 </div>
+								
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-menu-text-color">{{ entry_menu_text_color }}</label>
                                     <div class="col-sm-2">
@@ -155,6 +150,8 @@
                                         <select name="item_font_weight" id="input-item-font-weigth" class="form-control">
                                             <option value="300" {% if item_font_weight == '300' %} selected="selected" {% endif %}>{{ text_light ~ ' (300)'}} </option>
                                             <option value="400" {% if item_font_weight == '400' %} selected="selected" {% endif %}>{{ text_normal ~ ' (400)'}}  </option>
+                                            <option value="500" {% if item_font_weight == '500' %} selected="selected" {% endif %}>{{ text_medium ~ ' (500)'}}  </option>
+                                            <option value="600" {% if item_font_weight == '600' %} selected="selected" {% endif %}>{{ text_semibold ~ ' (600)'}}  </option>
                                             <option value="700" {% if item_font_weight == '700' %} selected="selected" {% endif %}>{{ text_bold ~ ' (700)'}}  </option>
                                         </select>
                                     </div>
@@ -170,6 +167,8 @@
                                         <select name="item_font_weight_hover" id="input-item-font-weigth-hover" class="form-control">
                                             <option value="300" {% if item_font_weight_hover == '300' %} selected="selected" {% endif %}>{{ text_light ~ ' (300)'}} </option>
                                             <option value="400" {% if item_font_weight_hover == '400' %} selected="selected" {% endif %}>{{ text_normal ~ ' (400)'}}  </option>
+                                            <option value="500" {% if item_font_weight_hover == '500' %} selected="selected" {% endif %}>{{ text_medium ~ ' (500)'}}  </option>
+                                            <option value="600" {% if item_font_weight_hover == '600' %} selected="selected" {% endif %}>{{ text_semibold ~ ' (600)'}}  </option>
                                             <option value="700" {% if item_font_weight_hover == '700' %} selected="selected" {% endif %}>{{ text_bold ~ ' (700)'}}  </option>
                                         </select>
                                     </div>
@@ -193,9 +192,97 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="input-mega-text-color">{{ entry_menu_text_color }}</label>
+                                    <label class="col-sm-2 control-label" for="input-mega-sub-item">{{ entry_menu_sub_item }}</label>
+									<div class="col-sm-2">
+                                        <div class="form-sp"><span>{{ text_color }}</span></div>
+                                        <input type="text" id="input-mega-sub-item-font" class="jscolor form-control" name="mega_sub_item_font_color" value="{{ mega_sub_item_font_color }}" />
+                                    </div>
                                     <div class="col-sm-2">
-                                        <input type="text" id="input-mega-text-color" class="jscolor form-control" name="mega_text_color" value="{{ mega_text_color }}" />
+                                        <div class="form-sp"><span>{{ text_size }}</span></div>
+                                        <input type="text" id="input-mega-sub-item-font-size" class="form-control" name="mega_sub_item_font_size" value="{{ mega_sub_item_font_size }}" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-sp"><span>{{ text_transform }}</span></div>
+                                        <select name="mega_sub_item_font_transform" id="input-mega-sub-item-font-transform" class="form-control">
+                                            <option value="none"        {% if mega_sub_item_font_transform == 'none' %}        selected="selected" {% endif %}>{{ text_normal }}    </option>
+                                            <option value="capitalize"  {% if mega_sub_item_font_transform == 'capitalize' %}  selected="selected" {% endif %}>{{ text_capitalize }}</option>
+                                            <option value="uppercase"   {% if mega_sub_item_font_transform == 'uppercase' %}   selected="selected" {% endif %}>{{ text_uppercase }} </option>
+                                            <option value="lowercase"   {% if mega_sub_item_font_transform == 'lowercase' %}   selected="selected" {% endif %}>{{ text_lowercase }} </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-sp"><span>{{ text_weight }}</span></div>
+                                        <select name="mega_sub_item_font_weight" id="input-mega-sub-item-font-weigth" class="form-control">
+                                            <option value="300" {% if mega_sub_item_font_weight == '300' %} selected="selected" {% endif %}>{{ text_light ~ ' (300)'}} </option>
+                                            <option value="400" {% if mega_sub_item_font_weight == '400' %} selected="selected" {% endif %}>{{ text_normal ~ ' (400)'}}  </option>
+                                            <option value="500" {% if mega_sub_item_font_weight == '500' %} selected="selected" {% endif %}>{{ text_medium ~ ' (500)'}}  </option>
+                                            <option value="600" {% if mega_sub_item_font_weight == '600' %} selected="selected" {% endif %}>{{ text_semibold ~ ' (600)'}}  </option>
+                                            <option value="700" {% if mega_sub_item_font_weight == '700' %} selected="selected" {% endif %}>{{ text_bold ~ ' (700)'}}  </option>
+                                        </select>
+                                    </div>
+                                </div>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-mega-sub-item">{{ entry_menu_sub_item_hover }}</label>
+									<div class="col-sm-2">
+                                        <div class="form-sp"><span>{{ text_color }}</span></div>
+                                        <input type="text" id="input-mega-sub-item-hover-font" class="jscolor form-control" name="mega_sub_item_hover_font_color" value="{{ mega_sub_item_hover_font_color }}" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-sp"><span>{{ text_weight }}</span></div>
+                                        <select name="mega_sub_item_hover_font_weight" id="input-mega-sub-item-hover-font-weigth" class="form-control">
+                                            <option value="300" {% if mega_sub_item_font_hover_weight == '300' %} selected="selected" {% endif %}>{{ text_light ~ ' (300)'}} </option>
+                                            <option value="400" {% if mega_sub_item_font_hover_weight == '400' %} selected="selected" {% endif %}>{{ text_normal ~ ' (400)'}}  </option>
+                                            <option value="500" {% if mega_sub_item_font_hover_weight == '500' %} selected="selected" {% endif %}>{{ text_medium ~ ' (500)'}}  </option>
+                                            <option value="600" {% if mega_sub_item_font_hover_weight == '600' %} selected="selected" {% endif %}>{{ text_semibold ~ ' (600)'}}  </option>
+                                            <option value="700" {% if mega_sub_item_font_hover_weight == '700' %} selected="selected" {% endif %}>{{ text_bold ~ ' (700)'}}  </option>
+                                        </select>
+                                    </div>
+                                </div>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-mega-sub-item">{{ entry_menu_sub_sub_item }}</label>
+									<div class="col-sm-2">
+                                        <div class="form-sp"><span>{{ text_color }}</span></div>
+                                        <input type="text" id="input-mega-sub-sub-item-font" class="jscolor form-control" name="mega_sub_sub_item_font_color" value="{{ mega_sub_sub_item_font_color }}" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-sp"><span>{{ text_size }}</span></div>
+                                        <input type="text" id="input-mega-sub-sub-item-font-size" class="form-control" name="mega_sub_sub_item_font_size" value="{{ mega_sub_sub_item_font_size }}" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-sp"><span>{{ text_transform }}</span></div>
+                                        <select name="mega_sub_sub_item_font_transform" id="input-mega-sub-sub-item-font-transform" class="form-control">
+                                            <option value="none"        {% if mega_sub_sub_item_font_transform == 'none' %}        selected="selected" {% endif %}>{{ text_normal }}    </option>
+                                            <option value="capitalize"  {% if mega_sub_sub_item_font_transform == 'capitalize' %}  selected="selected" {% endif %}>{{ text_capitalize }}</option>
+                                            <option value="uppercase"   {% if mega_sub_sub_item_font_transform == 'uppercase' %}   selected="selected" {% endif %}>{{ text_uppercase }} </option>
+                                            <option value="lowercase"   {% if mega_sub_sub_item_font_transform == 'lowercase' %}   selected="selected" {% endif %}>{{ text_lowercase }} </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-sp"><span>{{ text_weight }}</span></div>
+                                        <select name="mega_sub_sub_item_font_weight" id="input-mega-sub-sub-item-font-weigth" class="form-control">
+                                            <option value="300" {% if mega_sub_sub_item_font_weight == '300' %} selected="selected" {% endif %}>{{ text_light ~ ' (300)'}} </option>
+                                            <option value="400" {% if mega_sub_sub_item_font_weight == '400' %} selected="selected" {% endif %}>{{ text_normal ~ ' (400)'}}  </option>
+                                            <option value="500" {% if mega_sub_sub_item_font_weight == '500' %} selected="selected" {% endif %}>{{ text_medium ~ ' (500)'}}  </option>
+                                            <option value="600" {% if mega_sub_sub_item_font_weight == '600' %} selected="selected" {% endif %}>{{ text_semibold ~ ' (600)'}}  </option>
+                                            <option value="700" {% if mega_sub_sub_item_font_weight == '700' %} selected="selected" {% endif %}>{{ text_bold ~ ' (700)'}}  </option>
+                                        </select>
+                                    </div>
+                                </div>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-mega-sub-sub-item">{{ entry_menu_sub_sub_item_hover }}</label>
+									<div class="col-sm-2">
+                                        <div class="form-sp"><span>{{ text_color }}</span></div>
+                                        <input type="text" id="input-mega-sub-sub-item-hover-font" class="jscolor form-control" name="mega_sub_sub_item_hover_font_color" value="{{ mega_sub_sub_item_hover_font_color }}" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-sp"><span>{{ text_weight }}</span></div>
+                                        <select name="mega_sub_sub_item_hover_font_weight" id="input-mega-sub-sub-item-hover-font-weigth" class="form-control">
+                                            <option value="300" {% if mega_sub_sub_item_font_hover_weight == '300' %} selected="selected" {% endif %}>{{ text_light ~ ' (300)'}} </option>
+                                            <option value="400" {% if mega_sub_sub_item_font_hover_weight == '400' %} selected="selected" {% endif %}>{{ text_normal ~ ' (400)'}}  </option>
+                                            <option value="500" {% if mega_sub_sub_item_font_hover_weight == '500' %} selected="selected" {% endif %}>{{ text_medium ~ ' (500)'}}  </option>
+                                            <option value="600" {% if mega_sub_sub_item_font_hover_weight == '600' %} selected="selected" {% endif %}>{{ text_semibold ~ ' (600)'}}  </option>
+                                            <option value="700" {% if mega_sub_sub_item_font_hover_weight == '700' %} selected="selected" {% endif %}>{{ text_bold ~ ' (700)'}}  </option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
