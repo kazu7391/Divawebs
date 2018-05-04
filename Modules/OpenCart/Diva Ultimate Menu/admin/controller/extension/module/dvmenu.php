@@ -242,7 +242,39 @@ class ControllerExtensionModuleDvmenu extends Controller
         } else {
             $data['item_font_weight_hover'] = '400';
         }
+		
+		if (isset($this->request->post['item_pd_top'])) {
+            $data['item_pd_top'] = $this->request->post['item_pd_top'];
+        } elseif (!empty($module_info)) {
+            $data['item_pd_top'] = $module_info['item_pd_top'];
+        } else {
+            $data['item_pd_top'] = '0px';
+        }
 
+        if (isset($this->request->post['item_pd_right'])) {
+            $data['item_pd_right'] = $this->request->post['item_pd_right'];
+        } elseif (!empty($module_info)) {
+            $data['item_pd_right'] = $module_info['item_pd_right'];
+        } else {
+            $data['item_pd_right'] = '0px';
+        }
+
+        if (isset($this->request->post['item_pd_bottom'])) {
+            $data['item_pd_bottom'] = $this->request->post['item_pd_bottom'];
+        } elseif (!empty($module_info)) {
+            $data['item_pd_bottom'] = $module_info['item_pd_bottom'];
+        } else {
+            $data['item_pd_bottom'] = '0px';
+        }
+
+        if (isset($this->request->post['item_pd_left'])) {
+            $data['item_pd_left'] = $this->request->post['item_pd_left'];
+        } elseif (!empty($module_info)) {
+            $data['item_pd_left'] = $module_info['item_pd_left'];
+        } else {
+            $data['item_pd_left'] = '0px';
+        }
+		
         if (isset($this->request->post['item_show'])) {
             $data['item_show'] = $this->request->post['item_show'];
         } elseif (!empty($module_info)) {

@@ -2,6 +2,7 @@
     #dv-menu-{{ module_id }} .dv-menu-bar {
         background: {{ menu_setting.menu_bg }};
         color: {{ menu_setting.menu_text_color }};
+		padding: {{ menu_setting.menu_pd_top }} {{ menu_setting.menu_pd_right }} {{ menu_setting.menu_pd_bottom }} {{ menu_setting.menu_pd_left }};
     }
     #dv-menu-{{ module_id }}.dv-menu-bar {
         background: {{ menu_setting.menu_bg }};
@@ -12,7 +13,7 @@
         color: {{ menu_setting.item_font_color }};
     }
     #dv-menu-{{ module_id }} .ul-top-items .li-top-item .a-top-link {
-        padding: {{ menu_setting.menu_pd_top }} {{ menu_setting.menu_pd_right }} {{ menu_setting.menu_pd_bottom }} {{ menu_setting.menu_pd_left }};
+        padding: {{ menu_setting.item_pd_top }} {{ menu_setting.item_pd_right }} {{ menu_setting.item_pd_bottom }} {{ menu_setting.item_pd_left }};
         color: {{ menu_setting.item_font_color }};
         font-size: {{ menu_setting.item_font_size }};
         text-transform: {{ menu_setting.item_font_transform }};
@@ -41,13 +42,13 @@
 		color: {{ menu_setting.mega_sub_item_hover_font_color }};
 		font-weight: {{ menu_setting.mega_sub_item_hover_font_weight }};
 	}
-	#dv-menu-{{ module_id }} .mega-menu-container .a-mega-second-link .a-mega-third-link {
+	#dv-menu-{{ module_id }} .mega-menu-container .a-mega-third-link {
 		color: {{ menu_setting.mega_sub_sub_item_font_color }};
 		font-size: {{ menu_setting.mega_sub_sub_item_font_size }};
 		text-transform: {{ menu_setting.mega_sub_sub_item_font_transform }};
 		font-weight: {{ menu_setting.mega_sub_sub_item_font_weight }};
 	}
-	#dv-menu-{{ module_id }} .mega-menu-container .a-mega-second-link .a-mega-third-link:hover {
+	#dv-menu-{{ module_id }} .mega-menu-container .a-mega-third-link:hover {
 		color: {{ menu_setting.mega_sub_sub_item_hover_font_color }};
 		font-weight: {{ menu_setting.mega_sub_sub_item_hover_font_weight }};
 	}
