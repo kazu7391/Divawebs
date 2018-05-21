@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="{{ direction }}" lang="{{ lang }}">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>{{ title }}</title>
+<base href="{{ base }}" />
+{% if description %}
+<meta name="description" content="{{ description }}" />
+{% endif %}
+{% if keywords %}
+<meta name="keywords" content="{{ keywords }}" />
+{% endif %}
+<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script src="catalog/view/javascript/jquery/jquery-ui.js" type="text/javascript"></script>
+<link href="catalog/view/javascript/jquery/css/jquery-ui.css" type="text/css" rel="stylesheet" media="screen" />
+<link href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+<script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<link href="catalog/view/javascript/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="//fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/default/stylesheet/stylesheet.css" rel="stylesheet">
+{% for style in styles %}
+<link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
+{% endfor %}
+{% for script in scripts %}
+<script src="{{ script }}" type="text/javascript"></script>
+{% endfor %}
+<script src="catalog/view/javascript/common.js" type="text/javascript"></script>
+{% for link in links %}
+<link href="{{ link.href }}" rel="{{ link.rel }}" />
+{% endfor %}
+{% for analytic in analytics %}
+{{ analytic }}
+{% endfor %}
+  <!-- Ajax Search -->
+  {% if search_status %}
+      <link href="catalog/view/theme/default/stylesheet/diva/ajaxsearch/search.css" rel="stylesheet" type="text/css" />
+  {% endif %}
+  <!-- Quick view -->
+  {% if use_quick_view %}
+    <script src="catalog/view/javascript/diva/cloudzoom/cloud-zoom.1.0.2.min.js" type="text/javascript"></script>
+    <script src="catalog/view/javascript/diva/cloudzoom/zoom.js" type="text/javascript"></script>
+    <script src="catalog/view/javascript/diva/quickview/quickview.js" type="text/javascript"></script>
+    <link href="catalog/view/theme/default/stylesheet/diva/quickview/quickview.css" rel="stylesheet" type="text/css" />
+  {% endif %}
+
+  <!-- Font & CSS -->
+  <!-- Body -->
+  {% if body_font_link and body_font_family and body_font_cate %}
+    <link href="{{ body_font_link }}" rel="stylesheet" type="text/css" />
+    <style>
+      body {
+        font-family: '{{ body_font_family }}', {{ body_font_cate }};
+        {% if body_font_size %} font-size: {{ body_font_size }}; {% endif %}
+        {% if body_font_weight %} font-weight: {{ body_font_weight }}; {% endif %}
+        {% if body_font_color %} color: #{{ body_font_color }}; {% endif %}
+      }
+    </style>
+  {% endif %}
+
+  <!-- Heading -->
+  {% if heading_font_link and heading_font_family and heading_font_cate %}
+    <link href="{{ heading_font_link }}" rel="stylesheet" type="text/css" />
+    <style>
+      h1, h2, h3, h4, h5, h6 {
+        font-family: '{{ heading_font_family }}', {{ heading_font_cate }};
+        {% if heading_font_weight %} font-weight: {{ heading_font_weight }}; {% endif %}
+        {% if heading_font_color %} color: #{{ heading_font_color }}; {% endif %}
+      }
+    </style>
+  {% endif %}
+
+  <!-- Link -->
+  {% if link_color or link_hover_color %}
+    <style>
+      a {
+        {% if link_color %} color: #{{ link_color }}; {% endif %}
+      }
+      a:hover {
+        {% if link_hover_color %} color: #{{ link_hover_color }}; {% endif %}
+      }
+    </style>
+  {% endif %}
+
+  <!-- Button -->
+  {% if button_color or button_hover_color or button_bg_color or button_bg_hover_color %}
+    <style>
+      button {
+        {% if button_color %} color: #{{ button_color }}; {% endif %}
+        {% if button_bg_color %} background-color: #{{ button_bg_color }}; {% endif %}
+      }
+
+      button:hover {
+        {% if button_hover_color %} color: #{{ button_hover_color }}; {% endif %}
+        {% if button_bg_hover_color %} background-color: #{{ button_bg_hover_color }}; {% endif %}
+      }
+    </style>
+  {% endif %}
+
+  <!-- General -->
+  <!-- Sticky Menu -->
+  {% if sticky_header %}
+  <script>
+    // Sticky Header JS Code
+  </script>
+  {% endif %}
+
+  <!-- Scroll Top -->
+  {% if scroll_top %}
+    <script>
+      $("#back-top").hide();
+      $(function () {
+        $(window).scroll(function () {
+          if ($(this).scrollTop() > $('body').height()/3) {
+            $('#back-top').fadeIn();
+          } else {
+            $('#back-top').fadeOut();
+          }
+        });
+        $('#back-top').click(function () {
+          $('body,html').animate({scrollTop: 0}, 800);
+          return false;
+        });
+      });
+    </script>
+  {% endif %}
+
+  <!-- Advance -->
+  {% if custom_css %}
+    <style>
+      {{ custom_css }}
+    </style>
+  {% endif %}
+
+  {% if custom_js %}
+    <script>
+      {{ custom_js }}
+    </script>
+  {% endif %}
+</head>
+<body>
+{% if scroll_top %}
+  <div id="back-top"></div>
+{% endif %}
+{{ header }}
