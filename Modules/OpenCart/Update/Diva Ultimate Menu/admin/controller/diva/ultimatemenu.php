@@ -815,6 +815,8 @@ class ControllerDivaUltimatemenu extends Controller
 
         $data['lang_id'] = $lang['language_id'];
 
+        $data['links'] = $this->getLinks();
+
         if(isset($this->request->get['menu_item_id'])) {
             $menu_item_description = $this->model_diva_ultimatemenu->getTopItemDescriptionById($this->request->get['menu_item_id']);
         } else {
@@ -1351,22 +1353,22 @@ class ControllerDivaUltimatemenu extends Controller
 
         $links[] = array(
             'label' => 'Blog Page',
-            'url'   => $this->url->link('diva/blog')
+            'url'   => 'index.php?route=diva/blog'
         );
 
         $links[] = array(
             'label' => 'Product Manufacturer',
-            'url'   => $this->url->link('product/manufacturer')
+            'url'   => 'index.php?route=product/manufacturer'
         );
 
         $links[] = array(
             'label' => 'Product Special',
-            'url'   => $this->url->link('product/special')
+            'url'   => 'index.php?route=product/special'
         );
 
         $links[] = array(
             'label' => 'Contact Us',
-            'url'   => $this->url->link('information/contact')
+            'url'   => 'index.php?route=information/contact'
         );
 
         $filter_data = array(
@@ -1374,18 +1376,20 @@ class ControllerDivaUltimatemenu extends Controller
             'limit' => 100
         );
 
+        $this->load->model('catalog/information');
+
         $informations = $this->model_catalog_information->getInformations($filter_data);
 
         foreach ($informations as $result) {
             $links[] = array(
                 'label'          => $result['title'],
-                'url'            => $this->url->link('information/information', 'information_id=' . $result['information_id'], true)
+                'url'            => 'index.php?route=information/information&information_id=' . $result['information_id']
             );
         }
 
         $links[] = array(
             'label' => 'Site Map',
-            'url'   => $this->url->link('information/sitemap')
+            'url'   => 'index.php?route=information/sitemap'
         );
 
         return $links;
