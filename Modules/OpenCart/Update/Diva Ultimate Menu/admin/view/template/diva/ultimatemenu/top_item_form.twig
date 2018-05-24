@@ -67,13 +67,14 @@
                             <label class="frm-label col-sm-2" for="input-link">{{ entry_link }}</label>
                             <div class="col-sm-6">
                                 <select class="form-control link-selection">
+                                    {% set flg = 0 %}
                                     {% for mlink in links %}
-                                    <option value="{{ mlink.url }}" {% if link == mlink.url %} selected="selected" {% endif %}>{{ mlink.label }}</option>
+                                    <option value="{{ mlink.url }}" {% if link == mlink.url %} selected="selected" {% set flg = 1 %} {% endif %}>{{ mlink.label }}</option>
                                     {% endfor %}
-                                    <option value="0">{{ text_custom_link }}</option>
+                                    <option value="0" {% if flg == 0 %} selected="selected" {% endif %}>{{ text_custom_link }}</option>
                                 </select>
 
-                                <input type="text" id="input-link" name="link" value="{{ link }}" class="form-control" />
+                                <input type="text" id="input-link" name="link" value="{{ link }}" class="form-control" style="margin-top: 10px"/>
                             </div>
                             <div class="col-sm-1"></div>
                             <div class="col-sm-3">
@@ -369,7 +370,7 @@
     });
 
     $('#input-link').hide();
-    var link = $('#input-link').val();
+    var link = $('.link-selection').val();
     if (link == '0') {
         $('#input-link').show();
     } else {

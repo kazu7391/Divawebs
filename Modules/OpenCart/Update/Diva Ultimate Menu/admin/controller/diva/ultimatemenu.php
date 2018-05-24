@@ -1154,6 +1154,8 @@ class ControllerDivaUltimatemenu extends Controller
             }
         }
 
+        $data['links'] = $this->getLinks();
+
         if(isset($this->request->get['sub_item_id'])) {
             $menu_item_description = $this->model_diva_ultimatemenu->getSubItemDescriptionById($this->request->get['sub_item_id']);
         } else {
