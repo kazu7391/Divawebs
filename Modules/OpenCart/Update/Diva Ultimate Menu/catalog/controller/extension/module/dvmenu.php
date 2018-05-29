@@ -399,24 +399,8 @@ class ControllerExtensionModuleDvmenu extends Controller
             'item_font_weight'              => $setting['item_font_weight'],
             'item_font_color_hover'         => '#' . $setting['item_font_color_hover'],
             'item_font_weight_hover'        => $setting['item_font_weight_hover'],
-            'item_pd_top'                   => $setting['item_pd_top'],
-            'item_pd_right'                 => $setting['item_pd_right'],
-            'item_pd_bottom'                => $setting['item_pd_bottom'],
-            'item_pd_left'                  => $setting['item_pd_left'],
             'item_show'                     => (int) $setting['item_show'],
             'mega_menu_bg'                  => '#' . $setting['mega_menu_bg'],
-            'mega_sub_item_font_color'               => '#' . $setting['mega_sub_item_font_color'],
-            'mega_sub_item_font_size'               => $setting['mega_sub_item_font_size'],
-            'mega_sub_item_font_transform'               => $setting['mega_sub_item_font_transform'],
-            'mega_sub_item_font_weight'               => $setting['mega_sub_item_font_weight'],
-            'mega_sub_item_hover_font_color'               => '#' . $setting['mega_sub_item_hover_font_color'],
-            'mega_sub_item_hover_font_weight'               => $setting['mega_sub_item_hover_font_weight'],
-            'mega_sub_sub_item_font_color'               => '#' . $setting['mega_sub_sub_item_font_color'],
-            'mega_sub_sub_item_font_size'               => $setting['mega_sub_sub_item_font_size'],
-            'mega_sub_sub_item_font_transform'               => $setting['mega_sub_sub_item_font_transform'],
-            'mega_sub_sub_item_font_weight'               => $setting['mega_sub_sub_item_font_weight'],
-            'mega_sub_sub_item_hover_font_color'               => '#' . $setting['mega_sub_sub_item_hover_font_color'],
-            'mega_sub_sub_item_hover_font_weight'               => $setting['mega_sub_sub_item_hover_font_weight'],
             'mega_menu_width'               => $setting['mega_menu_width'],
             'mega_menu_pd_top'              => $setting['mega_menu_pd_top'],
             'mega_menu_pd_right'            => $setting['mega_menu_pd_right'],
@@ -458,7 +442,7 @@ class ControllerExtensionModuleDvmenu extends Controller
             $params_path = $parts[1];
 
             if($params_path) {
-                $params = explode('&', $params_path);
+                $params = explode('&amp;', $params_path);
 
                 $route_param = $params[0];
 
@@ -467,9 +451,8 @@ class ControllerExtensionModuleDvmenu extends Controller
                 $params_attr = '';
 
                 if(isset($params[1])) {
-                    for($i = 1; $i <= count($params); $i++) {
-
-                        if($i = 1) {
+                    for($i = 1; $i <= (count($params) - 1); $i++) {
+                        if($i == 1) {
                             $params_attr = $params[1];
                         } else {
                             $params_attr .= "&" . $params[$i];
@@ -483,7 +466,6 @@ class ControllerExtensionModuleDvmenu extends Controller
                     $link = $this->url->link($route, $params_attr);
                 }
             }
-
             return $link;
         } else {
             return $url;
