@@ -24,6 +24,8 @@ $_['text_right']           = 'Right';
 $_['text_lowercase']       = 'lowercase';
 $_['text_uppercase']       = 'UPPERCASE';
 $_['text_capitalize']      = 'Capitalize';
+$_['text_responsive_layout']    = 'Responsive Layout';
+$_['text_specified_layout']     = 'Device Specified Layout';
 
 // Tab
 $_['tab_general']          = 'General';
@@ -46,6 +48,7 @@ $_['tab_data']             = 'Data Storage';
 // Entry
 $_['entry_header']         = 'Header';
 $_['entry_footer']         = 'Footer';
+$_['entry_responsive']     = 'Responsive Type';
 $_['entry_lazy_load']      = 'Lazy Load';
 $_['entry_sticky_header']  = 'Sticky Header';
 $_['entry_scroll_top']     = 'Scroll Top Button';

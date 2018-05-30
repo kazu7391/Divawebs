@@ -156,6 +156,12 @@ class ControllerExtensionModuleDvcontrolpanel extends Controller
             $data['module_dvcontrolpanel_footer_layout'] = $this->config->get('module_dvcontrolpanel_footer_layout');
         }
 
+        if (isset($this->request->post['module_dvcontrolpanel_responsive_type'])) {
+            $data['module_dvcontrolpanel_responsive_type'] = $this->request->post['module_dvcontrolpanel_responsive_type'];
+        } else {
+            $data['module_dvcontrolpanel_responsive_type'] = $this->config->get('module_dvcontrolpanel_responsive_type');
+        }
+
         $this->load->model('tool/image');
 
         foreach ($data['stores'] as $store) {

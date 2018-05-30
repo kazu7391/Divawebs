@@ -113,6 +113,16 @@
                                                         </div>
 
                                                         <div class="form-group">
+                                                            <label class="col-sm-4 control-label">{{ entry_responsive }}</label>
+                                                            <div class="col-sm-6">
+                                                                <select name="module_dvcontrolpanel_responsive_type[{{ store.store_id }}]" class="form-control">
+                                                                    <option value="responsive" {% if module_dvcontrolpanel_responsive_type[store.store_id] == 'responsive' %} selected="selected" {% endif %}>{{ text_responsive_layout }}</option>
+                                                                    <option value="specified" {% if module_dvcontrolpanel_responsive_type[store.store_id] == 'specified' %} selected="selected" {% endif %}>{{ text_specified_layout }}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
                                                             <label class="col-sm-4 control-label">{{ entry_sticky_header }}</label>
                                                             <div class="col-sm-6">
                                                                 <input type="hidden" name="module_dvcontrolpanel_sticky_header[{{ store.store_id }}]" value="0" />

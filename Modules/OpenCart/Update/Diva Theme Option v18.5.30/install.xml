@@ -384,6 +384,37 @@
                     'product_image_option' => $this->model_tool_image->resize($result['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_thumb_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_thumb_height')),
             ]]></add>
         </operation>
+        <operation>
+            <search><![CDATA[if ((float)$product_info['special']) {]]></search>
+            <add position="after"><![CDATA[
+                $this->load->model('diva/product');
+
+				$product_diva_info = $this->model_diva_product->getProduct($data['product_id']);
+
+				if (isset($product_diva_info['date_start']) && $product_diva_info['date_start']) {
+					$data['date_start'] = $product_diva_info['date_start'];
+				} else {
+					$data['date_start'] = false;
+				}
+
+				if(isset($product_diva_info['date_end']) &&  $product_diva_info['date_end']) {
+					$data['date_end'] = $product_diva_info['date_end'];
+				} else {
+					$data['date_end'] = false;
+				}
+
+				if($data['date_start'] && $data['date_end']) {
+					$this->document->addScript('catalog/view/javascript/diva/countdown/countdown.js');
+				}
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[$data['special'] = false;]]></search>
+            <add position="after"><![CDATA[
+                $data['date_start'] = false;
+				$data['date_end'] = false;
+            ]]></add>
+        </operation>
     </file>
     
     <!-- CATEGORY CONFIGURATION -->
