@@ -9250,7 +9250,7 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
 jQuery(document).ready(function(){
 	jQuery('#documenter_nav li a').click(function(){
 		if(jQuery(this).next('ul') !== undefined){
-		jQuery(this).next('ul').slideToggle("fast");
+		jQuery(this).next('ul').slideToggle("slow");
         }
     });
 });

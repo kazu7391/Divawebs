@@ -26,25 +26,7 @@ $(document).ready(function() {
 		window.open($(this).attr('href'));
 		return false;
 	});
-	
-	//IE 8 and lower doesn't like the smooth pagescroll
-	if(!badIE){
-		window.scroll(0,0);
-		
-		$('a[href^=#]').bind('click touchstart',function(){
-			hash = $(this).attr('href');
-			$.scrollTo.window().queue([]).stop();
-			goTo(hash);
-			return false;
-		});
-		
-		//if a hash is set => go to it
-		if(hash){
-			setTimeout(function(){
-				goTo(hash);
-			},500);
-		}
-	}
+
 	
 	
 	//We need the position of each section until the full page with all images is loaded
@@ -67,38 +49,7 @@ $(document).ready(function() {
 		});
 		
 		
-		//iPhone, iPod and iPad don't trigger the scroll event
-		if(iDeviceNotOS4){
-			nav.find('a').bind('click',function(){
-				setTimeout(function(){
-					win.trigger('scroll');				
-				},duration);
-				
-			});
-			//scroll to top
-			window.scroll(0,0);
-		}
 
-		//how many sections
-		sectionscount = sections.length;
-		
-		//bind the handler to the scroll event
-		win.bind('scroll',function(event){
-			clearInterval(timeout);
-			//should occur with a delay
-			timeout = setTimeout(function(){
-				//get the position from the very top in all browsers
-				pos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-				
-				//iDeviceNotOS4s don't know the fixed property so we fake it
-				if(iDeviceNotOS4){
-					sidebar.css({height:document.height});
-					logo.css({'margin-top':pos});
-				}
-				//activate Nav element at the current position
-				activateNav(pos);
-			},timeoffset);
-		}).trigger('scroll');
 
 	});
 	
@@ -153,6 +104,26 @@ $(document).ready(function() {
 			};
 		}	
 	}
+	
+	/////////////scrolltop
+	$("#back-top").hide();
+	
+	$(function () {
+		$(window).scroll(function () {
+			if ($(this).scrollTop() > 100) {
+				$('#back-top').fadeIn();
+			} else {
+				$('#back-top').fadeOut();
+			}
+		});
+		$('#back-top').click(function () {
+			$('body,html').animate({
+				scrollTop: 0
+			}, 800);
+			return false;
+		});
+	});
+	////////////////////////////
 	
     // make code pretty
     window.prettyPrint && prettyPrint();
