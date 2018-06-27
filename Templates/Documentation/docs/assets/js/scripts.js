@@ -53,7 +53,7 @@
 	// Scroll
 	var currentP = 0;
 	jQuery(window).scroll(function(){
-		var headerH = jQuery('.header').height();
+		var headerH = jQuery('#intro').height();
 		
 		headerH+=44; //44 is padding top of content
 		

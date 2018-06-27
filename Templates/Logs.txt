@@ -1,7 +1,6 @@
 Documentation
 - Greating
-- Install 
-- Layout setting
+- Install
 - Module & Features
 - Customization
 - Translate
