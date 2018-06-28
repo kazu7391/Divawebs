@@ -248,7 +248,7 @@ p strong {
   position: fixed;
   top: -15px;
   z-index: 100;
-  width: 337px;
+  width: 25%;
 }
 #affect_all {
   background: #DCC5B0;
