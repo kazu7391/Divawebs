@@ -757,7 +757,6 @@ footer {
 }
 h5 {
   font-size: 15px;
-  padding: 30px 0 10px 0;
   font-weight:bold;
 }
 ol li {
@@ -770,9 +769,6 @@ ol li figure.img-paraloid {
   margin-bottom: 30px;
 }
 ul.square-list {
-  list-style-position: outside;
-  list-style-type: square;
-  margin: 0 0 1.5em 1.5em;
 }
 ul.square-list li {
   list-style: square;
