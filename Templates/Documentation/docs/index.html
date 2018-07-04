@@ -13,7 +13,6 @@
 	<script src="assets/js/scripts.js"></script>
 </head>
 <body>
-<div class="mobile-menu"></div>
 <div id="content">
 	<div class="container-fluid">
 		<div class="row">
@@ -263,8 +262,25 @@
 							<h4>Layout</h4>
 							<p>This is default feature of OpenCart. You can assign your modules to any position of specified layouts (page).</p>
 							<p>You can know more about Layout at link: <a href="http://docs.opencart.com/en-gb/system/design/layout/">http://docs.opencart.com/en-gb/system/design/layout/</a></p>
-							<p><strong>Kular</strong> theme has 2 layouts for Home page. You can change layout just one click by using <a href="#">Theme Control Panel</a></p>
-							<p>Also, this theme has some modules and features to edit layout easily: <a href="#"><b>DIVA Layout Composer</b></a> and <a href="#"><b>Theme Module Customization</b></a></p>
+							<p><strong>Kular</strong> theme has 2 layouts for Home page. There are 2 ways to setup layout for <b>Template</b> and <b>QuickStart</b>.</p>
+							<ul class="square-list">
+								<li>
+									<p><strong>Template Version</strong> (install Template on your site)</p>
+									<p>You can change layout just one click by using <a href="#control-panel-advance"><b>Theme Control Panel</b></a></p>
+								</li>
+								<li>
+									<p><strong>QuickStart Version</strong> (install QuickStart on your site)</p>
+									<p>You can change layout by configuring store.</p>
+									<p>Go to <b>System -> Settings</b></p>
+									<img src="img/layout-setting-1.png" />
+									<p>Choose store to edit. <i>(Example: Store 2)</i></p>
+									<img src="img/layout-setting-2.png" />
+									<p>Fill your site link to <b>Store URL</b> and Save your settings. <i>(Example: http://localhost/dv_kular/)</i></p>
+									<img src="img/layout-setting-3.png" />
+									<p>Now, your site layout switch to layout of store 2 already.</p>
+								</li>
+							</ul>
+							<p><b>Kular</b> theme has some modules and features to edit layout easily: <a href="#"><b>DIVA Layout Composer</b></a> and <a href="#"><b>Theme Module Customization</b></a></p>
 						</article>
 
 						<article id="dashboard">
@@ -363,9 +379,9 @@
 									<li>
 										<p><strong>Responsive Type</strong>: Choose type of mobile layout</p>
 										<ul class="square-list">
-											<li>Responsive Layout: The tablet, mobile layout following the layout of desktop already. You don't need configure Layout.</li>
+											<li><p><b>Responsive Layout:</b> The tablet, mobile layout following the layout of desktop already. You don't need configure Layout.</p></li>
 											<li>
-												Device Specified Layout: The tablet, mobile layout can be configured and customize.
+												<p><b>Device Specified Layout:</b> The tablet, mobile layout can be configured and customize.</p>
 												<p>You can use this option to design your mobile layout</p>
 												<p><strong>Admin -> Design -> Layouts</strong></p>
 												<img src="img/desgin-layout.png" />
@@ -455,10 +471,16 @@
 										<p><strong>Image Zoom Settings</strong></p>
 										<img src="img/product-zoom-setting.png" />
 										<ul class="square-list">
-											<li><b><i>Image Zoom:</i></b> Enable / Disable Image Zoom.</li>
-											<li><b><i>Type:</i></b> Set Zoom's type is <b>Inner</b> or <b>Outer</b></li>
-											<li><b><i>Space:</i></b> When zoom's type is "Outer", set space between Thumbnail Image and Zoom Image</li>
-											<li><b><i>Zoom Title:</i></b> Enable / Disable product name on zoom image.</li>
+											<li><p><b><i>Image Zoom:</i></b> Enable / Disable Image Zoom.</p></li>
+											<li>
+												<p><b><i>Type:</i></b> Set Zoom's type is <b>Inner</b> or <b>Outer</b></p>
+												<p><b>Inner Zoom</b></p>
+												<img src="img/product-innerzoom.gif" />
+												<p><b>Outer Zoom</b></p>
+												<img src="img/product-outerzoom.gif" />
+											</li>
+											<li><p><b><i>Space:</i></b> When zoom's type is "Outer", set space between Thumbnail Image and Zoom Image</p></li>
+											<li><p><b><i>Zoom Title:</i></b> Enable / Disable product name on zoom image.</p></li>
 										</ul>
 									</li>
 									<li>
@@ -509,6 +531,7 @@
 												<p><b><i>Swatches Option:</i></b> Choose option to use swatches</p>
 											</li>
 										</ul>
+										<img src="img/product-swatches.gif" />
 									</li>
 								</ol>
 							</div>
@@ -528,13 +551,56 @@
 										<p><strong>Children Categories:</strong> Show / Hide Children category and Refine Search.</p>
 									</li>
 									<li>
-										<p><strong>Filter:</strong></p>
+										<p><strong>Filter:</strong> Enable /Disable Filter on Category page.</p>
+										<p><strong>Position of Filter</strong></p>
+										<ul class="square-list">
+											<li>
+												<p><b>Left</b></p>
+												<img src="img/filter-left.png" />
+											</li>
+											<li>
+												<p><b>Right</b></p>
+												<img src="img/filter-right.png" />
+											</li>
+										</ul>
 									</li>
 									<li>
-										<p><strong></strong></p>
+										<p><strong>Quick View:</strong> Enable / Disable Product Quick view.</p>
 									</li>
 									<li>
-										<p><strong></strong></p>
+										<p><strong>Image Effect</strong></p>
+										<img src="img/category-image-settings.png" />
+										<ul class="square-list">
+											<li><p><strong>None:</strong> No Effect.</p></li>
+											<li>
+												<p><strong>Hover Image:</strong> Show other image when hover product.</p>
+												<img src="img/category-hover-image.gif" />
+											</li>
+											<li>
+												<p><strong>Swatches Image:</strong> Show color options to click to change product image.</p>
+												<p>You have to configure <strong>Swatches Icon</strong> to set width - height of option images.</p>
+												<img src="img/category-swatches-image.gif" />
+											</li>
+										</ul>
+									</li>
+									<li>
+										<p><strong>Advance View:</strong> Enable / Disable to show Advance View on Category page.</p>
+										<img src="img/category-view-settings.png" />
+										<p><strong>Default View:</strong> Choose View Type of the first load page - <b>Grid View</b> or <b>List View</b>.</p>
+										<p><strong>Product per Row:</strong> Choose products number of <b>Grid View</b> at the first load page.</p>
+										<img src="img/category-advance-view.gif" />
+									</li>
+								</ol>
+							</div>
+
+							<div id="control-panel-advance">
+								<h5>Advance</h5>
+								<p>Some Advance configuration may help you more to configure theme.</p>
+								<ol>
+									<li>
+										<p><strong>Home Database:</strong> This options just used for <a href="#installtemp"><b>Template Installation</b></a></p>
+										<p>Choose layout you want to use and click <b>Import</b></p>
+										<img src="img/install_temp_6.png" />
 									</li>
 								</ol>
 							</div>

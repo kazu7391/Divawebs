@@ -1,18 +1,4 @@
 @import url(//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,700,700italic);
-/*Core variables and mixins*/
-.mobile-menu {
-  background: #333 url("../img/bg-menu-mobile.png") no-repeat center center;
-  border-radius: 3px;
-  cursor: pointer;
-  display: block;
-  height: 50px;
-  position: fixed;
-  right: 10px;
-  top: 10px;
-  width: 50px;
-  z-index: 10000;
-  display: none;
-}
 .clearfix {
   *zoom: 1;
 }
