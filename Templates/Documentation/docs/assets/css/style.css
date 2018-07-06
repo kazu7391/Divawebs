@@ -365,8 +365,9 @@ p strong {
   box-sizing: border-box;
   margin: 0;
   position: relative;
-  font-size: 13px;
+  font-size: 14px;
   color: #000;
+  font-weight: bold;
   font-family: Tahoma, sans-serif;
 }
 .bs-docs-sidenav li dt a:before,
