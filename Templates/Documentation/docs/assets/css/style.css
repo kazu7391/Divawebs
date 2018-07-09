@@ -645,10 +645,12 @@ span.img-paraloid {
 }
 footer {
   text-align: center;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 20px;
-  background: #ffffff;
-  padding: 30px 0 40px;
+  background: #feeee6;
+  padding: 30px 0 30px;
+  font-weight: bold;
+  color: #aa1156;
 }
 .list-2 {
   margin-bottom: 15px;
