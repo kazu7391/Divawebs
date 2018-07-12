@@ -1,7 +1,1 @@
-Documentation
-- Greating
-- Install
-- Module & Features
-- Customization
-- Translate
-- Support
+* Kular: Almost done
