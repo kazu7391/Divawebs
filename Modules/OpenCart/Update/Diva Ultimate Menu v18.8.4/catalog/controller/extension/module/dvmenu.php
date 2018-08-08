@@ -21,6 +21,8 @@ class ControllerExtensionModuleDvmenu extends Controller
 
         $menu_id = $setting['menu'];
 
+        $data['menu_id'] = $menu_id;
+
         $menu = $this->model_diva_ultimatemenu->getMenuById($menu_id);
 
         $data['menu_type'] = $menu['menu_type'];
@@ -126,7 +128,7 @@ class ControllerExtensionModuleDvmenu extends Controller
                     }
 
                     if($top_item['icon']) {
-                        $icon = $this->model_tool_image->resize($top_item['icon'], 15, 15);
+                        $icon = $this->model_tool_image->resize($top_item['icon'], 16, 14);
                     } else {
                         $icon = false;
                     }
@@ -180,7 +182,7 @@ class ControllerExtensionModuleDvmenu extends Controller
 
                                                 if($widget['show_image']) {
                                                     if ($category_info['image']) {
-                                                        $image = $this->model_tool_image->resize($category_info['image'], 100, 100);
+                                                        $image = $this->model_tool_image->resize($category_info['image'], 110, 110);
                                                     } else {
                                                         $image = false;
                                                     }
@@ -232,7 +234,7 @@ class ControllerExtensionModuleDvmenu extends Controller
 
                                                     if($widget['show_image']) {
                                                         if ($category_info['image']) {
-                                                            $image = $this->model_tool_image->resize($category_info['image'], 100, 100);
+                                                            $image = $this->model_tool_image->resize($category_info['image'], 110, 110);
                                                         } else {
                                                             $image = false;
                                                         }
@@ -301,7 +303,7 @@ class ControllerExtensionModuleDvmenu extends Controller
 
                                                     if($widget['show_image']) {
                                                         if ($product_info['image']) {
-                                                            $image = $this->model_tool_image->resize($product_info['image'], 100, 100);
+                                                            $image = $this->model_tool_image->resize($product_info['image'], 110, 110);
                                                         } else {
                                                             $image = false;
                                                         }
@@ -353,6 +355,13 @@ class ControllerExtensionModuleDvmenu extends Controller
                         $top_link = $this->getLink($top_item['link']);
                     }
 
+                    $is_home = false;
+
+                    if($top_item['link'] == "index.php?route=common/home") {
+                        $top_link = $this->config->get('config_url');
+                        $is_home = true;
+                    }
+
                     $data['items'][] = array(
                         'id'    => $top_item['menu_item_id'],
                         'sub_items' => $sub_items_lv2,
@@ -361,12 +370,13 @@ class ControllerExtensionModuleDvmenu extends Controller
                         'has_link' => $top_item_has_link,
                         'has_child' => $top_item_has_child,
                         'category_id' => $top_item['category_id'],
+                        'is_home' => $is_home,
                         'link' => $top_link,
                         'icon' => $icon,
                         'item_align' => $top_item['item_align'],
                         'sub_menu_type' => $top_item['sub_menu_type'],
                         'sub_menu_content_type' => $top_item['sub_menu_content_type'],
-                        'sub_menu_content_width' => $top_item['sub_menu_content_width'],
+						'sub_menu_content_width' => $top_item['sub_menu_content_width'],
                         'sub_menu_content_columns' => $cols,
                         'sub_menu_content' => $sub_menu_content,
                         'title' => $top_level_title
@@ -418,6 +428,7 @@ class ControllerExtensionModuleDvmenu extends Controller
             'mega_sub_sub_item_font_weight'               => $setting['mega_sub_sub_item_font_weight'],
             'mega_sub_sub_item_hover_font_color'               => '#' . $setting['mega_sub_sub_item_hover_font_color'],
             'mega_sub_sub_item_hover_font_weight'               => $setting['mega_sub_sub_item_hover_font_weight'],
+            
             'mega_menu_pd_top'              => $setting['mega_menu_pd_top'],
             'mega_menu_pd_right'            => $setting['mega_menu_pd_right'],
             'mega_menu_pd_bottom'           => $setting['mega_menu_pd_bottom'],
@@ -445,6 +456,22 @@ class ControllerExtensionModuleDvmenu extends Controller
 //        } else {
 //            $this->document->addStyle('catalog/view/theme/default/stylesheet/diva/ultimatemenu/menu.css');
 //        }
+
+        $data['menu_module_id'] = $setting['module_id'];
+
+        $store_id = $this->config->get('config_store_id');
+
+        if(isset($this->config->get('module_dvcontrolpanel_extension_custom')[$store_id])) {
+            $module_custom = (int) $this->config->get('module_dvcontrolpanel_extension_custom')[$store_id];
+        } else {
+            $module_custom = 0;
+        }
+
+        if(isset($this->session->data['user_token']) && $module_custom) {
+            $data['user_token'] = $this->session->data['user_token'];
+        } else {
+            $data['user_token'] = false;
+        }
 
         $this->document->addScript('catalog/view/javascript/diva/ultimatemenu/menu.js');
 

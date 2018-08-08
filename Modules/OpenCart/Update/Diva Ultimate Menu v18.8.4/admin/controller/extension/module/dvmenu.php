@@ -305,7 +305,7 @@ class ControllerExtensionModuleDvmenu extends Controller
         } elseif (!empty($module_info)) {
             $data['mega_sub_item_font_size'] = $module_info['mega_sub_item_font_size'];
         } else {
-            $data['mega_sub_item_font_size'] = '';
+            $data['mega_sub_item_font_size'] = '14px';
         }
 		
 		if (isset($this->request->post['mega_sub_item_font_transform'])) {
@@ -353,7 +353,7 @@ class ControllerExtensionModuleDvmenu extends Controller
         } elseif (!empty($module_info)) {
             $data['mega_sub_sub_item_font_size'] = $module_info['mega_sub_sub_item_font_size'];
         } else {
-            $data['mega_sub_sub_item_font_size'] = '';
+            $data['mega_sub_sub_item_font_size'] = '14px';
         }
 		
 		if (isset($this->request->post['mega_sub_sub_item_font_transform'])) {
@@ -387,7 +387,7 @@ class ControllerExtensionModuleDvmenu extends Controller
         } else {
             $data['mega_sub_sub_item_hover_font_weight'] = '';
         }
-
+		
         if (isset($this->request->post['mega_menu_pd_top'])) {
             $data['mega_menu_pd_top'] = $this->request->post['mega_menu_pd_top'];
         } elseif (!empty($module_info)) {

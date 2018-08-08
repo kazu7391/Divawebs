@@ -1,6 +1,10 @@
 $(document).ready(function () {
     var current_url = window.location.href;
     
+    if(current_url.indexOf('common/home') >= 0) {
+        $('.home-link').addClass('active');
+    }
+    
     $('.dv-menu .li-top-item .a-top-link').each(function () {
         var link = $(this).attr('href');
         if(current_url == link) {
@@ -15,12 +19,12 @@ $(document).ready(function () {
             } else {
                 $(this).closest('li').removeClass().addClass('li-top-item right');
 
-                var menu = $('.dv-menu-bar').offset();
+                var menu = $('.horizontal-menu.dv-menu-bar').offset();
                 var dropdown = $(this).parent().offset();
 
-                var dropdownRight = $('.dv-menu-bar').outerWidth() - dropdown.left;
+                var dropdownRight = $('.horizontal-menu.dv-menu-bar').outerWidth() - dropdown.left;
 
-                var i = (dropdownRight + $(this).outerWidth()) - ($('.dv-menu-bar').outerWidth());
+                var i = (dropdownRight + $(this).outerWidth()) - ($('.horizontal-menu.dv-menu-bar').outerWidth());
 
                 if (i > 0) {
                     $(this).css('margin-right', '-' + (i) + 'px');
@@ -30,10 +34,10 @@ $(document).ready(function () {
 
         if($(this).hasClass('left')) {
             if($(this).hasClass('full-width') == false) {
-                var menu = $('.dv-menu-bar').offset();
+                var menu = $('.horizontal-menu.dv-menu-bar').offset();
                 var dropdown = $(this).parent().offset();
 
-                var i = (dropdown.left + $(this).outerWidth()) - (menu.left + $('.dv-menu-bar').outerWidth());
+                var i = (dropdown.left + $(this).outerWidth()) - (menu.left + $('.horizontal-menu.dv-menu-bar').outerWidth());
 
                 if (i > 0) {
                     $(this).css('margin-left', '-' + (i + 10) + 'px');
@@ -111,9 +115,14 @@ $(document).ready(function () {
         }
     });
 
-    $('.mobile-menu .dv-menu-bar .right').click(function () {
+    $('.mobile-menu .dv-menu-bar').click(function () {
         var effect = $(this).closest('.dv-menu').find('.menu-effect').val();
-        if(effect == "none") {
+        if($(this).hasClass('opened')) {
+			$(this).removeClass('opened');
+		} else {
+			$(this).addClass('opened');
+		}
+		if(effect == "none") {
             $('.mobile-menu .ul-top-items').toggle();
         }
 

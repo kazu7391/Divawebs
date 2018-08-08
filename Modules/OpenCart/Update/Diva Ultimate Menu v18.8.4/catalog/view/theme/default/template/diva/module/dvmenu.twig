@@ -8,26 +8,21 @@
         background: {{ menu_setting.menu_bg }};
         color: {{ menu_setting.menu_text_color }};
     }
-    #dv-menu-{{ module_id }} .ul-top-items .li-top-item {
-        background: {{ menu_setting.item_bg }};
-        color: {{ menu_setting.item_font_color }};
-    }
     #dv-menu-{{ module_id }} .ul-top-items .li-top-item .a-top-link {
-        padding: {{ menu_setting.item_pd_top }} {{ menu_setting.item_pd_right }} {{ menu_setting.item_pd_bottom }} {{ menu_setting.item_pd_left }};
-        color: {{ menu_setting.item_font_color }};
+		background: {{ menu_setting.item_bg }};
+		padding: {{ menu_setting.item_pd_top }} {{ menu_setting.item_pd_right }} {{ menu_setting.item_pd_bottom }} {{ menu_setting.item_pd_left }};
+		color: {{ menu_setting.item_font_color }};
         font-size: {{ menu_setting.item_font_size }};
         text-transform: {{ menu_setting.item_font_transform }};
         font-weight: {{ menu_setting.item_font_weight }};
     }
-    #dv-menu-{{ module_id }} .ul-top-items .li-top-item:hover, #dv-menu-{{ module_id }} .ul-top-items .li-top-item.active {
-        background: {{ menu_setting.item_bg_hover }};
-        color: {{ menu_setting.item_font_color_hover }};
-    }
-    #dv-menu-{{ module_id }} .ul-top-items .li-top-item:hover .a-top-link, #dv-menu-{{ module_id }} .ul-top-items .li-top-item.active .a-top-link{
+    #dv-menu-{{ module_id }} .ul-top-items .li-top-item .a-top-link:hover, #dv-menu-{{ module_id }} .ul-top-items .li-top-item.active .a-top-link{
         color: {{ menu_setting.item_font_color_hover }};
         font-weight: {{ menu_setting.item_font_weight_hover }};
+		background: {{ menu_setting.item_bg_hover }};
     }
     #dv-menu-{{ module_id }} .mega-menu-container {
+        
         background: {{ menu_setting.mega_menu_bg }};
         padding: {{ menu_setting.mega_menu_pd_top }} {{ menu_setting.mega_menu_pd_right }} {{ menu_setting.mega_menu_pd_bottom }} {{ menu_setting.mega_menu_pd_left }};
     }
@@ -65,7 +60,7 @@
         text-transform: {{ menu_setting.second_item_font_transform }};
         font-weight: {{ menu_setting.second_item_font_weight }};
     }
-    #dv-menu-{{ module_id }} .ul-second-items .li-second-items:hover .a-second-link, #dv-menu-{{ module_id }} .ul-second-items .li-second-items.active .a-second-link {
+    #dv-menu-{{ module_id }} .ul-second-items .li-second-items .a-second-link:hover, #dv-menu-{{ module_id }} .ul-second-items .li-second-items.active .a-second-link {
         color: {{ menu_setting.second_item_font_color_hover }};
         font-weight: {{ menu_setting.second_item_font_weight_hover }};
     }
@@ -81,7 +76,7 @@
         text-transform: {{ menu_setting.third_item_font_transform }};
         font-weight: {{ menu_setting.third_item_font_weight }};
     }
-    #dv-menu-{{ module_id }} .ul-third-items .li-third-items:hover .a-third-link, #dv-menu-{{ module_id }} .ul-third-items .li-third-items.active .a-third-link {
+    #dv-menu-{{ module_id }} .ul-third-items .li-third-items .a-third-link:hover, #dv-menu-{{ module_id }} .ul-third-items .li-third-items.active .a-third-link {
         color: {{ menu_setting.third_item_font_color_hover }};
         font-weight: {{ menu_setting.third_item_font_weight_hover }};
     }
@@ -89,35 +84,41 @@
 {% if warning %}
 {% else %}
     {% if menu_type == "horizontal" %}
-        <div class="dv-menu horizontal-menu dv-menu-bar visible-lg visible-md" id="dv-menu-{{ module_id }}">
+        <div class="dv-menu horizontal-menu dv-menu-bar visible-lg visible-md {% if user_token %} {{ 'show-edit-button' }} {% endif %}" id="dv-menu-{{ module_id }}">
+            {% if user_token %}
+                <div class="btn-logged">
+                    <a href="admin/index.php?route=diva/ultimatemenu/edit&user_token={{ user_token }}&menu_id={{ menu_id }}" title="edit" target="_blank" class="btn btn-edit-logged"><i class="fa fa-edit"></i></a>
+                    <a href="admin/index.php?route=extension/module/dvmenu&user_token={{ user_token }}&module_id={{ menu_module_id }}" title="setting" target="_blank" class="btn btn-setting-logged"><i class="fa fa-wrench"></i></a>
+                </div>
+            {% endif %}
             {% if items %}
                 <input type="hidden" id="menu-effect-{{ module_id }}" class="menu-effect" value="{{ menu_setting.effect }}" />
                 <ul class="ul-top-items">
                     {% for top_item in items %}
                         {% if top_item.status %}
-                            <li class="li-top-item {{ top_item.item_align }}" style="float: {{ top_item.item_align }}">
+                            <li class="li-top-item {{ top_item.item_align }} {% if top_item.is_home %} home-link {% endif %}" style="float: {{ top_item.item_align }}">
                                 {% if top_item.has_link %}
                                     <a class="a-top-link" href="{{ top_item.link }}">
                                         {% if top_item.icon %}
-                                            <img src="{{ top_item.icon }}" class="top-icon"/>
+                                            <img src="{{ top_item.icon }}" class="top-icon" alt="{{ top_item.title }}"/>
                                         {% endif %}
                                         {% if top_item.has_title %}
                                             <span>{{ top_item.title }}</span>
                                         {% endif %}
                                         {% if top_item.has_child %}
-                                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                            <i class="pe-7s-angle-down" aria-hidden="true"></i>
                                         {% endif %}
                                     </a>
                                 {% else %}
                                     <a class="a-top-link a-item" href="javascript:void(0)">
                                         {% if top_item.icon %}
-                                            <img src="{{ top_item.icon }}" class="top-icon"/>
+                                            <img src="{{ top_item.icon }}" class="top-icon" alt="{{ top_item.title }}" />
                                         {% endif %}
                                         {% if top_item.has_title %}
                                             <span>{{ top_item.title }}</span>
                                         {% endif %}
                                         {% if top_item.has_child %}
-                                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                            <i class="pe-7s-angle-down" aria-hidden="true"></i>
                                         {% endif %}
                                     </a>
                                 {% endif %}
@@ -157,7 +158,7 @@
                                                                 {% for widget in widgets %}
                                                                     <div class="col-md-{{ widget.cols }} sub-item2-content" data-cols="{{ widget.cols }}">
                                                                         {% if widget.image %}
-                                                                            <img src="{{ widget.image }}" alt="{{ widget.title }}" class="mega-second-image" />
+                                                                            <a href="{{ widget.link }}"><img src="{{ widget.image }}" title="{{ widget.title }}" alt="{{ widget.title }}" class="mega-second-image" /></a>
                                                                         {% endif %}
                                                                         <h4><a class="a-mega-second-link" href="{{ widget.link }}">{{ widget.title }}</a></h4>
                                                                         {% if widget.children|length > 0 %}
@@ -186,7 +187,7 @@
                                                                     {% if widget.type == "category" %}
                                                                         <div class="col-md-{{ widget.cols }} sub-item2-content" data-cols="{{ widget.cols }}">
                                                                             {% if widget.image %}
-                                                                                <img src="{{ widget.image }}" alt="{{ widget.title }}" class="mega-second-image" />
+                                                                                <a  href="{{ widget.link }}"><img src="{{ widget.image }}" title="{{ widget.title }}" alt="{{ widget.title }}" class="mega-second-image" /></a>
                                                                             {% endif %}
                                                                             <h4><a class="a-mega-second-link" href="{{ widget.link }}">{{ widget.title }}</a></h4>
                                                                             {% if widget.children|length > 0 %}
@@ -202,7 +203,7 @@
                                                                     {% if widget.type == "product" %}
                                                                         <div class="col-md-{{ widget.cols }} sub-item2-content" data-cols="{{ widget.cols }}">
                                                                             {% if widget.image %}
-                                                                                <img src="{{ widget.image }}" alt="{{ widget.title }}" class="mega-second-image" />
+                                                                                <a  href="{{ widget.link }}"><img src="{{ widget.image }}" alt="{{ widget.title }}" class="mega-second-image" /></a>
                                                                             {% endif %}
                                                                            <h4><a class="a-mega-second-link" href="{{ widget.link }}">{{ widget.title }}</a></h4>
                                                                         </div>
@@ -210,8 +211,8 @@
 
                                                                     {% if widget.type == "html" %}
                                                                         <div class="col-md-{{ widget.cols }} sub-item2-content" data-cols="{{ widget.cols }}">
-                                                                            <h4><strong>{{ widget.title }}</strong></h4>
-                                                                            <p>{{ widget.content }}</p>
+                                                                            {% if widget.title %}<h4><strong>{{ widget.title }}</strong></h4>{% endif %}
+                                                                            {{ widget.content }}
                                                                         </div>
                                                                     {% endif %}
 
@@ -242,7 +243,7 @@
                                                                         <span class="a-second-title">{{ sub_item2.title }}</span>
                                                                         {% if sub_item2.sub_items|length > 0 %}
                                                                             {% if top_item.item_align == 'left' %}
-                                                                                <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                                                                <i class="icon-more-right pe-7s-angle-right" aria-hidden="true"></i>
                                                                             {% endif %}
                                                                             {% if top_item.item_align == 'right' %}
                                                                                 <i class="fa fa-caret-left" aria-hidden="true"></i>
@@ -283,7 +284,7 @@
                                                                                 <span class="a-second-title">{{ widget.title }}</span>
                                                                                 {% if widget.children|length > 0 %}
                                                                                     {% if top_item.item_align == 'left' %}
-                                                                                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                                                                        <i class="icon-more-right pe-7s-angle-right" aria-hidden="true"></i>
                                                                                     {% endif %}
                                                                                     {% if top_item.item_align == 'right' %}
                                                                                         <i class="fa fa-caret-left" aria-hidden="true"></i>
@@ -323,40 +324,46 @@
     {% set item_show = menu_setting.item_show %}
     {% if menu_type == "vertical" %}
         {% set count = 0 %}
-        <div class="dv-menu vertical-menu visible-lg visible-md" id="dv-menu-{{ module_id }}">
+        <div class="dv-menu vertical-menu visible-lg visible-md {% if user_token %} {{ 'show-edit-button' }} {% endif %}" id="dv-menu-{{ module_id }}">
+            {% if user_token %}
+                <div class="btn-logged">
+                    <a href="admin/index.php?route=diva/ultimatemenu/edit&user_token={{ user_token }}&menu_id={{ menu_id }}" title="edit" target="_blank" class="btn btn-edit-logged"><i class="fa fa-edit"></i></a>
+                    <a href="admin/index.php?route=extension/module/dvmenu&user_token={{ user_token }}&module_id={{ menu_module_id }}" title="setting" target="_blank" class="btn btn-setting-logged"><i class="fa fa-wrench"></i></a>
+                </div>
+            {% endif %}
             {% if items %}
                 <input type="hidden" id="menu-effect-{{ module_id }}" class="menu-effect" value="{{ menu_setting.effect }}" />
                 <div class="dv-menu-bar">
-                    <div class="left"><i class="fa fa-bars"></i> <span>{{ text_vertical_bar }}</span></div>
-                    <div class="right"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+                    <div class="left"><i class="icon-left"></i> <span>{{ text_vertical_bar }}</span></div>
+                    <div class="right"><i class="icon-right" aria-hidden="true"></i></div>
                 </div>
                 <ul class="ul-top-items">
                     {% for top_item in items %}
                         {% if top_item.status %}
                             {% set count = count + 1 %}
-                            <li class="li-top-item {{ top_item.item_align }} {{ (count > item_show) ? 'over' : '' }}">
+                            <li class="li-top-item {{ top_item.item_align }} {{ (count > item_show) ? 'over' : '' }} {% if top_item.is_home %} home-link {% endif %}">
                                 {% if top_item.has_link %}
                                     <a class="a-top-link a-item" href="{{ top_item.link }}">
                                         {% if top_item.icon %}
-                                            <img src="{{ top_item.icon }}" class="top-icon"/>
+                                            <img src="{{ top_item.icon }}" class="top-icon" alt="{{ top_item.title }}" />
                                         {% endif %}
                                         {% if top_item.has_title %}
                                             <span>{{ top_item.title }}</span>
                                         {% endif %}
                                         {% if top_item.has_child %}
-                                            <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                            <i class="icon-more-right pe-7s-angle-right" aria-hidden="true"></i>
                                         {% endif %}
                                     </a>
                                 {% else %}
                                     <a class="a-top-link a-item" href="javascript:void(0)">
                                         {% if top_item.icon %}
-                                            <img src="{{ top_item.icon }}" class="top-icon"/>
+                                            <img src="{{ top_item.icon }}" class="top-icon" alt="{{ top_item.title }}" />
                                         {% endif %}
                                         {% if top_item.has_title %}
                                             <span>{{ top_item.title }}</span>
                                         {% endif %}
                                         {% if top_item.has_child %}
-                                            <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                            <i class="icon-more-right pe-7s-angle-right" aria-hidden="true"></i>
                                         {% endif %}
                                     </a>
                                 {% endif %}
@@ -439,8 +446,8 @@
 
                                                                     {% if widget.type == "html" %}
                                                                         <div class="col-md-{{ widget.cols }} sub-item2-content" data-cols="{{ widget.cols }}">
-                                                                            <h4><strong>{{ widget.title }}</strong></h4>
-                                                                            <p>{{ widget.content }}</p>
+                                                                            {% if widget.title %}<h4><strong>{{ widget.title }}</strong></h4>{% endif %}
+                                                                            {{ widget.content }}
                                                                         </div>
                                                                     {% endif %}
 
@@ -470,7 +477,7 @@
                                                                     <a href="{{ sub_item2.link }}" class="a-second-link a-item">
                                                                         <span class="a-second-title">{{ sub_item2.title }}</span>
                                                                         {% if sub_item2.sub_items|length > 0 %}
-                                                                            <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                                                            <i class="icon-more-right pe-7s-angle-right" aria-hidden="true"></i>
                                                                         {% endif %}
                                                                     </a>
                                                                     {% if sub_item2.sub_items|length > 0 %}
@@ -506,7 +513,7 @@
                                                                             <a href="{{ widget.link }}" class="a-second-link a-item">
                                                                                 <span class="a-second-title">{{ widget.title }}</span>
                                                                                 {% if widget.children|length > 0 %}
-                                                                                    <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                                                                    <i class="icon-more-right pe-7s-angle-right" aria-hidden="true"></i>
                                                                                 {% endif %}
                                                                             </a>
                                                                             {% if widget.children|length > 0 %}
@@ -536,10 +543,10 @@
                     {% endfor %}
                     {% if count > item_show %}
                         <li class="li-top-item li-over li-plus">
-                            <a href="javascript:void(0);" class="a-top-link a-plus a-over"><i class="fa fa-plus-square" aria-hidden="true"></i> <span>{{ text_more_item }}</span></a>
+                            <a href="javascript:void(0);" class="a-top-link a-plus a-over"><span>{{ text_more_item }}</span></a>
                         </li>
                         <li class="li-top-item li-over li-minus over">
-                            <a href="javascript:void(0);" class="a-top-link a-minus a-over"><i class="fa fa-minus-square" aria-hidden="true"></i> <span>{{ text_close_item }}</span></a>
+                            <a href="javascript:void(0);" class="a-top-link a-minus a-over"><span>{{ text_close_item }}</span></a>
                         </li>
                     {% endif %}
                 </ul>
@@ -548,21 +555,28 @@
     {% endif %}
 
     {% if menu_type == "mobile" %}
-        <div class="dv-menu mobile-menu hidden-lg hidden-md" id="dv-menu-{{ module_id }}">
+        <div class="dv-menu mobile-menu hidden-lg hidden-md {% if user_token %} {{ 'show-edit-button' }} {% endif %}" id="dv-menu-{{ module_id }}">
+            {% if user_token %}
+                <div class="btn-logged">
+                    <a href="admin/index.php?route=diva/ultimatemenu/edit&user_token={{ user_token }}&menu_id={{ menu_id }}" title="edit" target="_blank" class="btn btn-edit-logged"><i class="fa fa-edit"></i></a>
+                    <a href="admin/index.php?route=extension/module/dvmenu&user_token={{ user_token }}&module_id={{ menu_module_id }}" title="setting" target="_blank" class="btn btn-setting-logged"><i class="fa fa-wrench"></i></a>
+                </div>
+            {% endif %}
             {% if items %}
                 <input type="hidden" id="menu-effect-{{ module_id }}" class="menu-effect" value="{{ menu_setting.effect }}" />
                 <div class="dv-menu-bar">
-                    <div class="left"><i class="fa fa-bars"></i> <span>{{ text_mobile_bar }}</span></div>
-                    <div class="right"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+                    <i class="ion-android-menu" aria-hidden="true"></i>
+                    <i class="pe-7s-close" aria-hidden="true"></i>
                 </div>
                 <ul class="ul-top-items">
-                    {% for top_item in items %}
+                    <li class="block-title"><h3>{{ text_mobile_bar }}</h3></li>
+					{% for top_item in items %}
                         {% if top_item.status %}
-                            <li class="li-top-item">
+                            <li class="li-top-item {% if top_item.is_home %} home-link {% endif %}">
                                 {% if top_item.has_link %}
                                     <a class="a-top-link a-item" href="{{ top_item.link }}">
                                         {% if top_item.icon %}
-                                            <img src="{{ top_item.icon }}" class="top-icon"/>
+                                            <img src="{{ top_item.icon }}" class="top-icon" alt="{{ top_item.title }}" />
                                         {% endif %}
                                         {% if top_item.has_title %}
                                             <span>{{ top_item.title }}</span>
@@ -570,14 +584,14 @@
                                     </a>
                                     {% if top_item.has_child and top_item.sub_menu_content_type != 'widget' %}
                                         <span class="top-click-show a-click-show">
-                                            <i class="fa fa-plus" aria-hidden="true"></i>
-                                            <i class="fa fa-minus" aria-hidden="true"></i>
+                                            <i class="pe-7s-angle-down" aria-hidden="true"></i>
+                                            <i class="pe-7s-angle-up" aria-hidden="true"></i>
                                         </span>
                                     {% endif %}
                                 {% else %}
                                     <a class="a-top-link a-item" href="javascript:void(0)">
                                         {% if top_item.icon %}
-                                            <img src="{{ top_item.icon }}" class="top-icon"/>
+                                            <img src="{{ top_item.icon }}" class="top-icon" alt="{{ top_item.title }}" />
                                         {% endif %}
                                         {% if top_item.has_title %}
                                             <span>{{ top_item.title }}</span>
@@ -585,8 +599,8 @@
                                     </a>
                                     {% if top_item.has_child and top_item.sub_menu_content_type != 'widget' %}
                                         <span class="top-click-show a-click-show">
-                                            <i class="fa fa-plus" aria-hidden="true"></i>
-                                            <i class="fa fa-minus" aria-hidden="true"></i>
+                                            <i class="pe-7s-angle-down" aria-hidden="true"></i>
+                                            <i class="pe-7s-angle-up" aria-hidden="true"></i>
                                         </span>
                                     {% endif %}
                                 {% endif %}
@@ -603,8 +617,8 @@
                                                                 </a>
                                                                 {% if sub_item2.sub_items|length > 0 %}
                                                                     <span class="second-click-show a-click-show">
-                                                                        <i class="fa fa-plus" aria-hidden="true"></i>
-                                                                        <i class="fa fa-minus" aria-hidden="true"></i>
+                                                                        <i class="pe-7s-angle-down" aria-hidden="true"></i>
+                                                                        <i class="pe-7s-angle-up" aria-hidden="true"></i>
                                                                     </span>
                                                                 {% endif %}
                                                                 {% if sub_item2.sub_items|length > 0 %}
@@ -642,8 +656,8 @@
                                                                         </a>
                                                                         {% if widget.children|length > 0 %}
                                                                             <span class="second-click-show a-click-show">
-                                                                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                                                                <i class="fa fa-minus" aria-hidden="true"></i>
+                                                                                <i class="pe-7s-angle-down" aria-hidden="true"></i>
+                                                                                <i class="pe-7s-angle-up" aria-hidden="true"></i>
                                                                             </span>
                                                                         {% endif %}
                                                                         {% if widget.children|length > 0 %}

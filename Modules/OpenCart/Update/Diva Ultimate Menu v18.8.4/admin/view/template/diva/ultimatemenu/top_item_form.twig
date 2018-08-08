@@ -85,20 +85,20 @@
                         </div>
                         <div class="frm-group">
                             <label class="frm-label col-sm-2" for="input-sub-menu-type">{{ entry_menu_content_type }}</label>
-                            <div class="col-sm-2">
+                            <div class="col-sm-4">
                                 <select name="sub_menu_type" id="input-sub-menu-type" class="form-control sub-type-selection">
                                     <option value="mega"    {% if sub_menu_type == 'mega' %}    selected="selected" {% endif %}>{{ text_megamenu }}</option>
                                     <option value="flyout"  {% if sub_menu_type == 'flyout' %}  selected="selected" {% endif %}>{{ text_flyoutmenu }}</option>
                                 </select>
                             </div>
-                            <label class="frm-label col-sm-2 sub-width-container" for="input-sub-menu-width">{{ entry_menu_width }}</label>
+							<label class="frm-label col-sm-2 sub-width-container" for="input-sub-menu-width">{{ entry_menu_width }}</label>
                             <div class="col-sm-2">
                                 <input type="text" name="sub_menu_content_width" id="input-sub-menu-width" class="form-control sub-width-container" value="{{ sub_menu_content_width }}" />
                             </div>
                         </div>
                         <div class="frm-group">
                             <label class="frm-label col-sm-2" for="input-item-align">{{ entry_item_align }}</label>
-                            <div class="col-sm-2">
+                            <div class="col-sm-4">
                                 <select name="item_align" id="input-item-align" class="form-control">
                                     <option value="left"    {% if item_align == 'left' %}    selected="selected" {% endif %}>{{ text_left }}</option>
                                     <option value="right"   {% if item_align == 'right' %}   selected="selected" {% endif %}>{{ text_right }}</option>
@@ -114,7 +114,7 @@
                         </div>
                         <div class="frm-group">
                             <label class="frm-label col-sm-2" for="input-position">{{ entry_order }}</label>
-                            <div class="col-sm-2">
+                            <div class="col-sm-4">
                                 <input type="text" id="input-position" name="position" value="{{ position }}" class="form-control" />
                             </div>
                         </div>
@@ -391,8 +391,8 @@
             $('#input-link').val(link);
         }
     });
-
-    $('.sub-width-container').hide();
+	
+	$('.sub-width-container').hide();
     var sub_menu_type = $('.sub-type-selection').val();
     if (sub_menu_type == 'mega') {
         $('.sub-width-container').show();

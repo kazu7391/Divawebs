@@ -903,14 +903,14 @@ class ControllerDivaUltimatemenu extends Controller
             $data['sub_menu_content_columns'] = 0;
         }
 
-        if (isset($this->request->post['sub_menu_content_width'])) {
+		if (isset($this->request->post['sub_menu_content_width'])) {
             $data['sub_menu_content_width'] = $this->request->post['sub_menu_content_width'];
         } elseif (!empty($menu_item_info)) {
             $data['sub_menu_content_width'] = $menu_item_info['sub_menu_content_width'];
         } else {
             $data['sub_menu_content_width'] = '';
         }
-
+		
         if (isset($this->request->post['category_id'])) {
             $data['category_id'] = $this->request->post['category_id'];
         } elseif (!empty($menu_item_info)) {
@@ -1358,7 +1358,7 @@ class ControllerDivaUltimatemenu extends Controller
 
         $links[] = array(
             'label' => 'Home Page',
-            'url'   => $common_url
+            'url'   => 'index.php?route=common/home'
         );
 
         $links[] = array(
