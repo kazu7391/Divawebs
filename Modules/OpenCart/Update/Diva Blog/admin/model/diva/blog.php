@@ -217,9 +217,34 @@ class ModelDivaBlog extends Model
     }
 
     public function addPostList($data) {
-        $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_list SET name = '" . $this->db->escape($data['name']) . "', status = '" . (int) $data['status'] . "'");
+        $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_list SET sort_order = '" . (int) $data['sort_order'] . "', status = '" . (int) $data['status'] . "'");
 
         $post_list_id = $this->db->getLastId();
+
+        foreach ($data['post_list_description'] as $language_id => $value) {
+            $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_description SET post_id = '" . (int) $post_id . "', language_id = '" . (int) $language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', intro_text = '" . $this->db->escape($value['intro_text']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");
+
+            foreach ($data['post_list_store'] as $store_id) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET store_id = '" . (int) $store_id . "', language_id = '" . (int) $language_id . "', query = 'post_id=" . (int) $post_id . "', keyword = '" . $this->db->escape($value['seo_url']) . "'");
+            }
+        }
+
+        if (isset($data['post_store'])) {
+            foreach ($data['post_store'] as $store_id) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_to_store SET post_id = '" . (int) $post_id . "', store_id = '" . (int) $store_id . "'");
+            }
+        }
+
+        if (isset($data['related'])) {
+            foreach ($data['related'] as $related_id) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_related_post SET post_id = '" . (int) $post_id . "', related_post_id = '" . (int) $related_id . "'");
+                $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_related_post SET related_post_id = '" . (int) $post_id . "', post_id = '" . (int) $related_id . "'");
+            }
+        }
+
+        $this->cache->delete('post');
+
+        return $post_id;
 
         $this->cache->delete('post_list');
 
@@ -239,7 +264,7 @@ class ModelDivaBlog extends Model
     }
 
     public function editPostList($post_list_id, $data = array()) {
-        $sql = "UPDATE " . DB_PREFIX . "dvpost_list SET name = '" . $this->db->escape($data['name']) . "', status = '" . (int) $data['status'] . "' WHERE post_list_id = '" . (int) $post_list_id . "'";
+        $sql = "UPDATE " . DB_PREFIX . "dvpost_list SET sort_order = '" . (int) $data['sort_order'] . "', status = '" . (int) $data['status'] . "' WHERE post_list_id = '" . (int) $post_list_id . "'";
 
         $this->db->query($sql);
 
@@ -278,6 +303,22 @@ class ModelDivaBlog extends Model
         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "dvpost_list WHERE post_list_id = '" . (int) $post_list_id . "'");
 
         return $query->row;
+    }
+
+    public function getPostListDescriptions($post_list_id) {
+        
+    }
+    
+    public function getPostListStores($post_list_id) {
+        $post_list_store_data = array();
+
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "dvpost_list_to_store WHERE post_list_id = '" . (int) $post_list_id . "'");
+
+        foreach ($query->rows as $result) {
+            $post_list_store_data[] = $result['store_id'];
+        }
+
+        return $post_list_store_data;
     }
 
     public function getPostToList($post_list_id) {
