@@ -40,11 +40,35 @@ class ModelDivaControlpanel extends Model
 		) DEFAULT COLLATE=utf8_general_ci;");
 
         $this->db->query("
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvpost_comment` (
+			    `comment_id` INT(11) NOT NULL AUTO_INCREMENT,
+                `post_id` INT(11) NOT NULL,
+                `reply_comment_id` INT(11) DEFAULT NULL,
+                `author` VARCHAR(255) NOT NULL,
+                `comment` TEXT NOT NULL,
+                `date_submitted` DATETIME NOT NULL,
+                `approved` TINYINT(1) NOT NULL DEFAULT '0',
+            PRIMARY KEY (`comment_id`)
+		) DEFAULT COLLATE=utf8_general_ci;");
+
+        $this->db->query("
 			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvpost_list` (
 			    `post_list_id` INT(11) NOT NULL AUTO_INCREMENT,
-                `name` VARCHAR(255) NOT NULL,
                 `status` TINYINT(1) NOT NULL DEFAULT '0',
-            PRIMARY KEY (`post_list_id`),
+                `sort_order` INT(11) NOT NULL DEFAULT '0',
+            PRIMARY KEY (`post_list_id`)
+		) DEFAULT COLLATE=utf8_general_ci;");
+
+        $this->db->query("
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvpost_list_description` (
+			    `post_list_id` INT(11) NOT NULL,
+                `language_id` INT(11) NOT NULL,
+                `name` VARCHAR(255) NOT NULL,
+                `description` TEXT NOT NULL,
+                `meta_title` VARCHAR(255) NOT NULL,
+                `meta_description` VARCHAR(255) NOT NULL,
+                `meta_keyword` VARCHAR(255) NOT NULL,
+            PRIMARY KEY (`post_list_id`, `language_id`),
 	        INDEX `name` (`name`)
 		) DEFAULT COLLATE=utf8_general_ci;");
 
@@ -174,6 +198,7 @@ class ModelDivaControlpanel extends Model
 	            `sub_menu_type` VARCHAR(255) NOT NULL,
 	            `sub_menu_content_type` VARCHAR(255) NOT NULL,
 	            `sub_menu_content_columns` INT(11),
+	            `sub_menu_content_width` VARCHAR(100),
 	            `sub_menu_content` text,
 	        PRIMARY KEY (`menu_item_id`)
 		) DEFAULT COLLATE=utf8_general_ci;");
