@@ -1,0 +1,8 @@
+- admin/language/en-gb/design/layout.php
+- catalog/language/en-gb/en-gb.php
+- catalog/language/en-gb/product/product.php
+- catalog/language/en-gb/common/cart.php
+- catalog/language/en-gb/checkout/cart.php
+- catalog/language/en-gb/common/header.php
+- catalog/language/en-gb/common/footer.php
+- catalog/language/en-gb/account/wishlist.php
