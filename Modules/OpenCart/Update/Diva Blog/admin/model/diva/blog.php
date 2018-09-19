@@ -222,29 +222,18 @@ class ModelDivaBlog extends Model
         $post_list_id = $this->db->getLastId();
 
         foreach ($data['post_list_description'] as $language_id => $value) {
-            $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_description SET post_id = '" . (int) $post_id . "', language_id = '" . (int) $language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', intro_text = '" . $this->db->escape($value['intro_text']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");
+            $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_list_description SET post_list_id = '" . (int) $post_list_id . "', language_id = '" . (int) $language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");
 
             foreach ($data['post_list_store'] as $store_id) {
-                $this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET store_id = '" . (int) $store_id . "', language_id = '" . (int) $language_id . "', query = 'post_id=" . (int) $post_id . "', keyword = '" . $this->db->escape($value['seo_url']) . "'");
+                $this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET store_id = '" . (int) $store_id . "', language_id = '" . (int) $language_id . "', query = 'post_list_id=" . (int) $post_list_id . "', keyword = '" . $this->db->escape($value['seo_url']) . "'");
             }
         }
 
-        if (isset($data['post_store'])) {
-            foreach ($data['post_store'] as $store_id) {
-                $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_to_store SET post_id = '" . (int) $post_id . "', store_id = '" . (int) $store_id . "'");
+        if (isset($data['post_list_store'])) {
+            foreach ($data['post_list_store'] as $store_id) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_list_to_store SET post_list_id = '" . (int) $post_list_id . "', store_id = '" . (int) $store_id . "'");
             }
         }
-
-        if (isset($data['related'])) {
-            foreach ($data['related'] as $related_id) {
-                $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_related_post SET post_id = '" . (int) $post_id . "', related_post_id = '" . (int) $related_id . "'");
-                $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_related_post SET related_post_id = '" . (int) $post_id . "', post_id = '" . (int) $related_id . "'");
-            }
-        }
-
-        $this->cache->delete('post');
-
-        return $post_id;
 
         $this->cache->delete('post_list');
 
@@ -276,25 +265,35 @@ class ModelDivaBlog extends Model
             $this->db->query($sql);
         }
 
-        $this->cache->delete('post_to_list');
+        $this->db->query("DELETE FROM " . DB_PREFIX . "dvpost_list_description WHERE post_list_id = '" . (int) $post_list_id . "'");
+
+        $this->db->query("DELETE FROM " . DB_PREFIX . "seo_url WHERE query = 'post_list_id=" . (int) $post_list_id . "'");
+
+        foreach ($data['post_list_description'] as $language_id => $value) {
+            $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_list_description SET post_list_id = '" . (int) $post_list_id . "', language_id = '" . (int) $language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");
+
+            foreach ($data['post_list_store'] as $store_id) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET store_id = '" . (int) $store_id . "', language_id = '" . (int) $language_id . "', query = 'post_list_id=" . (int) $post_list_id . "', keyword = '" . $this->db->escape($value['seo_url']) . "'");
+            }
+        }
+
+        $this->db->query("DELETE FROM " . DB_PREFIX . "dvpost_list_to_store WHERE post_list_id = '" . (int) $post_list_id . "'");
+
+        if (isset($data['post_list_store'])) {
+            foreach ($data['post_list_store'] as $store_id) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "dvpost_list_to_store SET post_list_id = '" . (int) $post_list_id . "', store_id = '" . (int) $store_id . "'");
+            }
+        }
+
+        $this->cache->delete('post_list');
 
         return;
     }
 
-    public function copyPostList($post_list_id) {
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "dvpost_list WHERE post_list_id = '" . (int) $post_list_id . "'");
-
-        if ($query->num_rows) {
-            $result = $query->row;
-
-            $data['name'] = $result['name'];
-            $data['status'] = $result['status'];
-            $this->addPostList($data);
-        }
-    }
-
     public function deletePostList($post_list_id) {
         $this->db->query("DELETE FROM " . DB_PREFIX . "dvpost_list WHERE post_list_id = '" . (int) $post_list_id . "'");
+        $this->db->query("DELETE FROM " . DB_PREFIX . "dvpost_list_description WHERE post_list_id = '" . (int) $post_list_id . "'");
+        $this->db->query("DELETE FROM " . DB_PREFIX . "dvpost_list_to_store WHERE post_list_id = '" . (int) $post_list_id . "'");
         $this->db->query("DELETE FROM " . DB_PREFIX . "dvpost_to_list WHERE post_list_id = '" . (int) $post_list_id . "'");
         $this->cache->delete('post_list');
     }
@@ -306,7 +305,29 @@ class ModelDivaBlog extends Model
     }
 
     public function getPostListDescriptions($post_list_id) {
-        
+        $post_list_description_data = array();
+
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "dvpost_list_description WHERE post_list_id = '" . (int) $post_list_id . "'");
+
+        foreach ($query->rows as $result) {
+            $post_list_description_data[$result['language_id']] = array(
+                'name'             => $result['name'],
+                'description'      => $result['description'],
+                'meta_title'       => $result['meta_title'],
+                'meta_description' => $result['meta_description'],
+                'meta_keyword'     => $result['meta_keyword']
+            );
+        }
+
+        $sql = "SELECT * FROM " . DB_PREFIX . "seo_url su LEFT JOIN " . DB_PREFIX . "dvpost_list_to_store dts ON (dts.store_id = su.store_id) WHERE dts.post_list_id = '" . (int) $post_list_id . "' AND su.query = 'post_list_id=" . (int) $post_list_id . "'";
+
+        $query = $this->db->query($sql);
+
+        foreach ($query->rows as $result) {
+            $post_list_description_data[$result['language_id']]['seo_url'] = $result['keyword'];
+        }
+
+        return $post_list_description_data;
     }
     
     public function getPostListStores($post_list_id) {
@@ -328,7 +349,9 @@ class ModelDivaBlog extends Model
     }
 
     public function getAllPostList($data = array()) {
-        $sql = "SELECT * FROM " . DB_PREFIX . "dvpost_list";
+        $sql = "SELECT * FROM " . DB_PREFIX . "dvpost_list p LEFT JOIN " . DB_PREFIX . "dvpost_list_description pd ON (p.post_list_id = pd.post_list_id) WHERE pd.language_id = '" . (int) $this->config->get('config_language_id') . "'";
+
+        $sql .= " GROUP BY p.post_list_id";
 
         if (isset($data['start']) || isset($data['limit'])) {
             if ($data['start'] < 0) {
@@ -348,7 +371,9 @@ class ModelDivaBlog extends Model
     }
 
     public function getTotalPostList() {
-        $sql = "SELECT COUNT(DISTINCT " . DB_PREFIX . "dvpost_list.post_list_id) AS total FROM " . DB_PREFIX . "dvpost_list";
+        $sql = "SELECT COUNT(DISTINCT p.post_list_id) AS total FROM " . DB_PREFIX . "dvpost_list p LEFT JOIN " . DB_PREFIX . "dvpost_list_description pd ON (p.post_list_id = pd.post_list_id)";
+
+        $sql .= " WHERE pd.language_id = '" . (int) $this->config->get('config_language_id') . "'";
 
         $query = $this->db->query($sql);
 
@@ -395,11 +420,35 @@ class ModelDivaBlog extends Model
 		) DEFAULT COLLATE=utf8_general_ci;");
 
         $this->db->query("
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvpost_comment` (
+			    `comment_id` INT(11) NOT NULL AUTO_INCREMENT,
+                `post_id` INT(11) NOT NULL,
+                `reply_comment_id` INT(11) DEFAULT NULL,
+                `author` VARCHAR(255) NOT NULL,
+                `comment` TEXT NOT NULL,
+                `date_submitted` DATETIME NOT NULL,
+                `approved` TINYINT(1) NOT NULL DEFAULT '0',
+            PRIMARY KEY (`comment_id`)
+		) DEFAULT COLLATE=utf8_general_ci;");
+
+        $this->db->query("
 			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvpost_list` (
 			    `post_list_id` INT(11) NOT NULL AUTO_INCREMENT,
-                `name` VARCHAR(255) NOT NULL,
                 `status` TINYINT(1) NOT NULL DEFAULT '0',
-            PRIMARY KEY (`post_list_id`),
+                `sort_order` INT(11) NOT NULL DEFAULT '0',
+            PRIMARY KEY (`post_list_id`)
+		) DEFAULT COLLATE=utf8_general_ci;");
+
+        $this->db->query("
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvpost_list_description` (
+			    `post_list_id` INT(11) NOT NULL,
+                `language_id` INT(11) NOT NULL,
+                `name` VARCHAR(255) NOT NULL,
+                `description` TEXT NOT NULL,
+                `meta_title` VARCHAR(255) NOT NULL,
+                `meta_description` VARCHAR(255) NOT NULL,
+                `meta_keyword` VARCHAR(255) NOT NULL,
+            PRIMARY KEY (`post_list_id`, `language_id`),
 	        INDEX `name` (`name`)
 		) DEFAULT COLLATE=utf8_general_ci;");
 
@@ -413,6 +462,18 @@ class ModelDivaBlog extends Model
 			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvpost_to_store` (
 			    `post_id` INT(11) NOT NULL,
                 `store_id` INT(11) NOT NULL
+		) DEFAULT COLLATE=utf8_general_ci;");
+
+        $this->db->query("
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvpost_list_to_store` (
+			    `post_list_id` INT(11) NOT NULL,
+                `store_id` INT(11) NOT NULL
+		) DEFAULT COLLATE=utf8_general_ci;");
+
+        $this->db->query("
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvpost_related_post` (
+			    `post_id` INT(11) NOT NULL,
+                `related_post_id` INT(11) NOT NULL
 		) DEFAULT COLLATE=utf8_general_ci;");
 
         $this->load->model('user/user_group');
@@ -435,6 +496,10 @@ class ModelDivaBlog extends Model
         $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "dvpost_list`");
         $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "dvpost_to_list`");
         $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "dvpost_to_store`");
+        $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "dvpost_comment`");
+        $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "dvpost_list_description`");
+        $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "dvpost_list_to_store`");
+        $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "dvpost_related_post`");
 
         $this->load->model('user/user_group');
         $this->model_user_user_group->removePermission($this->user->getGroupId(), 'access', 'diva/blog');

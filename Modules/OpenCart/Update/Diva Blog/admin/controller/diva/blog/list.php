@@ -90,33 +90,6 @@ class ControllerDivaBlogList extends Controller
         $this->getList();
     }
 
-    public function copy() {
-        $this->load->language('diva/blog/list');
-        $this->load->language('diva/adminmenu');
-
-        $this->document->setTitle($this->language->get('page_title'));
-
-        $this->load->model('diva/blog');
-
-        if (isset($this->request->post['selected']) && $this->validateCopy()) {
-            foreach ($this->request->post['selected'] as $post_list_id) {
-                $this->model_diva_blog->copyPostList($post_list_id);
-            }
-
-            $this->session->data['success'] = $this->language->get('text_success');
-
-            $url = '';
-
-            if (isset($this->request->get['page'])) {
-                $url .= '&page=' . $this->request->get['page'];
-            }
-
-            $this->response->redirect($this->url->link('diva/blog/list', 'user_token=' . $this->session->data['user_token'] . $url, true));
-        }
-
-        $this->getList();
-    }
-
     public function getList() {
         $data = array();
 
@@ -481,6 +454,34 @@ class ControllerDivaBlogList extends Controller
             $this->error['warning'] = $this->language->get('error_permission');
         }
 
+        foreach ($this->request->post['post_list_description'] as $language_id => $value) {
+            if ((utf8_strlen($value['name']) < 3) || (utf8_strlen($value['name']) > 255)) {
+                $this->error['name'][$language_id] = $this->language->get('error_name');
+            }
+
+            if ((utf8_strlen($value['meta_title']) < 3) || (utf8_strlen($value['meta_title']) > 255)) {
+                $this->error['meta_title'][$language_id] = $this->language->get('error_meta_title');
+            }
+
+            if (utf8_strlen($value['seo_url']) > 0) {
+                $this->load->model('design/seo_url');
+
+                $url_alias_info = $this->model_design_seo_url->getSeoUrlsByKeyword($value['seo_url']);
+
+                foreach ($url_alias_info as $surl) {
+                    if ($url_alias_info && isset($this->request->get['post_list_id']) && $surl['query'] != 'post_list_id=' . $this->request->get['post_list_id']) {
+                        $this->error['keyword'] = sprintf($this->language->get('error_keyword'));
+
+                        break;
+                    }
+                }
+
+                if ($url_alias_info && !isset($this->request->get['post_list_id'])) {
+                    $this->error['keyword'] = sprintf($this->language->get('error_keyword'));
+                }
+            }
+        }
+
         if ($this->error && !isset($this->error['warning'])) {
             $this->error['warning'] = $this->language->get('error_warning');
         }
@@ -489,14 +490,6 @@ class ControllerDivaBlogList extends Controller
     }
 
     protected function validateDelete() {
-        if (!$this->user->hasPermission('modify', 'diva/blog/list')) {
-            $this->error['warning'] = $this->language->get('error_permission');
-        }
-
-        return !$this->error;
-    }
-
-    protected function validateCopy() {
         if (!$this->user->hasPermission('modify', 'diva/blog/list')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }

@@ -85,6 +85,12 @@ class ModelDivaControlpanel extends Model
 		) DEFAULT COLLATE=utf8_general_ci;");
 
         $this->db->query("
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvpost_list_to_store` (
+			    `post_list_id` INT(11) NOT NULL,
+                `store_id` INT(11) NOT NULL
+		) DEFAULT COLLATE=utf8_general_ci;");
+
+        $this->db->query("
 			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "dvpost_related_post` (
 			    `post_id` INT(11) NOT NULL,
                 `related_post_id` INT(11) NOT NULL

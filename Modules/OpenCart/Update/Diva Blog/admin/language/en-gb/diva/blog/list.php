@@ -31,6 +31,6 @@ $_['entry_meta_description'] = 'Meta Tag Description';
 // Error
 $_['error_warning']          = 'Warning: Please check the form carefully for errors!';
 $_['error_permission']       = 'Warning: You do not have permission to modify Blog Categories!';
-$_['error_name']             = 'Article Name must be greater than 3 and less than 255 characters!';
+$_['error_name']             = 'Category Name must be greater than 3 and less than 255 characters!';
 $_['error_meta_title']       = 'Meta Title must be greater than 3 and less than 255 characters!';
 $_['error_keyword']          = 'SEO keyword already in use!';
